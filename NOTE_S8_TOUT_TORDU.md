@@ -117,6 +117,21 @@ paire C1 ferme alors un triangle (0–3–4 ou 0–5–6) dans le 6-cycle : aucu
 - Relabellisation canonique contre relabellisation fixe : 0 écart sur 2 × 300 décompositions au hasard.
 - Explications bloc par bloc : `logs/explain_blocks.log`.
 
+
+## 3 bis. Part prouvée à la main contre part calculée (`scripts/chain_free.py`)
+- **Chaînes.** Dès que deux triangles sont disjoints, tout troisième triangle crée une chaîne. Il doit contenir le
+  7ᵉ point, et le reste de ses sommets est pris dans les deux triangles.
+- **Tuées par le lemme S8.2 (à la main)** : (3⁵,6) 420/420 ; (3³,5,7) 2520/2520 ; (3⁴,4,5) 2520/5040 ;
+  (3³,4³) 3150/5565 ; (3³,6,6) 1260/1890.
+- **Sans chaîne (triangles deux à deux sécants), tuées par le calcul seulement** :
+  - Fano 30 (aussi le Théorème F de C2, et S8.3) ;
+  - quadrilatère (3⁴,4,5) 2520, d'emblée ;
+  - étoile (3³,6,6) 630, d'emblée ;
+  - étoile (3³,4³) 630 d'emblée plus 105 par le budget (48) ;
+  - triangle de triangles (3³,4³) 1680, par le budget (51).
+- Relecture de C2 (25/09) : C0–C8 et S8.2 re-dérivés à la main, « TIENT », inscrits à son carnet §26. Le calcul
+  exhaustif y est mentionné comme calcul du labo « structures », recoupé par un second solveur.
+
 ## 4. Erreurs rencontrées en chemin (consignées)
 - Premier contrôle Fano à 42, puis 70 au lieu de 84 : il manquait les contraintes (a) et (b). Le contrôle a joué son
   rôle.
