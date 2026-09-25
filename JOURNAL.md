@@ -35,3 +35,8 @@
   e(S₁,S₂) ≥ 2 vient d'un argument de degrés.
 - Certificat d'Astra (mission géométrique) vérifié par code indépendant (NOTE_ASTRA_CERTIFICAT.md) : wᵀCw = −2 et
   qᵀAq − 3‖q‖² = 16. Ses 8 dimensions sont exactement le Π₋₄ de rang 8 du X12 de C1 pour la droite {x, 0, 1}.
+- S10 : doubles_budget3 (système local avec C8), calcul exhaustif. Les types à ≥ 3 triangles sont tous exclus, et une
+  partie des types à 2 triangles. explain_blocks.py met au jour deux mécanismes : l'orbite morte (lemme S8.2, preuve à la
+  main −4 = 0 ; une autre forme force φ ≥ 3) et le triangle forcé dans le 6-cycle (Fano, S8.3).
+  Contrôle croisé par solveur indépendant au niveau des étiquettes : 670/670 clés d'accord.
+  Résidu tout-tordu : 14 types (6 sans triangle, 5 à 1 triangle, 3 à 2 triangles, en partie).

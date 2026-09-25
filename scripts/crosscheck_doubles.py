@@ -9,7 +9,7 @@ import labellevel_check as LL
 import doubles_budget3 as d3
 from zeros_budget import decompositions
 
-keys = json.load(open('logs/doubles3_keys.json'))
+keys = json.load(open(sys.argv[1] if len(sys.argv) > 1 else 'logs/doubles3_keys.json'))
 t0 = time.time()
 err, eq, gt, lnone = [], 0, 0, 0
 for tris, nbrs, cval in keys:

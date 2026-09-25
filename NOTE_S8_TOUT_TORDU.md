@@ -1,8 +1,8 @@
 # S8 — Cas « tout-tordu pur » de C2 : le type (3,3,3,3,3,6) est impossible (preuve à la main) ; bornes pour les autres types
 
-*25/09, labo « structures », en appui de C2 (branche involution). Statut : **DÉRIVÉ** (preuve à la main du Théorème
-S8.1, contrôlée par programme) ; **OBSERVÉ** pour les bornes numériques des autres types (programme, avec contrôles
-indépendants). Toutes les références « § » renvoient au carnet de C2 (`notes/MATH_C2_PROGRAMME.md`, branche
+*25/09, labo « structures », en appui de C2 (branche involution). Statut : **DÉRIVÉ** pour S8.1–S8.3 (preuves à la
+main) ; **ÉTABLI par calcul exhaustif contrôlé** pour le tableau du §3 (système local exact, solveur indépendant au
+niveau des étiquettes, 0 désaccord). Toutes les références « § » renvoient au carnet de C2 (`notes/MATH_C2_PROGRAMME.md`, branche
 math-c2-programme).*
 
 ## 0. Cadre
@@ -61,14 +61,61 @@ et F′ = {a′,b′,c′} sont les deux derniers triangles, et l'équateur a–
 *Contrôle machine : `scripts/zeros_budget.py` donne 48 exactement, sur les 420 décompositions étiquetées.
 `scripts/doubles_budget3.py` (système local exact) donne 54.*
 
-## 3. Autres types (calcul, bornes inférieures) — à compléter
-Système local exact par orbite (`scripts/doubles_budget3.py`, contraintes C0–C8 dans l'en-tête), minimisé sur les
-ordres cycliques des 6-cycles libres, bloc par bloc.
-Contrôles :
-- tests unitaires (Fano : 2 doubles forcés, résolu à la main) ;
-- solveur indépendant au niveau des étiquettes (`scripts/labellevel_check.py`), comparé sur toutes les signatures
-  locales ;
-- comparaison de la relabellisation canonique avec une relabellisation fixe.
+## 3. Système local complet et résultats (calcul exhaustif, contrôlé)
+**Système local par orbite** (x ∈ X, rôles i = 0, j = 1, k = 2, R_x = {3,4,5,6}). Inconnues : φ(P) ∈ {0,1,2} pour les 6
+paires P ⊂ R_x ; y_r = φ_x(kr) ∈ {0,1,2} ; n_r = 1 pour les deux paires jr des voisins de x sur le 6-cycle libre en j.
+| contrainte | origine |
+|---|---|
+| C0 : n_k = 0 si le cycle propre est le triangle {i,j,k} | F5 (compte 2 dans son propre triangle, atteint par v, σv) |
+| C1 : φ(ab) = 1 pour un triangle {i,a,b} | F5 (compte 1) + F1 |
+| C2 : n_a + n_b + φ(ab) = 1 pour un triangle {j,a,b} | F5 + F2 |
+| C3 : n_k + n_b + y_b = 1 pour un triangle {j,k,b} | F5 + F2 |
+| C4 : y_c + y_d + φ(cd) = 3 pour un triangle {k,c,d} | F5 (compte 3) |
+| C5 : Σφ = 3 sur un triangle contenu dans R_x | F5 |
+| C6 : Σ_r y_r = 2 − n_k | μ = 2 avec (k,0), (k,1) ; v, σv comptent une fois chacun |
+| C8 : n_t + y_t + Σ_s φ(ts) = 4 pour t ∈ R_x | μ = 2 avec (t,0), (t,1) ; φ(it) = 0 par F1 |
+doubles(x) ≥ #{φ = 2} + #{y = 2}. Budget : Σ_{orbites} doubles ≤ 42.
+
+**Lemme S8.2 (orbite morte).** Supposons que le cycle propre de x soit le triangle {i,j,k} et qu'il existe deux triangles
+{j,a,b} et {k,c,d} avec {a,b,c,d} = R_x. Alors le système est impossible.
+*Preuve.* On somme C8 sur {a,b} et sur {c,d}, avec X = Σ φ croisés :
+  N_ab + (y_a + y_b) + 2φ(ab) + X = 8   et   N_cd + (y_c + y_d) + 2φ(cd) + X = 8.
+On y substitue :
+- N_cd = 2 − N_ab (C0 : les deux voisins sont dans R_x) ;
+- φ(ab) = 1 − N_ab (C2) ;
+- y_c + y_d = 3 − φ(cd) (C4) ;
+- y_a + y_b = φ(cd) − 1 (C6 avec n_k = 0).
+La différence des deux sommes vaut alors **−4 = 0** : contradiction. ∎
+*Conséquence.* Toute décomposition contenant une chaîne de trois triangles T₁ – T – T₃ (T₁ et T₃ passent par deux
+sommets distincts de T et sont disjoints hors de T) est impossible : l'orbite de la paire {i,j} appariée par i meurt, où
+i est le troisième sommet de T.
+
+**Lemme S8.3 (Fano, second mécanisme).** En un bloc porté par 3 triangles de Fano, chaque orbite libre n'admet que ses deux
+« paires C1 » comme voisins. Par exemple, pour {3,6} au lieu de {3,4} ou {5,6}, C4 et C8 forcent φ(45) = 3. Suivre une
+paire C1 ferme alors un triangle (0–3–4 ou 0–5–6) dans le 6-cycle : aucun ordre possible.
+
+**Résultats** (`scripts/doubles_budget3.py`, toutes les décompositions étiquetées ; `logs/doubles_budget3.log`) :
+| type | étiquetées | impossibles d'emblée | borne des survivantes | verdict |
+|---|---|---|---|---|
+| (3⁷) | 30 | 30 | – | exclu |
+| (3⁵,6) | 420 | 420 | – | exclu (et §2) |
+| (3⁴,4,5) | 5040 | 5040 | – | exclu |
+| (3³,4³) | 5565 | 3780 | 48–51 > 42 | exclu |
+| (3³,5,7) | 2520 | 2520 | – | exclu |
+| (3³,6,6) | 1890 | 1890 | – | exclu |
+| (3²,4,4,7) | 2520 | 0 | 28 | survit |
+| (3²,4,5,6) | 25200 | 5040 | 26–34 | 20160 survivent |
+| (3²,5³) | 5880 | 840 | 30 | 5040 survivent |
+| types à 1 triangle | – | 0 | 9–16 | survivent |
+| types sans triangle | – | – | système sans contrainte de triangle | hors de portée |
+
+**Contrôles.**
+- Tests unitaires : Fano, clé (3,4) → 2 ; (3,5) et (2,3) → impossibles, refaits à la main.
+- Solveur indépendant au niveau des étiquettes (`labellevel_check.py`), comparé sur **toutes les 670 clés locales**
+  (`crosscheck_doubles.py`) : 353 faisables avec le même minimum, 317 impossibles des deux côtés, **0 désaccord**
+  (`logs/crosscheck_t3.log`, `logs/crosscheck_extra.log`).
+- Relabellisation canonique contre relabellisation fixe : 0 écart sur 2 × 300 décompositions au hasard.
+- Explications bloc par bloc : `logs/explain_blocks.log`.
 
 ## 4. Erreurs rencontrées en chemin (consignées)
 - Premier contrôle Fano à 42, puis 70 au lieu de 84 : il manquait les contraintes (a) et (b). Le contrôle a joué son

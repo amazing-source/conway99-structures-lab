@@ -1,0 +1,8 @@
+unit tests passed
+local keys solved: 518
+(3, 3, 3, 3, 3, 3, 3): 30 labelled; impossible outright 30; lower bound: min -, max -; KILLED: True  (surviving labelled: 0)
+(3, 3, 3, 3, 3, 6): 420 labelled; impossible outright 420; lower bound: min -, max -; KILLED: True  (surviving labelled: 0)
+(3, 3, 3, 3, 4, 5): 5040 labelled; impossible outright 5040; lower bound: min -, max -; KILLED: True  (surviving labelled: 0)
+(3, 3, 3, 4, 4, 4): 5565 labelled; impossible outright 3780; lower bound: min 48, max 51; KILLED: True  (surviving labelled: 0)
+(3, 3, 3, 5, 7): 2520 labelled; impossible outright 2520; lower bound: min -, max -; KILLED: True  (surviving labelled: 0)
+(3, 3, 3, 6, 6): 1890 labelled; impossible outright 1890; lower bound: min -, max -; KILLED: True  (surviving labelled: 0)
