@@ -29,7 +29,7 @@ LABELS = []                                                       # label of eac
 VARS = {}                                                         # variable index -> key, for the last build()
 
 
-def build(dec, ppe=True, coupling=True, colsum=None, typed=False):
+def build(dec, ppe=True, coupling=True, colsum=None, typed=False, p2=False):
     """typed=True adds the signed refinement (types of doubles): a double of X at {t,s} is of type t or s
     (its two neighbours share the t-vertex or the s-vertex); (L1) a y-double {k,r} is of type r; (L2) at a block t of
     R_x, the doubles incident to t are all of type t or all of another type; (P) each pair {a,b} is doubled by exactly
@@ -160,6 +160,66 @@ def build(dec, ppe=True, coupling=True, colsum=None, typed=False):
             for key, c in lin(*[phi(W, P) for W in XQ]).items():
                 coefs[key] = coefs.get(key, 0) - c
             add(coefs, 0, 0)
+    if p2:
+        # C1's (P2) off-diagonal, at the fixed vertex, per ORBIT (each orbit = 2 labels with equal values):
+        #   R, R' disjoint:       sum_Z val_Z(R) val_Z(R') = 16 - E[R][R']            (N = 2E)
+        #   R, R' share a block:  sum_Z val_Z(R) val_Z(R') = 12 - N(R,R')/2
+        # val_Z(Q): local phi/y if Q is disjoint from P_Z; n_r if Q = {free block of Z, r}; 2[k = r] if Q = {p, r}
+        # with p the pairing block of Z; 0 if Q = P_Z.
+        def val(Z, Q):
+            j_, i_ = Z
+            cyc_, k_, R_ = frame(dec, j_, i_)
+            if Q == frozenset(Z):
+                return {}, 0
+            if not (Q & {i_, j_}):
+                return phi(Z, Q), 0
+            if j_ in Q:                                   # free block j_: near value n_r
+                (r_,) = Q - {j_}
+                return {v(('c', j_, frozenset((i_, r_)))): 1}, 0
+            (r_,) = Q - {i_}                              # pairing block i_: square iff r_ = k_
+            return {}, (2 if r_ == k_ else 0)
+
+        andv = {}
+
+        def AND(a, b):
+            if a == b:
+                return a
+            key = (min(a, b), max(a, b))
+            if key not in andv:
+                w = v(('and',) + key)
+                andv[key] = w
+                cur[0] = 'AND'
+                add({w: 1, key[0]: -1}, -1, 0)
+                add({w: 1, key[1]: -1}, -1, 0)
+                add({w: 1, key[0]: -1, key[1]: -1}, -1, 1)
+            return andv[key]
+
+        for Q1, Q2 in itertools.combinations(PAIRS, 2):
+            if len(Q1 & Q2) == 2:
+                continue
+            coefs, const = {}, 0
+            for Z in orbits:
+                f1, c1 = val(Z, Q1)
+                f2, c2 = val(Z, Q2)
+                const += c1 * c2
+                for a, ca in f1.items():
+                    coefs[a] = coefs.get(a, 0) + ca * c2
+                for b, cb in f2.items():
+                    coefs[b] = coefs.get(b, 0) + cb * c1
+                for a, ca in f1.items():
+                    for b, cb in f2.items():
+                        w = AND(a, b)
+                        coefs[w] = coefs.get(w, 0) + ca * cb
+            # right-hand side: 16 - E[Q1][Q2]  or  12 - N/2, with N = sum over the 4 labels of Q1 of phi at Q2
+            rhs_c, rhs = (16, -1) if not (Q1 & Q2) else (12, -1)
+            for Z in orbits:
+                if frozenset(Z) == Q1:
+                    f, c = val(Z, Q2)
+                    for a, ca in f.items():
+                        coefs[a] = coefs.get(a, 0) - rhs * ca       # move  -(-1)*val  to the left
+                    rhs_c += rhs * c
+            cur[0] = f'P2 {sorted(Q1)}|{sorted(Q2)}'
+            add(coefs, rhs_c - const, rhs_c - const)
     VARS.clear()
     VARS.update({ix: key for key, ix in var.items()})
     A = lil_matrix((len(rows), len(var)))

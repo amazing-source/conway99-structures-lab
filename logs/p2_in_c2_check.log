@@ -1,0 +1,2 @@
+srg(9,4,1,2): off-diagonal (P2) exact at 3 vertices: disjoint blocks -> 32 - N, one common class -> 24 - N (0 + 0 block pairs at the last vertex)
+BvLS(243,22,1,2): off-diagonal (P2) exact at 3 vertices: disjoint blocks -> 32 - N, one common class -> 24 - N (990 + 495 block pairs at the last vertex)

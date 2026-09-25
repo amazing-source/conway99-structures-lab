@@ -78,3 +78,13 @@
 - S12, vérification demandée par C1 (notes/116). (P2) et sa diagonale, le critère lointain et le Fano tendu (table des
   g, κ, F5) sont refaits à la main et contrôlés exactement sur Paley 9 et BvLS : TIENT. Précision : la diagonale vaut
   16 − 2e(R) ; sur les vrais graphes, e(R) = 4 et elle vaut 8.
+- S14 : (P2) de C1 transposé au cadre de C2.
+  - La diagonale de (P2) redonne exactement 16.1/PPE. Les identités hors diagonale sont nouvelles : 105 couples de
+    paires disjointes, qui donnent 16 − E[R][R′] par orbites, et 105 couples partageant un bloc, qui donnent
+    12 − N/2.
+  - La valeur val_Z(Q) vaut : φ/y locale si Q est disjointe de P_Z ; n_r si Q contient le bloc libre de Z ; 2[k = r]
+    si Q contient son bloc d'appariement ; 0 si Q = P_Z.
+  - Formes exactes contrôlées sur BvLS.
+  - Test court : relâchement McCormick faisable sur les 3 échantillons à 1 triangle. La PLNE n'a pas pu tourner dans
+    le budget, et je ne l'ai pas prolongée (règle du 25/09).
+- C1 a corrigé notes/116 d'après S12 (commit b9fb15e dans c1_recherche) : la diagonale générale vaut 16 − 2e(R).

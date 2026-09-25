@@ -1,0 +1,9 @@
+(3, 4, 4, 5, 5) unsigned LP relaxation feasible: True
+(3, 4, 4, 5, 5) typed LP relaxation feasible: True
+(3, 4, 4, 4, 6) unsigned LP relaxation feasible: True
+(3, 4, 4, 4, 6) typed LP relaxation feasible: True
+(3, 4, 4, 5, 5) unsigned LP relaxation feasible: True
+(3, 4, 4, 5, 5) typed LP relaxation feasible: True
+(3, 4, 4, 5, 5) LP: P2 alone feasible True; P2 + PPE + coupling feasible True (13545 vars, 37681 rows)  [89 s]
+(3, 4, 4, 4, 6) LP: P2 alone feasible True; P2 + PPE + coupling feasible True (13545 vars, 37681 rows)  [194 s]
+(3, 4, 4, 5, 5) LP: P2 alone feasible True; P2 + PPE + coupling feasible True (13545 vars, 37681 rows)  [273 s]
