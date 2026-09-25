@@ -1,0 +1,5 @@
+BvLS: 891 lines, |N| = 60, |F| = 180
+  BB^T identity: 891/891 lines
+  components meet the 3 parts equally: 8910/8910 components
+  sum n_C = (k-4)|C| and sum n_C^2 = (k-14)|C| + (5/3)|C|^2: 8910/8910 components
+  negative control (random 12-sets, not unions of components): second-moment identity breaks on 891/891

@@ -11,3 +11,5 @@ CONJECTURE / HEURISTIQUE / SPÉCULATION / RÉFUTÉ.
 | S3 | Rejouer L20, L21, L23 (bornes de k par sous-matrices, signe) sur de vrais graphes, contrôles négatifs | falsification (D11) | 3 | 2 | à faire |
 | S4 | Rejouer L17 (scission locale 2/3/5) sur BvLS et Gewirtz, avec contrôle négatif | falsification (D11) | 2 | 2 | à faire |
 | S5 | Discriminant mod 4 des réseaux propres : (−1)^{m/2} det Λ_θ ≡ 1 (mod 4) si d impair et E_θ 2-entier ; famille NL_e(n), e impair, n à premiers ≡ 1 (4) | généralisation (D2) | 5 | 1 | DÉRIVÉ + OBSERVÉ : 0 graphe connu exclu sur 1183 ; 35 « ? » exclus (v ≤ 1300) ; NOTE_S5 |
+| S3 | L21 (boule d'une droite) et L23 (signe) de C1 rejoués sous forme générale sur de vrais graphes | falsification (D11) | 3 | 2 | OBSERVÉ : L21 891/891 droites BvLS + 6/6 srg9, contrôle négatif 100 % ; L23 4/4 T(n), les deux signes représentés (contrôle négatif non discriminant) |
+| S6 | Relecture adverse du lemme de la queue de C2 (équilibre en k = 14) | relecture (D11) | 5 | 1 | tient ; équilibre vérifié en forme générale sur BvLS (8910/8910 composantes, contrôle négatif 891/891) |

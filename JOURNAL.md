@@ -12,3 +12,9 @@
 - S5 : disc4_scan.py → 36 exclusions pour v ≤ 1300, 185 pour v ≤ 5000. Contrôle contre la table de Brouwer téléchargée
   (brouwer_crosscheck.py) : 0 graphe existant exclu sur 1183 ; (289,54,1,12) déjà connu inexistant ; 35 « ? » exclus.
   Test décisif à v = 625 et 841 : NL_e connus tous à e pair. Rédigé dans NOTE_S5_DISCRIMINANT_MOD4.md.
+- S3 : s3_lemmas_real.py. L21, forme générale : S = A_G − rI + (1/c)(D + J/(c−3)), c = r + 1. Pour BvLS et srg9,
+  S|_U = 0 et le rang local vaut rang(A_G − rI) ; 891/891 droites, contrôle négatif 100 %. L23 : le signe des blocs de
+  rang plein égale le ε(V) du genre sur T(7), T(9), T(13), T(15). Le contrôle négatif (mauvais multiple de J) ne
+  discrimine pas : à noter.
+- S6 : c2_balance_check.py. Équilibre de C2 en forme générale, BBᵀ1_C = (k−14)1_C + (5/3)|C|1_N, vérifié sur BvLS.
+  Relecture du lemme de la queue (stabilité de X_In(k), v et σv dans C_Out(k), conséquences) : tient. Envoyé à C2.

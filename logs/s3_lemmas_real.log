@@ -1,0 +1,13 @@
+Part A (L21 mechanism, ball of a line):
+  srg(9,4,1,2): p=3, 6 lines, global rank_p(A - 1I) = 4; identity rank = 3 + rank S and = rank(A_G - 1I) on 6/6 lines; negative control (no J term) fails on 6/6; max local rank 4 <= global 4: True
+  BvLS(243,22,1,2): p=3, 891 lines, global rank_p(A - 4I) = 67; identity rank = 3 + rank S and = rank(A_G - 4I) on 891/891 lines; negative control (no J term) fails on 891/891; max local rank 40 <= global 67: True
+Part B (L23 principle, sign of full-rank principal blocks):
+  T(7) p=5 Q: Q^2 ≡ 0: True, rank Q = 6 (alpha = 6), full-rank samples 60, disc classes [-1], genus eps(V) = -1 -> MATCH
+  T(7) p=5 wrong J: Q^2 ≡ 0: False, rank Q = 7 (alpha = 6), full-rank samples 60, disc classes [-1], genus eps(V) = -1
+  T(9) p=7 Q: Q^2 ≡ 0: True, rank Q = 8 (alpha = 8), full-rank samples 60, disc classes [1], genus eps(V) = 1 -> MATCH
+  T(9) p=7 wrong J: Q^2 ≡ 0: False, rank Q = 9 (alpha = 8), full-rank samples 60, disc classes [1], genus eps(V) = 1
+  T(13) p=11 Q: Q^2 ≡ 0: True, rank Q = 12 (alpha = 12), full-rank samples 60, disc classes [-1], genus eps(V) = -1 -> MATCH
+  T(13) p=11 wrong J: Q^2 ≡ 0: False, rank Q = 13 (alpha = 12), full-rank samples 60, disc classes [-1], genus eps(V) = -1
+  T(15) p=13 Q: Q^2 ≡ 0: True, rank Q = 14 (alpha = 14), full-rank samples 60, disc classes [-1], genus eps(V) = -1 -> MATCH
+  T(15) p=13 wrong J: Q^2 ≡ 0: False, rank Q = 15 (alpha = 14), full-rank samples 60, disc classes [-1], genus eps(V) = -1
+ALL CONSISTENT
