@@ -125,7 +125,10 @@ paire C1 ferme alors un triangle (0–3–4 ou 0–5–6) dans le 6-cycle : aucu
   (3³,4³) 3150/5565 ; (3³,6,6) 1260/1890.
 - **Sans chaîne (triangles deux à deux sécants), tuées par le calcul seulement** :
   - Fano 30 (aussi le Théorème F de C2, et S8.3) ;
-  - quadrilatère (3⁴,4,5) 2520, d'emblée ;
+  - étoile + transversale (3⁴,4,5) 2520, d'emblée. *(Correction du 25/09, relevée par C2 : j'avais écrit
+    « quadrilatère, 4 triangles se coupant en 6 points distincts ». C'est faux : les intersections sont 2, 2, 2,
+    1, 5, 6. Le vrai quadrilatère complet est impossible en (3⁴,4,5), car le 7ᵉ point n'aurait que le degré 4.
+    Le calcul portait bien sur la bonne famille.)*
   - étoile (3³,6,6) 630, d'emblée ;
   - étoile (3³,4³) 630 d'emblée plus 105 par le budget (48) ;
   - triangle de triangles (3³,4³) 1680, par le budget (51).
@@ -139,3 +142,24 @@ paire C1 ferme alors un triangle (0–3–4 ou 0–5–6) dans le 6-cycle : aucu
   (compte 3). C'était plus faible, mais valide ; corrigé dans doubles_budget3.
 - Script de recomptage : formule `ordered*3//6` au lieu de `ordered//6` (2880 au lieu de 960). L'erreur était dans
   le contrôle, pas dans la classification ; corrigée.
+
+## 5. Versions à la main des familles sans chaîne (pour la consigne « sans solveur » de C2) — 25/09 soir
+Relues et acceptées par C2 au fur et à mesure (§26 de son carnet) : Fano, étoile (6,6), étoile (4,4,4) classe B,
+étoile + transversale, ainsi que les classifications à la main (octaèdre : types I et II des 6-cycles, équateurs et
+cerfs-volants, impossibilité de trois cerfs-volants ; étoile + transversale : 4-cycle forcé).
+- **ML1** : si k porte deux triangles qui couvrent R_x, alors n_k = 0, il y a exactement un voisin dans chaque paire, et
+  φ(ab) = φ(cd) = 2.
+- **Lemme D** : #doubles − #zéros = n_k parmi les paires de R_x.
+- **Fano** : les paires admissibles sont exactement les paires C1 ; elles ferment un triangle dans le 6-cycle.
+- **Étoile (6,6), bloc 0** : faits F_a à F_e, puis six cas sur les voisins de l'orbite 2.
+- **Étoile B, bloc 6** : ML1 pour l'orbite 4, exclusions pour les orbites 0, 1, 3, 5 ; fermeture en deux cas.
+- **Étoile + transversale, bloc 1** : ML1 et C2 pour l'orbite 0 ; exclusions pour 2, 3, 4, 5, 6 ; trois cas.
+- **Étoile A (trois équateurs)** : budget.
+  - Centre : au moins 2 doubles par orbite (C2 et lemme D), soit 12.
+  - Chaque bloc non central j : l'orbite de l'antipode de j (ML1) a 2 doubles, et ses deux voisins, qui ont n_k = 1,
+    en ont au moins 2 chacun, soit au moins 6.
+  - Total au moins 48 > 42.
+- **Triangle de triangles** : budget 51, sans lemme court. Minima par type de bloc sous Z₃ : w = 6, intersections = 8,
+  privés = 7. Format en tableaux proposé à C2.
+Contrôles machine de chaque ensemble de faits : `scripts/check_star66_facts.py`, `scripts/check_facts_generic.py`,
+`scripts/budget_block_detail.py`.

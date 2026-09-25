@@ -40,3 +40,11 @@
   main −4 = 0 ; une autre forme force φ ≥ 3) et le triangle forcé dans le 6-cycle (Fano, S8.3).
   Contrôle croisé par solveur indépendant au niveau des étiquettes : 670/670 clés d'accord.
   Résidu tout-tordu : 14 types (6 sans triangle, 5 à 1 triangle, 3 à 2 triangles, en partie).
+- Nouvelle règle de l'utilisateur, transmise à C1 et C2, mémoire mise à jour : les mathématiques d'abord ; solveurs et
+  calcul seulement en petits tests de 5 minutes au plus, s'ils sont primordiaux pour une vérification importante, et
+  jamais comme appui.
+- Familles sans chaîne à la main pour C2 : Fano, étoile (6,6), étoile B et étoile + transversale acceptées par C2.
+  Étoile A envoyée (48 > 42). Triangle de triangles : format à convenir.
+  Erreur de nom relevée par C2 : « quadrilatère » au lieu de « étoile + transversale ». Corrigée dans la note.
+- Recalculs indépendants pour C1 : lemme du triangle (complément de Schur 3I − P_∂, cas tendu) et certificat 3 (Sturm,
+  une racine positive ≈ 0,0543 ; admissibilité locale OK). Confirmés.
