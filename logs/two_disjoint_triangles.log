@@ -1,0 +1,8 @@
+(1) triangles {j,a,b} and {k,c,d} covering R_x: no solution for any neighbour pair (with or without own triangle)
+(2) type (3, 3, 4, 4, 7), triangles sharing: 2520 labelled
+(2) type (3, 3, 4, 5, 6), triangles disjoint: 5040 labelled  -> dead orbit found and checked
+(2) type (3, 3, 4, 5, 6), triangles sharing: 20160 labelled
+(2) type (3, 3, 5, 5, 5), triangles disjoint: 840 labelled  -> dead orbit found and checked
+(2) type (3, 3, 5, 5, 5), triangles sharing: 5040 labelled
+    (60 distinct frame keys solved)
+    disjoint counts = impossible-outright counts of the exhaustive run for every 2-triangle type

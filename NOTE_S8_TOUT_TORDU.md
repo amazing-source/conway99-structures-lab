@@ -94,6 +94,38 @@ i est le troisième sommet de T.
 « paires C1 » comme voisins. Par exemple, pour {3,6} au lieu de {3,4} ou {5,6}, C4 et C8 forcent φ(45) = 3. Suivre une
 paire C1 ferme alors un triangle (0–3–4 ou 0–5–6) dans le 6-cycle : aucun ordre possible.
 
+**Lemme S8.4 (du complément, CL).** Si k porte un triangle {k,c,d} avec c, d ∈ R_x, alors, pour {a,b} = R_x ∖ {c,d},
+**φ(ab) = 3 − N_ab** (N_ab = n_a + n_b). En particulier N_ab ≥ 1, et N_ab = 1 force le double φ(ab) = 2.
+*Preuve.* Demi-sommes de C8 sur {a,b} et sur {c,d}, avec X = Σ φ croisés :
+  N_ab + (y_a + y_b) + 2φ(ab) + X = 8   et   N_cd + (y_c + y_d) + 2φ(cd) + X = 8.
+On y substitue :
+- y_c + y_d = 3 − φ(cd) (C4) ;
+- y_a + y_b = φ(cd) − 1 − n_k (C6) ;
+- N_ab + N_cd = 2 − n_k.
+La différence vaut 2N_ab − 6 + 2φ(ab) = 0. ∎
+- S8.2 en est un cas particulier : C2 sur {j,a,b} donne φ(ab) = 1 − N_ab, contre 3 − N_ab. **Le triangle propre n'y sert
+  pas.**
+- ML1 (§5) est CL appliqué deux fois.
+- Relu par C2 (25/09) et inscrit comme lemme général à son §26 (valable en Σ = ∅, carrés « un bloc », triangles D
+  complets) ; C2 compte l'employer pour les mélanges.
+
+**Corollaire S8.5 (deux triangles disjoints).** Une décomposition tout-tordue qui contient deux triangles disjoints est
+impossible.
+*Preuve.* Soient T, T′ les deux triangles et i le 7ᵉ bloc. Les trois cycles par i apparient ses six voisins deux à deux.
+Comme |T| = 3 est impair, l'un de ces cycles passe par x – i – y avec x ∈ T et y ∈ T′. Au bloc j = x, l'orbite i a
+k = y et R_x = (T ∖ x) ∪ (T′ ∖ y). Pour {a,b} = T ∖ x, C2 sur T donne φ(ab) = 1 − N_ab et CL sur T′ donne
+φ(ab) = 3 − N_ab : l'orbite est morte. ∎
+- Avec au moins 3 triangles, c'est déjà le cas des chaînes (§3 bis).
+- **Nouveau : les types à exactement deux triangles disjoints**, soit (3²,4,5,6) 5040 et (3²,5³) 840. Ce sont
+  **exactement** les « impossibles d'emblée » du calcul exhaustif. Aucune décomposition (3²,4,4,7) n'a deux triangles
+  disjoints.
+- Contrôle (`scripts/two_disjoint_triangles.py`, `logs/two_disjoint_triangles.log`) :
+  - la clé morte est infaisable pour les 10 paires de voisins, avec ou sans triangle propre ;
+  - l'orbite morte est trouvée et vérifiée dans chacune des 5880 décompositions ;
+  - les effectifs coïncident avec ceux du calcul exhaustif.
+- Il reste, à deux triangles, les 27 720 décompositions à triangles **sécants**. Leurs bornes locales exactes valent
+  26 à 34, en dessous de 42 : le système local seul ne suffira pas.
+
 **Résultats** (`scripts/doubles_budget3.py`, toutes les décompositions étiquetées ; `logs/doubles_budget3.log`) :
 | type | étiquetées | impossibles d'emblée | borne des survivantes | verdict |
 |---|---|---|---|---|
@@ -104,8 +136,8 @@ paire C1 ferme alors un triangle (0–3–4 ou 0–5–6) dans le 6-cycle : aucu
 | (3³,5,7) | 2520 | 2520 | – | exclu |
 | (3³,6,6) | 1890 | 1890 | – | exclu |
 | (3²,4,4,7) | 2520 | 0 | 28 | survit |
-| (3²,4,5,6) | 25200 | 5040 | 26–34 | 20160 survivent |
-| (3²,5³) | 5880 | 840 | 30 | 5040 survivent |
+| (3²,4,5,6) | 25200 | 5040 (= triangles disjoints, S8.5) | 26–34 | 20160 survivent |
+| (3²,5³) | 5880 | 840 (= triangles disjoints, S8.5) | 30 | 5040 survivent |
 | types à 1 triangle | – | 0 | 9–16 | survivent |
 | types sans triangle | – | – | système sans contrainte de triangle | hors de portée |
 
@@ -134,6 +166,9 @@ paire C1 ferme alors un triangle (0–3–4 ou 0–5–6) dans le 6-cycle : aucu
   - triangle de triangles (3³,4³) 1680, par le budget (51).
 - Relecture de C2 (25/09) : C0–C8 et S8.2 re-dérivés à la main, « TIENT », inscrits à son carnet §26. Le calcul
   exhaustif y est mentionné comme calcul du labo « structures », recoupé par un second solveur.
+- **Mise à jour (25/09, soir).** Les familles sans chaîne ont toutes une preuve à la main, relue par C2 (§5). **Tous les
+  types tout-tordus à au moins 3 triangles sont donc exclus entièrement à la main.** Les types à deux triangles
+  disjoints aussi (S8.5).
 
 ## 4. Erreurs rencontrées en chemin (consignées)
 - Premier contrôle Fano à 42, puis 70 au lieu de 84 : il manquait les contraintes (a) et (b). Le contrôle a joué son
@@ -159,7 +194,37 @@ cerfs-volants, impossibilité de trois cerfs-volants ; étoile + transversale : 
   - Chaque bloc non central j : l'orbite de l'antipode de j (ML1) a 2 doubles, et ses deux voisins, qui ont n_k = 1,
     en ont au moins 2 chacun, soit au moins 6.
   - Total au moins 48 > 42.
-- **Triangle de triangles** : budget 51, sans lemme court. Minima par type de bloc sous Z₃ : w = 6, intersections = 8,
-  privés = 7. Format en tableaux proposé à C2.
+- **Triangle de triangles (famille 4) : au moins 43 > 42.** Relu en entier par C2, énumérations comprises (« TIENT »,
+  25/09), inscrit à son §26.
+  - Cadre : T1 = {0,1,2}, T2 = {1,5,6}, T3 = {2,4,6}, et w = 3 sur aucun triangle. Z₃ agit par ρ = (1 6 2)(0 5 4).
+    Le budget exact vaut 51 ; il suffit d'atteindre 43.
+  - Outil : CL (S8.4), avec les exclusions immédiates C0/C2/C3 et la borne immédiate max(#φ forcés à 2,
+    n_k + #zéros exportés) du lemme D.
+  - **Bloc w = 3 : au moins 4.**
+    - Règles CL : 0 doit avoir un voisin dans {1,5}, 1 dans {0,5}, 2 dans {0,4}, 4 dans {0,2}, 5 dans {4,6},
+      6 dans {4,5}. Une orbite qui n'a qu'un voisin dans sa paire gagne un double.
+    - On note z le nombre d'orbites qui ont leurs deux voisins dans leur paire. On a z ≤ 3, sinon on obtient un
+      triangle 0-1-5, 0-2-4 ou 4-5-6.
+    - z = 3 force le cycle (0,1,5,6,4,2). Le fait X1 (orbite 5, paire {1,6}, au moins 2) donne alors 1 + 2 + 1.
+  - **Bloc d'intersection 1 : au moins 7.**
+    - C0, C2 et C3 placent 5 et 6 à distance 3, ainsi que 0 et 2.
+    - Avec les règles CL 0{3,5} et 5{0,3}, il reste 3 cycles, chacun avec les bornes 1+2+1+1+1+1.
+  - **Bloc privé 0 : au moins 6.**
+    - 1 et 2 sont à distance 3. Avec les quatre règles CL, il reste 5 cycles, chacun à 6.
+    - Deux faits servent : X2 (orbite 3, paire {1,4}) et X3 (orbite 5, paire {1,6}), chacun au moins 2.
+  - Total : 4 + 3·7 + 3·6 = **43**. ∎
+  - *X3 sans énumération.* On a y1 = 0, φ14 = 2, φ24 = 1 + y6 et φ26 = 3 − y2 − y6 (C8(2)). Supposons qu'il n'y ait
+    pas de second double. Alors φ24 ≤ 1, donc y6 = 0 ; puis φ26 ≤ 1 force y2 = 2, ce qui est un double.
+    Contradiction.
+  - Contrôle (`scripts/verify_pasch_hand.py`, avec son propre solveur `scripts/local_system.py` en noms d'origine ;
+    `logs/verify_pasch_hand.log`) :
+    - CL tient sur les 420 clés du triangle de triangles et sur les 1340 clés canoniques des calculs exhaustifs. Le
+      solveur propre concorde avec doubles_budget3 sur toutes ces clés.
+    - X1, X2 et X3 tiennent pas à pas, et leur minimum exact vaut 2.
+    - Les règles laissent exactement 8, 3 et 5 cycles. Les bornes données sont celles des règles et ne dépassent pas
+      les minima exacts. Tout cycle exclu est réellement infaisable.
+    - ρ est un automorphisme. Les minima exacts par bloc sont 6 pour w, 8 pour les intersections et 7 pour les privés.
 Contrôles machine de chaque ensemble de faits : `scripts/check_star66_facts.py`, `scripts/check_facts_generic.py`,
-`scripts/budget_block_detail.py`.
+`scripts/budget_block_detail.py`. Pour le triangle de triangles, la recherche du plan le moins coûteux se trouve dans
+`scripts/pasch_greedy2.py` et `scripts/pasch_rules.py`. `scripts/pasch_cheapest.py` n'a servi que de recherche exacte, abandonnée
+au-delà de 5 minutes. `scripts/show_system.py` affiche le système local d'une orbite.

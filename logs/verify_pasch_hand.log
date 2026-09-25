@@ -1,0 +1,11 @@
+(a) CL holds on all 420 (block, orbit, pair) keys of the triangle of triangles
+    CL holds on all 1340 canonical keys of the exhaustive runs (and the own solver agrees with them)
+(b) X1 (block 3, orbit 5, pair [1, 6]): 2 solutions, every step holds, exact minimum 2
+(b) X2 (block 0, orbit 3, pair [1, 4]): 2 solutions, every step holds, exact minimum 2
+(b) X3 (block 0, orbit 5, pair [1, 6]): 3 solutions, every step holds, exact minimum 2
+(c) block 3: 8 cycles pass the CL rules; z <= 3; z = 3 only on (0,1,5,6,4,2); every cycle >= 4 (N = 1 doubles + X1); stated bounds <= exact minima
+(c) block 1: the stated rules leave exactly 3 cycles, the listed ones; stated bounds = rules, <= exact minima; each cycle >= 7
+(c) block 0: the stated rules leave exactly 5 cycles, the listed ones; stated bounds = rules, <= exact minima; each cycle >= 6
+(d) rho = (1 6 2)(0 5 4) is an automorphism; exact block minima {0: 7, 1: 8, 2: 8, 3: 6, 4: 7, 5: 7, 6: 8}; exact total 51; hand total 4 + 3*7 + 3*6 = 43 > 42
+    own solver = doubles_budget3 on all 420 keys of the triangle of triangles
+ALL CHECKS PASSED

@@ -48,3 +48,10 @@
   Erreur de nom relevée par C2 : « quadrilatère » au lieu de « étoile + transversale ». Corrigée dans la note.
 - Recalculs indépendants pour C1 : lemme du triangle (complément de Schur 3I − P_∂, cas tendu) et certificat 3 (Sturm,
   une racine positive ≈ 0,0543 ; admissibilité locale OK). Confirmés.
+- Triangle de triangles (famille 4) à la main : 43 > 42, grâce au **lemme du complément** (CL : si k porte {k,c,d} avec
+  c, d ∈ R_x, alors φ(ab) = 3 − N_ab sur la paire complémentaire). Il faut trois faits en plus : X1, X2, X3. C2 a tout
+  relu et conclut « TIENT » ; CL devient un lemme général à son §26. Tous les types à au moins 3 triangles sont donc
+  exclus à la main. Contrôle : verify_pasch_hand.py, avec un solveur propre en noms d'origine qui concorde sur 1340 clés.
+- Corollaire S8.5 de CL : **deux triangles disjoints ⇒ impossible**, sans triangle propre, par un argument de parité au
+  7ᵉ bloc. Il tue exactement les 5880 décompositions à deux triangles que le calcul exhaustif tuait d'emblée. Restent
+  les 27 720 à deux triangles sécants, dont les bornes locales valent 26 à 34, et les types à 1 ou 0 triangle.
