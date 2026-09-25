@@ -1,8 +1,9 @@
 """Check (a check only; the proof is by hand) of the corollary of the Complement Lemma: in the pure twisted case, a
 decomposition with two vertex-disjoint triangles T, T' is impossible.
 Hand proof: let i be the 7th block.  The 3 cycles through i pair up its 6 neighbours; |T| = 3 is odd, so some cycle
-passes x - i - y with x in T, y in T'.  At block j = x, orbit i has k = y and R_x = (T - x) u (T' - y): C2 on T gives
-phi(ab) = 1 - N_ab, CL on T' gives phi(ab) = 3 - N_ab, where {a,b} = T - x.  Contradiction: the orbit is dead.
+passes s - i - t with s in T, t in T'.  At block j = s, the orbit of {i,s} paired via i has k = t and
+R_x = (T - s) u (T' - t): C2 on T gives phi(ab) = 1 - N_ab, CL on T' gives phi(ab) = 3 - N_ab, where {a,b} = T - s.
+Contradiction: the orbit is dead.
 Checks: (1) the dead key is infeasible for every neighbour pair, with or without an own triangle; (2) every labelled
 decomposition with exactly two triangles, disjoint, has such an x - i - y; their counts per type equal the counts
 'impossible outright' of the exhaustive run (logs/doubles_budget3.log), so these are exactly the ones it killed."""

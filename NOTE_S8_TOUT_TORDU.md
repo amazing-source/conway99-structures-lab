@@ -112,9 +112,9 @@ La différence vaut 2N_ab − 6 + 2φ(ab) = 0. ∎
 **Corollaire S8.5 (deux triangles disjoints).** Une décomposition tout-tordue qui contient deux triangles disjoints est
 impossible.
 *Preuve.* Soient T, T′ les deux triangles et i le 7ᵉ bloc. Les trois cycles par i apparient ses six voisins deux à deux.
-Comme |T| = 3 est impair, l'un de ces cycles passe par x – i – y avec x ∈ T et y ∈ T′. Au bloc j = x, l'orbite i a
-k = y et R_x = (T ∖ x) ∪ (T′ ∖ y). Pour {a,b} = T ∖ x, C2 sur T donne φ(ab) = 1 − N_ab et CL sur T′ donne
-φ(ab) = 3 − N_ab : l'orbite est morte. ∎
+Comme |T| = 3 est impair, l'un de ces cycles passe par s – i – t avec s ∈ T et t ∈ T′ (s, t sont des blocs). Au bloc
+j = s, l'orbite de la paire {i,s} appariée par i a k = t et R_x = (T ∖ s) ∪ (T′ ∖ t). Pour {a,b} = T ∖ s, C2 sur T
+donne φ(ab) = 1 − N_ab et CL sur T′ donne φ(ab) = 3 − N_ab : l'orbite est morte. ∎
 - Avec au moins 3 triangles, c'est déjà le cas des chaînes (§3 bis).
 - **Nouveau : les types à exactement deux triangles disjoints**, soit (3²,4,5,6) 5040 et (3²,5³) 840. Ce sont
   **exactement** les « impossibles d'emblée » du calcul exhaustif. Aucune décomposition (3²,4,4,7) n'a deux triangles
