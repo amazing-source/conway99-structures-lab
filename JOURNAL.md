@@ -93,3 +93,9 @@
   - NOTE_S12 et le registre S12 sont corrigés. Au Fano tendu, e(R) = 0 tient par tension.
   - Rien ne change pour le tout-tordu (S8, S11, S14) : il n'utilise que n_s = 0, théorème de C2 pour les carrés
     « un bloc », avec e(R) = 2n_s.
+- Relecture pour C2 (sa note 30, a0900cc ; carnet §28, 0fed809) : **TIENT**.
+  - Lemme 30.1 : une paire liée tordue en c donne f_a ≥ 8. Par l'équilibre en c (réunion fermée de 12 sommets, donc
+    2 voisins par lointain), P n'a aucune racine et chaque autre Z en a une seule. A = {X₁, X₂, P} est indépendant,
+    et un 6-cycle force P à 3 voisins.
+  - Conséquence : H = H-β. Il n'y a aucun bloc α, par 28.5 (paire ancrée, dans les deux sens) ou par 30.1 (paire
+    tordue).
