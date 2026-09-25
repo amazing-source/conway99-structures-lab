@@ -1,0 +1,11 @@
+   Paley(25) srg(25,12,5,6) Lambda_2: rank 12 (m=12), even True, det = [5]-number ≡ 1 (mod 4), predicted P = 1: True, (-1)^(m/2) det ≡ 1: True
+   Paley(25) srg(25,12,5,6) Lambda_-3: rank 12 (m=12), even True, det = [5]-number ≡ 1 (mod 4), predicted P = 1: True, (-1)^(m/2) det ≡ 1: True
+   LS_3(5) srg(25,12,5,6) Lambda_2: rank 12 (m=12), even True, det = [5]-number ≡ 1 (mod 4), predicted P = 1: True, (-1)^(m/2) det ≡ 1: True
+   LS_3(5) srg(25,12,5,6) Lambda_-3: rank 12 (m=12), even True, det = [5]-number ≡ 1 (mod 4), predicted P = 1: True, (-1)^(m/2) det ≡ 1: True
+   LS_3(13) srg(169,36,13,6) Lambda_10: rank 36 (m=36), even True, det = [13]-number ≡ 1 (mod 4), predicted P = 1: True, (-1)^(m/2) det ≡ 1: True
+   LS_3(13) srg(169,36,13,6) Lambda_-3: rank 132 (m=132), even True, det = [13]-number ≡ 1 (mod 4), predicted P = 1: True, (-1)^(m/2) det ≡ 1: True
+   LS_4(13) srg(169,48,17,12) Lambda_9: rank 48 (m=48), even True, det = [13]-number ≡ 1 (mod 4), predicted P = 1: True, (-1)^(m/2) det ≡ 1: True
+   LS_4(13) srg(169,48,17,12) Lambda_-4: rank 120 (m=120), even True, det = [13]-number ≡ 1 (mod 4), predicted P = 1: True, (-1)^(m/2) det ≡ 1: True
+   Paley(169) srg(169,84,41,42) Lambda_6: rank 84 (m=84), even True, det = [13]-number ≡ 1 (mod 4), predicted P = 1: True, (-1)^(m/2) det ≡ 1: True
+   Paley(169) srg(169,84,41,42) Lambda_-7: rank 84 (m=84), even True, det = [13]-number ≡ 1 (mod 4), predicted P = 1: True, (-1)^(m/2) det ≡ 1: True
+ALL CONSISTENT

@@ -1,0 +1,73 @@
+== Petersen: srg(10,3,0,1), r=1^5, s=-2^4, scan status: ok
+   Lambda_1: rank 5, det 162 = [2, 3], even True, (-1)^(m/2) det mod 4 = None, Jordan {3: [(0, 1, 1), (1, 4, -1)]}
+   Lambda_-2: rank 4, det 405 = [3, 5], even True, (-1)^(m/2) det mod 4 = 1, Jordan {3: [(1, 4, -1)], 5: [(0, 3, -1), (1, 1, -1)]}
+   q=3: alpha = 4 (rank formula 4), delta_r = 1, delta_s = 1, delta relation OK
+   cyclic prime 5 on Lambda_-2: predicted (e=1, eps=-1), lattice [(0, 3, -1), (1, 1, -1)] -> OK
+   actual (alpha, delta) passes side_ok: r True, s True; alpha in scan-allowed set: True
+   -> CONSISTENT
+== T(5): srg(10,6,3,4), r=1^4, s=-2^5, scan status: ok
+   Lambda_1: rank 4, det 405 = [3, 5], even True, (-1)^(m/2) det mod 4 = 1, Jordan {3: [(1, 4, -1)], 5: [(0, 3, -1), (1, 1, -1)]}
+   Lambda_-2: rank 5, det 162 = [2, 3], even True, (-1)^(m/2) det mod 4 = None, Jordan {3: [(0, 1, 1), (1, 4, -1)]}
+   q=3: alpha = 4 (rank formula 4), delta_r = 1, delta_s = 1, delta relation OK
+   cyclic prime 5 on Lambda_-2: predicted (e=1, eps=-1), lattice None -> MISMATCH
+   actual (alpha, delta) passes side_ok: r False, s False; alpha in scan-allowed set: True
+   -> *** INCONSISTENT ***
+== T(7): srg(21,10,5,4), r=3^6, s=-2^14, scan status: ok
+   Lambda_3: rank 6, det 109375 = [5, 7], even True, (-1)^(m/2) det mod 4 = 1, Jordan {5: [(1, 6, -1)], 7: [(0, 5, 1), (1, 1, 1)]}
+   Lambda_-2: rank 14, det 46875 = [3, 5], even True, (-1)^(m/2) det mod 4 = 1, Jordan {3: [(0, 13, -1), (1, 1, -1)], 5: [(0, 8, 1), (1, 6, -1)]}
+   q=5: alpha = 6 (rank formula 6), delta_r = 1, delta_s = 1, delta relation OK
+   cyclic prime 7 on Lambda_3: predicted (e=1, eps=1), lattice [(0, 5, 1), (1, 1, 1)] -> OK
+   cyclic prime 3 on Lambda_-2: predicted (e=1, eps=-1), lattice [(0, 13, -1), (1, 1, -1)] -> OK
+   actual (alpha, delta) passes side_ok: r True, s True; alpha in scan-allowed set: True
+   -> CONSISTENT
+== T(9): srg(36,14,7,4), r=5^8, s=-2^27, scan status: ok
+   Lambda_5: rank 8, det 51883209 = [3, 7], even True, (-1)^(m/2) det mod 4 = 1, Jordan {3: [(0, 7, -1), (2, 1, -1)], 7: [(1, 8, 1)]}
+   Lambda_-2: rank 27, det 23059204 = [2, 7], even True, (-1)^(m/2) det mod 4 = None, Jordan {7: [(0, 19, 1), (1, 8, 1)]}
+   q=7: alpha = 8 (rank formula 8), delta_r = 0, delta_s = 0, delta relation OK
+   cyclic prime 3 on Lambda_5: predicted (e=2, eps=-1), lattice [(0, 7, -1), (2, 1, -1)] -> OK
+   actual (alpha, delta) passes side_ok: r True, s True; alpha in scan-allowed set: True
+   -> CONSISTENT
+== T(13): srg(78,22,11,4), r=9^12, s=-2^65, scan status: ok
+   Lambda_9: rank 12, det 40799568897373 = [11, 13], even True, (-1)^(m/2) det mod 4 = 1, Jordan {11: [(1, 12, -1)], 13: [(0, 11, -1), (1, 1, -1)]}
+   Lambda_-2: rank 65, det 18830570260326 = [2, 3, 11], even True, (-1)^(m/2) det mod 4 = None, Jordan {3: [(0, 64, -1), (1, 1, 1)], 11: [(0, 53, 1), (1, 12, -1)]}
+   q=11: alpha = 12 (rank formula 12), delta_r = 1, delta_s = 1, delta relation OK
+   cyclic prime 13 on Lambda_9: predicted (e=1, eps=-1), lattice [(0, 11, -1), (1, 1, -1)] -> OK
+   cyclic prime 3 on Lambda_-2: predicted (e=1, eps=1), lattice [(0, 64, -1), (1, 1, 1)] -> OK
+   actual (alpha, delta) passes side_ok: r True, s True; alpha in scan-allowed set: True
+   -> CONSISTENT
+== T(15): srg(105,26,13,4), r=11^14, s=-2^90, scan status: ok
+   Lambda_11: rank 14, det 59060645785489335 = [3, 5, 13], even True, (-1)^(m/2) det mod 4 = 1, Jordan {3: [(0, 13, -1), (1, 1, 1)], 5: [(0, 13, -1), (1, 1, 1)], 13: [(1, 14, -1)]}
+   Lambda_-2: rank 90, det 27561634699895023 = [7, 13], even True, (-1)^(m/2) det mod 4 = 1, Jordan {7: [(0, 89, -1), (1, 1, -1)], 13: [(0, 76, 1), (1, 14, -1)]}
+   q=13: alpha = 14 (rank formula 14), delta_r = 1, delta_s = 1, delta relation OK
+   cyclic prime 3 on Lambda_11: predicted (e=1, eps=1), lattice [(0, 13, -1), (1, 1, 1)] -> OK
+   cyclic prime 5 on Lambda_11: predicted (e=1, eps=1), lattice [(0, 13, -1), (1, 1, 1)] -> OK
+   cyclic prime 7 on Lambda_-2: predicted (e=1, eps=-1), lattice [(0, 89, -1), (1, 1, -1)] -> OK
+   actual (alpha, delta) passes side_ok: r True, s True; alpha in scan-allowed set: True
+   -> CONSISTENT
+== T(17): srg(136,30,15,4), r=13^16, s=-2^119, scan status: ok
+   Lambda_13: rank 16, det 111662942047119140625 = [3, 5, 17], even True, (-1)^(m/2) det mod 4 = 1, Jordan {3: [(1, 16, -1)], 5: [(1, 16, -1)], 17: [(0, 15, 1), (1, 1, 1)]}
+   Lambda_-2: rank 119, det 52547266845703125000 = [2, 3, 5], even True, (-1)^(m/2) det mod 4 = None, Jordan {3: [(0, 103, 1), (1, 16, -1)], 5: [(0, 103, 1), (1, 16, -1)]}
+   q=3: alpha = 16 (rank formula 16), delta_r = 1, delta_s = 1, delta relation OK
+   q=5: alpha = 16 (rank formula 16), delta_r = 1, delta_s = 1, delta relation OK
+   cyclic prime 17 on Lambda_13: predicted (e=1, eps=1), lattice [(0, 15, 1), (1, 1, 1)] -> OK
+   actual (alpha, delta) passes side_ok: r True, s True; alpha in scan-allowed set: True
+   -> CONSISTENT
+== T(19): srg(171,34,17,4), r=15^18, s=-2^152, scan status: ok
+   Lambda_15: rank 18, det 267198604589286774829171 = [17, 19], even True, (-1)^(m/2) det mod 4 = 1, Jordan {17: [(1, 18, 1)], 19: [(0, 17, -1), (1, 1, -1)]}
+   Lambda_-2: rank 152, det 126567760068609524919081 = [3, 17], even True, (-1)^(m/2) det mod 4 = 1, Jordan {3: [(0, 151, -1), (2, 1, -1)], 17: [(0, 134, 1), (1, 18, 1)]}
+   q=17: alpha = 18 (rank formula 18), delta_r = 0, delta_s = 0, delta relation OK
+   cyclic prime 19 on Lambda_15: predicted (e=1, eps=-1), lattice [(0, 17, -1), (1, 1, -1)] -> OK
+   cyclic prime 3 on Lambda_-2: predicted (e=2, eps=-1), lattice [(0, 151, -1), (2, 1, -1)] -> OK
+   actual (alpha, delta) passes side_ok: r True, s True; alpha in scan-allowed set: True
+   -> CONSISTENT
+== T(21): srg(210,38,19,4), r=17^20, s=-2^189, scan status: ok
+   Lambda_17: rank 20, det 789389442608465122060467621 = [3, 7, 19], even True, (-1)^(m/2) det mod 4 = 1, Jordan {3: [(0, 19, -1), (1, 1, -1)], 7: [(0, 19, 1), (1, 1, -1)], 19: [(1, 20, -1)]}
+   Lambda_-2: rank 189, det 375899734575459581933556010 = [2, 5, 19], even True, (-1)^(m/2) det mod 4 = None, Jordan {5: [(0, 188, 1), (1, 1, -1)], 19: [(0, 169, 1), (1, 20, -1)]}
+   q=19: alpha = 20 (rank formula 20), delta_r = 1, delta_s = 1, delta relation OK
+   cyclic prime 3 on Lambda_17: predicted (e=1, eps=-1), lattice [(0, 19, -1), (1, 1, -1)] -> OK
+   cyclic prime 7 on Lambda_17: predicted (e=1, eps=-1), lattice [(0, 19, 1), (1, 1, -1)] -> OK
+   cyclic prime 5 on Lambda_-2: predicted (e=1, eps=-1), lattice [(0, 188, 1), (1, 1, -1)] -> OK
+   actual (alpha, delta) passes side_ok: r True, s True; alpha in scan-allowed set: True
+   -> CONSISTENT
+
+*** SOME INCONSISTENCY ***
