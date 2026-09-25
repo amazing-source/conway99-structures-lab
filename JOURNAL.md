@@ -18,3 +18,8 @@
   discrimine pas : à noter.
 - S6 : c2_balance_check.py. Équilibre de C2 en forme générale, BBᵀ1_C = (k−14)1_C + (5/3)|C|1_N, vérifié sur BvLS.
   Relecture du lemme de la queue (stabilité de X_In(k), v et σv dans C_Out(k), conséquences) : tient. Envoyé à C2.
+- S7 (aide à C2) : partage acté, C2 garde les mélanges presque ancrés, je prends le tout-tordu pur.
+  k7_cycle_decomp.py : 121 215 décompositions étiquetées, 20 types.
+  star_S_spectrum.py : W = intérieurs + étoile(k), 7680 étiquetages, spectre unique dans [−4, 3] ; les extrêmes sont les
+  vecteurs triviaux θe_k + Ce_k. En tout-tordu |D_h(x)| ≤ 2 : budgets non saturés. Aucun levier local ; (7,7,7) est le
+  cœur.

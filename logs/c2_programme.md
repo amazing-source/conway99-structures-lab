@@ -738,3 +738,66 @@ l'utilisateur).**
     - {−1, 6} : m₆ = 54, m₋₇ + m₋₁ = 45, tr H = 0 donne 6m₋₇ = 279. Pas entier.
   - Donc aucun spectre, pas même à trois valeurs propres, sans recherche.
 - **Conclusion commune :** la famille genre/réseaux est épuisée pour C2 ; le verrou reste combinatoire.
+
+## 24. Lemme de la queue : aucune configuration ancrée n'existe (25/09, croisement avec le labo `c2_experimental`)
+**Origine.** Le **lemme d'équilibre** du labo (note 23 §8, preuve humaine, sans involution), appliqué aux configurations ancrées des
+§18–§22. Rédaction détaillée : labo, `notes/25_LEMME_DE_LA_QUEUE.md`.
+
+**Lemme 24.0 (équilibre, labo).** Soit ℓ une droite, et C une réunion de composantes du graphe 3-régulier induit sur N(ℓ). Tout
+sommet à distance 2 de ℓ (60 sommets) a exactement |C|/6 voisins dans C.
+*Preuve.* BBᵀ = (12I − A_NN + 2J) − Cls − A_NN², et C coupe chaque classe en tiers. Donc Σ_z n_C(z)² = 5|C|²/3 et
+Σ_z n_C(z) = 10|C| : la variance est nulle. ∎ (C'est propre à k = 14 : 1_C − (|C|/36)1_N est un vecteur propre de A_NN de valeur
+propre 3.)
+
+**Composantes en un bloc k.**
+- N(ℓ_k) contient les intérieurs b ∈ X_k = {±e_m : m ≠ k} et les racines ±e_k + b.
+- Les trois sommets d'étiquette b sont dans la même composante, et b, −b aussi (la droite b – (−b) passe par x).
+- Les composantes sont donc les orbites de ⟨σ, μ_k, τ_k⟩ sur X_k. Ce sont des réunions de blocs : c'est un graphe G_k sur les 6
+  autres blocs.
+
+**Lemme 24.1.** Soit X ⊂ ij une orbite appariée par i à D(X) ⊂ ik (troisième bloc k). Alors, dans G_k, la composante de i contient
+au moins 3 + [j dans la même composante] blocs.
+*Preuve.* x évite k. Dans cette composante, il voit forcément :
+- l'intérieur de son signe en i ;
+- les deux sommets v, σv de son carré (des racines d'étiquettes ±e_i, dans les classes ±e_k) ;
+- l'intérieur de son signe en j, si j est dans la composante.
+
+Or il y a exactement (nombre de blocs) voisins dans la composante, par 24.0. ∎
+
+**Corollaire 24.2 (queue).** Dans une configuration ancrée (§18), X_In(k) est stable par μ_k = τ_k. En effet, une paire ancrée en k
+est appariée par k à une paire elle aussi ancrée en k. Donc X_Out(k) est une réunion de composantes, de taille 2(6 − d_k). Pour un
+carré de pivot i et de bras j, k : **d_k ≤ 3 − [k → j] et d_j ≤ 3 − [j → k]**. La queue de l'arc entre bras a donc d ≤ 2, et la tête
+d ≤ 3.
+Pour une structure liée, on retrouve la règle « s → w ⇒ out(s) ≥ 4 » du §20.
+
+**Théorème 24.3.** Aucune configuration ancrée n'existe.
+*Preuve.* Par 19.2, les degrés sont dans {0, 2, 3, 6}. En un bloc de degré 3, le triangle D porte des carrés sur les trois paires
+de bras. Tout arc entre éléments de In(i) a donc une queue de degré ≤ 2, et au moins deux éléments de In(i) sont de degré ≤ 2.
+- **3⁷** : impossible. C'est une nouvelle preuve du Théorème P.
+- **(6,0,3⁵)** : In(B) = {Z, B₁, B₂}, et l'arc B₁–B₂ a une queue de degré 3. Impossible.
+- **(6,3,3,3,2,2,2)** :
+  - un In(C) contient au plus un C, donc les C forment un cycle ;
+  - les deux L de In(C_j) pointent vers C_{j−1}, donc les trois C ont le même couple {L, L′} ;
+  - les trois C pointent vers le troisième L, qui est alors de degré ≥ 3 : impossible.
+  (Pour contrôle, dans le tournoi unique du §22, l'arc C_{j−1} → L_{j−1} dans In(C_j) a une queue C.) ∎
+
+**Statut.** PROUVÉ et **VÉRIFIÉ deux fois** :
+- par « structures » : relecture adverse étape par étape, avec contrôle numérique de l'identité d'équilibre générale
+  BBᵀ1_C = (k − 14)1_C + (5/3)|C|1_N sur BvLS (891 droites, 8910 composantes) et contrôle négatif ;
+- par une relecture interne indépendante.
+Les deux cas ancrés qui restaient ouverts au §22 sont fermés.
+
+*Simplification (relecture interne).* 19.2 est inutile :
+- un degré 1 est impossible (paire sœur) ;
+- tout bloc ayant un arc sortant est un bras, donc de degré ≤ 3 par 24.2 ;
+- d'où d ∈ {0, 2, 3, 6} sans l'argument K₂,₂.
+
+**Reste**, en Σ = ∅ :
+- les paires tordues (§14) et les chaînes tordues de longueur ≥ 4 ;
+- les mélanges ;
+- les carrés disjoints, y compris dans les paires mixtes.
+
+Les fourches (§16) sont ancrées, donc fermées.
+
+24.1 s'y applique tel quel. Mais les composantes de G_k y sont plus grandes : les orbites libres forment des cycles de R_k (19.1),
+et σ recolle les paires mixtes. Il faut donc contrôler G_k.
