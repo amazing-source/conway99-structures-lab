@@ -1,0 +1,3 @@
+(3, 3, 3, 3, 3, 3, 3): 30 labelled decompositions; min over them of (min total zeros per orbit-sum) = 84, max = 84; killed (all > 42): True; count with >42: 30
+(3, 3, 3, 3, 3, 6): 420 labelled decompositions; min over them of (min total zeros per orbit-sum) = 48, max = 48; killed (all > 42): True; count with >42: 420
+(3, 3, 3, 3, 4, 5): 5040 labelled decompositions; min over them of (min total zeros per orbit-sum) = 32, max = 38; killed (all > 42): False; count with >42: 0

@@ -23,3 +23,8 @@
   star_S_spectrum.py : W = intérieurs + étoile(k), 7680 étiquetages, spectre unique dans [−4, 3] ; les extrêmes sont les
   vecteurs triviaux θe_k + Ce_k. En tout-tordu |D_h(x)| ≤ 2 : budgets non saturés. Aucun levier local ; (7,7,7) est le
   cœur.
+- S9 : 27.2 de C2 relu, il tient (équilibre croisé en 0 et en 3).
+- S8 : zeros_budget.py. Deux contraintes ajoutées après que le contrôle Fano a d'abord donné 42, puis 70 :
+  (a) φ_x(jk) = 0 si x est dans le triangle {i,j,k} ; (b) au plus un R_j-voisin par triangle {j,r,s} ∌ i (compte exact 1).
+  Fano donne alors 84 = compte de C2. (3⁵,6) : 48 > 42, exclu ; (3⁴,4,5) : 32–38, survit.
+  Le cœur est redéfini avec C2 comme « G_c connexe en tout bloc » ; le résidu tout-tordu compte 18 types.
