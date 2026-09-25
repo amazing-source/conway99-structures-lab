@@ -28,3 +28,10 @@
   (a) φ_x(jk) = 0 si x est dans le triangle {i,j,k} ; (b) au plus un R_j-voisin par triangle {j,r,s} ∌ i (compte exact 1).
   Fano donne alors 84 = compte de C2. (3⁵,6) : 48 > 42, exclu ; (3⁴,4,5) : 32–38, survit.
   Le cœur est redéfini avec C2 comme « G_c connexe en tout bloc » ; le résidu tout-tordu compte 18 types.
+- Consigne de l'utilisateur : « be extremely careful with errors … once you're done with your part report to your peers ».
+  Pratique adoptée : contrôle positif (Fano = 84), solveur indépendant au niveau des étiquettes, recomptage
+  indépendant de la classification, tests unitaires, et rien d'envoyé avant la fin des contrôles.
+- S8 : preuve à la main de l'exclusion de (3⁵,6) (NOTE_S8_TOUT_TORDU.md), relue ligne à ligne. La borne vaut 48 et
+  e(S₁,S₂) ≥ 2 vient d'un argument de degrés.
+- Certificat d'Astra (mission géométrique) vérifié par code indépendant (NOTE_ASTRA_CERTIFICAT.md) : wᵀCw = −2 et
+  qᵀAq − 3‖q‖² = 16. Ses 8 dimensions sont exactement le Π₋₄ de rang 8 du X12 de C1 pour la droite {x, 0, 1}.
