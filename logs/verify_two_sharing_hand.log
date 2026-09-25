@@ -1,0 +1,21 @@
+(T) Lemma T holds on all 430 (key, triangle in R) cases of the exhaustive runs
+(A) Lemma A: its local identities hold in all 7 classes (the coupling step is by hand)
+(S) class steps:
+   0 (3,3,4,4,7): at block 6, 5 ~ [1, 2]; at block 5, 6 ~ [3, 4]
+   2 (3,3,4,5,6)b: at block 6, 5 ~ [1, 2]; at block 5, 6 ~ [1, 2]
+   1 (3,3,4,5,6)a: at block 6, 5 ~ [1, 2]; at block 5, 6 ~ [3, 4]
+   3 (3,3,4,5,6)c: at block 6, 5 ~ [1, 2]; at block 5, 6 ~ [3, 4]
+   4 (3,3,4,5,6)d: at block 6, 5 ~ [3, 4]; at block 5, 6 ~ [1, 2]
+   5 (3,3,4,5,6)e: at block 6, 5 ~ [3, 4]; at block 5, 6 ~ [1, 2]
+   6 (3,3,4,5,6)f: at block 6, 5 ~ [1, 2]; at block 5, 6 ~ [1, 2]
+   7 (3,3,5,5,5): at block 6, 5 ~ [3, 4]; at block 5, 6 ~ [3, 4]
+   (per-class finishing steps below)
+   class 7: E[36][45] >= 2+1 > 1+1 >= E[45][36]
+   class 0: E[46][35] >= 2+1 > 0+2 >= E[35][46]
+   class 1: E[36][45] >= 2+2 > 2+1 >= E[45][36]
+   class 3: E[36][45] >= 2+1 > 0+2 >= E[45][36]
+   class 5: E[26][15] >= 2+1 > 0+2 >= E[15][26]
+   class 4: E[36][45] >= 2+2 > 2+0 >= E[45][36]  (after E[56][34] = 1+1 forces 4 ~ {5,6} at block 3)
+   class 6: {4,6} <- (5;3),(3;5); {3,5} <- (6;4),(4;6); {3,6} <- (5;4),(0;5); {4,5} <- (6;3),(0;6); (0;1) needs a third double at 36 or 45
+   class 2: (1;3),(1;4),(2;3),(2;4) double at the opposite cross pair; (3;6),(4;5),(5;1),(5;2),(6;1),(6;2) have phi_a + phi_b = 3 on two cross pairs: 10 doubles on the four cross pairs > 8 = PPE
+ALL CHECKS PASSED

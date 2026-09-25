@@ -1,0 +1,4 @@
+(3,3,4,4,7) {'PPE doubles only': True, 'column sums only': True, 'coupling only': True, 'PPE + colsum': True, 'PPE + coupling': False} [3 s]
+(3,3,4,5,6)a {'PPE doubles only': True, 'column sums only': True, 'coupling only': False, 'PPE + colsum': True, 'PPE + coupling': False} [7 s]
+(3,3,4,5,6)f {'PPE doubles only': True, 'column sums only': True, 'coupling only': True, 'PPE + colsum': True, 'PPE + coupling': False} [13 s]
+(3,3,5,5,5) {'PPE doubles only': True, 'column sums only': True, 'coupling only': True, 'PPE + colsum': True, 'PPE + coupling': False} [16 s]

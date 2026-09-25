@@ -55,3 +55,15 @@
 - Corollaire S8.5 de CL : **deux triangles disjoints ⇒ impossible**, sans triangle propre, par un argument de parité au
   7ᵉ bloc. Il tue exactement les 5880 décompositions à deux triangles que le calcul exhaustif tuait d'emblée. Restent
   les 27 720 à deux triangles sécants, dont les bornes locales valent 26 à 34, et les types à 1 ou 0 triangle.
+- S11 (25/09, soir) : **budget exact paire par paire** (PPE).
+  - C'est 16.1 de C2 en tout-tordu. Chaque paire est doublée par exactement 2 orbites, a 12 uns et 6 zéros. Le total 42
+    est donc exact, alors que mon calcul exhaustif n'utilisait que Σ ≤ 42.
+  - Avec le **couplage** E[P][Q] = E[Q][P], il ferme les 8 classes à deux triangles sécants.
+  - Nouveaux lemmes : le lemme T (R_x = triangle ∪ {r} ⇒ y_r = 1 − n_k − n_r, jamais de double) et le lemme A (deux
+    triangles sécants ⇒ les paires de base se doublent mutuellement et sont saturées).
+  - Preuves à la main, étapes locales vérifiées par solveur exact. Des tests PLNE/PL courts (moins de 5 min chacun,
+    règle du 25/09) ont servi à localiser les arguments.
+  - Limite : les types à 1 triangle restent faisables pour ces outils.
+- Rapport d'Astra reçu de l'utilisateur (recherches indépendantes : 5 triangles disjoints reliés deux à deux par 2
+  arêtes impossibles, contraintes mod 3, tests spectraux sur témoins à 51 sommets). Consigne de l'utilisateur : ne pas
+  se réorienter dessus sauf si c'est utile. Rien n'a été envoyé à Astra.
