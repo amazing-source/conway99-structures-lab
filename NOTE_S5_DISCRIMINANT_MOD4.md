@@ -80,3 +80,19 @@ e impair (n = 13, 17, 25, 29, 37, 41, 53, 61, 65) et 122 sont sporadiques (`logs
 - Extension possible : v pair avec une partie 2-adique cyclique (E_θ non 2-entier). Le type 2-adique y est encore
   calculable si e ≥ 2.
 - **Avant toute annonce** : audit indépendant (Astra), puis avis d'expert (A. E. Brouwer tient la table).
+
+## 6. Relecture de C2 (25/09) et compléments
+- **Mécanisme confirmé** à partir des principes, y compris la règle du facteur de v. (k − r)(k − s) = μv et
+  (k − s) − (k − r) = d, donc p ∤ d divise exactement l'un des deux facteurs, et disc(ℤ1) est cyclique.
+- **(289, 54, 1, 12) et la famille NL** : recalculés à la main par C2, d'accord.
+- **La condition de rang (m pair) ne mord jamais.** Sur les 6849 ensembles à multiplicités entières avec v et d impairs
+  (v ≤ 3000, sans filtre de Krein), f et g sont toujours pairs : c'est une conséquence de l'intégralité. Les 36
+  exclusions viennent toutes du discriminant mod 4.
+- **r et s ensemble n'apportent rien de plus** : det_r · det_s · v est un carré, et (−1)^{(v−1)/2} v ≡ 1 (mod 4).
+  Le mod 8 (Arf) n'ajoute rien non plus.
+- **Filtre pour v pair** : on exige 2^{v₂(v)} | k − θ′. Vérifié par exemple sur (1248, 203, 22, 35), où k − θ′ = 224 = 2⁵·7
+  et v₂(1248) = 5.
+- **Antériorité.** C2 ne connaît pas l'énoncé et y voit une condition « Bruck–Ryser 2-adique ». Recherche bibliographique
+  (web, livre de Brouwer–Van Maldeghem, articles récents de non-existence) : rien trouvé. À confirmer par un expert.
+- **Extension (C2, point 5)** : pour p ≡ 3 (mod 4) divisant d, il faudrait connaître la parité de α_p par un autre
+  argument (borne de p-rang). Rare, mais cela rouvrirait des cas.
