@@ -1,0 +1,5 @@
+(1) srg(9,4,1,2): A_D^2 + A_D - (k-2)I = 2J - d^T d exact; (P2) on 200 random (R,R') exact; diagonal on 1 class-pair blocks, sum cnt(cnt-1) = 16 - 2e(R) with e(R) in [np.int64(4)]
+(1) BvLS srg(243,22,1,2): A_D^2 + A_D - (k-2)I = 2J - d^T d exact; (P2) on 200 random (R,R') exact; diagonal on 55 class-pair blocks, sum cnt(cnt-1) = 16 - 2e(R) with e(R) in [np.int64(4)]
+(2) BvLS srg(243,22,1,2) (r=4, s=-5): on 4 lines, MM^T and A_F M^T identities exact; exact forms of (U) and (L) on 60 random S each, equality at S = F
+(3) 99 closed forms: coefficients of |S|^2 are 1/12 in (U) and 1/5 in (L); on the complement (MM^T)^+ = [(3-A_G)(A_G+4)]^-1, Y = -(3-A_G)^-1, Y' = (A_G+4)^-1 = Y + 7P
+ALL CHECKS PASSED

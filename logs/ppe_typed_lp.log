@@ -1,0 +1,6 @@
+(3, 4, 4, 5, 5) unsigned LP relaxation feasible: True
+(3, 4, 4, 5, 5) typed LP relaxation feasible: True
+(3, 4, 4, 4, 6) unsigned LP relaxation feasible: True
+(3, 4, 4, 4, 6) typed LP relaxation feasible: True
+(3, 4, 4, 5, 5) unsigned LP relaxation feasible: True
+(3, 4, 4, 5, 5) typed LP relaxation feasible: True

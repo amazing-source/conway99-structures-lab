@@ -67,3 +67,14 @@
 - Rapport d'Astra reçu de l'utilisateur (recherches indépendantes : 5 triangles disjoints reliés deux à deux par 2
   arêtes impossibles, contraintes mod 3, tests spectraux sur témoins à 51 sommets). Consigne de l'utilisateur : ne pas
   se réorienter dessus sauf si c'est utile. Rien n'a été envoyé à Astra.
+- S13, PPE signé (accord de C2). μ = 2 par sommet (t,ε) donne des types aux doubles :
+  - (L1) un y-double est de type r ;
+  - (L2) les doubles incidents à un bloc ne sont jamais mélangés ; un double proche est toujours du type du bloc non
+    partagé, ce qui vaut aussi dans les mélanges M1 ;
+  - (P) une orbite de chaque type par paire.
+  - Test court (règle du 25/09) sur les 3 échantillons à 1 triangle que le modèle non signé laissait passer : PLNE
+    indécis en 45 s, et **relâchement linéaire faisable**. Aucun certificat linéaire : le signe au premier ordre ne
+    suffit pas seul.
+- S12, vérification demandée par C1 (notes/116). (P2) et sa diagonale, le critère lointain et le Fano tendu (table des
+  g, κ, F5) sont refaits à la main et contrôlés exactement sur Paley 9 et BvLS : TIENT. Précision : la diagonale vaut
+  16 − 2e(R) ; sur les vrais graphes, e(R) = 4 et elle vaut 8.

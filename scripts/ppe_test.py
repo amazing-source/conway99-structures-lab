@@ -29,7 +29,11 @@ LABELS = []                                                       # label of eac
 VARS = {}                                                         # variable index -> key, for the last build()
 
 
-def build(dec, ppe=True, coupling=True, colsum=None):
+def build(dec, ppe=True, coupling=True, colsum=None, typed=False):
+    """typed=True adds the signed refinement (types of doubles): a double of X at {t,s} is of type t or s
+    (its two neighbours share the t-vertex or the s-vertex); (L1) a y-double {k,r} is of type r; (L2) at a block t of
+    R_x, the doubles incident to t are all of type t or all of another type; (P) each pair {a,b} is doubled by exactly
+    one orbit of type a and one of type b."""
     if colsum is None:
         colsum = ppe
     var = {}
@@ -111,6 +115,23 @@ def build(dec, ppe=True, coupling=True, colsum=None):
                 add(lin(*[phi(X, frozenset(e)) for e in itertools.combinations(sorted(t), 2)]), 3, 3)          # C5
         cur[0] = f'C6 {tag}: n{k}+sum y=2'
         add(lin({n(X, k): 1}, *[phi(X, frozenset((k, r))) for r in R]), 2, 2)                  # C6
+        if typed:
+            for Q in disj:
+                a, b = sorted(Q)
+                cur[0] = f'type {tag} Q={sorted(Q)}'
+                add({v(('tau', X, Q, a)): 1, v(('tau', X, Q, b)): 1, v(('t', X, Q, 2)): -1}, 0, 0)
+            for r in R:
+                cur[0] = f'L1 {tag} r={r}'
+                add({v(('tau', X, frozenset((k, r)), k)): 1}, 0, 0)
+            for t in R:
+                inc = [frozenset((t, s)) for s in R if s != t] + [frozenset((k, t))]
+                cur[0] = f'L2 {tag} t={t}'
+                cA = {v(('tau', X, Q, t)): 1 for Q in inc}
+                cA[v(('z', X, t))] = -2
+                add(cA, -2, 0)                                                   # A_t <= 2 z
+                cB = {v(('tau', X, Q, next(iter(Q - {t})))): 1 for Q in inc}
+                cB[v(('z', X, t))] = 2
+                add(cB, 0, 2)                                                    # B_t <= 2 (1 - z)
         for t in R:
             cur[0] = f'C8({t}) {tag}'
             add(lin({n(X, t): 1}, phi(X, frozenset((k, t))),
@@ -121,6 +142,10 @@ def build(dec, ppe=True, coupling=True, colsum=None):
         cur[0] = f'PPE Q={sorted(Q)}'
         if ppe:
             add({v(('t', X, Q, 2)): 1 for X in Xs}, 2, 2)
+        if ppe and typed:
+            for a in sorted(Q):
+                cur[0] = f'PPEtyped Q={sorted(Q)} type={a}'
+                add({v(('tau', X, Q, a)): 1 for X in Xs}, 1, 1)
         cur[0] = f'colsum Q={sorted(Q)}'
         if colsum:
             add(lin(*[phi(X, Q) for X in Xs]), 16, 16)
