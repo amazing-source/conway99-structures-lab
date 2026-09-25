@@ -19,7 +19,11 @@ graphes de la famille srg(v,k,1,2), à savoir srg(9,4,1,2) et BvLS srg(243,22,1,
 Σ_z cnt(z,R)cnt(z,R′) = (k−2)|R ∩ R′| − N(R,R′) + Σ_{y∈R,w∈R′}(2 − |y∩w|). Les termes y = w sont nuls.
 
 **Diagonale sur un bloc (4 paires)** : **Σ cnt = 4(k − 2) et Σ cnt(cnt − 1) = 16 − 2e(R).**
-- Le « 16 » de C1 suppose donc **e(R) = 0**, c'est-à-dire la torsion maximale, que note/E3 énonce bien.
+- Le « 16 » de C1 suppose donc **e(R) = 0**, c'est-à-dire aucune arête dans le bloc. **Correction (C1, d02ac18) :**
+  la torsion maximale ne porte que sur τ et **ne garantit pas** e(R) = 0. Une σ-arête σ_c(v) = v̄, interne au bloc
+  {c, classe de v}, reste possible : ce sont les coïncidences S de L18. La bonne formulation, même en torsion
+  maximale, est 16 − 2e(R). Dans le cadre de C2, on a e(R) = 2n_s(P). Le « 16 » y vaut quand n_s = 0, ce qui est un
+  théorème de C2 pour les carrés « un bloc » (tout-tordu, S11), et non une hypothèse.
 - Contrôle : sur Paley 9 et sur les 55 blocs de BvLS, e(R) = 4, et la diagonale vaut 8. La forme générale est exacte.
 
 ## 2. Critère lointain
@@ -63,7 +67,8 @@ Soient L une droite, W = L ∪ N(L), F les lointains, M = A[N(L),F] et G = G(L),
     tension, les 8 atterrissages des paires de R tombent dans C₄(R) = R′₁ ∪ R′₂. La symétrie des arêtes
     N(R′,R) = N(R,R′) conclut.
   - **Toutes les autres paires ont cnt ≤ 1** :
-    - R lui-même donne 0 (torsion maximale) ;
+    - R lui-même donne 0. C'est la **tension**, et non la torsion maximale : une σ-arête interne à un bloc serait
+      interne à une droite tendue, d'où e ≥ 13, contre le lemme du triangle. La diagonale y vaut donc bien 16 ;
     - {c,p} et {d,p} donnent 1 (τ) ;
     - {c,x}, {d,x} et {p,x} donnent au plus 1 (famille tendue : un seul voisin dans Q_ℓ) ;
     - le type B donne 1 − [·].

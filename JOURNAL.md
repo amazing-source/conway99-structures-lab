@@ -88,3 +88,8 @@
   - Test court : relâchement McCormick faisable sur les 3 échantillons à 1 triangle. La PLNE n'a pas pu tourner dans
     le budget, et je ne l'ai pas prolongée (règle du 25/09).
 - C1 a corrigé notes/116 d'après S12 (commit b9fb15e dans c1_recherche) : la diagonale générale vaut 16 − 2e(R).
+- Correction répercutée (C1, d02ac18). « Torsion maximale ⇒ e(R) = 0 » était faux : la torsion maximale ne porte que
+  sur τ, et σ_c(v) = v̄ (coïncidences S de L18) peut créer une arête interne au bloc.
+  - NOTE_S12 et le registre S12 sont corrigés. Au Fano tendu, e(R) = 0 tient par tension.
+  - Rien ne change pour le tout-tordu (S8, S11, S14) : il n'utilise que n_s = 0, théorème de C2 pour les carrés
+    « un bloc », avec e(R) = 2n_s.
