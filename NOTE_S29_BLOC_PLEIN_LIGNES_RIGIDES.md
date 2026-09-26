@@ -132,3 +132,15 @@ de N(x)) sont des quasi-2-facteurs de K₁₂ − μ (deux chemins plus des cycl
   (`sat_local.py`) sur plusieurs cœurs.
 - Commencer par les 4 types de bloc plein.
 - Tous les types (~10³ à 10⁴ classes) demanderont une méthode plus efficace.
+
+## 7. Contrôle positif sur BvLS (27/09, nuit)
+BvLS = srg(243, 22, 1, 2), avec les mêmes λ = 1 et μ = 2 et m = 11 blocs. C'est un graphe de Cayley sur F₃⁵, et σ : v ↦ −v n'a
+que 0 comme point fixe (`involution/bvls_local_control.py`).
+- Aux **11 blocs**, la vraie structure locale vérifie EXACTEMENT :
+  - (i) Φ bijective, compatible avec σ ;
+  - (ii) et (iii), avec les formules GÉNÉRALES K₂ = 2J − I − P_π − P_μ − P_{τπ} et K₃ = 2J − P_π − P_τ − P_{τμ} − P_{μτ} ;
+  - les conditions ponctuelles L1, S1 et S2 de C1.
+- Tous les blocs y sont pleins (μ = τ).
+- L'étape 2 accepte le VRAI ι de BvLS au niveau PL (`bvls_step2_control.py`).
+- Les formules et le mécanisme de mort des modèles locaux sont donc validés sur un vrai graphe. Les morts à m = 7 ne sont pas
+  des artefacts de modélisation.
