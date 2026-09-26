@@ -115,3 +115,15 @@
   - Lecture : le second ordre mord là où le premier ordre (PPE, couplage, signe) ne mordait pas. Une preuve à la main
     demandera un principe spectral par blocs (compressions de Rayleigh de C1 sur les 21 paires), pas une chasse aux
     doubles.
+- S16 (tests courts). Coupes de sous-tours (tailles 3, 4, 5) ajoutées au modèle, suggestion de C2.
+  - 15 classes non isomorphes à 1 triangle. Avec (P2) : 10 sont PL-infaisables. Les 5 plus symétriques sont
+    PL-faisables mais **PLNE-infaisables** (30 à 45 s chacune).
+  - **Toutes les classes à 1 triangle sont donc infaisables pour le solveur**, et faisables sans (P2).
+  - Contrôle d'implémentation : sur une solution du premier ordre, la somme des 210 résidus (P2) vaut exactement 0
+    (identité globale), et 178 identités sont violées.
+  - Sans triangle (6 types, 12 600 colonnes) : PL avec (P2) indécis en 25 s.
+  - Statut : indication forte, pas une preuve. Il faudra des certificats exacts (Farkas rationnels pour les 10
+    classes PL, branchement avec certificats pour les 5), ce qui dépasse les tests de 5 min : **décision de
+    l'utilisateur requise**.
+  - C2 a transposé le modèle à H-β, avec la même conclusion côté (P2) : squelette circulant certifié infaisable, et
+    552 classes en cours dans sa session, calcul plafonné autorisé.

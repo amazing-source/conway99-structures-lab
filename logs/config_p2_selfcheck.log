@@ -1,0 +1,3 @@
+IP without P2 status: 0 Optimization terminated successfully. (HiGHS Status 7: Optim
+sum of (P2) residuals over the 210 unordered pairs: 0  (must be 0)
+nonzero residuals: 178 of 210; min -6, max 8

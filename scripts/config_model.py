@@ -113,6 +113,13 @@ def build(dec, p2=True, ppe=True, coupling=True, cols=None, typed=False):
             e1 = [(c, 1) for c in by_orbit[(j, i)] if q in cols[c][1]]
             e2 = [(c, -1) for c in by_orbit[(j, q)] if i in cols[c][1]]
             row(e1 + e2, 0, 0)
+        for size in (3, 4, 5):                                             # subtour cuts (single 6-cycle)
+            for S in itertools.combinations(O, size):
+                tag[0] = f'Ysub {j}:{S}'
+                ent = []
+                for i, q in itertools.combinations(S, 2):
+                    ent += [(c, 1) for c in by_orbit[(j, i)] if q in cols[c][1]]
+                row(ent, 0, size - 1)
         for A in itertools.combinations(O, 3):
             if O[0] not in A:
                 continue
