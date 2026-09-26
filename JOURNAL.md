@@ -667,3 +667,13 @@
 - **C1** : environ 10⁸ classes de boules génériques à P = 0, donc pas d'examen exhaustif possible. Ses idées : une
   surdétermination « inter-boules » (les droites par un même sommet partagent des lointains), et des bornes de type
   Weil.
+- **Chiffrage de C1 à P = 0 (S libre)** : environ 8·10⁹ classes de boules, dont 3·10⁹ génériques à τ non carré. C'est
+  environ 30 fois plus qu'à P = S = 0 (10⁸). Un examen exhaustif, même avec un test en C à la milliseconde,
+  prendrait environ un mois, et il laisserait de toute façon k = 24, 26 et 28. La voie « exhaustif » est écartée pour
+  l'instant.
+- **Bilan stratégique (structures).** Le jalon le plus proche et le plus solide pour l'équipe est **Aut(Γ) = 1**.
+  - C3 : pas d'ordre 3 (preuve vérifiée en Lean, relecture par un tiers à faire).
+  - C2 : pas d'involution, en cours (M1 presque fermé ; les mélanges restants demandent un théorème de corrélation
+    entre blocs).
+  - Littérature : Aut ∈ {1, Z₂, Z₃}.
+  C'est là que la vérification indépendante et l'aide théorique à C2 rapportent le plus maintenant.
