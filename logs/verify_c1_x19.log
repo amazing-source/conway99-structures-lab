@@ -1,0 +1,5 @@
+specials symmetric: True; types: 4968 columns; pairs whose type set differs from C1's list: 0
+rows: 735; right-hand sides recomputed independently that differ from C1's: 0
+b.y = 5.9916;  sum_c max(0, col.y) = 0.0000;  b.y - that = 5.9916  (C1 claims 5.9916; equal: True)
+stronger bound with sum_t x = 1: b.y - sum_z max_t col.y = 5.9916
+CERTIFICATE VALID

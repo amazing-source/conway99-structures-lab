@@ -141,3 +141,12 @@
   - 8 certificats tirés au hasard : 8/8 valides.
   - Mon nombre de colonnes est exactement celui de C2 sur chaque enregistrement testé.
   - Les 552 complets coûteraient environ 4,5 h : non lancé, accord de l'utilisateur requis.
+- Décision de l'utilisateur après S17 : **maths d'abord** pour les 14 classes sans triangle (tests de 5 min au plus).
+- S18, vérification indépendante demandée par C1 : certificat X19 (`c1_experimental/data/x19_cert_s1_c1.json`),
+  méthode par types avec (P2) transposée au cœur de C1. **Il TIENT** (`scripts/verify_c1_x19.py`, rationnels exacts).
+  - Spéciaux symétriques.
+  - Les types refaits par énumération des vrais graphes d'étiquettes coïncident avec ceux de C1 (84/84 paires,
+    4 968 colonnes).
+  - Les 735 seconds membres, recalculés, n'ont aucun écart.
+  - La valeur de Farkas vaut 5,9916 > 0, égale en exact à celle de C1.
+  - Portée : une configuration (τ, σ). Le « 19/31 » reste un échantillon.
