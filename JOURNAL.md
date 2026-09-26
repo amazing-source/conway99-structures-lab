@@ -238,4 +238,7 @@
     exactement pour 02, 03, 05, 23, 24, 25, 34, 35, 36. **Identique à C1.**
   - Remarque : les 6 blocs qui contiennent la classe 1 sont tous cohérents.
 - Autres vérifications : paire × bloc seed11#0 VALIDE (78 879 lignes, 0 écart, Farkas 168 240 155).
+- Certificats « cellules » de C1, lot 4 (s11_7 à s11_9, s21_7 à s21_9) : VALIDE. **Total : 19/19 certificats cellules
+  VALIDES**, soit les 19 configurations tuées au niveau cellules (graines 11 et 21). S'y ajoutent **2/2 certificats
+  paire × bloc VALIDES** (seed21#1, seed11#0). Chaque valeur de Farkas reconstruite est égale à celle de C1.
 

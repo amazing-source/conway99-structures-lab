@@ -1,0 +1,6 @@
+09:39:49  START pid=15296 RAM cap=3500MB commit cap=10000MB timeout=900s minfree RAM=2000MB commit=3000MB | avail RAM=4924MB commit=7826MB | "C:\Users\RESEARCHER\AppData\Local\Python\pythoncore-3.14-64\python.exe" scripts/verify_c1_cells.py C:/home/researcher/Desktop/c1_experimental/data/x19o_cert_s11_8_x19k
+09:40:20  running 30s  RAM 67MB (max 67)  commit 647MB (max 647)  | machine: RAM avail 5095MB, commit headroom 8082MB
+09:40:49  running 60s  RAM 69MB (max 69)  commit 650MB (max 650)  | machine: RAM avail 5202MB, commit headroom 8200MB
+09:41:19  running 90s  RAM 72MB (max 72)  commit 652MB (max 652)  | machine: RAM avail 5162MB, commit headroom 8134MB
+09:41:49  running 120s  RAM 75MB (max 75)  commit 655MB (max 655)  | machine: RAM avail 4733MB, commit headroom 5330MB
+09:42:14  END exit=0 time=145s max RAM=95MB max commit=675MB peak commit=675MB (RAM cap 3500MB, commit cap 10000MB)
