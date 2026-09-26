@@ -758,3 +758,24 @@
   - le cube force un prisme, donc il n'est exclu qu'à P = 0.
 - **C1** : a codé ad/sib_model.py (paires frères). Motifs ancrés : P₅, 2P₃, P₃, P₄ et P₃+K₂ meurent. Restent K₃ (une
   classe), 3K₂, 2K₂ et K₂. Demande relayée à C2 : ses feuilles v6 avec Σ exact.
+
+## 26/09, nuit : résidus AD, cœur « tout dis », étoile libre
+- **AD, bilan provisoire.** Une fois les 130 structures de A énumérées, il reste 10 classes à n_dd = 7 et 8 : A en
+  6-cycle ou 2+4, et plusieurs blocs à d = 0. Elles sont exportées au format ptype pour le modèle U de C2
+  (ad/ad_residues_n7_8.json).
+  - n_dd = 9 : 3 979 classes passées, 5 vivantes et 9 inconnues ; 2e passe de retest en cours.
+  - n_dd = 10 à 17 : balayage en cours. Ces classes sont riches en dd et ont souvent des survivants au niveau paires.
+- **« Tout dis » (n_dd = 21).**
+  - Au niveau paires, ça survit : l'équilibre est vide quand G_t est connexe.
+  - Avec une structure proche (μ_t, τ_t) fixée en chaque bloc, ça meurt vite par couplage (symétrie e(P,P′)), même quand
+    chaque orbite passe seule. Mais mes structures proches sont tirées au hasard : ce n'est PAS une preuve.
+  - Le système « lointain » pair-pair (105 inconnues E(P,P′)) a rang 84. Ses 21 conditions de cohérence sont automatiques
+    (4 − 2n_s des deux côtés) : rien de gratuit.
+- **Étoile libre, sans pivot** (le cœur qui revient partout : AD riches en dd, K₃ de C1, tout dis).
+  - Le sous-problème (iii) seul (involution ρ sur les arêtes de K₁₂ − μ) est faisable dans 6 cas sur 10 : il ne suffit pas.
+  - L'entrelacement réel à une ombre (3I − S ⪰ 0, donc n_fᵀG⁺n_f ≤ 3) laisse passer 70 à 80 % des couples (Φ(z), Φ(σz)).
+  - Le vrai contenu : le bloc lointain S_FF doit vérifier S_IF S_FF = −(S_II + I) S_IF (linéaire) et
+    S_FF² + S_FF = 12I − S_FI S_IF. Le résidu réel R = (3I − S)_FF − N_Fᵀ G⁺ N_F vaut 7 × un projecteur de rang 4.
+    Mais « lointain » = tout le reste du graphe : ce n'est plus un problème local.
+- **q:7, bloc A** : la droite-bloc est toujours de rang 18 et de signe +1, donc g⁻ = 20. C1 le confirme : bloc plein ⟹
+  τ = η, det Q_c = 3⁶, et K_c est anisotrope de dimension 2.
