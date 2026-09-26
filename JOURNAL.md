@@ -303,4 +303,10 @@
     au moins 5 fonctions constantes sur les cellules sont vecteurs propres de B pour la valeur 3. C'est une
     contrainte bilinéaire (comptes × F), invisible aux PL par types.
   - Pour le test (b) au Fano tendu : M(δ) = [M_β | M_γ(δ)], de taille 84 × 35, doit vérifier rang ≤ 30.
+- Test (b) de C1 au Fano tendu : **rang M_β = 8/14 sur Q et sur F₇** (`scripts/fano_mbeta_rank.py`). Il existe 6
+  directions β ∈ E₋₂ constantes par paire, avec γ = 0, qui sont déjà vecteurs propres de B pour la valeur 3. La
+  dimension forcée ≥ 5 n'impose donc rien aux δ au témoin : la piste est vide ici, sauf borne forcée > 6.
+- Triades de C1 : les types (i), (iv), (m) et R1 sont vérifiés (multigraphe 2-régulier sur les 4 racines d'un
+  bloc ; une cerise ne peut pas être doublée).
+- Bijection λ : l'équilibre étiquette (w, Z) contient le compte T(w), sans le forcer à 1. La question reste ouverte.
 
