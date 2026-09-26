@@ -182,4 +182,10 @@
   - VALIDE, rapporté à C1. Durée 90 s, en parallèle du lot d'orbites (calcul léger).
 - Lot des 13 classes lancé (accord de l'utilisateur, « Lancer les 13 classes ») : `scripts/run_orbit_batch.sh`, une
   classe à la fois. zero13 est CERTIFIÉ au tour 5 (106 s, écart 21,4).
+- S19, contrôle sur un vrai graphe (`scripts/orbit_identity_real.py`, `logs/orbit_identity_real.log`). Graphe : BvLS
+  = srg(243,22,1,2), x = 0, σ(v) = −v, même cadre que C2 (un seul point fixe, les deux étiquettes de chaque bloc
+  échangées).
+  - Q² + Q = 20I + 4J − Sh est **exacte**, sur 110 orbites.
+  - Q est symétrique, de diagonale nulle, avec exactement un 2 par ligne (partenaire D) et les autres entrées ≤ 1.
+  - Spectre : 20, −2 (×10), 4 (×55), −5 (×44), comme prévu (x² + x = 20 hors de l'espace des blocs).
 

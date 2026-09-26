@@ -1,0 +1,3 @@
+BvLS: 220 far vertices, 110 orbits, far degree 20; Q symmetric: True; Q^2 + Q = (k-2)I + 4J - Sh exactly: True
+q_U(U) = 0 for all U: True; exactly one 2 per row: True; max entry 2; row sums {20}
+spectrum of Q: {-5.0: 44, -2.0: 10, 4.0: 55, 20.0: 1}
