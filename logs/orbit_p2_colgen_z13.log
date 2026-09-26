@@ -1,0 +1,14 @@
+class zero13 (7, 7, 7) x120
+  12600 pair-level columns, 352800 orbit-level columns, 1778 rows  [7 s]
+  round 1: 12600 columns, phase-1 value 690.6484, 12598 improving  [24 s]
+  round 2: 16600 columns, phase-1 value 300.6247, 7656 improving  [40 s]
+  round 3: 20600 columns, phase-1 value 140.5778, 3076 improving  [62 s]
+  round 4: 23676 columns, phase-1 value 95.3159, 1215 improving  [87 s]
+  round 5: 24891 columns, phase-1 value 77.7722, 461 improving  [113 s]
+  round 6: 25352 columns, phase-1 value 71.8690, 217 improving  [138 s]
+  round 7: 25569 columns, phase-1 value 70.0934, 111 improving  [164 s]
+  round 8: 25680 columns, phase-1 value 69.7463, 49 improving  [190 s]
+  round 9: 25729 columns, phase-1 value 69.6804, 13 improving  [216 s]
+  round 10: 25742 columns, phase-1 value 69.6764, 5 improving  [243 s]
+  round 11: 25747 columns, phase-1 value 69.6763, 0 improving  [270 s]
+CONVERGED: phase-1 value 69.6763 (LP INFEASIBLE)

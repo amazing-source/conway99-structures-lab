@@ -150,3 +150,13 @@
   - Les 735 seconds membres, recalculés, n'ont aucun écart.
   - La valeur de Farkas vaut 5,9916 > 0, égale en exact à celle de C1.
   - Portée : une configuration (τ, σ). Le « 19/31 » reste un échantillon.
+- S19 (maths d'abord, selon la décision de l'utilisateur). Ingrédient nouveau : l'identité de C2 au niveau des orbites.
+  - Énoncé : Σ_Z q_Z(U) q_Z(W) + (q_U(W) + q_W(U))/2 = 12[U = W] + 4 − Sh(U,W), pour les 903 couples d'orbites.
+    C'est Q_out² + Q_out = 12I + 4J − Sh, re-dérivé via A² = 12I + 2J − A et les chemins de longueur 2 par les
+    lointains. Contrôle de somme : 6552 = 6552.
+  - (P2) par paires en est la compression, ce qui explique pourquoi (P2) ne suffisait pas.
+  - Le modèle de configurations raffiné affecte chaque voisin de valeur 1 à l'une des deux orbites de sa paire (un
+    double touche les deux, le carré va à l'orbite D(Z)). Cela fait 352 800 colonnes pour (7,7,7)×120, traitées par
+    génération de colonnes avec énumération exacte des répartitions.
+  - Test : **PL infaisable à la racine** pour (7,7,7)×120 (convergé en 11 tours, 270 s). Premier signe que le
+    tout-tordu sans triangle peut tomber sans branchement.
