@@ -160,3 +160,16 @@
     génération de colonnes avec énumération exacte des répartitions.
   - Test : **PL infaisable à la racine** pour (7,7,7)×120 (convergé en 11 tours, 270 s). Premier signe que le
     tout-tordu sans triangle peut tomber sans branchement.
+- S19, suite :
+  - Cadre vérifié contre la note 10 de C2 : σ échange les deux étiquettes de chaque bloc et z ≁ σz. Donc Sh = Σ b_i b_iᵀ
+    et le terme diagonal est nul, comme codé.
+  - Ajouts à `orbit_p2_colgen.py` : vérification exacte entière sur toutes les colonnes-orbites (lignes P2o doublées),
+    arrêt dès que le certificat tient, sauvegarde avec étiquettes.
+  - Nouveau vérificateur indépendant `verify_orbit_certs.py`.
+  - zero0 (4,4,4,4,5) : certificat exact au tour 8 (phase 1 = 34,30, non convergé : inutile), en 252 s pour 785 Mo de
+    RAM au plus. Le vérificateur indépendant retrouve exactement les mêmes bornes (écart 26,3 à l'échelle 10⁹).
+  - Incident de format : les bornes P2o étaient stockées non doublées. Elles ont été détectées par le vérificateur
+    (qui ne les utilise pas), puis corrigées dans le générateur et dans le fichier.
+  - Messages : à C2 (identité d'orbites, réponses à ses 3 questions sur les mélanges, transmission du repère ajusté de
+    C1) et à C1 (même objet que W14 ; raffinement sans symétrie par cellules antipodales).
+

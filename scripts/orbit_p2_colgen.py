@@ -7,7 +7,13 @@ pair-level (P2) is its compression.
 Orbit-level column = (orbit Z, free neighbours p, exact local solution, and for every far pair of value 1 the orbit of
 that pair which receives the neighbour; a far double hits both orbits of its pair; the square is the orbit D(Z)).
 Rows: one column per orbit; free 6-cycles (symmetric edges, subtour cuts); PPE; orbit coupling q_U(W) = q_W(U) for
-orbits of disjoint pairs; the 903 orbit identities.  LP by column generation, phase 1 (artificials of cost 1)."""
+orbits of disjoint pairs; the 903 orbit identities.  LP by column generation, phase 1 (artificials of cost 1).
+EXACT CHECK at the end (whatever the convergence state): the last phase-1 duals, rounded to integers (P2o rows doubled
+so that every coefficient is an integer), must satisfy
+    sum_{rows r except O} min(y_r lo_r, y_r hi_r)  >  sum_Z  max over ALL orbit-level columns c of orbit Z of (A^T y)_c,
+evaluated in exact int64 arithmetic over the complete column set (every split of every pair-level column).  For a
+feasible x (x >= 0, one unit per orbit) the left side is <= sum_r y_r (A x)_r = sum_c x_c (A^T y)_c <= the right side,
+so the inequality proves that the model has no solution.  The certificate is saved with its row labels."""
 import itertools
 import sys
 import time
@@ -148,13 +154,19 @@ def run(dec, time_limit=270, add_per_round=4000):
         A_ub = hstack([Ai, csr_matrix((ni, 2 * ne)), -identity(ni)]).tocsr()
         cobj = np.concatenate([np.zeros(n), np.ones(2 * ne + ni)])
         res = linprog(cobj, A_ub=A_ub, b_ub=hi[in_idx], A_eq=A_eq, b_eq=lo[eq_idx],
-                      bounds=[(0, 1)] * n + [(0, None)] * (2 * ne + ni), method='highs-ipm',
+                      bounds=[(0, None)] * (n + 2 * ne + ni), method='highs-ipm',
                       options={'time_limit': 120})
         if res.status != 0:
-            return f'master status {res.status} ({res.message[:50]}) at round {it}'
+            return f'master status {res.status} ({res.message[:50]}) at round {it}', None, rows, base
         y = np.zeros(m)
         y[eq_idx] = res.eqlin.marginals
         y[in_idx] = res.ineqlin.marginals
+        if it >= 2 and res.fun > 1e-6:                # early stop: the exact certificate may hold before convergence
+            ok, low, high = exact_check(base, rows, y, spot=0)[:3]
+            if ok:
+                print(f'  round {it}: {n} columns, phase-1 value {res.fun:.4f}: exact certificate already valid '
+                      f'(low - high = {low - high})  [{time.time() - t0:.0f} s]', flush=True)
+                return f'CERTIFIED at round {it} (phase-1 value {res.fun:.4f}; convergence not needed)', y, rows, base
         # pricing: score(c) = y . A_c ; improving if > 0
         Ymat = np.zeros((42, 42))
         yC = np.zeros((42, 42))
@@ -195,9 +207,10 @@ def run(dec, time_limit=270, add_per_round=4000):
         print(f'  round {it}: {n} columns, phase-1 value {res.fun:.4f}, {len(newc)} improving  '
               f'[{time.time() - t0:.0f} s]', flush=True)
         if not newc:
-            return f'CONVERGED: phase-1 value {res.fun:.4f} ({"LP INFEASIBLE" if res.fun > 1e-6 else "LP feasible"})'
+            return (f'CONVERGED: phase-1 value {res.fun:.4f} ({"LP INFEASIBLE" if res.fun > 1e-6 else "LP feasible"})',
+                    y, rows, base)
         if time.time() - t0 > time_limit:
-            return f'stopped at the time limit: phase-1 value {res.fun:.4f} (not converged)'
+            return f'stopped at the time limit: phase-1 value {res.fun:.4f} (not converged)', y, rows, base
         for s, bi, ch in newc[:add_per_round]:
             zi, fixed, v0, opts = base[bi]
             v = v0.copy()
@@ -206,10 +219,129 @@ def run(dec, time_limit=270, add_per_round=4000):
             cols.append(full_entries(zi, fixed, v, RI)); seen.add((bi, ch))
 
 
+def int_entries(zi, fixed, v, RI):
+    """Integer coefficients of one orbit-level column in the system with the P2o rows DOUBLED (written apart from
+    full_entries on purpose: it is used to spot-check the vectorised exact evaluation)."""
+    ent = dict(fixed)
+    nz = [w for w in range(42) if v[w]]
+    for w in nz:
+        if not (PO[w] & PO[zi]):
+            r = RI[('C', (min(zi, w), max(zi, w)))]
+            ent[r] = ent.get(r, 0) + (int(v[w]) if zi < w else -int(v[w]))
+    for a in nz:
+        for b in nz:
+            if a <= b:
+                r = RI[('P2o', (a, b))]
+                ent[r] = ent.get(r, 0) + 2 * int(v[a]) * int(v[b])
+    for w in nz:
+        if w != zi:
+            r = RI[('P2o', (min(zi, w), max(zi, w)))]
+            ent[r] = ent.get(r, 0) + int(v[w])
+    return ent
+
+
+def exact_check(base, rows, y, scale=10 ** 9, spot=400, seed=1):
+    RI = {(r[0], r[1]): t for t, r in enumerate(rows)}
+    yi = [int(round((y[t] / 2 if r[0] == 'P2o' else y[t]) * scale)) for t, r in enumerate(rows)]
+    fac = [2 if r[0] == 'P2o' else 1 for r in rows]
+    low = sum(min(yi[t] * r[2] * fac[t], yi[t] * r[3] * fac[t]) for t, r in enumerate(rows) if r[0] != 'O')
+    isO = np.array([r[0] == 'O' for r in rows])
+    yv = np.array(yi, dtype=np.int64)
+    yv_noO = np.where(isO, 0, yv)
+    M = np.zeros((42, 42), dtype=np.int64)            # v^T M v = sum_{a<=b} y2_ab * 2 v_a v_b
+    yC = np.zeros((42, 42), dtype=np.int64)
+    for t, (kind, key, l, h) in enumerate(rows):
+        if kind == 'P2o':
+            a, b = key
+            if a == b:
+                M[a, a] += 2 * yv[t]
+            else:
+                M[a, b] += yv[t]; M[b, a] += yv[t]
+        elif kind == 'C':
+            a, b = key
+            yC[a, b] = yv[t]
+    best = {}
+    total_cols = 0
+    rng = np.random.default_rng(seed)
+    spots, bad = 0, 0
+    for bi, (zi, fixed, v0, opts) in enumerate(base):
+        const = sum(int(yv_noO[r]) * int(a) for r, a in fixed.items())
+        g = np.zeros(42, dtype=np.int64)
+        for w in range(42):
+            if w == zi:
+                continue
+            if not (PO[w] & PO[zi]):
+                g[w] += yC[zi, w] if zi < w else -yC[w, zi]
+            a, b = min(zi, w), max(zi, w)
+            g[w] += yv[RI[('P2o', (a, b))]]
+        mo = len(opts)
+        bits = np.array(list(itertools.product((0, 1), repeat=mo)), dtype=np.int64).reshape(-1, mo)
+        base1 = np.rint(v0).astype(np.int64)
+        D = np.zeros((mo, 42), dtype=np.int64)
+        for t, (o1, o2) in enumerate(opts):
+            base1[o1] += 1
+            D[t, o2] += 1; D[t, o1] -= 1
+        Vm = base1 + bits @ D
+        sc = const + Vm @ g + np.einsum('ij,jk,ik->i', Vm, M, Vm)
+        total_cols += len(sc)
+        mx = int(sc.max())
+        best[zi] = max(best.get(zi, mx), mx)
+        # spot-check the vectorised value against a direct construction of the column
+        for t in rng.choice(len(sc), size=min(2, len(sc)), replace=False):
+            if spots >= spot:
+                break
+            ent = int_entries(zi, fixed, Vm[t], RI)
+            direct = sum(yi[r] * a for r, a in ent.items() if rows[r][0] != 'O')
+            spots += 1
+            bad += direct != int(sc[t])
+    high = sum(best.values())
+    return low > high and bad == 0 and len(best) == 42, low, high, yi, total_cols, spots, bad
+
+
+def fac2(row):
+    """Bounds are stored for the rows the multipliers apply to: the P2o rows are doubled."""
+    return 2 if row[0] == 'P2o' else 1
+
+
+def labels_json(rows):
+    out = []
+    for kind, key, l, h in rows:
+        if kind == 'O':
+            out.append(['O', list(key)])
+        elif kind == 'Ysym':
+            out.append(['Ysym', list(key)])
+        elif kind == 'Ysub':
+            out.append(['Ysub', [key[0], list(key[1])]])
+        elif kind == 'PPE':
+            out.append(['PPE', sorted(key)])
+        else:                                          # C, P2o: orbits written out, not as indices
+            out.append([kind, [list(ORB[key[0]]), list(ORB[key[1]])]])
+    return out
+
+
 if __name__ == '__main__':
-    from certify_core import zero_triangle_classes
-    cl = zero_triangle_classes()
+    import gzip
+    import json
+    import os
     n = int(sys.argv[1]) if len(sys.argv) > 1 else 13
-    typ, dec, cnt = cl[n]
-    print(f'class zero{n} {typ} x{cnt}', flush=True)
-    print(run(dec), flush=True)
+    tl = float(sys.argv[2]) if len(sys.argv) > 2 else 240
+    d = json.load(gzip.open(f'logs/core_certs/zero_{n:02d}.json.gz', 'rt'))
+    dec = [tuple(c) for c in d['decomposition']]
+    print(f'class zero{n} {tuple(d["type"])} x{d["labelled"]}  decomposition {dec}', flush=True)
+    t0 = time.time()
+    msg, y, rows, base = run(dec, time_limit=tl)
+    print(msg, flush=True)
+    if y is not None:
+        ok, low, high, yi, ncols, spots, bad = exact_check(base, rows, y)
+        print(f'exact check over ALL {ncols} orbit-level columns: low = {low}, high = {high}, low - high = {low - high} '
+              f'(scale 1e9); spot-checks {spots}, mismatches {bad}  ->  '
+              f'{"CERTIFICATE VALID" if ok else "no certificate"}  [{time.time() - t0:.0f} s]', flush=True)
+        if ok:
+            os.makedirs('logs/orbit_certs', exist_ok=True)
+            lab = labels_json(rows)
+            with gzip.open(f'logs/orbit_certs/zero_{n:02d}.json.gz', 'wt', encoding='utf-8') as f:
+                json.dump({'class': n, 'type': d['type'], 'labelled': d['labelled'], 'decomposition': d['decomposition'],
+                           'scale': 10 ** 9, 'p2o_rows_doubled': True, 'low': low, 'high': high,
+                           'rows': [[lab[t], [rows[t][2] * fac2(rows[t]), rows[t][3] * fac2(rows[t])], yi[t]]
+                                    for t in range(len(rows)) if yi[t]]}, f)
+            print(f'saved logs/orbit_certs/zero_{n:02d}.json.gz', flush=True)
