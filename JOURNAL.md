@@ -467,4 +467,12 @@
     - le partenaire d'un apex intérieur a 5 supports possibles.
   - Borne : **3h ≤ 2n_dis**.
   - Le lemme 11.2 reste ouvert, et la famille dis n'est pas fermée.
+- Suivi du dossier n° 5 envoyé à l'utilisateur (il avait déjà transmis la v1). Contenu : la vérification de Schur par C1
+  (6 tirages sur 6, rang Q_BB = 37 − d(L)) et la correction de l'heuristique (R_L = KΞKᵀ, Ξ symétrique 26 × 26, soit
+  environ 7^(−210) ≈ 10^(−177) et non 7^(−2916) ; Ξ = 0 de codimension 351, arithmétique revérifiée).
+- Projecteurs : P₋₄ = Π_K(3I − B)/7, avec Π_K = I − ∂ᵀ(∂∂ᵀ)⁺∂ qui commute avec B, est de degré 1. Ses mineurs principaux
+  sont le lemme du triangle de C1 (notes/115), déjà exploité. Ma remarque « degré plus haut » était fausse avec Π_K
+  explicite. Le §3 du suivi était imprécis ; signalé à l'utilisateur.
+- Règle de l'utilisateur : une fois un dossier transmis à Astra, ne lui renvoyer que les nouveautés (fichier de suivi),
+  jamais une version refaite du dossier.
 
