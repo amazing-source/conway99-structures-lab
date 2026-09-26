@@ -221,4 +221,11 @@
   - couverture 30 360 par réénumération propre et Σ 5040/|Aut| ;
   - identité redérivée.
   Le tout-tordu pur est exclu avec double vérification indépendante (mon vérificateur séparé + le code de C2).
+- Certificats de C1, vérifiés par du code propre :
+  - « cellules », lot 3 (s11_4 à s11_6, s21_2 à s21_6) : VALIDE, avec les valeurs de Farkas de C1 à l'identique. Cela
+    fait **13/13** certificats cellules VALIDES (moins de 0,1 Go et 70 à 180 s chacun, `logs/verify_c1_cells_batch.log`) ;
+  - **paire × bloc, seed21#1** (`scripts/verify_c1_pairblock.py`) : VALIDE. Les 78 492 lignes des 8 familles sont
+    reconstruites depuis leur nom sans aucun écart ; les 124 477 colonnes s sont complètes (toutes les parties de
+    taille t[R]) ; le Farkas reconstruit vaut 147 842 015 (échelle 10⁶), égal à celui de C1 ; 147 s, 177 Mo
+    (`logs/vpb_seed21_1.log.out`).
 

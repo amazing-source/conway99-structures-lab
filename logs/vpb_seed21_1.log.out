@@ -1,0 +1,4 @@
+specials equal: True, symmetric: True, 4 distinct: True; 4870 x-columns, type sets differing from own enumeration: 0, duplicates: 0; 124477 s-columns, (x-column, block) whose subsets are not ALL subsets of size t[R]: 0
+rows 78492 {'conv': 84, 'cons': 27167, 'labdeg': 48700, 'bal': 210, 'lab': 210, 'P2': 231, 'pairblk': 1764, 'pairpair': 126}: rebuilt coefficients differing: 0; right-hand sides differing: 0 
+Farkas on the REBUILT system: b.y - sum_j max(0, (A^T y)_j) = 147842015  (D = 1000000; file claims 147842015)
+CERTIFICATE VALID
