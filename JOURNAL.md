@@ -524,3 +524,20 @@
     §8 s'applique. Donc k = 24 est aussi un problème de construction complet.
 - **Modèle de colonnes au niveau racine de C2** (`root_colmodel.py`) : relecture en cours, à la demande de C2. Points
   prioritaires : l'équilibre 2/2 aux blocs lointains et le choix des racines m et π.
+- **Relecture de `root_colmodel.py` de C2 (commit 8cb7fb0) : aucune erreur de modélisation.**
+  - Équilibre 2/2 aux blocs lointains : TIENT. Les 4 racines proches, dont celles de D, sont bien retranchées avec
+    leurs signes ; il y a exactement 8 lointaines, au plus une par orbite.
+  - Choix de m et π : TIENT. Dans chaque orbite, le code prend la racine qui porte le bon intérieur signé, et
+    (F_m, F_π) est ordonné. La règle typée « pas toutes deux dans {j,k} » est redondante avec l'équilibre. F_π peut
+    être la sœur de F_m sur {j,c} avec c ≠ k : c'est légitime, car c'est un double (1,1).
+  - Lignes symP, symM et I(U,W,±) : TIENNENT. C'est (B² + B) = 12I + 2J − CCᵀ lu dans les colonnes, avec un second
+    membre doublé.
+  - Tests exacts sur le job 0 de M1 n = 6 (le job 12 n'est pas dans le clone), sans PL, script
+    `scripts/review_c2_root_colmodel_tests.py` :
+    - T1 : 26 720 colonnes relues, 0 problème ;
+    - T2 : far_sets identique à une énumération indépendante (44 clés) ;
+    - T3 : entries(), 126/126 ;
+    - T4 : scores() = Aᵀy, 96/96.
+  - Plantage latent l. 74 : reshape(0, −1) sur un ensemble lointain vide.
+  - Réserve : un EVEN = 1 infaisable ne prouverait pas un bug. En effet symP et symM restent séparées, et le 2/2 signé
+    est plus fort que les sommes orbitales.
