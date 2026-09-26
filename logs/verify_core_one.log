@@ -1,0 +1,17 @@
+one_00.json.gz: 10 certificate(s): all valid True; branching tree complete True
+one_01.json.gz: 1 certificate(s): all valid True; branching tree complete True
+one_02.json.gz: 1 certificate(s): all valid True; branching tree complete True
+one_03.json.gz: 7 certificate(s): all valid True; branching tree complete True
+one_04.json.gz: 41 certificate(s): all valid True; branching tree complete True
+one_05.json.gz: 1 certificate(s): all valid True; branching tree complete True
+one_06.json.gz: 1 certificate(s): all valid True; branching tree complete True
+one_07.json.gz: 1 certificate(s): all valid True; branching tree complete True
+one_08.json.gz: 9 certificate(s): all valid True; branching tree complete True
+one_09.json.gz: 1 certificate(s): all valid True; branching tree complete True
+one_10.json.gz: 7 certificate(s): all valid True; branching tree complete True
+one_11.json.gz: 1 certificate(s): all valid True; branching tree complete True
+one_12.json.gz: 1 certificate(s): all valid True; branching tree complete True
+one_13.json.gz: 1 certificate(s): all valid True; branching tree complete True
+one_14.json.gz: 1 certificate(s): all valid True; branching tree complete True
+coverage: 41790 labelled decompositions, 0 not isomorphic to a certified representative
+ALL VERIFIED

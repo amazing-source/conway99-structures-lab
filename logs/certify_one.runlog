@@ -1,0 +1,17 @@
+05:38:01  START pid=18752 RAM cap=4000MB commit cap=10000MB timeout=1750s minfree RAM=2000MB commit=3000MB | avail RAM=5918MB commit=10340MB | "C:\Users\RESEARCHER\AppData\Local\Python\pythoncore-3.14-64\python.exe" -u scripts/certify_core.py one 1600
+05:39:01  running 60s  RAM 55MB (max 55)  commit 1184MB (max 1184)  | machine: RAM avail 5806MB, commit headroom 8021MB
+05:40:01  running 120s  RAM 224MB (max 224)  commit 1489MB (max 1489)  | machine: RAM avail 5671MB, commit headroom 8850MB
+05:41:01  running 180s  RAM 95MB (max 240)  commit 1229MB (max 1544)  | machine: RAM avail 5725MB, commit headroom 8972MB
+05:42:02  running 241s  RAM 229MB (max 240)  commit 1494MB (max 1544)  | machine: RAM avail 5622MB, commit headroom 8771MB
+05:43:01  running 300s  RAM 235MB (max 247)  commit 1500MB (max 1544)  | machine: RAM avail 5436MB, commit headroom 7397MB
+05:44:02  running 360s  RAM 109MB (max 247)  commit 1244MB (max 1549)  | machine: RAM avail 5783MB, commit headroom 7962MB
+05:45:01  running 420s  RAM 241MB (max 247)  commit 1512MB (max 1549)  | machine: RAM avail 5628MB, commit headroom 8802MB
+05:46:02  running 480s  RAM 207MB (max 249)  commit 1404MB (max 1549)  | machine: RAM avail 5652MB, commit headroom 8852MB
+05:47:01  running 540s  RAM 110MB (max 258)  commit 1246MB (max 1569)  | machine: RAM avail 5657MB, commit headroom 8918MB
+05:48:02  running 601s  RAM 250MB (max 258)  commit 1521MB (max 1569)  | machine: RAM avail 5412MB, commit headroom 8553MB
+05:49:01  running 660s  RAM 111MB (max 258)  commit 1247MB (max 1569)  | machine: RAM avail 5563MB, commit headroom 8837MB
+05:50:01  running 720s  RAM 212MB (max 258)  commit 1478MB (max 1569)  | machine: RAM avail 5558MB, commit headroom 9836MB
+05:51:01  running 780s  RAM 227MB (max 258)  commit 1497MB (max 1569)  | machine: RAM avail 5426MB, commit headroom 9695MB
+05:52:01  running 840s  RAM 222MB (max 258)  commit 1492MB (max 1569)  | machine: RAM avail 5514MB, commit headroom 9795MB
+05:53:02  running 900s  RAM 221MB (max 258)  commit 1485MB (max 1569)  | machine: RAM avail 5528MB, commit headroom 9807MB
+05:53:38  END exit=0 time=937s max RAM=258MB max commit=1569MB peak commit=1576MB (RAM cap 4000MB, commit cap 10000MB)
