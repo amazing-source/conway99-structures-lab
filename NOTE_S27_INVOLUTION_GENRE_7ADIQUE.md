@@ -68,3 +68,21 @@ Sur de vrais graphes avec l'involution x ↦ −x, la formule « rang + excès_p
   (les squelettes de C2, où Q est connu et seuls les signes lointains sont inconnus).
 - Ou une contradiction propre aux cas g⁻ = 18 et g⁻ = 20. Leurs signes sont fixés : [ε⁻ = −1] ≡ M − 9 et M − 10, avec
   M pair.
+
+## 7. Le signe local à g⁻ = 18 (`involution/blockline_sign.py`)
+- Si g⁻ = 18 et qu'une droite-bloc E a un rang 18, alors E/rad_E ≅ V/rad(B) comme espaces quadratiques. Le rang
+  permet de le déduire : l'image de E dans V/rad est de dimension ≥ 18 = g, et E ∩ rad = rad_E.
+- Donc ε⁻ = χ((−1)^g disc B) = χ(disc B|_E), le déterminant du bloc 18×18 obtenu en retirant d_c, qui est la
+  coordonnée du radical z_c.
+- La genèse impose ε⁻ = −1 (M pair, g = 18).
+- **Local** : sur ~33 000 configurations de rang 18, le signe vaut −1 dans environ 45 % des cas et +1 dans environ 55 %.
+- **Contrainte** : à g⁻ = 18, **toute droite-bloc générique doit avoir le signe local −1**, et les 7 droites-blocs de x
+  doivent concorder.
+- **Cohérence avec L7 de C1** : la configuration non tordue (τ = ι = mate) donne +1. Elle est donc interdite à
+  g⁻ = 18, ce qui rejoint « un point de Hamming n'est pas le point fixe d'une involution ».
+- **g⁻ = 20** : aucune droite-bloc ne détermine B (rang 18 < 20). Il faut la structure lointaine.
+- **Cas restants pour l'involution** :
+  - (a) g⁻ = 20 ;
+  - (b) g⁻ = 18, avec toutes les droites-blocs génériques de signe −1 ;
+  - (c) g⁻ ≤ 16, avec toutes les droites-blocs de rang ≤ g⁻, ce qui est rare localement (~1,5 % des configurations
+    aléatoires ont un rang ≤ 16).
