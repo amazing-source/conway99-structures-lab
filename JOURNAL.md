@@ -365,4 +365,15 @@
   - Parties de Fano qui rencontrent chaque droite en 0, 2 ou 3 points : ∅, le complémentaire d'une droite, le
     complémentaire d'un point, ou le plan entier.
   - Addendum 2c envoyé à l'utilisateur pour Astra.
+- **Rapport d'Astra sur le dossier n° 2** (transmis par l'utilisateur ; Astra n'avait pas reçu les addendums 2b et 2c) :
+  - **Revêtements de degré 4 de K₇ avec λ = 1 : un seul**, non régulier, de monodromie S₄, avec exactement 8 prismes.
+    L'unicité vient de deux énumérations exactes indépendantes d'Astra ; la construction et le comptage des prismes
+    sont prouvés à la main, sur F₄.
+  - Conséquence : la branche « factorisation de Heawood » du Fano tendu force P ≥ 24, donc elle est exclue à P = 0.
+  - **Le σ témoin de C1 meurt par P-Ψ pour tout τ.** Certificat sur la paire {0.0, 4.0} : σ₅^{±}(0.0) ∈ classe 2 et
+    σ₅^{±}(4.0) ∈ classe 3, sur la même droite (2,3,5). **Revérifié sur les données.**
+  - La contrainte τ–σ d'Astra est redondante (conséquence de P-Ψ, de la réciprocité de σ et de la symétrie des
+    comptes).
+  - Réponses aux questions de C1 (β, U, d_i, r_i) transmises à C1. Astra retrouve indépendamment la typologie de C1
+    par l'application de retour affine.
 
