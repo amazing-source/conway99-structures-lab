@@ -48,8 +48,9 @@ Le bloc B de z est disjoint de R. Il y a 3 positions relatives (10 blocs = 2 + 4
 - Donc ⟨c, Ψ_R⟩ = 18 + 1 − 9 − 8 − 2 = **0**.
 
 **(2) M ∈ B**, avec B = {M,c}, c ∈ C4(R), c′ son partenaire M_M(R) et {d,d′} l'autre paire M_M(R).
-- Troisième point de B : c′. C4(B) = {P,Q,d,d′}. Dans le repère de B, R ∈ M_M… plus précisément R est la paire de
-  troisième point M. Donc **c_R(z) = 1 − [a_M ∈ R]**, où a_M est l'atterrissage via M.
+- Troisième point de B : c′. C4(B) = {P,Q,d,d′}. Dans le repère de B, R = {P,Q} a pour troisième point M, qui est
+  une classe de B. R est donc une paire du couplage de la classe M de B, et le lemme 1 donne
+  **c_R(z) = 1 − [a_M ∈ R]**, où a_M est l'atterrissage via M.
 - On pose σ = s(c). Alors ⟨c,Ψ_R⟩/σ = 13 − 9[a_M ∉ R] + [b_c ∈ R] + (g_{c′P} + g_{c′Q}) − 4g_{dd′} − 5.
   - Le −5 vient des quatre paires {P,Q}×{d,d′}. Deux sont des paires M_M(B) (2 + 2), les deux autres sont les paires
     M_c(B) (0 + 1).
