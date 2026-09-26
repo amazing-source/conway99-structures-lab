@@ -119,3 +119,26 @@ Le bloc B de z est disjoint de R. Il y a 3 positions relatives (10 blocs = 2 + 4
 et pour 8 σ tendus frais, 2 à 6 droites sur 7 n'admettent aucun réglage de retournements. Il reste à le démontrer
 pour tout σ tendu (invariant par droite).
 
+## 5. Critère exact de P-Ψ par droite (26/09, maths pures ; conventions de C1, notes/119)
+**Codage.** w_Z(u,v) = c_v ⊕ m_v·u, avec C0 = (0,0), C1 = (1,0), M0 = (0,1), M1 = (1,1). Les types sont pris par
+rapport au troisième point du bloc.
+
+**Bloc B = XY, de troisième point Z.** Étiquettes x_a et y_b ; flips via τ_x(Y_b) = Z_{b⊕f_x}. On pose
+p_a = c_{x_a} ⊕ m_{x_a}f_{x_a} et q_b = c_{y_b} ⊕ m_{y_b}f_{y_b}.
+- P-Ψ s'écrit p_a ⊕ q_b ⊕ m_{x_a}b ⊕ m_{y_b}a = 1 pour a, b ∈ {0,1}.
+- La somme des 4 équations donne Σm = 0 (mod 2). C'est automatique : les comptes circulants donnent #M = 4 − 2m_{Z,L}.
+- Les solutions forment une famille à un paramètre π_B : p_{x0} = π_B, p_{x1} = π_B ⊕ m_{y0}, q_{y0} = 1 ⊕ π_B et
+  q_{y1} = 1 ⊕ π_B ⊕ m_{x0}.
+
+**Droite L = {X,Y,Z}.** Chaque étiquette de L est dans 2 blocs de L et porte un seul bit.
+- Type C dans un bloc : une équation affine en π_B.
+- Type M dans les deux blocs : une équation qui lie π_B et π_{B′}.
+- Type M dans un seul bloc : le flip est fixé par ce bloc, et seule reste l'équation du bloc où l'étiquette est de
+  type C.
+
+**Critère.** La droite admet un réglage de retournements si et seulement si le système affine en 3 inconnues
+(π_XY, π_XZ, π_YZ) est cohérent. Il a une équation par occurrence C et une par étiquette MM.
+- Bloc tout-C : il est vivant si et seulement si les deux étiquettes d'une classe ont le même type C, et celles de
+  l'autre classe le type C opposé.
+- Tout-M : on retrouve la condition de cycle de C1.
+
