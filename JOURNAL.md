@@ -216,4 +216,9 @@
 - Relecture du modèle paire × bloc de C1 (x19n) : lignes saines (labdeg, pairblk, pairpair, cons ; produits entre
   blocs omis). Le vérificateur `scripts/verify_c1_pairblock.py` est préparé, sur la convention de noms proposée à C1 ;
   il sera testé dès l'arrivée des fichiers.
+- **Contre-vérification de C2** (son code, carnet §32) :
+  - 14/14 certificats d'orbites VALIDES, low et high identiques ;
+  - couverture 30 360 par réénumération propre et Σ 5040/|Aut| ;
+  - identité redérivée.
+  Le tout-tordu pur est exclu avec double vérification indépendante (mon vérificateur séparé + le code de C2).
 

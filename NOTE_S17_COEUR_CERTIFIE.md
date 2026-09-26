@@ -175,6 +175,17 @@ les 13 classes », `scripts/run_orbit_batch.sh`, une classe à la fois, moins de
   certifié (forme canonique propre `canon_any`), et les effectifs s'additionnent exactement ;
 - verdict : **ALL VERIFIED**.
 
+**Contre-vérification par C2, avec son propre code** (`c2_experimental/scripts/xcheck_structures_orbit_certs.py`,
+`xcheck_structures_coverage.py` ; carnet C2 §32). C2 n'a lu que les fichiers de certificats et la sémantique documentée.
+- Colonnes reconstruites avec le système local de C2 (sommes par bloc 4 − [t∈p] − 2[t=k]) : 352 800 colonnes-orbites
+  par classe.
+- Lignes reconstruites depuis les étiquettes, avec ses propres bornes : 0 écart.
+- 14/14 VALIDES, avec low et high identiques.
+- Couverture : réénumération propre, qui donne 30 360 décompositions sans triangle. Les 14 représentants sont deux à
+  deux non isomorphes, et Σ 5040/|Aut| = 30 360.
+- Identité redérivée : Q² + Q = (k − 2)I + 4J − Sh.
+**Le tout-tordu pur est donc exclu, avec double vérification indépendante.**
+
 **Vérification de zero0** (`scripts/verify_orbit_certs.py`) :
 - Le vérificateur est un code séparé, en entiers seuls. Les colonnes par paires viennent de `my_columns` (propre
   fonction de cadre), et le vérificateur fait lui-même l'expansion en orbites. Chaque ligne est reconstruite depuis
