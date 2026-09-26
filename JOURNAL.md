@@ -328,4 +328,15 @@
     Astra utilise P = 0 globalement.
   - Pas de parité locale gratuite en y fixé : l'union de deux couplages parfaits est faite de cycles pairs, et « sans
     boucle » exclut les digones.
+- C2 : mon critère « dedans » est **vide** pour un bloc A complet. Tout est ancré, donc o_x = 0 ; par F1, les orbites de
+  A ne sont jamais des doubles ; la diagonale PPE donne déjà 2 doubles hors A. C'est accepté.
+- **C2 signale 14 survivants « faisables, A fixé »** au niveau paires :
+  - M1 n = 6, jobs 0 et 2 (2 + 8) ;
+  - mélange 2C₃ (4).
+  Tous sont du cœur (G_c connexe partout, équilibre vide) ; fichier `c2_experimental/logs/lp_survivors.json`.
+  - C'est le profil où le niveau orbite a mordu dans le tout-tordu.
+  - Réponse à C2 : colonnes et lignes libres de `orbit_p2_colgen.py` propres au tout-tordu ; lignes P2o/C/PPE,
+    pricing, exact_check et vérificateur génériques.
+  - Interface donnée : (zi, fixed, v0, opts). Deux adaptations : voisin libre ambigu, et option (2,1) des partenaires
+    dis. Je ne lance aucun PL.
 
