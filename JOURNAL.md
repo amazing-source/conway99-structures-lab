@@ -376,4 +376,16 @@
     comptes).
   - Réponses aux questions de C1 (β, U, d_i, r_i) transmises à C1. Astra retrouve indépendamment la typologie de C1
     par l'application de retour affine.
+- **Dossier n° 3 pour Astra**, préparé avec C1 à la demande de l'utilisateur.
+  - Partage : Astra prend le Fano tendu (tâche principale : le cas général ; tâche secondaire : une généralisation en
+    contrainte). C1 prend le cas général (I_x à P = 0). « structures » vérifie et fait les ponts.
+  - Contenu :
+    - Q1 à Q4 de C1 (Q2, décisive : F5 + KBLDP + P-Ψ + admissibilité sur 7 droites a-t-il une solution ?) ;
+    - le découpage des branches ;
+    - deux outils de C1 **revérifiés à la main** : les coordonnées φ (C4(L) ≅ vecteurs pairs, F5 et P-Ψ par droite),
+      et (A + I)g_R = 12ψ_R − 30ζ_R (deg_Ψ(c) = 15s(c)) ;
+    - les 9 σ avec leur statut par droite (`scripts/fano_perline_status.py`) ;
+    - les notes 120 à 122.
+  - Statut par droite **recoupé** : pour le témoin, les comptes P-Ψ sont 0,0,2,1,0,0,1, comme Astra ; pour s41_5, 5
+    droites P-Ψ-vivantes (mortes : 013 et 602), comme C1, et 4 avec l'admissibilité.
 
