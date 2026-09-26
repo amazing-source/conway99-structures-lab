@@ -640,3 +640,16 @@
 - Question à Astra préparée (`A_ENVOYER_ASTRA_question_suite.md`) : son texte de réponse au suivi n° 4 est tronqué.
   D'après la partie reçue, le critère de Brouwer tient à l'audit (35 exclusions reproduites), et les 18 conditions
   d'apex ne suffisent pas (témoin).
+- **Structure de l'obstruction de l'étoile à k = 22** (`scripts/star_matching_structure.py`,
+  `scripts/star_expected_count.py`).
+  - **Au niveau des paires, tout est permis.** Tous les groupes peuvent être apex, les 45 paires peuvent être
+    appariées, et il y a 512 choix « apex + couplage parfait ». Ce n'est donc pas une obstruction de couplage.
+  - **Surdétermination** (heuristique d'indépendance, avec des fréquences empiriques de g par paire et par rôle) :
+    l'espérance du nombre de solutions de l'étoile complète vaut 8,6·10⁻¹⁶ (boule d'Astra) et 2,2·10⁻¹⁵ (cyclique
+    (2,4,1)).
+  - **Lecture.** L'échec « universel » (42/42) s'explique par le comptage. Il n'y a peut-être pas d'identité algébrique
+    courte à trouver pour (a′). Même sur ~10¹¹–10¹² boules et 36 étoiles chacune, on n'attend pratiquement aucune
+    étoile réalisable.
+  - **Conséquence pour la stratégie.** k = 22 (droite générique) est presque sûrement impossible, mais une preuve
+    uniforme demandera un levier structurel, ou une réduction drastique de l'espace des boules pour un examen
+    exhaustif. Ce n'est pas un simple lemme local.
