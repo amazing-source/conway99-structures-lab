@@ -1,0 +1,5 @@
+type 1 (mixed): step 1 FEASIBLE, step 2 INFEASIBLE 48s
+type 2 (free): step 1 UNKNOWN 108s
+type 3 (free): step 1 FEASIBLE, step 2 unknown(1) 178s
+type 4 (free): step 1 UNKNOWN 239s
+type 5 (mixed): step 1 FEASIBLE, step 2 INFEASIBLE 241s
