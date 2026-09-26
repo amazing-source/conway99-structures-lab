@@ -147,11 +147,14 @@ Ici, h est le nombre de carrés dis qui ont un apex intérieur.
 **Conclusion.** supp V ∈ {{p,q}, {p,r}, {q,r}, {j,r}, {l,r}}, avec Q_BV = 0 pour les deux derniers.
 
 **Certificats entiers** (ordre U, W, A, B, V ; on donne x puis xᵀ𝒫x < 0) :
-- {j,l} : x = (3,3,3,0,1), valeur −4 ;
-- {j,p} et {j,q} avec Q_BV = 0 : x = (41,39,40,8,16), valeur −16 ;
-- les mêmes avec Q_BV = 1 : x = (171,165,152,56,48), valeur −7824 ;
-- {j,r} avec Q_BV = 1 : x = (147,141,136,40,48), valeur −3216 ;
+- {j,l} : x = (2,2,2,0,1), valeur −3 (le vecteur (3,3,3,·,1) d'Astra donne −4) ;
+- {j,p} et {j,q} avec Q_BV = 0 : x = (41,39,40,8,16), valeur −16. Aucun certificat n'a d'entrées dans [−8, 8], car le
+  déterminant du complément de Schur ne vaut que −3/16 ;
+- les mêmes avec Q_BV = 1 : x = (2,2,2,1,1), valeur −2 ;
+- {j,r} avec Q_BV = 1 : x = (3,3,3,1,1), valeur −1 ;
 - pour les cas en l : échanger les deux premières coordonnées.
+
+Les trois petits certificats sont refaits à la main.
 
 ## 6. Statut
 - **Vérifié par « structures »** :
