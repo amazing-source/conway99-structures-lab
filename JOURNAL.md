@@ -707,3 +707,21 @@
   g⁻ = 20, ou prouver g⁻ ≥ 21.
 - **C2** : son pipeline ne produit pas de S entière. Le rang₇ servira de filtre dans les recherches entières (cas dis)
   ou de théorème global.
+- **C1 relit NOTE_S27 : tout tient.** Il ajoute (notes/129) :
+  - **β⁻ est scindée** (disc ≡ (−1)^{g/2}). Cela redonne notre contrainte de signe à g⁻ = 18.
+  - **Boule impaire exacte** : rang = 6 + rang₇ Q_c avec Q_c = P_τ − P_η − 2P_π − I, et det Q_c ≡ 4⁶ det L_G⁻.
+  - **L23 dédoublé** : pour une droite-bloc générique, g⁻ = 18 + ρ⁻ et g⁺ = 18 + ρ⁺. g⁻ = 18 impose
+    (det Q_c | 7) = −1 pour tout bloc générique ; donc un bloc générique avec det Q_c carré force g⁻ = 20 (par
+    exemple τ_c = η_c).
+  - **Résidu lointain impair** : R_c² = 0 et X R_c = 0 (étoile complète impaire à g⁻ = 18).
+  - **Critère** : l'involution meurt ssi Λ_{T,−4} (rang 15) est 7-isotrope.
+  - Répartition : C1 fait (b) à la main (étoile impaire à 18, R_c à 20) ; « structures » fait (a), le filtre N_II sur
+    les Q entiers sans certificat (survivants AD de C2, squelettes dis).
+- **C2 : percée dis.** Le plus petit sous-cas AD (paires dd {0,1} et {2,3} liées) s'effondre : la queue tue 308
+  classes sur 322 à la main, et le PL unifié tue le rep 0 (écart 425). Il demande à « structures » de prouver que
+  toute configuration AD meurt (un 25.3 pour AD). Premiers faits envoyés :
+  - n_dd ≥ 2, avec partenaires dd ;
+  - out ≥ 1 ⟹ d ≤ 3 ;
+  - les puits forment une clique dd ;
+  - un comptage.
+  Liste des 14 survivants demandée.
