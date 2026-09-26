@@ -456,4 +456,15 @@
   C'est cohérent avec ma réponse à l'utilisateur sur la méthode.
 - Estimation donnée à l'utilisateur : C2 environ 60 % (reste le verrou dis / Σ ≠ ∅) ; C1 moins de 10 % (une idée
   nouvelle manque probablement).
+- **Rapport d'Astra sur le dossier n° 4 (carrés disjoints)**, transmis à C2 :
+  - Outil : 𝒫 = 6I − 2Q − Sh + J avec **𝒫² = 14𝒫**, **revérifié à la main**. Il vient de Stage Q : Sh² = 10Sh + 8J,
+    Q·Sh = 8J − 2Sh, QJ = 12J, ShJ = 24J. Donc 𝒫 ⪰ 0, et ses sous-matrices principales sont des filtres exacts.
+  - Témoin local (2,1) sur 5 lignes d'orbites, vérifié par deux implémentations d'Astra : le lemme 11.2 ne peut pas se
+    démontrer localement.
+  - Filtres démontrés :
+    - (2,1) ⇒ aucun apex dans T (noyau (5,5,2,4) de K, revérifié) ;
+    - un apex intérieur force l'autre à l'extérieur (résidu de Schur 1, revérifié) ;
+    - le partenaire d'un apex intérieur a 5 supports possibles.
+  - Borne : **3h ≤ 2n_dis**.
+  - Le lemme 11.2 reste ouvert, et la famille dis n'est pas fermée.
 
