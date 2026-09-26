@@ -241,4 +241,10 @@
 - Certificats « cellules » de C1, lot 4 (s11_7 à s11_9, s21_7 à s21_9) : VALIDE. **Total : 19/19 certificats cellules
   VALIDES**, soit les 19 configurations tuées au niveau cellules (graines 11 et 21). S'y ajoutent **2/2 certificats
   paire × bloc VALIDES** (seed21#1, seed11#0). Chaque valeur de Farkas reconstruite est égale à celle de C1.
+- Noyau universel de C1, recalculé (paramétrisation des atterrissages permis de C1 : a ∈ C4, b ∈ {Φ(P,a), Φ(Q,a)}) :
+  - les 168 vecteurs de comptes (21 paires de blocs × 8 atterrissages) sont bien définis (solution unique, entière,
+    ≥ 0), et chaque vecteur du témoin est l'un d'eux ;
+  - le noyau universel est de dimension 3 pour les 21 blocs ;
+  - le membre de droite du témoin y est orthogonal partout.
+  **Identique à C1.** L'obstruction vit donc dans les 2 dimensions propres au témoin (noyau à gauche de dimension 5).
 

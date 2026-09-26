@@ -160,3 +160,95 @@ for R in BLOCKS:
         inconsistent.append(bn(R))
     print(f'block {bn(R)}: {len(free)} unknowns, rank A = {rA}, rank [A|b] = {rAb}')
 print(f'blocks whose cellcross system is inconsistent even without bounds: {inconsistent}')
+
+
+# 5. universal kernel (C1's parametrisation of the permitted landings), recomputed with the same own solver
+def third(p, q):
+    (L,) = [L for L in lines if {p, q} <= L]
+    (m,) = L - {p, q}
+    return m
+
+
+def counts_abstract(P, Q, a, b):
+    """Block counts of a pair of block {P,Q} whose sigma-specials land in {P,a} and {Q,b} (tau-specials in PM, QM)."""
+    M = third(P, Q)
+    PQ = frozenset((P, Q))
+    sp = Counter([frozenset((P, M)), frozenset((Q, M)), frozenset((P, a)), frozenset((Q, b))])
+    cz = {R: sp[R] for R in BLOCKS if R & PQ}
+    free = [R for R in BLOCKS if not (R & PQ)]
+    Mx, rhs = [], []
+    for L in lines:
+        k = len(L & PQ)
+        target = 2 if k == 2 else (1 if k == 1 else 3)
+        inL = [R for R in BLOCKS if R <= L]
+        Mx.append([1 if R in inL else 0 for R in free]); rhs.append(target - sum(cz.get(R, 0) for R in inL if R & PQ))
+    for cl in range(7):
+        if cl in PQ:
+            continue
+        Mx.append([1 if cl in R else 0 for R in free]); rhs.append(4 - sum(v for R, v in cz.items() if cl in R))
+    x = solve_exact(Mx, rhs)
+    if not isinstance(x, list) or any(v.denominator != 1 or v < 0 for v in x):
+        return None
+    for R, v in zip(free, x):
+        cz[R] = int(v)
+    return [cz[R] for R in BLOCKS]
+
+
+def nullspace_left(vectors, n=21):
+    """Basis of {phi in Q^n : <v, phi> = 0 for all v}."""
+    rows = [[Fr(x) for x in v] for v in vectors]
+    piv, r = [], 0
+    for col in range(n):
+        p = next((i for i in range(r, len(rows)) if rows[i][col] != 0), None)
+        if p is None:
+            continue
+        rows[r], rows[p] = rows[p], rows[r]
+        rows[r] = [x / rows[r][col] for x in rows[r]]
+        for i in range(len(rows)):
+            if i != r and rows[i][col] != 0:
+                rows[i] = [a - rows[i][col] * bb for a, bb in zip(rows[i], rows[r])]
+        piv.append(col); r += 1
+    basis = []
+    for fc in [cc for cc in range(n) if cc not in piv]:
+        phi = [Fr(0)] * n
+        phi[fc] = Fr(1)
+        for i, pc in enumerate(piv):
+            phi[pc] = -rows[i][fc]
+        basis.append(phi)
+    return basis
+
+
+bad_abs, witness_in_family = 0, True
+univ_dims, witness_orth = {}, {}
+fam = {}
+for P, Q in itertools.combinations(range(7), 2):
+    M = third(P, Q)
+    C4 = [x for x in range(7) if x not in (P, Q, M)]
+    fam[frozenset((P, Q))] = []
+    for a in C4:
+        for b in {third(P, a), third(Q, a)}:
+            v = counts_abstract(P, Q, a, b)
+            if v is None:
+                bad_abs += 1
+            else:
+                fam[frozenset((P, Q))].append(v)
+for z in PAIRS:                                    # the witness's own counts must be one of the 8 permitted vectors
+    witness_in_family &= [c[z][R] for R in BLOCKS] in fam[blk(z)]
+print(f'abstract counts: {sum(len(v) for v in fam.values())} (block pair, landing) vectors, failures {bad_abs}; '
+      f'every witness count vector is a permitted one: {witness_in_family}')
+for R in BLOCKS:
+    vecs = [v for PQ, vs in fam.items() if not (PQ & R) for v in vs]
+    K = nullspace_left(vecs)
+    univ_dims[bn(R)] = len(K)
+    own = [z for z in PAIRS if blk(z) == R]
+    one = [z for z in PAIRS if len(blk(z) & R) == 1]
+    bR = []
+    for Rp in BLOCKS:
+        rhs = -sum(eps(y) * c[y][Rp] for y in own)
+        for z in one + own:
+            rhs -= sum(eps(w) for w in spec[z] if blk(w) == R) * c[z][Rp]
+        bR.append(rhs)
+    witness_orth[bn(R)] = all(sum(p * q for p, q in zip(phi, bR)) == 0 for phi in K)
+print(f'universal kernel dimension per block: {univ_dims}')
+print(f'witness right-hand side orthogonal to the universal kernel, per block: '
+      f'{all(witness_orth.values())} {[k for k, v in witness_orth.items() if not v]}')
