@@ -188,4 +188,14 @@
   - Q² + Q = 20I + 4J − Sh est **exacte**, sur 110 orbites.
   - Q est symétrique, de diagonale nulle, avec exactement un 2 par ligne (partenaire D) et les autres entrées ≤ 1.
   - Spectre : 20, −2 (×10), 4 (×55), −5 (×44), comme prévu (x² + x = 20 hors de l'espace des blocs).
+- 26/09 :
+  - **Décision de l'utilisateur** : il transmet lui-même à Astra un résumé de nos résultats (C1, C2, structures).
+    L'indépendance d'Astra prend fin par son choix. Je n'ai rien envoyé à Astra moi-même.
+  - Partage des ressources avec C1, à la demande de l'utilisateur transmise par C1 (même machine, Core Ultra 5 125H,
+    15,4 Go de RAM) :
+    - 3,5 Go au plus chacun en simultané, tout sous run_capped ;
+    - 2 fils au plus par tâche ;
+    - un message avant tout lancement de plus de 1,5 Go.
+  - Répartition : je vérifie au fil de l'eau les certificats « cellules » de C1 (format x19k). Mon lot d'orbites tourne
+    sur 1 cœur, avec moins de 0,8 Go.
 
