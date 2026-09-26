@@ -93,7 +93,7 @@ def green_mod7(H):
     assert all(sum(L[p]) % P7 == 0 for p in range(n))
     return L
 
-def star_test(adj, groups, u=0, full=False):
+def star_test(adj, groups, u=0, full=False, use_lm=True, use_K=True, use_overlap=True, use_diag=True):
     Bm, H, tau, rk = ball_data(adj)
     assert rk == 35, 'not a generic line (rank_7 H != 35)'
     Lg = green_mod7(H)
@@ -113,11 +113,11 @@ def star_test(adj, groups, u=0, full=False):
             for ec in PC:
                 S = (u, v) + eb + ec
                 Ss = set(S)
-                if any(len(adj[p] & Ss) > 2 - (p in Ss) for p in range(N)):
+                if use_lm and any(len(adj[p] & Ss) > 2 - (p in Ss) for p in range(N)):
                     continue
-                if any(K[p][q] == 0 for p, q in itertools.combinations(S, 2)):
+                if use_K and any(K[p][q] == 0 for p, q in itertools.combinations(S, 2)):
                     continue
-                if sum(Lg[p][q] for p in S for q in S) % P7 != 6:
+                if use_diag and sum(Lg[p][q] for p in S for q in S) % P7 != 6:
                     continue
                 out.append(S)
         cand[v] = out
@@ -134,7 +134,7 @@ def star_test(adj, groups, u=0, full=False):
                 if gg not in (2, 3):
                     continue
                 aa = 3 - gg
-                if len(sets[v][x] & sets[w][y]) > 2 - aa:
+                if use_overlap and len(sets[v][x] & sets[w][y]) > 2 - aa:
                     continue
                 okb |= 1 << y
                 if aa:

@@ -1,0 +1,3 @@
+cyclic241 only_green: dead; candidates [533, 481, 567, 481, 533, 516, 551, 479, 551, 516]; nodes 413871; 84s
+rand7 only_green: dead; candidates [508, 488, 543, 536, 529, 527, 514, 540, 523, 538]; nodes 440748; 99s
+rand19 only_green: dead; candidates [517, 519, 488, 490, 539, 561, 558, 533, 508, 507]; nodes 420514; 87s

@@ -610,3 +610,17 @@
     C1 ;
   - tâche (b′) : l'étoile avec j mauvais membres à k = 24.
 - C2 demande l'énumération du transfert de coin (parité le long des traînées) : à faire.
+- **Initiative « lemme unique par 243 » : réorientée.**
+  - Le seul forçage connu de la propriété de grille serait arithmétique. À 243, c'est 3-adique avec 3 | v ; à 99, c'est
+    7-adique avec 7 ∤ v. Les situations diffèrent (Q² ≢ 0 mod 3 à 243, alors que Q² ≡ 0 mod 7 à 99). Le local seul est
+    exclu (faux mondes), et l'ordre ≤ 8 est faisable (notes/91). Donc aucun transfert direct.
+  - Travail recentré sur le plafond 7-adique : l'obstruction de l'étoile à k = 22.
+- **Ablation de l'étoile complète à k = 22** (`scripts/star_ablation_one.py`, `scripts/star_ablation_ball.py`,
+  `logs/star_ablation_astra.log`, `logs/star_ablation_balls.log`).
+  - Sur la boule d'Astra, l'étoile reste morte sans λ/μ contre la boule, sans les zéros de K et sans les
+    recouvrements. Sans g(n,n) = 6, la recherche est trop grosse (> 110 s).
+  - **Avec les seules contraintes « de Green »**, l'étoile est morte sur 4 boules sur 4 (Astra, cyclique (2,4,1),
+    2 aléatoires), en environ 90 s chacune. Ces contraintes sont : forme des ombres, g(n,n) ≡ 6, g ∈ {2,3} par paire,
+    et motif de l'étoile 4K₂ + 2K₁ avec capacités égales.
+  - **L'obstruction est donc algébrique** : la forme de Green H⁺ mod 7 de la boule ne représente pas le Gram
+    3I + 3J − (4K₂ + 2K₁) par des ombres de forme admise.

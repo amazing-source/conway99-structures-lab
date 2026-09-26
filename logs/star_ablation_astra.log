@@ -1,0 +1,5 @@
+all: dead; candidates [350, 356, 338, 356, 307, 294, 350, 345, 312, 297]; nodes 15796; 13s
+no_lm: dead; candidates [471, 462, 508, 519, 435, 404, 505, 497, 425, 397]; nodes 42973; 28s
+no_K: dead; candidates [350, 394, 346, 362, 349, 331, 350, 358, 369, 352]; nodes 21592; 15s
+no_overlap: dead; candidates [350, 356, 338, 356, 307, 294, 350, 345, 312, 297]; nodes 68748; 19s
+only_green: dead; candidates [488, 554, 520, 526, 529, 495, 518, 512, 524, 510]; nodes 416964; 89s
