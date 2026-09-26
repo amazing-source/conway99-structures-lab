@@ -590,3 +590,10 @@
     Le lien « τ carré ⇒ R anisotrope » est à confirmer par C1 (signes de L23).
   - §3 : 66 composantes 4+4+4 admissibles, τ ∈ {8 100, 8 640} (carrés non nuls mod 7), d(L) = 3. C'est compatible
     avec le lemme de Klein de C1 : elles ont des événements S.
+- **Calibration heuristique** (4,5 min, ce n'est pas une preuve ; `scripts/random_balls_star_calibration.py`,
+  `logs/random_balls_star_calibration.log`).
+  - Sur 92 boules aléatoires, 35 sont admissibles (K ≥ 0), génériques et à τ non carré. **L'étoile complète en A₀ les
+    tue toutes les 35.** Avec la boule d'origine d'Astra et les 6 cycliques, cela fait 42 sur 42.
+  - Contrôles du module (`logs/star_shadows_controls.log`) : le témoin partiel v = 1..7 est retrouvé, le négatif
+    (1..6, 8) aussi.
+  - Suggère une obstruction universelle à k = 22 ; tâche (a′) proposée à C1 pour Astra.
