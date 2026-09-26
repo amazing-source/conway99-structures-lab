@@ -339,4 +339,23 @@
     pricing, exact_check et vérificateur génériques.
   - Interface donnée : (zi, fixed, v0, opts). Deux adaptations : voisin libre ambigu, et option (2,1) des partenaires
     dis. Je ne lance aucun PL.
+- **Astra, nouveaux résultats** (Fano tendu, transmis par l'utilisateur) :
+  - lemme « aucun revêtement régulier de degré 4 de K₇ n'a λ = 1 » : **relu, juste** (argument θ mod 2, puis tiroirs
+    dans une classe d'ordre 2) ;
+  - contrainte τ–σ « β_j = β_k = 1 ⟹ e_i = 0 » (contrôle d'Astra sur 3 072 cas) ;
+  - profils d'atterrissage liés aux 24 couplages parfaits de Heawood (conséquence de (P2)).
+  - Transmis à C1. Dossier n° 2 envoyé à l'utilisateur pour Astra : tâche 1 (revêtements non réguliers, S₄), tâche 2
+    (la contrainte τ–σ tue-t-elle les 480 réglages ?), les questions de C1, et les données du témoin (τ, σ, les 480
+    réglages).
+- C1 :
+  - identité automatique des branches ; e_i d'Astra = E(R_i) mod 2 (la sommation est vérifiée) ;
+  - « où P-Ψ est automatique », **vérifié à la main** : m_B = 1 ⇒ π_B unique (6 placements), #MM = #CC + 6 − 2Σm,
+    et dans le cas tout-CM τ est déterminé par σ.
+  - Addendum envoyé à l'utilisateur pour Astra.
+- **C2 : le survivant 0 (M1 n = 6, job 0) MEURT au niveau orbite**, avec un certificat exact de C2. Son propre code
+  donne un écart de 77,09 sur 414 260 colonnes-orbites.
+  - Contrôles de C2 : faisable sans les identités, et faisable avec les identités comprimées par paires. La mort vient
+    donc de la partie orbite.
+  - J'ai relu son expansion : (a) exclusions des voisins libres (F1, pivot j, orbites distinctes), (b) aucune paire
+    lointaine ne contient D(Z), (c) Sh = 2 pour les sœurs. Tout est juste.
 
