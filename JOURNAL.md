@@ -210,4 +210,10 @@
   - Vérification des certificats cellules de C1 : lot 1 (s11_1, s21_0) VALIDE ; lot 2 en cours.
   - Deux incidents de lancement, corrigés, qui n'ont rien vérifié : `\$b` dans le script, puis la conversion de
     chemins MSYS (corrigée par MSYS_NO_PATHCONV=1).
+- Certificats « cellules » de C1 : lot 2 (s11_2, s11_3, s21_1) VALIDE. Cela fait 5/5, et chaque valeur de Farkas
+  reconstruite est égale à celle de C1 (la plus serrée : 5 286 630 / 10⁶). Moins de 0,1 Go et 140 à 180 s par
+  certificat.
+- Relecture du modèle paire × bloc de C1 (x19n) : lignes saines (labdeg, pairblk, pairpair, cons ; produits entre
+  blocs omis). Le vérificateur `scripts/verify_c1_pairblock.py` est préparé, sur la convention de noms proposée à C1 ;
+  il sera testé dès l'arrivée des fichiers.
 
