@@ -127,3 +127,11 @@
     l'utilisateur requise**.
   - C2 a transposé le modèle à H-β, avec la même conclusion côté (P2) : squelette circulant certifié infaisable, et
     552 classes en cours dans sa session, calcul plafonné autorisé.
+- S17, calcul certifié (autorisé par l'utilisateur, plafond d'environ 1 h).
+  - **Tout-tordu à 1 triangle : impossible.** 15 classes, 84 certificats exacts en entiers, 937 s, 258 Mo. Revérifié
+    par `verify_core_certs.py` (code séparé, lignes reconstruites depuis leurs étiquettes, arbres complets). La
+    couverture des 41 790 étiquetées est vérifiée.
+  - **Sans triangle** : les 14 classes ont un PL faisable à la racine, même avec (P2) et les types. Le branchement
+    est estimé à des heures ; arrêt dans le plafond, décision requise.
+  - Erreur relevée dans mon message à l'utilisateur, corrigée aussitôt : 84 certificats et non 83 ; 5 classes à
+    branchement, avec 74 certificats, et non 4 classes avec 69.

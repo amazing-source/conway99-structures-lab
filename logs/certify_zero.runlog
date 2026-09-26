@@ -1,0 +1,7 @@
+05:53:43  START pid=12524 RAM cap=4000MB commit cap=10000MB timeout=1900s minfree RAM=2000MB commit=3000MB | avail RAM=5759MB commit=11335MB | "C:\Users\RESEARCHER\AppData\Local\Python\pythoncore-3.14-64\python.exe" -u scripts/certify_core.py zero 1800
+05:54:43  running 60s  RAM 184MB (max 252)  commit 1327MB (max 1513)  | machine: RAM avail 5973MB, commit headroom 11653MB
+05:55:43  running 120s  RAM 186MB (max 252)  commit 1328MB (max 1513)  | machine: RAM avail 2700MB, commit headroom 7121MB
+05:56:43  running 180s  RAM 187MB (max 252)  commit 1329MB (max 1513)  | machine: RAM avail 5948MB, commit headroom 10364MB
+05:57:43  running 240s  RAM 187MB (max 252)  commit 1329MB (max 1513)  | machine: RAM avail 5640MB, commit headroom 10035MB
+05:58:43  running 300s  RAM 189MB (max 252)  commit 1331MB (max 1513)  | machine: RAM avail 5682MB, commit headroom 10087MB
+05:59:25  END exit=1 time=342s max RAM=278MB max commit=1561MB peak commit=1571MB (RAM cap 4000MB, commit cap 10000MB)

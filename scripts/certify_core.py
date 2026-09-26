@@ -28,13 +28,14 @@ import config_model as cm
 from zeros_budget import decompositions, V
 
 SCALE = 10 ** 9
+METHOD = 'highs'                 # 'highs-ipm' for the triangle-free classes (see S17)
 OUT = 'logs/core_certs'
 
 
 def lp_primal(A, lo, hi, ub):
     eq = lo == hi
     res = linprog(np.zeros(A.shape[1]), A_ub=vstack([A[~eq], -A[~eq]]), b_ub=np.concatenate([hi[~eq], -lo[~eq]]),
-                  A_eq=A[eq], b_eq=lo[eq], bounds=list(zip(np.zeros(len(ub)), ub)), method='highs',
+                  A_eq=A[eq], b_eq=lo[eq], bounds=list(zip(np.zeros(len(ub)), ub)), method=METHOD,
                   options={'time_limit': 300})
     return res
 
@@ -48,7 +49,7 @@ def farkas(A, lo, hi, ub):
     top = hstack([-AT, AT, -identity(n)])
     bot = csr_matrix(np.concatenate([hi, -lo, ub]).reshape(1, -1))
     res = linprog(np.ones(2 * m + n), A_ub=vstack([top, bot]), b_ub=np.concatenate([np.zeros(n), [-1.0]]),
-                  bounds=(0, None), method='highs', options={'time_limit': 300})
+                  bounds=(0, None), method=METHOD, options={'time_limit': 300})
     if res.status != 0:
         return None
     y = res.x[:m] - res.x[m:2 * m]
@@ -67,9 +68,8 @@ def exact_check(A, lo, hi, ub, y_int):
     return left > right, left, right
 
 
-def certify_node(dec, cols, fixings, labels_cache):
-    A, lo, hi, _ = cm.build(dec, p2=True, cols=cols)
-    labels = list(cm.LABELS)
+def certify_node(dec, cols, fixings, model):
+    A, lo, hi, labels = model
     ub = np.ones(A.shape[1])
     for Z, p in fixings:
         for c, col in enumerate(cols):
@@ -109,13 +109,15 @@ def branch_orbit(cols, x, fixings):
 
 def certify_class(name, dec, deadline, max_depth=3):
     cols = cm.columns(dec)
+    A, lo, hi, _ = cm.build(dec, p2=True, cols=cols)
+    model = (A, lo, hi, list(cm.LABELS))
     certs, stack, status = [], [[]], 'certified'
     nodes = 0
     while stack:
         if time.time() > deadline:
             return 'timeout', certs, nodes
         fixings = stack.pop()
-        res, x, cert = certify_node(dec, cols, fixings, None)
+        res, x, cert = certify_node(dec, cols, fixings, model)
         nodes += 1
         if res == 'certified':
             certs.append(cert)
@@ -176,7 +178,10 @@ def zero_triangle_classes():
 if __name__ == '__main__':
     mode = sys.argv[1]
     budget = float(sys.argv[2]) if len(sys.argv) > 2 else 3000
-    only = int(sys.argv[3]) if len(sys.argv) > 3 else None
+    only = int(sys.argv[3]) if len(sys.argv) > 3 and sys.argv[3] != '-' else None
+    if len(sys.argv) > 4:
+        METHOD = sys.argv[4]
+    maxd = int(sys.argv[5]) if len(sys.argv) > 5 else 3
     t0 = time.time()
     os.makedirs(OUT, exist_ok=True)
     cl = one_triangle_classes() if mode == 'one' else zero_triangle_classes()
@@ -187,7 +192,7 @@ if __name__ == '__main__':
         deadline = t0 + budget
         if time.time() > deadline:
             print('BUDGET REACHED'); break
-        st, certs, nodes = certify_class(f'{mode}{n}', rep, deadline)
+        st, certs, nodes = certify_class(f'{mode}{n}', rep, deadline, max_depth=maxd)
         fn = f'{OUT}/{mode}_{n:02d}.json.gz'
         with gzip.open(fn, 'wt', encoding='utf-8') as f:
             json.dump({'mode': mode, 'index': n, 'type': typ, 'labelled': cnt, 'decomposition': [list(c) for c in rep],

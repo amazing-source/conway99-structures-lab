@@ -73,8 +73,29 @@ admissible, Σ_r y_r(Ax)_r = wᵀx serait à la fois ≥ le membre gauche et ≤
 - **Conclusion : aucune configuration tout-tordue à un seul triangle n'existe.** C'est une preuve assistée par
   ordinateur, vérifiable en entiers.
 
-### 2.2 Sans triangle
-(en cours)
+### 2.2 Sans triangle : NON résolu
+- 14 classes non isomorphes, soit 30 360 décompositions étiquetées :
+  - (4,4,4,4,5) : 1 classe ;
+  - (4,4,6,7) : 2 ;
+  - (4,5,5,7) : 3 ;
+  - (4,5,6,6) : 3 ;
+  - (5,5,5,6) : 3 ;
+  - (7,7,7) : 2.
+- **À la racine, avec (P2), les 14 PL sont FAISABLES** (`logs/certify_zero_root.runlog`, points intérieurs, 215 s). La
+  version typée (types signés des doubles) reste aussi faisable sur zero0 et zero5.
+- **Explication.** Sans triangle, tous les systèmes locaux sont identiques (C6, C8 seulement). Le PL admet des
+  solutions fractionnaires symétriques, et seul un branchement les casse. Les classes à 1 triangle qui ont demandé un
+  branchement étaient précisément les plus symétriques.
+- **Coût.** Chaque nœud coûte environ 8 à 15 s. Avec une profondeur probable de 2 ou 3, il faudrait des centaines à des
+  milliers de nœuds par classe, soit des heures au total. C'est au-delà de l'heure autorisée : **décision de
+  l'utilisateur requise**, ou bien de nouveaux ingrédients mathématiques.
+- **Pistes :**
+  - (P2) par ORBITES plutôt que par paires (côté invariant Q_out de C2) ;
+  - le côté signé S_out ;
+  - la reformulation en repère ajusté : UᵀU = 16,5 I + 16 J − 4A_T(7), avec pour tout 4-cycle de blocs
+    Σ_Z ⟨u_Z, g⟩² = 98.
+- Note technique : le simplexe dual de HiGHS n'aboutit pas en 110 à 300 s sur ces PL (12 600 colonnes,
+  844 000 non-zéros), alors que les points intérieurs mettent 8 s.
 
 ## 3. Portée et réserves
 - La preuve est **assistée par ordinateur**. Chaque certificat est un objet fini, vérifiable en entiers ; il ne dépend
