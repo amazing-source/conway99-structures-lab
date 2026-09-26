@@ -35,13 +35,14 @@ def random_cycles(rng):
         if len(c) == 1: raise ValueError
         cycles.append(tuple(c))
     return cycles
-rng = random.Random(int(sys.argv[1]) if len(sys.argv) > 1 else 3)
-for t in range(int(sys.argv[2]) if len(sys.argv) > 2 else 5):
-    cyc = random_cycles(rng)
-    orbs = skeleton_from_pair_cycles(cyc)
-    t0 = time.time(); r = feasible(orbs, time_limit=120)
-    st = 'dead' if r is None else ('unknown' if isinstance(r, str) else 'ALIVE')
-    print('cycle lengths', sorted(len(c) for c in cyc), st, '%.0fs' % (time.time() - t0), flush=True)
-    if st == 'ALIVE':
-        x, phi, ns = r
-        print('   n_s =', {P: int(round(x[j])) for P, j in ns.items() if round(x[j])})
+if __name__ == '__main__':
+  rng = random.Random(int(sys.argv[1]) if len(sys.argv) > 1 else 3)
+  for t in range(int(sys.argv[2]) if len(sys.argv) > 2 else 5):
+      cyc = random_cycles(rng)
+      orbs = skeleton_from_pair_cycles(cyc)
+      t0 = time.time(); r = feasible(orbs, time_limit=120)
+      st = 'dead' if r is None else ('unknown' if isinstance(r, str) else 'ALIVE')
+      print('cycle lengths', sorted(len(c) for c in cyc), st, '%.0fs' % (time.time() - t0), flush=True)
+      if st == 'ALIVE':
+          x, phi, ns = r
+          print('   n_s =', {P: int(round(x[j])) for P, j in ns.items() if round(x[j])})

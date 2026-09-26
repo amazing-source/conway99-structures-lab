@@ -91,7 +91,9 @@ def closed_classes(orbs, k):
     return closed, rest
 
 
-def build(orbs, dichotomy=True, balance=True):
+def build(orbs, dichotomy=True, balance=True, near=None):
+    """near (optional): {t: {orbit index i through t: (j1, j2)}}: the two R_t-neighbours (orbit indices) of every orbit through
+    t that is FREE at t (not pivoting at t).  Then phi_i(tm) is exact for those orbits, and the components of G_t are known."""
     check_skeleton(orbs)
     n_orb = len(orbs)
     PI = {P: i for i, P in enumerate(PAIRS)}
@@ -128,6 +130,29 @@ def build(orbs, dichotomy=True, balance=True):
         lo.append(l)
         hi.append(h)
     comps = {k: closed_classes(orbs, k) for k in range(N)}
+    if near is not None:
+        for k, nbk in near.items():
+            # union-find on blocks: an R_k edge between orbits of pairs km, km' joins m and m'; closed classes stay
+            par = {m: m for m in range(N) if m != k}
+            def f(a):
+                while par[a] != a:
+                    a = par[a]
+                return a
+            for i, nb in nbk.items():
+                m = orbs[i]['pair'][0] + orbs[i]['pair'][1] - k
+                for j2 in nb:
+                    m2 = orbs[j2]['pair'][0] + orbs[j2]['pair'][1] - k
+                    par[f(m)] = f(m2)
+            for i, o in enumerate(orbs):          # D-edges at k (digons of R_k) also join blocks
+                if o['pivot'] == k and o['partner'] is not None:
+                    m = o['pair'][0] + o['pair'][1] - k
+                    q = orbs[o['partner']]['pair']
+                    par[f(m)] = f(q[0] + q[1] - k)
+            closed, rest = comps[k]
+            groups = {}
+            for m in rest:
+                groups.setdefault(f(m), set()).add(m)
+            comps[k] = (closed + list(groups.values()), set())
     for i, o in enumerate(orbs):
         P = o['pair']
         a, b = P
@@ -165,6 +190,18 @@ def build(orbs, dichotomy=True, balance=True):
                         continue
                     cap = sum(1 for j2 in by_pair[pr(t, m)] if orbs[j2]['pivot'] != t)
                     ub[phi[(i, pr(t, m))]] = min(ub[phi[(i, pr(t, m))]], cap)
+                if near is not None and t in near and i in near[t]:
+                    nb = near[t][i]
+                    for m in range(N):
+                        if m == t:
+                            continue
+                        Q = pr(t, m)
+                        val = sum(1 for j2 in nb if orbs[j2]['pair'] == Q)
+                        j = phi[(i, Q)]
+                        if Q == P:
+                            add([(j, 1)], val, val)
+                        else:
+                            lb[j] = ub[j] = val
         if balance:
             for k in range(N):
                 if k in P:
@@ -224,8 +261,8 @@ def build(orbs, dichotomy=True, balance=True):
     return A, np.array(lo, float), np.array(hi, float), lb, ub, nvar, phi, ns
 
 
-def feasible(orbs, dichotomy=True, balance=True, time_limit=120):
-    A, lo, hi, lb, ub, nvar, phi, ns = build(orbs, dichotomy, balance)
+def feasible(orbs, dichotomy=True, balance=True, time_limit=120, near=None):
+    A, lo, hi, lb, ub, nvar, phi, ns = build(orbs, dichotomy, balance, near)
     if np.any(lb > ub):
         return None
     res = milp(c=np.zeros(nvar), constraints=[LinearConstraint(A, lo, hi)], integrality=np.ones(nvar),
