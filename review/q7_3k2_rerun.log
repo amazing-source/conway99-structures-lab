@@ -1,0 +1,9 @@
+A valid sister-shadow pairs: 384
+B valid sister-shadow pairs: 384
+C valid sister-shadow pairs: 384
+compatible (A,B): 2048
+compatible (B,C): 2048
+compatible (C,A): 2048
+complete assignments of the 6 sib shadows: 512
+sib assignments killed by the cross-orbit rows: 512 of 512
+min number of shadow options of a cross orbit (over assignments): 0 max 0
