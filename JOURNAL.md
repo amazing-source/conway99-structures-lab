@@ -494,3 +494,12 @@
   - Identité d'orbites exacte sur le bloc central 5 × 5.
   - Conséquence : le lemme 11.2 ne se démontre pas à ce niveau local.
 
+- **Énoncé autonome du dossier n° 4 pour C1** (NOTE_S23), à la demande de C1, qui ne connaît pas le cadre de C2.
+  - Contenu : définitions de C2 avec leurs preuves courtes (racines, orbites, Q, D, π_i, F1, identité d'orbites, budget
+    de Gram, apex) ; lemme « A est dis et Q_UV = Q_WV = 0 » ; théorème 3h ≤ 2n_dis ; 𝒫² = 14𝒫 ; réduction à 5 supports.
+  - **3h ≤ 2n_dis : refait à la main, TIENT.** J'ai simplifié le point « A est de type dis » : si i ∈ supp D(A), l'un
+    de v, σv contient (i,α), donc vaut π_i(a) = u, contre Q_AU = 1.
+  - **6.1 à 6.3 : refaits à la main, TIENNENT.** On utilise la forme close du complément de Schur sur (B,V) après
+    K = 𝒫[U,W,A], avec det K = 16 et K⁻¹ = (1/16)[[21,19,16],[19,21,16],[16,16,16]]. Les tableaux sont recoupés en
+    fractions exactes (`scripts/check_dossier4_compressions.py`, `logs/check_dossier4_compressions.log`) : 0 écart.
+  - Restent exactement {p,q}, {p,r}, {q,r}, {j,r}, {l,r}, avec Q_BV = 0 forcé pour les deux derniers, comme chez Astra.
