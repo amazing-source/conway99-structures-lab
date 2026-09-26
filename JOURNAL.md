@@ -503,3 +503,24 @@
     K = 𝒫[U,W,A], avec det K = 16 et K⁻¹ = (1/16)[[21,19,16],[19,21,16],[16,16,16]]. Les tableaux sont recoupés en
     fractions exactes (`scripts/check_dossier4_compressions.py`, `logs/check_dossier4_compressions.log`) : 0 écart.
   - Restent exactement {p,q}, {p,r}, {q,r}, {j,r}, {l,r}, avec Q_BV = 0 forcé pour les deux derniers, comme chez Astra.
+- **C1 relit NOTE_S23 en troisième regard : tout tient, sans écart.** Il a tout refait à la main et recalculé le §5 avec
+  son propre script en fractions. Sa remarque : la clause « aucune orbite comptée n'est aussi apex choisi » s'obtient en
+  appliquant « U n'est apex intérieur d'aucun carré » au carré (A, V) lui-même, quand il est compté. Cela s'applique
+  tel quel.
+- **Lemme (4,4,4) de C1 (G(L) à P = 0, S = 0) : TIENT.** Pour tout v, r_v est dans P_u ou dans P_ū, jamais un
+  lointain. Refait à la main, avec les 8 configurations vérifiées une à une. Preuve en une ligne envoyée à C1 :
+  - par (c), τ_ū = σM̄σ⁻¹, où M̄ est le couplage complémentaire de τ_u ;
+  - r_v ∈ P_u ⟺ σ⁻¹(v) = τ_u(v), et r_v ∈ P_ū ⟺ σ⁻¹(v) = M̄(v) ;
+  - σ⁻¹(v) est dans l'autre classe, qui vaut {τ_u(v), M̄(v)}.
+  Les quatre r_v sont du même côté si et seulement si σ est une involution sur la partie.
+- **Rapport d'Astra sur le dossier n° 5 (relayé par l'utilisateur) : entièrement correct** (NOTE_S24,
+  `astra/RAPPORT_ASTRA_DOSSIER5.md`).
+  - §1 : la boule tordue explicite est exclue à k = 22. Reproduit avec mon propre code
+    (`scripts/verify_astra_d5_seven_shadows.py`) : τ = 1 928 719 172 295 ≡ 6, mêmes candidats, aucune complétion en
+    27 626 nœuds. Le contrôle positif retrouve le témoin d'Astra.
+  - §2 (R = 0 ⇒ SRG exacte), §3 (MR = 0 et rang ≤ 2 ⇒ SRG exacte) et §4 (un échange de ≤ 6 ombres force deux prismes) :
+    refaits à la main.
+  - Mon ajout : MR = 0 est automatique dans une vraie SRG. En effet Q² ≡ 0 mod 7, et la condition d'image de notes/102
+    §8 s'applique. Donc k = 24 est aussi un problème de construction complet.
+- **Modèle de colonnes au niveau racine de C2** (`root_colmodel.py`) : relecture en cours, à la demande de C2. Points
+  prioritaires : l'équilibre 2/2 aux blocs lointains et le choix des racines m et π.

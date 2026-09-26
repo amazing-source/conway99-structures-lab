@@ -1,0 +1,13 @@
+cubic True; triangles 0; two-part unions are single C24: [True, True, True]; rank_7(3I - B) = 35
+tau(G) = 1928719172295; tau mod 7 = 6; squares mod 7 are {1, 2, 4}
+groups 1..6,8: candidate counts [350, 356, 338, 356, 307, 294, 345]; joint choice: None; DFS nodes 27626
+positive control, groups 1..7: candidate counts [350, 356, 338, 356, 307, 294, 350]; joint choice found: True (25980 nodes)
+    1 : 0 1 15 19 31 34
+    2 : 0 2 17 18 32 35
+    3 : 0 3 15 18 26 29
+    4 : 0 4 18 20 27 33
+    5 : 0 5 15 20 24 35
+    6 : 0 6 20 21 25 26
+    7 : 0 7 16 22 25 33
+Astra's witness for 1..7: all shadows are candidates True; pairwise OK True; star OK True
+section 3 counterexample: rank 4 ; R1 = 0: True ; tr R = 0: True ; diag(R^2) = 0: True ; R^2 != 0: True
