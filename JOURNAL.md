@@ -624,3 +624,19 @@
     et motif de l'étoile 4K₂ + 2K₁ avec capacités égales.
   - **L'obstruction est donc algébrique** : la forme de Green H⁺ mod 7 de la boule ne représente pas le Gram
     3I + 3J − (4K₂ + 2K₁) par des ombres de forme admise.
+- **Sous-étoiles** (`scripts/star_substars.py`, `logs/star_substars_6.log`) : sur la boule d'Astra, toutes les
+  sous-étoiles de 6 membres testées (96 sur 210, avec égalité des capacités) sont réalisables. L'obstruction demande
+  donc au moins 7 membres, ce qui est cohérent avec Astra (les sous-étoiles de 6 passent).
+- **C1, notes/128 (lemme R) : TIENT.** À P = 0, un sommet dont les 7 droites sont (4,4,4) vérifie σ_C = mate partout,
+  donc S(x) = 84 ; deux tels sommets ne sont jamais voisins (≤ 22 par Hoffman) ; « (4,4,4) partout » est impossible ;
+  sous NT et à P = 0, k ≥ 22.
+- **C1, notes/126 §3 quater (NT ⟹ k ≥ 18) : TIENT**, avec un complément. Pour c = 6, r = 0 demande τ(prisme) = 75 ≢ 0
+  mod 7.
+- **Bilan 7-adique à P = 0 (C1, notes/127).** Sous NT, k ∈ {22, 24, 26, 28}. Il reste :
+  - NT (droites connexes) ;
+  - (a′), l'étoile uniforme ;
+  - k = 22 sans droite générique (C1) ;
+  - k = 24 à 28.
+- Question à Astra préparée (`A_ENVOYER_ASTRA_question_suite.md`) : son texte de réponse au suivi n° 4 est tronqué.
+  D'après la partie reçue, le critère de Brouwer tient à l'audit (35 exclusions reproduites), et les 18 conditions
+  d'apex ne suffisent pas (témoin).
