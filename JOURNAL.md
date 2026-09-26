@@ -294,4 +294,13 @@
   - Vérifié à la main : le graphe τ des 12 paires d'une droite est 2-régulier, sans triangle (λ = 1), de longueurs de
     cycle multiples de 3, donc C6 + C6 ou C12.
   - Les deux sessions reviennent au cas général.
+- **Nouvelle piste de C1, cas général** (dimension forcée), vérifiée à la main :
+  - Sur K = ker ∂ (rang 70), B a pour valeurs propres 3 et −4, de multiplicités 40 et 30. En effet tr(B|_K) = 0, car
+    BN = N(J − P − I) et ce bloc a pour spectre 12, 0 (×7) et −2 (×6).
+  - K_cell (fonctions constantes sur les 42 cellules antipodales, dans ker ∂) est de rang 35 : 14 dans E₋₂ et 21
+    antisymétriques.
+  - D'où dim(K_cell ∩ V₃) ≥ 5 sur Q, et ≥ 7 modulo 7 (avec k ≤ 28 de C1). En tout sommet de toute srg(99,14,1,2),
+    au moins 5 fonctions constantes sur les cellules sont vecteurs propres de B pour la valeur 3. C'est une
+    contrainte bilinéaire (comptes × F), invisible aux PL par types.
+  - Pour le test (b) au Fano tendu : M(δ) = [M_β | M_γ(δ)], de taille 84 × 35, doit vérifier rang ≤ 30.
 
