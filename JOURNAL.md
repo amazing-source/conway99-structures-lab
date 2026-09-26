@@ -445,4 +445,15 @@
   - Tâche 2 : un lemme structurel pour la famille dis (Σ = ∅).
   - Tâche 3, facultative : les 9 motifs Σ ≠ ∅.
   - Joints : les notes 00, 07, 19, 35 et 39 de C2, la dichotomie, et mon analyse de (2,1). C2 est prévenu.
+- **Dossier n° 5 pour Astra** : la cible 7-adique de C1 sur le cas général (L22).
+  - R_L, matrice 60 × 60 mod 7 de rang k − 22, nulle à k = 22.
+  - Question : existe-t-il des ombres β_u, β_ū et un graphe lointain 8-régulier de rang ≤ 6 (ou 0) ? Un « non »
+    uniforme donnerait k ≥ 30, contre L22.
+  - Cas dégénéré à exclure à part : les 231 droites 7-dégénérées, forcé si k ≤ 20.
+  - Joints : notes 99–102, 106, 107, 110, 114 et 123 de C1. À traiter après le dossier n° 4.
+- Bilan I_x de C1 : la fermeture de Δ_x est essentielle (des géométries tordues au maximum existent hors srg, avec
+  P(x) = 0) ; pas de certificat linéaire uniforme (relaxations faisables jusqu'à l'ordre 8) ; il faut du non convexe.
+  C'est cohérent avec ma réponse à l'utilisateur sur la méthode.
+- Estimation donnée à l'utilisateur : C2 environ 60 % (reste le verrou dis / Σ ≠ ∅) ; C1 moins de 10 % (une idée
+  nouvelle manque probablement).
 
