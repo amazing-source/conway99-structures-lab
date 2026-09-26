@@ -13,7 +13,7 @@ from scipy.optimize import milp, LinearConstraint, Bounds
 from pair_level import N, PAIRS, PIDX, pr, cycle_matching
 
 
-def build_relaxed(In, dd, dichotomy=True):
+def build_relaxed(In, dd, dichotomy=True, fixedDs=None):
     orbits = [(p, s) for p in PAIRS for s in (0, 1)]
     anchor = {}
     for k in range(N):
@@ -24,15 +24,26 @@ def build_relaxed(In, dd, dichotomy=True):
     assert all(p in anchor for p in PAIRS)
     fixedD = {}
     freeblocks = []
+    fixedDs = fixedDs or {}
+    compsM = {}
     for k in range(N):
         d = len(In[k])
         if d in (2, 3):
             for (m, s), (m2, s2) in cycle_matching(tuple(In[k])).items():
                 fixedD[(pr(k, m), s)] = (pr(k, m2), s2)
+            compsM[k] = [set(In[k])]
+        elif d >= 4 and k in fixedDs:
+            for cyc in fixedDs[k]:
+                for (m, s), (m2, s2) in cycle_matching(tuple(cyc)).items():
+                    fixedD[(pr(k, m), s)] = (pr(k, m2), s2)
+            compsM[k] = [set(c) for c in fixedDs[k]]
         elif d >= 4:
             freeblocks.append(k)
+            compsM[k] = [set(In[k])]
         elif d == 1:
             return None
+        else:
+            compsM[k] = []
     cnt = [0]
 
     def new(n=1):
@@ -108,7 +119,7 @@ def build_relaxed(In, dd, dichotomy=True):
         for k in range(N):
             if k in P:
                 continue
-            comps = [set(In[k])] if len(In[k]) >= 2 else []
+            comps = list(compsM[k])
             Fk = set(range(N)) - {k} - set(In[k])
             if Fk:
                 comps.append(Fk)
@@ -173,8 +184,8 @@ def build_relaxed(In, dd, dichotomy=True):
     return A, np.array(lo, float), np.array(hi, float), lb, ub, nvar
 
 
-def feasible_relaxed(In, dd, dichotomy=True, time_limit=120):
-    out = build_relaxed(In, dd, dichotomy)
+def feasible_relaxed(In, dd, dichotomy=True, time_limit=120, fixedDs=None):
+    out = build_relaxed(In, dd, dichotomy, fixedDs)
     if out is None or isinstance(out, str):
         return None
     A, lo, hi, lb, ub, nvar = out

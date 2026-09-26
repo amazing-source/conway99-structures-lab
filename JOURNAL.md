@@ -725,3 +725,36 @@
   - les puits forment une clique dd ;
   - un comptage.
   Liste des 14 survivants demandée.
+
+## 26/09, soirée (suite) : AD au niveau paires, g⁻ ∈ {16, 18, 20}, mélanges de C2
+- **AD (NOTE_S28, ad/).**
+  - **Modèle « paires »**, fait uniquement de résultats démontrés : F1, zéros par bloc, équilibre sur chaque D-cycle
+    fermé et sur F_k, symétrie e(P,P′), dichotomie de paire (= budget 16.1).
+  - **Les 14 survivants AD2 de C2 meurent**, chacun par UNE racine, sans connaître le bloc A. Pour 12 d'entre eux, c'est
+    le **lemme T⁺** (queue chargée) : |S| ≥ 3 + [j∈S] + #digones {i,k} dans S∖{i,j}. Les 2 autres tombent par une
+    identité linéaire. **Relu et validé par C1.**
+  - **Balayage complet** : 26 524 classes AD de n_dd = 2 à 21, énumérées avec l'outil de C2 relu.
+    - Tout est mort pour n_dd ≤ 6 (6 079 classes).
+    - Il reste des survivants **riches en dd** : n_dd = 7 (3 vivantes, 3 inconnues), n_dd = 8 (en cours), 18 et 19
+      (vivantes), 21 « tout dd » (inconnue).
+    - **Tous les survivants de 7 et 8 ont un bloc A.** Retest en cours, en énumérant les 130 structures de A.
+  - **Certificats exacts** (ad/certify.py) : Farkas rationnel, ou arbre de branchement ; contrôleur `--check`.
+    general_model relu par C2 : « correct ».
+- **Mélanges de C2.**
+  - Classe 9 job 42 : 10/10 feuilles tuées, certifiées et revérifiées.
+  - M1 n = 6 (le cœur) résiste.
+  - Le modèle relâché (blocs non fixés) est trop faible aux profondeurs 1 et 2. C2 garde donc le PL d'orbite pour les
+    sous-arbres, et mon filtre sert pour les petits nœuds.
+- **q:7.**
+  - **Astra, dossier 6 (relu, tout tient)** : min Λ₋₄⁻ ≥ 8, det L_T = 2¹²7^{g⁻−7}, Blichfeldt ⟹ g⁻ ≥ 12.
+  - **C1, recoupé ici (involution/blockline_exhaustive.py)** : t_c ≤ 4, et les rangs 14 ⟺ τ à 2, 4 ou 6 digones de
+    mate avec ι sans digone. Par cohérence des digones, **g⁻ ≠ 14**. Donc **g⁻ ∈ {16, 18, 20}**.
+  - **Bloc A** : τ = ι partout. La droite-bloc est alors toujours de rang 18 et de signe local +1, **donc g⁻ = 20**.
+    Cela recoupe « τ_c = η_c ⟹ det Q_c = 3⁶ » de C1.
+  - Blocs sans digone D (τ ∩ ι = ∅, cas « tout dis ») : pas de restriction locale particulière.
+- **Astra est en pause une semaine.** Le suivi n° 2 du dossier 6 est prêt mais n'est pas parti. L'utilisateur fait
+  tourner « Sol » (ChatGPT) : à relire avec prudence. Son rapport « supports courts » (astra/RAPPORT_SOL_SUPPORTS_COURTS.md) :
+  - §1–2 relus et justes : norme ≤ 10 dans L_T ⟹ ±1, côté positif stable, B 4-régulier ; norme 8 ⟹ cube ou Wagner ;
+  - le cube force un prisme, donc il n'est exclu qu'à P = 0.
+- **C1** : a codé ad/sib_model.py (paires frères). Motifs ancrés : P₅, 2P₃, P₃, P₄ et P₃+K₂ meurent. Restent K₃ (une
+  classe), 3K₂, 2K₂ et K₂. Demande relayée à C2 : ses feuilles v6 avec Σ exact.
