@@ -439,4 +439,10 @@
   - unicité du partenaire D en ligne : la masse des colonnes qui mettent 2 sur W vaut 1 (42 lignes) ;
   - la règle explicite « voisin libre en j de pivot ≠ j ».
   - C2 intègre aussi mes filtres de colonnes dis (rigidité aux blocs k et l).
+- **Dossier n° 4 pour Astra**. L'utilisateur m'a laissé le choix (« comme tu veux ») : j'ai pris les **carrés disjoints**
+  de C2, vrai verrou de la branche involution, hors de portée du calcul.
+  - Tâche 1 : (2,0) contre (2,1), soit le lemme 11.2, soit une configuration locale cohérente.
+  - Tâche 2 : un lemme structurel pour la famille dis (Σ = ∅).
+  - Tâche 3, facultative : les 9 motifs Σ ≠ ∅.
+  - Joints : les notes 00, 07, 19, 35 et 39 de C2, la dichotomie, et mon analyse de (2,1). C2 est prévenu.
 
