@@ -420,4 +420,15 @@
   A_Σ² = 13A_Σ + 68I (spectre 17 ×44 et −4 ×187, cohérent), ombres. Toutes ces identités sont automatiques : le
   plafond doit venir des génériques effectifs. C1 cherche des strates rigides forcées à P = 0.
 - Leçon (mémoire) : pour savoir ce que fait une session, le lui demander ; les commits sont en retard sur le travail.
+- **Correction des crédits (C1)** : ses identités sur I_x étaient déjà dans le corpus.
+  - Graphe signé des triangles : notes/99 §4 et 109 §4. Ombres : notes/114 §1. Holonomie et prismes : F1, notes/99
+    §4 bis. H + 3P = 213 444 : théorème de Reimbayev.
+  - Seul point nouveau : à P = 0 et S = 0, H(x) = 12 936 en tout sommet. C'est automatique.
+  - C1 a réécrit notes/123 avec les bons crédits.
+- **(2,0) contre (2,1) pour un carré dis** (partage avec C2, ma part), premier passage à la main :
+  - Rigidité aux blocs k et l : hormis w, σw et w′, seuls v₁ ∋ (k,−γ) et v₂ ∋ (l,δ) touchent k ou l. Tous les autres
+    voisins racines de u évitent k et l.
+  - Σ c_v(R) = 5 se ferme automatiquement dans les deux sous-cas : t ∈ D(W′), ou t, y₁, y₂ distincts.
+  - Globalement : Σ doubles = 42 − Σn_s − 2N₂₁, cohérent avec la dichotomie.
+  - Pas de contradiction. Proposé : classification locale de Q ∪ W′, à confier éventuellement à Astra.
 
