@@ -779,3 +779,13 @@
     Mais « lointain » = tout le reste du graphe : ce n'est plus un problème local.
 - **q:7, bloc A** : la droite-bloc est toujours de rang 18 et de signe +1, donc g⁻ = 20. C1 le confirme : bloc plein ⟹
   τ = η, det Q_c = 3⁶, et K_c est anisotrope de dimension 2.
+- **Sol, rapport « Wagner »** (astra/RAPPORT_SOL_WAGNER.md). Le lemme « six ou sept blocs » a été relu et il est juste
+  (H = C₄ + C₄, h_c ≤ 2, a + l = 8). Les 25 certificats à six blocs sont plausibles mais non refaits.
+  **La cible est dépassée** : les vecteurs de norme ≤ 10 n'étaient forcés qu'à g⁻ = 12, déjà exclu, et le tout est
+  conditionnel à P = 0.
+- **Feuille de problèmes pour Sol et Astra** (astra/PROBLEMES_OUVERTS_INVOLUTION.md), trois énoncés autonomes :
+  - exclure g⁻ = 16 ;
+  - le réseau de det 49 à g⁻ = 20 ;
+  - l'étoile totalement libre (μ ∩ τ = ∅), qui est le cœur commun de tous les résidus.
+- Coupes PSD d'orbite (𝒫² = 14𝒫 exact, via 0 ⪯ 𝒫 ⪯ 14I et ‖𝒫‖² = 2940) sur « tout dd » : pas de convergence en
+  85 tours. La compression Sym au niveau paires n'apporte rien.
