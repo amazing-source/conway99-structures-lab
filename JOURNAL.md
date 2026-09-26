@@ -172,4 +172,14 @@
     (qui ne les utilise pas), puis corrigées dans le générateur et dans le fichier.
   - Messages : à C2 (identité d'orbites, réponses à ses 3 questions sur les mélanges, transmission du repère ajusté de
     C1) et à C1 (même objet que W14 ; raffinement sans symétrie par cellules antipodales).
+- S20 : C1 a appliqué les cellules antipodales (S19) à son cadre sans symétrie. Résultats : 10 survivants sur 11
+  infaisables, et le témoin de Fano tendu aussi.
+  - Sa demande : vérifier le certificat du témoin. `scripts/verify_c1_cells.py` le fait avec du code propre, sans
+    import de C1.
+  - Résultat : spéciaux identiques et symétriques ; 4 spéciaux distincts par paire ; types = énumération propre (0
+    écart, 0 doublon, 8 génériques chacun) ; découpages complets ; 29 652 lignes reconstruites depuis leur nom,
+    identiques à A et b ; Farkas reconstruit = 75 381 256 (échelle 10⁶), égal à sa valeur.
+  - VALIDE, rapporté à C1. Durée 90 s, en parallèle du lot d'orbites (calcul léger).
+- Lot des 13 classes lancé (accord de l'utilisateur, « Lancer les 13 classes ») : `scripts/run_orbit_batch.sh`, une
+  classe à la fois. zero13 est CERTIFIÉ au tour 5 (106 s, écart 21,4).
 
