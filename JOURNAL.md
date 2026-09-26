@@ -813,3 +813,24 @@
   - Nouveaux outils : (★), l'identité Alt entre frères, rang K ≤ 14.
   - **Verrou unique identifié** : le bloc sans classe fermée, dont l'étoile totalement libre est le cas extrême. Test q:7 + RSF de
     C1 lancé sur A111111 (3,3) : le 1er φ est inconnu à 5 min.
+
+## 26-27/09, nuit : A33 mort, g⁻ ≠ 16, famille ancrée morte, bloc plein (NOTE_S29)
+- **Balayage AD** : confié au cloud de C2 (477c3dd, ad/HANDOFF_AD_SWEEP.md). Rien de lourd sur le portable.
+- **Sol, A111111 (3,3)** (c2-experimental 9415b71) : le signe de Witt est relu et JUSTE.
+  - Le bloc local est de rang 14, et ses 4389 mineurs 14 × 14 non singuliers sont tous des carrés, donc il est non scindé.
+  - dim U = 18 − r₀ ; énergie 3‖ψ‖²/2 re-dérivée.
+  - C2 a revérifié les 15 certificats (r₀ ≤ 1). **A33 est MORT.**
+- **Lemme de Witt général** (retombée transmise à C1) : g ≥ 18 + t − 2r₀ + 2·[boule réduite non scindée].
+  - C1 en tire **g⁻ ≠ 16** (notes/132). Je relis les trois points : décomposition de rang, Witt, (i)–(iii) en tout bloc.
+    Ils tiennent.
+  - C1 ne suppose pas P = 0 : son énumération couvre tous les couples (τ, η). **g⁻ ∈ {18, 20}.**
+- **3K₂, étape 1** (C1 notes/131 §7 bis) : je ré-implémente indépendamment les 24 cas (2,0).
+  - Résultat : 0 couple compatible, 1664 options, 2048 perm–perm ; sans canonisation de k, toujours 0.
+  - Avec les 24 certificats de C2, **toute la famille ancrée Σ ≠ ∅ est morte**.
+- **Bloc plein** (NOTE_S29) :
+  - aucune annulation d'ombre ; K₂ et K₃ valent en tout bloc ;
+  - une orbite ancrée est rigide ⟺ une étiquette par bloc hors de sa paire ;
+  - équations linéaires exactes (E1), (E2) sur T_FF ; spectre exact 3⁹(−4)⁴(−1)⁵(−2)⁶1⁶ ; |r_f|² = (14 + y − 3x)/15.
+  - Le modèle local Φ (HiGHS, CP-SAT) est inconnu à 4-5 min. Seule donnée ferme : aucun Φ n'est équivariant sous la rotation
+    d'ordre 6, en 26 s.
+  - Un bloc plein force g = 20, donc à g = 18 il n'y a ni bloc plein ni résidu AD.

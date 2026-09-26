@@ -1,0 +1,2 @@
+D-cycles [(0, 1, 5, 2, 4, 3)] | anchored far pairs 8 | variables 45696 | rows 378 | build 0s
+solve 0 unknown(1) 201s
