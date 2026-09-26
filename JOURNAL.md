@@ -677,3 +677,12 @@
     entre blocs).
   - Littérature : Aut ∈ {1, Z₂, Z₃}.
   C'est là que la vérification indépendante et l'aide théorique à C2 rapportent le plus maintenant.
+- **Remarque de C1, pour Astra plus tard.** Sous NT, à k = 20, on a ρ(L) = c − 3 − t. Toute droite à exactement 3
+  composantes ((4,4,4), (2,4,6) ou (2,2,8)) a donc ρ = 0 et t = 0 : elle est construction-complète comme une droite
+  générique à k = 22. La machinerie de l'étoile s'y applique, avec :
+  - le Green de la boule à 3 composantes (pseudo-inverse sur le complément d'un radical de dimension 5) ;
+  - un équilibre qui fixe les ombres par composante.
+  C'est le test naturel si le calcul est rouvert. Aucune action pour l'instant.
+- **Décision de l'utilisateur (26/09, soir) : C1 et « structures » passent à fond sur la branche C2** (involution),
+  pour viser Aut(Γ) = 1 avec C3. Messages de coordination envoyés à C2 (inventaire demandé) et à C1 (mise en pause du
+  programme 7-adique).
