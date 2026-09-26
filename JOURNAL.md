@@ -789,3 +789,27 @@
   - l'étoile totalement libre (μ ∩ τ = ∅), qui est le cœur commun de tous les résidus.
 - Coupes PSD d'orbite (𝒫² = 14𝒫 exact, via 0 ⪯ 𝒫 ⪯ 14I et ‖𝒫‖² = 2940) sur « tout dd » : pas de convergence en
   85 tours. La compression Sym au niveau paires n'apporte rien.
+
+## 26/09, fin de soirée : où en est C2 (hier / ce matin / maintenant)
+- **Hier (25/09).**
+  - Morts : « tout frère » (Th. D), N ≤ 6 arêtes, le modèle de Fano, et toutes les configurations ancrées (queue, 25.3).
+  - Ouverts : « tout tordu », M1 n = 5 et 6, 47 classes de mélanges, 9 motifs Σ ≠ ∅, et la famille dis (sans outil).
+- **Ce matin.**
+  - « Tout tordu » fermé.
+  - AD2 : 14 survivants après la queue.
+  - g⁻ pair et ≤ 20.
+- **Maintenant.**
+  - AD :
+    - les 14 survivants AD2 sont morts à la main (T⁺, relu par C1) ;
+    - toutes les classes jusqu'à n_dd = 6 sont mortes ;
+    - il reste des résidus riches en dd, tous avec un bloc A (donc g⁻ = 20), envoyés au modèle U de C2.
+  - M1 n = 6 est fermé ; n = 5 n'a plus qu'un job.
+  - Mélanges : le filtre par paires certifié tue 80 à 100 % des feuilles, et C2 en a une réimplémentation à 0,2 s par feuille.
+  - Motifs (C1) :
+    - P₅, 2P₃, P₃, P₄ et P₃+K₂ sont morts ;
+    - K₃ passe de 216 à 21 ;
+    - la queue vaut aussi pour Σ ≠ ∅, ce qui rebranche v6.
+  - q:7 : g⁻ ∈ {16, 18, 20} ; bloc A ⟹ g⁻ = 20.
+  - Nouveaux outils : (★), l'identité Alt entre frères, rang K ≤ 14.
+  - **Verrou unique identifié** : le bloc sans classe fermée, dont l'étoile totalement libre est le cas extrême. Test q:7 + RSF de
+    C1 lancé sur A111111 (3,3) : le 1er φ est inconnu à 5 min.
