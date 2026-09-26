@@ -277,4 +277,13 @@
   - une dichotomie exacte par paire, tirée de l'identité des sœurs : n_s = 0 ⇒ soit 2 doubles (1,1), soit 0 double
     et un seul (2,1).
   Je n'ai pas de borne sur n_dis.
+- Question de C2 : pour un carré « dis », φ_u(R_D) vaut-il 2 ou 3 (profil (2,0) ou (2,1)) ? Son lemme 11.2 (= 2) n'a pas
+  de preuve écrite.
+  - Exemple réel : BvLS avec σ = −v n'a que des carrés « frère » (110/110). Aucun cas dis à observer
+    (`scripts/dis_squares_real.py`, exploration de quelques secondes).
+  - Les identités par paire (Σφ = 24, Σφ² = 32 − 2n_s) admettent les deux cas : (2,1) donne 9 + 4 + 19 = 32, (2,0)
+    donne 4 + 4 + 8 + 16 = 32.
+  - Dans le cas (2,1) : les 4 racines de R forment un stable ; voisins communs (w,w′) = {(k,γ), u} ; U est l'unique
+    orbite qui voit W et W′ ; D(W′) ne voit pas W ; u a deux voisins supplémentaires v₁ ≠ v₂ hors de R.
+  - Non tranché. J'attends de C2 les énoncés exacts de ses lemmes d'apex et d'équilibre (note 39).
 
