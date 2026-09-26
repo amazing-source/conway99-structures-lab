@@ -398,4 +398,15 @@
 - Argument de C2 (« le voisin libre de pivot j est exclu par F1 + couplage ») : juste pour les solutions entières.
   En fractionnaire, le couplage se compense en moyenne (poids ½ sur des colonnes où D(F) = Z). La relaxation est donc
   plus faible mais valide. Règle explicite suggérée si un PL reste faisable.
+- **Rapport d'Astra sur le dossier n° 3** (transmis à C1) :
+  - **Q2 : oui.** Témoin explicite de rang 8 (σ_c(d_t) = ρ^t_c(d)_{1−t}, avec g = (0 1)(4 6), tous les retournements
+    à 1). Il satisfait F5, P-Ψ, l'admissibilité (7 × C12) et toutes les identités de bloc (P2 prouvée par
+    Q² + Q = 12I + 8J − 2DᵀD). Donc « P-Ψ + admissibilité » n'est **pas** un lemme de Fano complet.
+  - Ce témoin, et toute sa famille (deux factorisations par parité), meurt par un certificat de bornes ordonnées au
+    niveau paire × bloc : 6 > 5 en y = {0.0, 2.0}, R = {0,1}, pour tout τ admissible.
+  - L'outil général des bornes ordonnées (pairblk + choix de g_y(B) sommets distincts) est **vérifié**.
+  - **Théorème (vérifié à la main)** : un revêtement de K₇ avec λ = 1, μ ≤ 2 et sans prisme a un degré ≥ 5. Le degré 3
+    est exclu parce que la multiplicité vaudrait 42/5. À P = 0, le graphe auxiliaire H du Fano tendu a des
+    composantes de degrés 12, 5 + 7 ou 6 + 6.
+  - Ouvert : un Fano tendu qui satisfait aussi toutes les bornes ordonnées.
 
