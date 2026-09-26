@@ -1,0 +1,6 @@
+09:37:52  START pid=5204 RAM cap=3500MB commit cap=10000MB timeout=1800s minfree RAM=2000MB commit=3000MB | avail RAM=5928MB commit=12451MB | "C:/home/researcher/AppData/Local/Python/pythoncore-3.14-64/python.exe" scripts/verify_c1_pairblock.py C:/home/researcher/Desktop/c1_experimental/data/x19q_cert_seed11_0_pb
+09:38:22  running 30s  RAM 122MB (max 122)  commit 702MB (max 702)  | machine: RAM avail 5364MB, commit headroom 7804MB
+09:38:52  running 60s  RAM 125MB (max 125)  commit 705MB (max 705)  | machine: RAM avail 4628MB, commit headroom 6954MB
+09:39:22  running 90s  RAM 128MB (max 128)  commit 708MB (max 708)  | machine: RAM avail 4626MB, commit headroom 6966MB
+09:39:52  running 120s  RAM 178MB (max 178)  commit 758MB (max 758)  | machine: RAM avail 5029MB, commit headroom 7432MB
+09:40:03  END exit=0 time=131s max RAM=178MB max commit=758MB peak commit=758MB (RAM cap 3500MB, commit cap 10000MB)

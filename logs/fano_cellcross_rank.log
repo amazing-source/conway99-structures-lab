@@ -1,0 +1,25 @@
+Fano lines from tau: [[0, 1, 3], [0, 2, 6], [0, 4, 5], [1, 2, 4], [1, 5, 6], [2, 3, 5], [3, 4, 6]]; consistent for both labels: True; Fano plane: True
+block counts solved uniquely, integral, >= 0 for 84/84 pairs (failures 0)
+controls: sum_R c_R(z) distribution {12: 84}; internal edges 0; block balance True
+block 01: 24 unknowns, rank A = 16, rank [A|b] = 16
+block 02: 24 unknowns, rank A = 16, rank [A|b] = 17
+block 03: 24 unknowns, rank A = 16, rank [A|b] = 17
+block 04: 24 unknowns, rank A = 16, rank [A|b] = 16
+block 05: 24 unknowns, rank A = 16, rank [A|b] = 17
+block 06: 24 unknowns, rank A = 16, rank [A|b] = 16
+block 12: 24 unknowns, rank A = 16, rank [A|b] = 16
+block 13: 24 unknowns, rank A = 16, rank [A|b] = 16
+block 14: 24 unknowns, rank A = 16, rank [A|b] = 16
+block 15: 24 unknowns, rank A = 16, rank [A|b] = 16
+block 16: 24 unknowns, rank A = 16, rank [A|b] = 16
+block 23: 24 unknowns, rank A = 16, rank [A|b] = 17
+block 24: 24 unknowns, rank A = 16, rank [A|b] = 17
+block 25: 24 unknowns, rank A = 16, rank [A|b] = 17
+block 26: 24 unknowns, rank A = 16, rank [A|b] = 16
+block 34: 24 unknowns, rank A = 16, rank [A|b] = 17
+block 35: 24 unknowns, rank A = 16, rank [A|b] = 17
+block 36: 24 unknowns, rank A = 16, rank [A|b] = 17
+block 45: 24 unknowns, rank A = 16, rank [A|b] = 16
+block 46: 24 unknowns, rank A = 16, rank [A|b] = 16
+block 56: 24 unknowns, rank A = 16, rank [A|b] = 16
+blocks whose cellcross system is inconsistent even without bounds: ['02', '03', '05', '23', '24', '25', '34', '35', '36']

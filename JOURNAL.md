@@ -228,4 +228,14 @@
     reconstruites depuis leur nom sans aucun écart ; les 124 477 colonnes s sont complètes (toutes les parties de
     taille t[R]) ; le Farkas reconstruit vaut 147 842 015 (échelle 10⁶), égal à celui de C1 ; 147 s, 177 Mo
     (`logs/vpb_seed21_1.log.out`).
+- Obstruction de rang de C1 (cellcross au Fano tendu), **recalculée avec mon propre code**
+  (`scripts/fano_cellcross_rank.py`, `logs/fano_cellcross_rank.log`), sans lire le script x25 de C1 :
+  - données : droites de Fano lues sur τ (un plan de Fano, identique pour les deux étiquettes de chaque classe) ;
+    spéciaux depuis τ et σ ;
+  - comptes par bloc c_R(z) : résolus par les comptes de familles tendues 2/1/3 et les équations de fente 4. Solution
+    unique, entière et ≥ 0 pour les 84 paires. Contrôles : Σ = 12, 0 arête interne, équilibre des blocs ;
+  - systèmes cellcross découplés par bloc, 24 inconnues : rang(A) = 16 pour les 21 blocs, et rang[A|b] = 17
+    exactement pour 02, 03, 05, 23, 24, 25, 34, 35, 36. **Identique à C1.**
+  - Remarque : les 6 blocs qui contiennent la classe 1 sont tous cohérents.
+- Autres vérifications : paire × bloc seed11#0 VALIDE (78 879 lignes, 0 écart, Farkas 168 240 155).
 
