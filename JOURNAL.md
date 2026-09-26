@@ -475,4 +475,9 @@
   explicite. Le §3 du suivi était imprécis ; signalé à l'utilisateur.
 - Règle de l'utilisateur : une fois un dossier transmis à Astra, ne lui renvoyer que les nouveautés (fichier de suivi),
   jamais une version refaite du dossier.
+- Suivi n° 2 du dossier n° 5 pour Astra : la version réelle du complément de Schur lointain de C1 (notes/124).
+  - Énoncé : Φ_F = −7Π, avec Π le projecteur sur K₋₄(L), de dimension 7 + c.
+  - Vérifié à la main : sur K₋₄(L), A_BF f_F = 0, d'où Φ_F f_F = −7 f_F ; les dimensions se referment à 60.
+  - Conséquence : A_F = 3I + NᵀRN − 7Π, donc (3I + NᵀRN − A_F)/7 est un projecteur de rang 7 + c. Ses mineurs principaux
+    donnent un filtre réel sur les lointains.
 
