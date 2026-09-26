@@ -86,3 +86,22 @@ Sur de vrais graphes avec l'involution x ↦ −x, la formule « rang + excès_p
   - (b) g⁻ = 18, avec toutes les droites-blocs génériques de signe −1 ;
   - (c) g⁻ ≤ 16, avec toutes les droites-blocs de rang ≤ g⁻, ce qui est rare localement (~1,5 % des configurations
     aléatoires ont un rang ≤ 16).
+
+## 8. Mise à jour du 26/09, soir : g⁻ ∈ {16, 18, 20}
+**Astra, dossier 6** (relu : `astra/RAPPORT_ASTRA_DOSSIER6.md`).
+- min Λ₋₄⁻ ≥ 8 : preuve combinatoire, avec D² = 2I + 2J et 4 blocs contre Cb = −3a.
+- det L_T = 2¹²·7^{g⁻−7}.
+- Blichfeldt exclut g⁻ = 8 (rang 22) et g⁻ = 10 (L_T, rang 15).
+- Réduction à un N_max de déterminant 49, à discriminant anisotrope.
+
+**C1, recoupé par nous** (`involution/blockline_exhaustive.py`, `blockline_t4_digons.py`).
+- **t_c = dim ker Q_c ≤ 4**. On énumère les 11 classes de τ et les 10 395 ι sans point fixe (ι = mate∘ρ est sans point fixe
+  par F0). Histogramme des rangs de la droite-bloc : {14 : 800, 15 : 124, 16 : 11 363, 17 : 15 691, 18 : 86 367}.
+- Les rangs 14 sont exactement les cas où τ a 2, 4 ou 6 digones avec mate et ι aucun.
+- Cohérence : ι_c a un digone en d ⟺ τ_d a un digone en c. C'est la même arête : une racine voisine de sa sœur qui partage (d,s).
+- Donc g⁻ = 14 est impossible : tous les blocs seraient de rang 14, un digone de τ_c en d forcerait ι_d à en avoir un en c,
+  et le bloc d aurait un rang ≥ 15.
+
+**Bilan : g⁻ ∈ {16, 18, 20}.**
+- g⁻ = 16 exige de la torsion équilibrée dans les 7 blocs, par g⁻ = 18 + t_c − 2r₀_c + ρ_c.
+- 18 et 20 demandent de l'information globale.
