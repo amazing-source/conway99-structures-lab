@@ -431,4 +431,12 @@
   - Σ c_v(R) = 5 se ferme automatiquement dans les deux sous-cas : t ∈ D(W′), ou t, y₁, y₂ distincts.
   - Globalement : Σ doubles = 42 − Σn_s − 2N₂₁, cohérent avec la dichotomie.
   - Pas de contradiction. Proposé : classification locale de Q ∪ W′, à confier éventuellement à Astra.
+- Campagne orbite de C2, premières réponses : beaucoup d'orientations restent faisables avec D entièrement libre
+  (classe 2 job 6, papillon job 10, M1 n = 5 job 10, M1 n = 6 jobs 11 et 12). C2 compare deux découpages sur M1 n = 6
+  job 12 : branchement sur le partenaire D de l'orbite la plus étalée, contre union par feuilles.
+- Lignes proposées à C2 pour resserrer la racine :
+  - équilibre étiquette au niveau orbite : Σ_{Z : c ∈ paire(Z)} q_Z(W) = 4 (210 lignes) ;
+  - unicité du partenaire D en ligne : la masse des colonnes qui mettent 2 sur W vaut 1 (42 lignes) ;
+  - la règle explicite « voisin libre en j de pivot ≠ j ».
+  - C2 intègre aussi mes filtres de colonnes dis (rigidité aux blocs k et l).
 
