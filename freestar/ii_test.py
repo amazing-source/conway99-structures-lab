@@ -38,7 +38,11 @@ def solve_ii(mu, tau, tl=120):
     v = np.array(vals, float)
     res = milp(np.zeros(n * n), constraints=[LinearConstraint(A, v, v)], integrality=np.ones(n * n), bounds=Bounds(0, 1),
                options={'time_limit': tl})
-    return {0: 'feasible', 2: 'INFEASIBLE'}.get(res.status, 'unknown(%d)' % res.status)
+    if res.status == 0:
+        X = np.round(res.x).reshape(n, n)
+        sol = {str(list(far[i])): list(nonmu[int(np.argmax(X[i]))]) for i in range(n)}
+        return 'feasible', sol
+    return {2: 'INFEASIBLE'}.get(res.status, 'unknown(%d)' % res.status), None
 rng = random.Random(int(sys.argv[1]) if len(sys.argv) > 1 else 1)
 from collections import Counter
 cnt = Counter(); t0 = time.time()
@@ -47,7 +51,14 @@ for t in range(int(sys.argv[2]) if len(sys.argv) > 2 else 5):
         mu, tau = rand_fpf(rng), rand_fpf(rng)
         if any(mu[b] == tau[b] for b in L): continue           # fully free
         break
-    r = solve_ii(mu, tau)
+    r, sol = solve_ii(mu, tau, tl=float(sys.argv[3]) if len(sys.argv) > 3 else 120)
     cnt[r] += 1
     print(t, r, '%.0fs' % (time.time() - t0), flush=True)
+    if sol is not None:
+        import json
+        json.dump({'labels': 'i in 0..11: block i//2, sign (+ if i even); sigma(i) = i^1',
+                   'mu': {str(k): v for k, v in mu.items()}, 'tau': {str(k): v for k, v in tau.items()},
+                   'Phi (far root -> non-mu pair)': sol, 'satisfies': '(i) and (ii) only; (iii) NOT imposed'},
+                  open('etl_phi_i_ii_%d.json' % t, 'w'), indent=1)
+        print('saved etl_phi_i_ii_%d.json' % t, flush=True)
 print(dict(cnt))
