@@ -480,4 +480,10 @@
   - Vérifié à la main : sur K₋₄(L), A_BF f_F = 0, d'où Φ_F f_F = −7 f_F ; les dimensions se referment à 60.
   - Conséquence : A_F = 3I + NᵀRN − 7Π, donc (3I + NᵀRN − A_F)/7 est un projecteur de rang 7 + c. Ses mineurs principaux
     donnent un filtre réel sur les lointains.
+- C2 : **𝒫(Q̄) ⪰ 0 est impliqué par le PL au niveau orbite**, et je l'ai vérifié.
+  - M₂ + Q̄ = R et M₂ − Q̄² = Σ Cov ⪰ 0, donc Q̄² + Q̄ ⪯ R.
+  - Q̄ préserve span(Nb), et spec(Q̄) ⊂ [−4, 3] sur le complément.
+  - L'outil d'Astra ne vaut donc que comme filtre exact sur des squelettes, et C2 garde les filtres dis.
+  - C2 teste un modèle au niveau racine (signé, S² + S = 12I − CCᵀ) sur M1 n = 6 job 12, avec environ 11 M colonnes
+    implicites.
 
