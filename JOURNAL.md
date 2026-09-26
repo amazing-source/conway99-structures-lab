@@ -559,3 +559,25 @@
   - **Correction de ce que j'avais dit à l'utilisateur.** L'objectif de phase 1 du PL racine (job 12) est passé de 18,4
     (itération 29) à 8,4 (itération 33). La génération de colonnes n'a pas convergé, et un objectif positif en cours de
     route ne prouve rien. Seule une convergence avec un objectif > 0 et un certificat vérifié serait une infaisabilité.
+- **notes/125 de C1 (Σ_L c₄(G(L)) = S + 3P et Σ_L c₃ = 2P ; lemme de Klein) : TIENT.**
+  - Classement des 4-cycles refait à la main, ainsi que la bijection (prisme, barreau) ↔ cycle et Σ_L S(L) = 2S.
+  - **Contrôle positif sur les vrais membres de la famille** (`famille/control_c1_note125.py`) :
+    - H(2,3) : 12 = 2P et 18 = 3P ;
+    - BvLS : 17 820 = 2·8 910 et 26 730 = 3·8 910, avec S = 0 calculé par la définition.
+  - Réponse à la question de C1 : ses échantillons « S = 0 » n'imposaient que σ ≠ v̄. On y compte 1 à 13 événements
+    σ = τ_u et 2 à 12 événements σ = τ_ū par configuration (`scripts/count_S_events_c1_samples.py`). Seul le témoin de
+    Fano est à S = 0 au sens complet.
+- **Programme « famille » (demande de l'utilisateur : étudier à fond les graphes à 9 et 243 sommets, chercher une règle
+  qui échoue à 99, voire un nouveau membre).** Démarré dans `famille/`.
+  - H(2,3) et BvLS construits (Cayley sur F₃ⁿ ; code de Golay vérifié : dimension 6, distance 5).
+  - Invariants de C1 et C2 calculés sur les deux graphes (`famille/family_invariants.py`) :
+    - l'holonomie de chaque droite est triviale ;
+    - P = P_max = L(m − 1), soit 6 et 8 910 ;
+    - 100 % de points de Hamming ;
+    - rang₃(A − rI) = 4 et 67 ;
+    - forme de Smith 3-adique de A − 4I (BvLS) : 1^67 3^34 9^10 0^132.
+  - Les deux graphes sont à l'extrême « torsion nulle ». Or tous les lemmes de C1 (L8, L16…) excluent justement ce
+    côté à 99. Les graphes connus ne renseignent donc pas sur le régime fortement tordu, où vivrait un Γ.
+  - Observation arithmétique : l'écart des valeurs propres vaut t = √(8m − 7), et t divise 63. Les membres qui
+    existent ont t ∈ {3, 9}, les trois cas ouverts ont t ∈ {7, 21, 63}, c'est-à-dire exactement 7 | t.
+  - Recherche bibliographique en cours (agent) : unicité du srg(243,22,1,2) et méthode de preuve.
