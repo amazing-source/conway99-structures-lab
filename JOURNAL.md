@@ -698,3 +698,12 @@
     droite-bloc est générique.
   - **Cible** : g⁻ ≥ 21 (structure lointaine), ou exclure g⁻ ∈ {18, 20}.
   - sympy installé à la demande de l'utilisateur (1.14.0).
+- **Signe local à g⁻ = 18** (NOTE_S27 §7) : toute droite-bloc générique doit avoir le signe −1. La configuration non
+  tordue donne +1, ce qui est cohérent avec L7 de C1.
+- **Reformulation en réseau** : N, de Gram 3I − S, est entier, défini positif, de rang 22 et de déterminant
+  7^{22−g⁻}. Il est engendré par 42 vecteurs de norme 3 (produits dans {0, ±1}, 10 non nuls chacun), avec
+  3u_c + Σ u_o = 0 et |u_c|² = 4. À g⁻ = 20, det = 49 ; à g⁻ = 18, det = 7⁴.
+- **Dossier n° 6 pour Astra** (`astra/DOSSIER6_INVOLUTION_7ADIQUE.md`, envoyé à l'utilisateur) : exclure g⁻ = 18 et
+  g⁻ = 20, ou prouver g⁻ ≥ 21.
+- **C2** : son pipeline ne produit pas de S entière. Le rang₇ servira de filtre dans les recherches entières (cas dis)
+  ou de théorème global.
