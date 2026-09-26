@@ -1,0 +1,2 @@
+PASCH (control, must be infeasible): 834 columns; without P2: LP False, IP False ; WITH P2: LP False, IP False  [2 s]
+sample 0: 5736 columns; without P2: LP True, IP None ; WITH P2: LP False, IP False  [51 s]

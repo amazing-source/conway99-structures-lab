@@ -99,3 +99,19 @@
     et un 6-cycle force P à 3 voisins.
   - Conséquence : H = H-β. Il n'y a aucun bloc α, par 28.5 (paire ancrée, dans les deux sens) ou par 30.1 (paire
     tordue).
+- 26/09. L'utilisateur : « toi poursuis pour le moment ». Je comprends : pas de gros calcul de mon côté, je continue
+  par les maths et des tests de 5 min au plus. C2 a obtenu dans sa propre session une recherche plafonnée à 3 h sur
+  H-β.
+- S15, modèle de configurations. Chaque orbite choisit (paire de voisins, solution locale exacte), ce qui fait 5 700
+  à 6 100 colonnes par décomposition à 1 triangle. Toute valeur val_Z(Q) devient une constante de la colonne, donc
+  (P2) devient linéaire, et le PL est bien plus serré que la linéarisation de McCormick.
+  - Résultats (tests courts) :
+    - témoin, triangle de triangles : infaisable ;
+    - échantillon 0 (3,4,4,5,5) : faisable sans (P2), **PL infaisable avec (P2)** ;
+    - échantillon 1 (3,4,4,4,6) : **PLNE infaisable avec (P2)** en 7 s ;
+    - échantillon 2 : PL faisable avec (P2), PLNE indécise en 110 s. Les types en plus rendent le PL trop lent.
+  - Certificat de Farkas pour l'échantillon 0 : 162 lignes (P2), 62 de couplage, 18 PPE, 48 de cycle, poids
+    fractionnaires. La contradiction est globale, d'allure spectrale : pas de lemme court visible.
+  - Lecture : le second ordre mord là où le premier ordre (PPE, couplage, signe) ne mordait pas. Une preuve à la main
+    demandera un principe spectral par blocs (compressions de Rayleigh de C1 sur les 21 paires), pas une chasse aux
+    doubles.
