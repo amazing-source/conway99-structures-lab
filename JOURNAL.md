@@ -541,3 +541,14 @@
   - Plantage latent l. 74 : reshape(0, −1) sur un ensemble lointain vide.
   - Réserve : un EVEN = 1 infaisable ne prouverait pas un bug. En effet symP et symM restent séparées, et le 2/2 signé
     est plus fort que les sommes orbitales.
+- **Suivi n° 3 du dossier n° 5 envoyé à l'utilisateur pour Astra** (`astra/SUIVI3_DOSSIER5.md`). C1 a choisi les tâches.
+  - Contenu : le rapport d'Astra est vérifié, et MR = 0 est automatique, ce qui fait de k = 24 un problème de
+    construction complet.
+  - **Tâche principale (a)** : rendre uniforme l'obstruction de l'étoile à k = 22.
+    - Motif exact de l'étoile de u (sans prisme par u) : 2 apex isolés, et un couplage parfait par a = 1 des 8 autres
+      lointains, avec l'égalité Σ_{w≠v} a = 1 − (Bn_v)_u.
+    - La somme en étoile est automatique mod 7 (C1, revérifié), donc l'obstruction est dans les valeurs par paire.
+  - **Tâche secondaire (b)** : le cas où toutes les droites sont dégénérées. Fait de C1 : si G(L) a c composantes,
+    alors rang_Q(A_B − 3I) = 38 − c et d(L) ≥ c. Contrôlé en calcul exact (`scripts/check_c1_disconnected_degenerate.py`)
+    sur la boule d'Astra (d = c = 1) et sur des boules (4,4,4), (6,6), (4,8) (d = c).
+  - (c), la strate (4,4,4), reste chez C1.
