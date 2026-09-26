@@ -358,4 +358,11 @@
     donc de la partie orbite.
   - J'ai relu son expansion : (a) exclusions des voisins libres (F1, pivot j, orbites distinctes), (b) aucune paire
     lointaine ne contient D(Z), (c) Sh = 2 pour les sœurs. Tout est juste.
+- **Lemme des différences de retournement de C1 : VÉRIFIÉ à la main.**
+  - L'application de retour de T sur les 4 paires de AB est affine sur F₂², de partie linéaire M(d).
+  - Poids 1 : M d'ordre 3 (x² + x + 1), un point fixe, donc un τ-triangle : inadmissible.
+  - Poids 3 : M = I, donc C6+C6. Poids 0 ou 2 : transvection, donc C12.
+  - Parties de Fano qui rencontrent chaque droite en 0, 2 ou 3 points : ∅, le complémentaire d'une droite, le
+    complémentaire d'un point, ou le plan entier.
+  - Addendum 2c envoyé à l'utilisateur pour Astra.
 
