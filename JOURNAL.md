@@ -552,3 +552,10 @@
     alors rang_Q(A_B − 3I) = 38 − c et d(L) ≥ c. Contrôlé en calcul exact (`scripts/check_c1_disconnected_degenerate.py`)
     sur la boule d'Astra (d = c = 1) et sur des boules (4,4,4), (6,6), (4,8) (d = c).
   - (c), la strate (4,4,4), reste chez C1.
+- **C2 a appliqué mes deux correctifs** : far_sets vide rend zeros((0,8)), et symP et symM sont fusionnées en mode EVEN.
+  - « Pas la sœur » vise la sœur de Z. F_π sœur de F_m sur {j,c} est voulu : c'est un double proche (1,1).
+  - **Résultat négatif de C2** : le système A-local signé reste faisable pour les 4 types de D_A (6-cycle, 4+2, 3+3,
+    2+2+2). Il n'y a donc pas de lemme purement local « pas de bloc A », même avec les signes.
+  - **Correction de ce que j'avais dit à l'utilisateur.** L'objectif de phase 1 du PL racine (job 12) est passé de 18,4
+    (itération 29) à 8,4 (itération 33). La génération de colonnes n'a pas convergé, et un objectif positif en cours de
+    route ne prouve rien. Seule une convergence avec un objectif > 0 et un certificat vérifié serait une infaisabilité.
