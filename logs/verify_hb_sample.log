@@ -1,0 +1,10 @@
+coverage: 552 classes regenerated, 7680 skeletons; same classes as the records: True; multiplicities equal: True
+record 3 (mult 14): 8648 columns (record says 8648); y^T b = 118.738, UB <= 0.000, LB >= -50262.6 -> VALID
+record 27 (mult 14): 8520 columns (record says 8520); y^T b = 95.734, UB <= 0.000, LB >= -47755.3 -> VALID
+record 230 (mult 14): 8472 columns (record says 8472); y^T b = 110.697, UB <= 0.509, LB >= -46920.5 -> VALID
+record 464 (mult 14): 8436 columns (record says 8436); y^T b = 93.877, UB <= 2.000, LB >= -48064.8 -> VALID
+record 489 (mult 14): 8484 columns (record says 8484); y^T b = 117.179, UB <= 1.000, LB >= -44797.3 -> VALID
+record 47 (mult 14): 8520 columns (record says 8520); y^T b = 93.242, UB <= 0.000, LB >= -45823.0 -> VALID
+record 336 (mult 14): 8496 columns (record says 8496); y^T b = 101.487, UB <= 0.000, LB >= -44019.2 -> VALID
+record 255 (mult 14): 8416 columns (record says 8416); y^T b = 97.087, UB <= 2.501, LB >= -49992.0 -> VALID
+8/8 certificates valid (independent reconstruction)

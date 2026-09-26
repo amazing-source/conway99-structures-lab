@@ -135,3 +135,9 @@
     est estimé à des heures ; arrêt dans le plafond, décision requise.
   - Erreur relevée dans mon message à l'utilisateur, corrigée aussitôt : 84 certificats et non 83 ; 5 classes à
     branchement, avec 74 certificats, et non 4 classes avec 69.
+- Contre-vérification indépendante de H-β (C2), par échantillon, avec `verify_hb_independent.py` : code propre, écrit
+  d'après la seule description de C2.
+  - Couverture : 552 classes régénérées (7 680 squelettes), identiques aux enregistrements, multiplicités égales.
+  - 8 certificats tirés au hasard : 8/8 valides.
+  - Mon nombre de colonnes est exactement celui de C2 sur chaque enregistrement testé.
+  - Les 552 complets coûteraient environ 4,5 h : non lancé, accord de l'utilisateur requis.
