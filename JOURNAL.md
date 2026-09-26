@@ -257,4 +257,13 @@
   - Conséquence : **toute configuration de Fano tendu doit vérifier I_R = 0 pour les 21 blocs** (condition
     nécessaire exacte, sans PL). Le lemme « aucun sommet de Fano tendu » revient à l'incompatibilité de ces 21
     conditions avec le modèle.
+- 26/09, consigne de l'utilisateur relayée par C1 : **arrêt des solveurs, retour aux mathématiques pures** (C1 et C2 ;
+  j'applique aussi, rien ne tourne chez moi).
+- C1 : le Ψ évitable par les retournements (480 réglages avec le σ du témoin satisfont les 21 conditions I_R = 0) ; la
+  relaxation locale par bloc ne tue que les 9 blocs du témoin ; x22 indéterminé. La tâche « lemme Fano » proposée pour
+  Astra est donc caduque (réponse négative), ce que j'ai signalé à l'utilisateur.
+- S21 (maths pures) : preuve à la main de l'item 1 de C1 (NOTE_S21). Forme close des comptes génériques au Fano tendu
+  (contrôle arithmétique 168/168), puis trois positions relatives.
+- Idée « commutant » testée pour une tâche à Astra : dim{w : [A, L_w] = 0} = nombre de composantes de K sur Paley(9) (6)
+  et BvLS (11). Rien de plus que les indicatrices de composantes ; piste close.
 
