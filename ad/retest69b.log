@@ -3,3 +3,6 @@ rep 10987 n_dd 8 free blocks [6] structures 130 alive 12 unknown 4 685s [([(0, 5
 rep 12898 n_dd 8 free blocks [6] structures 130 alive 0 unknown 0 32s []
 rep 12993 n_dd 8 free blocks [6] structures 130 alive 4 unknown 0 86s [([(0, 2, 3, 4, 1, 5)],), ([(0, 2, 4, 3, 1, 5)],)]
 rep 13359 n_dd 8 free blocks [6] structures 130 alive 11 unknown 4 618s [([(0, 1, 2, 3, 4, 5)],), ([(0, 1, 3, 2, 4, 5)],)]
+rep 13762 n_dd 8 free blocks [6] structures 130 alive 16 unknown 5 990s [([(0, 4), (1, 3, 2, 5)],), ([(0, 3, 1, 4), (2, 5)],)]
+rep 15792 n_dd 9 free blocks [6] structures 130 alive 13 unknown 4 661s [([(0, 5), (1, 4), (2, 3)],), ([(0, 5), (1, 2, 3, 4)],)]
+rep 15793 n_dd 9 free blocks [6] structures 130 alive 28 unknown 8 1982s [([(0, 4, 1, 5), (2, 3)],), ([(0, 1, 2, 5, 4, 3)],)]
