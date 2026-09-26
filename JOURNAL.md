@@ -486,4 +486,11 @@
   - L'outil d'Astra ne vaut donc que comme filtre exact sur des squelettes, et C2 garde les filtres dis.
   - C2 teste un modèle au niveau racine (signé, S² + S = 12I − CCᵀ) sur M1 n = 6 job 12, avec environ 11 M colonnes
     implicites.
+- **Témoin local (2,1) d'Astra (dossier n° 4) : VÉRIFIÉ indépendamment** (`scripts/verify_astra_21_witness.py`, avec
+  son propre code, sans solveur).
+  - 10 racines centrales de degré 14, adjacences symétriques, λ/μ exacts entre elles et avec x et les 14 intérieurs.
+  - 0 dépassement de budget sur les 4 851 paires.
+  - Lignes d'orbites avec un seul 2 et une somme de 12, profil (2,1) : u ~ w, σw, w′ et u ≁ σw′.
+  - Identité d'orbites exacte sur le bloc central 5 × 5.
+  - Conséquence : le lemme 11.2 ne se démontre pas à ce niveau local.
 

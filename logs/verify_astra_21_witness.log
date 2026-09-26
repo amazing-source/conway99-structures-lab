@@ -1,0 +1,4 @@
+central roots: 10; problems in degrees / symmetry / lambda-mu: 0 []
+pairs of the partial graph over their common-neighbour budget: 0
+orbit rows (sum 12, a single 2): True; profile (q_U(W), q_U(W'), u~w', u~sigma w') = (2, 1, True, False)
+orbit identity Q^2 + Q = 12I + 4J - Sh on the 5 x 5 central block: 0 violations
