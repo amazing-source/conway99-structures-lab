@@ -247,4 +247,14 @@
   - le noyau universel est de dimension 3 pour les 21 blocs ;
   - le membre de droite du témoin y est orthogonal partout.
   **Identique à C1.** L'obstruction vit donc dans les 2 dimensions propres au témoin (noyau à gauche de dimension 5).
+- **Fonctionnelle Ψ_R de C1** (« piste à vérifier »), vérifiée avec mon propre code (section 6 du script) :
+  - noyau effectif (atterrissages avec c_R > 0) de dimension 5 pour les 21 blocs ;
+  - ⟨c(z;a,b), Ψ_R⟩ = 0 dès que c_R(z;a,b) > 0, sur les 21 blocs × tous les atterrissages ; ±6 sinon (336 + 336) ;
+  - au témoin, ⟨rhs_R, Ψ_R⟩ ≠ 0 exactement sur les 9 blocs, avec les valeurs ±24 et −48. I_R est identique à la
+    liste de C1, signes compris (même convention de signe) ;
+  - forme close −6 Σ_{y∈R} ε(y)[θ(z_P(y)) + θ(z_Q(y))] égale à ⟨rhs_R, Ψ_R⟩ sur les 21 blocs ; tous les
+    atterrissages du témoin sont permis.
+  - Conséquence : **toute configuration de Fano tendu doit vérifier I_R = 0 pour les 21 blocs** (condition
+    nécessaire exacte, sans PL). Le lemme « aucun sommet de Fano tendu » revient à l'incompatibilité de ces 21
+    conditions avec le modèle.
 

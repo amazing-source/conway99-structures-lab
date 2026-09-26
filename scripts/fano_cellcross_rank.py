@@ -252,3 +252,88 @@ for R in BLOCKS:
 print(f'universal kernel dimension per block: {univ_dims}')
 print(f'witness right-hand side orthogonal to the universal kernel, per block: '
       f'{all(witness_orth.values())} {[k for k, v in witness_orth.items() if not v]}')
+
+
+# 6. C1's functional Psi_R (26/09, "PISTE a verifier"), checked with own data
+def Psi(R):
+    P, Q = sorted(R)
+    M = third(P, Q)
+    C4 = [x for x in range(7) if x not in (P, Q, M)]
+    MM = [frozenset(pr) for pr in itertools.combinations(C4, 2) if third(*pr) == M]
+    assert len(MM) == 2 and MM[0] | MM[1] == set(C4)
+    s = {x: (1 if x in MM[0] else -1) for x in C4}   # sign choice: the first M_M pair gets +1 (global sign free)
+    psi = {B: Fr(0) for B in BLOCKS}
+    for x in C4:
+        psi[frozenset((M, x))] += 9 * s[x]
+        psi[frozenset((P, x))] += s[x]
+        psi[frozenset((Q, x))] += s[x]
+    psi[MM[0]] += 4
+    psi[MM[1]] -= 4
+    return [psi[B] for B in BLOCKS], s, M
+
+
+RI = {B: t for t, B in enumerate(BLOCKS)}
+eff_dims, psi_ok, psi_off = {}, True, Counter()
+for R in BLOCKS:
+    vecs = [v for PQ, vs in fam.items() if not (PQ & R) for v in vs if v[RI[R]] > 0]
+    eff_dims[bn(R)] = len(nullspace_left(vecs))
+    psi, s, M = Psi(R)
+    for PQ, vs in fam.items():
+        if PQ & R:
+            continue
+        for v in vs:
+            val = sum(p * q for p, q in zip(v, psi))
+            if v[RI[R]] > 0:
+                psi_ok &= val == 0
+            else:
+                psi_off[val] += 1
+print(f'effective kernel (only landings with c_R > 0) dimension per block: {set(eff_dims.values())} {eff_dims}')
+print(f'<c(z;a,b), Psi_R> = 0 whenever c_R(z;a,b) > 0, all 21 blocks x all landings: {psi_ok}; values when c_R = 0: '
+      f'{dict(psi_off)}')
+
+
+def landing(z, via_class):
+    """Class where the sigma-special of z through class via_class lands."""
+    (e,) = [l for l in z if l[0] == via_class]
+    (f,) = [l for l in z if l[0] != via_class]
+    w = sigma[e[0]][f] if e[1] == 0 else sinv[e[0]][f]
+    return w[0]
+
+
+vals, closed_ok, I = {}, True, {}
+for R in BLOCKS:
+    psi, s, M = Psi(R)
+    P, Q = sorted(R)
+    own = [z for z in PAIRS if blk(z) == R]
+    one = [z for z in PAIRS if len(blk(z) & R) == 1]
+    bR = []
+    for Rp in BLOCKS:
+        rhs = -sum(eps(y) * c[y][Rp] for y in own)
+        for z in one + own:
+            rhs -= sum(eps(w) for w in spec[z] if blk(w) == R) * c[z][Rp]
+        bR.append(rhs)
+    val = sum(p * q for p, q in zip(bR, psi))
+    vals[bn(R)] = val
+    # closed form: -6 sum_{y in R} eps(y) [theta(z_P(y)) + theta(z_Q(y))]
+    tot = 0
+    for y in own:
+        for X in (P, Q):
+            (e,) = [l for l in y if l[0] == X]
+            (f,) = [l for l in y if l[0] != X]
+            zX = frozenset({e, tau[e][f]})                  # tau-special of y through X: block {X, M}
+            assert blk(zX) == frozenset((X, M))
+            a = landing(zX, X)
+            bM = landing(zX, M)
+            if bM == third(M, a):
+                eta = 1
+            elif bM == third(X, a):
+                eta = -1
+            else:
+                raise AssertionError('landing outside the permitted set')
+            tot += eps(y) * s[a] * eta
+    closed_ok &= val == -6 * tot
+    I[bn(R)] = val / 24
+print(f'<rhs_R, Psi_R> at the witness: {dict((k, int(v)) for k, v in vals.items() if v)} (zero elsewhere)')
+print(f'blocks with <rhs_R, Psi_R> != 0: {sorted(k for k, v in vals.items() if v)}')
+print(f'closed form -6 sum eps(y)[theta(z_P(y)) + theta(z_Q(y))] equal to <rhs_R, Psi_R> on all 21 blocks: {closed_ok}')
+print(f'I_R = <rhs_R, Psi_R>/24: {dict((k, str(v)) for k, v in I.items() if v)}')
