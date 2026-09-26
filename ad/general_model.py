@@ -212,10 +212,15 @@ def build(orbs, dichotomy=True, balance=True):
             if P in ns:
                 coefs.append((ns[P], 1))
             add(coefs, 2 + const, 2 + const)
-    A = np.zeros((len(rows), nvar))
+    import scipy.sparse as sp
+    ri, ci, vv = [], [], []
     for r, cs in enumerate(rows):
         for j, c in cs:
-            A[r, j] += c
+            ri.append(r)
+            ci.append(j)
+            vv.append(c)
+    A = sp.csr_matrix((np.array(vv, float), (np.array(ri), np.array(ci))), shape=(len(rows), nvar))
+    A.sum_duplicates()
     return A, np.array(lo, float), np.array(hi, float), lb, ub, nvar, phi, ns
 
 

@@ -13,7 +13,7 @@ from scipy.optimize import linprog
 def _phase1(A, lo, hi, lb, ub):
     import scipy.sparse as sp
     m, n = A.shape
-    As = sp.csr_matrix(A)
+    As = A.tocsr() if hasattr(A, 'tocsr') else sp.csr_matrix(A)
     I = sp.identity(m, format='csr')
     Aub = sp.vstack([sp.hstack([As, I, -I]), sp.hstack([-As, -I, I])]).tocsr()
     bub = np.concatenate([hi, -lo])
@@ -28,6 +28,14 @@ def _cert_from(res, m, denom):
     return [Fraction(round(a * denom), denom) - Fraction(round(b * denom), denom) for a, b in zip(yhi, ylo)]
 
 
+def _row(A, r):
+    if hasattr(A, 'indptr'):
+        s, e = A.indptr[r], A.indptr[r + 1]
+        return zip(A.indices[s:e], A.data[s:e])
+    nz = np.nonzero(A[r])[0]
+    return zip(nz, A[r][nz])
+
+
 def leaf_ok(A, lo, hi, lb, ub, y):
     U = Fraction(0)
     for r, yr in enumerate(y):
@@ -39,8 +47,9 @@ def leaf_ok(A, lo, hi, lb, ub, y):
     for r, yr in enumerate(y):
         if yr == 0:
             continue
-        for j in np.nonzero(A[r])[0]:
-            c[j] = c.get(j, Fraction(0)) + yr * int(A[r][j])
+        for j, a in _row(A, r):
+            if a != 0:
+                c[j] = c.get(j, Fraction(0)) + yr * int(round(a))
     L = sum(min(cj * int(lb[j]), cj * int(ub[j])) for j, cj in c.items() if cj != 0)
     return L > U
 
