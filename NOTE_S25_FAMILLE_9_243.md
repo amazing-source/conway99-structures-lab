@@ -81,3 +81,20 @@ Godsil–McKay (à une seule classe) à partir d'un graphe de la famille. Ce n'e
 - **Un membre tordu serait l'objet le plus utile.** Soit un autre srg(243,22,1,2), soit un « faux monde » fermé aux
   paramètres locaux de 99. Ce serait le premier contrôle positif du régime tordu. Le §5 ferme la voie la plus simple
   (commutation locale).
+
+## 7. Ce que dit la littérature (revue du 26/09, `famille/REVUE_LITTERATURE_9_243.md`)
+- **L'unicité du graphe à 243 sommets est OUVERTE.** Elle n'est prouvée que parmi les graphes de rang 3, de Cayley
+  abéliens ou de translation.
+- **La règle cherchée existe depuis 1988.** C'est la propriété de grille (*) : toute paire de droites sécantes est
+  dans une grille 3×3, ce qui équivaut à P = P_max.
+  - 9 et 243 la vérifient.
+  - **Makhnev (Mat. Zametki 1988, Th. 2) : aucun srg(99,14,1,2) ne la vérifie.** Le lemme L16 de C1 en donne une autre
+    preuve.
+- **La pièce manquante porte un nom : la conjecture de Reimbayev.** Tout membre vérifierait (*) (égalité dans sa borne
+  des hexagones). Elle entraînerait l'inexistence de 99.
+- **Même obstacle pour l'unicité de 243.** Sa preuve devrait commencer par établir (*), et rien ne force les grilles
+  en diamètre 2.
+- **« Trouver un nouveau membre »** revient donc à trouver un srg(243,22,1,2) SANS (*). Ce serait le premier membre
+  tordu de la famille. Aucune méthode ne s'impose ; la commutation de Godsil–McKay est exclue (§5).
+- Autres faits : Aut(Γ₉₉) ∈ {1, Z₂, Z₃} (combinaison de Wilbrink 1984, Makhnev–Minakova 2004, Behbahani–Lam 2011,
+  Crnković–Maksimović 2020 et Cesarz–Woldar 2025) ; Keramatipour (2026) conjecture l'absence de toute grille 3×3 à 99.

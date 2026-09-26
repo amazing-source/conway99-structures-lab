@@ -597,3 +597,16 @@
   - Contrôles du module (`logs/star_shadows_controls.log`) : le témoin partiel v = 1..7 est retrouvé, le négatif
     (1..6, 8) aussi.
   - Suggère une obstruction universelle à k = 22 ; tâche (a′) proposée à C1 pour Astra.
+- **Revue de littérature (agent) : l'unicité de srg(243,22,1,2) est OUVERTE** (`famille/REVUE_LITTERATURE_9_243.md`,
+  NOTE_S25 §7).
+  - La « règle » vraie pour 9 et 243 et fausse à 99 est la propriété de grille (*) (P = P_max). Makhnev 1988 (Th. 2)
+    prouve qu'aucun srg(99,14,1,2) ne la vérifie, et L16 de C1 en est une autre preuve.
+  - La pièce manquante est la conjecture de Reimbayev (tout membre vérifie (*)). L'unicité de 243 bute sur le même lemme.
+- **Suivi n° 4 du dossier n° 5 envoyé à l'utilisateur pour Astra** (`astra/SUIVI4_DOSSIER5.md`). Contenu :
+  - rapport vérifié ;
+  - lien de signe démontré par C1 : χ(disc R_L) = (−1)^{k/2} χ(τ) ;
+  - calibration 42/42 ;
+  - tâche (a′) : trouver pourquoi l'étoile échoue toujours, avec les pistes α (noyau des 2 apex) et β (potentiel) de
+    C1 ;
+  - tâche (b′) : l'étoile avec j mauvais membres à k = 24.
+- C2 demande l'énumération du transfert de coin (parité le long des traînées) : à faire.
