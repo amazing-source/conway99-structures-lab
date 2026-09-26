@@ -309,4 +309,13 @@
 - Triades de C1 : les types (i), (iv), (m) et R1 sont vérifiés (multigraphe 2-régulier sur les 4 racines d'un
   bloc ; une cerise ne peut pas être doublée).
 - Bijection λ : l'équilibre étiquette (w, Z) contient le compte T(w), sans le forcer à 1. La question reste ouverte.
+- Fano tendu : T ≡ 1 est faux au témoin, dont le σ est solution de KBLDP. Sur 42 paires ordonnées, seules 14 ont le
+  profil (1,1,1,1) (`scripts/fano_T_check.py`). La route du dérangement est close, et C1 met le Fano tendu en pause.
+- Critère sans PL proposé à C2 pour les feuilles à bloc A (note 38 de C2).
+  - Hypothèses : Σ = ∅, partenaires un bloc, a_Z ≤ 2.
+  - La diagonale de Gram (Σa² = 24, Σa = 20) donne exactement 2 orbites hors A avec a_Z(x) = 2. Ce sont les
+    partenaires D hors A (o_x) et les doubles hors A.
+  - Avec la dichotomie (doubles totaux = 2 − n_s) : **#doubles dedans sur {A,x} = o_x − n_s**, et o_x ≥ n_s.
+  - Extension à Σ ≠ ∅ : #dedans = o_x + D_xx − n_s, à reprendre dans le cadre de C2.
+  - Information d'orbite, invisible au PL par paires. En attente du test de C2.
 
