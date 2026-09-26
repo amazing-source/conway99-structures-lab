@@ -26,7 +26,8 @@ for sV, qbv in [('jl', 0), ('jp', 0), ('jp', 1), ('jr', 1), ('lp', 0), ('lp', 1)
     M = pm(qbv, sV)
     v = np.einsum('ni,ij,nj->n', g, M, g)
     neg = np.where(v < 0)[0]
+    if len(neg) == 0:
+        print(f'supp V = {sV}, Q_BV = {qbv}: no certificate with entries in [-{R},{R}] (use the Schur certificate of check_dossier4_compressions.py)')
+        continue
     best = neg[np.lexsort((v[neg], l1[neg]))[0]]
     print(f'supp V = {sV}, Q_BV = {qbv}: x (U,W,A,B,V) = {tuple(int(t) for t in g[best])}, x^T P x = {int(v[best])}')
-    if (sV, qbv) == ('jp', 0):
-        print(M)
