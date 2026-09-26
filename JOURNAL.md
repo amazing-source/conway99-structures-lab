@@ -318,4 +318,14 @@
   - Avec la dichotomie (doubles totaux = 2 − n_s) : **#doubles dedans sur {A,x} = o_x − n_s**, et o_x ≥ n_s.
   - Extension à Σ ≠ ∅ : #dedans = o_x + D_xx − n_s, à reprendre dans le cadre de C2.
   - Information d'orbite, invisible au PL par paires. En attente du test de C2.
+- Nouvelle porte de C1 (cas général, P = 0) : la géométrie interne I_x (140 droites internes) et la torsion aux
+  voisins.
+  - Relu :
+    - t₁ + t₂ + t₃ + t₄ = 140 et t₂ + 2t₃ + 3t₄ = 84, car toutes les arêtes σ sont internes à P = 0 ;
+    - t₃ = #{z : les deux σ-partenaires de z sont adjacents} − 3t₄, donc un degré de liberté de premier ordre.
+  - Pont : une boucle τ^u_y équivaut à un prisme, qui équivaut à un triangle du graphe des carrés K d'Astra. Les
+    conditions « sans boucle aux voisins » de C1 sont donc les instances locales de « K sans triangle » (P = 0), et
+    Astra utilise P = 0 globalement.
+  - Pas de parité locale gratuite en y fixé : l'union de deux couplages parfaits est faite de cycles pairs, et « sans
+    boucle » exclut les digones.
 
