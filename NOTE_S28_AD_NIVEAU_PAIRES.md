@@ -149,3 +149,44 @@ choix.
   - l'échantillon de la classe 9.
 - **Suite** : AD pour n_dd = 7 à 21, puis la famille dis générale (paires mixtes « un bloc + dis », tordues avec dis),
   qu'il faut énumérer.
+
+## 7. Mise à jour (26/09, nuit) : résidus AD, (★) de C2, le cœur commun
+**Balayage complet.**
+- 26 524 classes AD de n_dd = 2 à 21.
+- Mortes dans la version relâchée (structures libres en variables de partenaire) : toutes jusqu'à n_dd = 6.
+- Survivantes :
+  - n_dd = 7 : 6 ;
+  - n_dd = 8 : 20 ;
+  - n_dd = 9 : 14 ;
+  - n_dd = 10 : balayage en cours ;
+  - n_dd = 18 et 19 : vivantes ;
+  - n_dd = 21 (« tout dd ») : inconnue.
+
+**Retest en énumérant les 130 structures de A.**
+- Les survivantes de 7 et 8 ont TOUTES un bloc A. La plupart des structures de A meurent. Il reste A en 6-cycle ou en 2+4.
+- 10 classes sont exportées pour le modèle U de C2 (ad_residues_n7_8.json) ; le 2e passage en trouve d'autres.
+- Tout bloc A force g⁻ = 20 (droite-bloc de rang 18, signe +1).
+
+**Lemme (★) de C2 (équilibre général, pour tout ensemble S de blocs).** Re-dérivé ici, JUSTE :
+Σ_{W∌k} δ_W² + Σ_{W∋k, W∉Lab} ε_W² = Σ_{o∈Lab} (2 − g_o)(g_o + 5).
+- Preuve par racine : BBᵀ = 12I + 2J − A − Cls − A² sur N(ℓ_k), d'où
+  Σ_z (n_C(z) − s)² = Σ_{v∈C} L_v(7 − L_v) − Σ_{v∉C} d_C(v)².
+- Linéarisation exacte aux points entiers : tangentes de δ² et ε², et r_o ≤ min(10 − 4g, 12 − 6g). Code : ad/star_lemma.py
+  et ad/star_generic.py.
+- Résultats :
+  - « tout dd » : faisable en PL, inconnu en entier à 300 s ;
+  - résidus AD : en cours.
+
+**Le cœur commun : l'étoile totalement libre.** Un bloc où aucune orbite ne pivote (μ ∩ τ = ∅). On la retrouve dans :
+- les résidus AD (blocs à d = 0) ;
+- le K₃ ancré de C1 (bloc 7) ;
+- « tout dis ».
+
+Rien de ce qui suit ne la tue :
+- (iii) seul, faisable sur 6 tirages sur 10 ;
+- (i)+(ii) seuls, faisable au moins une fois ;
+- l'entrelacement à une ombre ;
+- les coupes PSD d'orbite (𝒫² = 14𝒫) ;
+- (★) en PL.
+
+Feuille de problèmes pour les modèles extérieurs : astra/PROBLEMES_OUVERTS_INVOLUTION.md.
