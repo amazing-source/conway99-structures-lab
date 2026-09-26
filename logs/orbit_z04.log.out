@@ -1,0 +1,11 @@
+class zero4 (4, 5, 5, 7) x2520  decomposition [(6, 3, 5, 1), (6, 5, 4, 3, 2, 1, 0), (6, 4, 0, 5, 2), (3, 1, 4, 2, 0)]
+  12600 pair-level columns, 352800 orbit-level columns, 1778 rows  [7 s]
+  round 1: 12600 columns, phase-1 value 665.5730, 12599 improving  [28 s]
+  round 2: 16600 columns, phase-1 value 286.5995, 7527 improving  [47 s]
+  round 3: 20600 columns, phase-1 value 100.5967, 3269 improving  [75 s]
+  round 4: 23869 columns, phase-1 value 58.7273, 1190 improving  [106 s]
+  round 5: 25059 columns, phase-1 value 40.4686, 640 improving  [140 s]
+  round 6: 25699 columns, phase-1 value 34.9704: exact certificate already valid (low - high = 357536487)  [174 s]
+CERTIFIED at round 6 (phase-1 value 34.9704; convergence not needed)
+exact check over ALL 352800 orbit-level columns: low = 36678857592, high = 36321321105, low - high = 357536487 (scale 1e9); spot-checks 400, mismatches 0  ->  CERTIFICATE VALID  [176 s]
+saved logs/orbit_certs/zero_04.json.gz

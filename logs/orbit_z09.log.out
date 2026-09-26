@@ -1,0 +1,11 @@
+class zero9 (5, 5, 5, 6) x840  decomposition [(0, 3, 1, 6, 2), (0, 1, 2, 3, 4, 5), (0, 6, 5, 1, 4), (3, 6, 4, 2, 5)]
+  12600 pair-level columns, 352800 orbit-level columns, 1778 rows  [8 s]
+  round 1: 12600 columns, phase-1 value 680.5761, 12600 improving  [29 s]
+  round 2: 16600 columns, phase-1 value 303.0570, 7734 improving  [50 s]
+  round 3: 20600 columns, phase-1 value 111.5438, 2943 improving  [80 s]
+  round 4: 23543 columns, phase-1 value 69.5292, 1084 improving  [113 s]
+  round 5: 24627 columns, phase-1 value 55.9748, 539 improving  [146 s]
+  round 6: 25166 columns, phase-1 value 50.7228: exact certificate already valid (low - high = 20696172337)  [180 s]
+CERTIFIED at round 6 (phase-1 value 50.7228; convergence not needed)
+exact check over ALL 352800 orbit-level columns: low = 59668331286, high = 38972158949, low - high = 20696172337 (scale 1e9); spot-checks 400, mismatches 0  ->  CERTIFICATE VALID  [182 s]
+saved logs/orbit_certs/zero_09.json.gz

@@ -1,0 +1,4 @@
+specials equal to the file: True; symmetric: True; types: 4987 x-columns, pairs whose type set differs from own enumeration: 0, duplicates: 0; s-columns 63958, (x-column, block) with a split set different from ALL splits: 0
+rows 30422: rebuilt coefficients differing from the file: 0; right-hand sides differing: 0 
+Farkas on the REBUILT system: b.y - sum_j max(0, (A^T y)_j) = 28804609  (scale D = 1000000; file claims 28804609)
+CERTIFICATE VALID

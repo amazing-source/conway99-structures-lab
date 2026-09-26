@@ -198,4 +198,16 @@
     - un message avant tout lancement de plus de 1,5 Go.
   - Répartition : je vérifie au fil de l'eau les certificats « cellules » de C1 (format x19k). Mon lot d'orbites tourne
     sur 1 cœur, avec moins de 0,8 Go.
+- **S19, fin du lot : TOUT-TORDU PUR ENTIÈREMENT EXCLU.**
+  - Les 14 classes sans triangle sont certifiées à la racine, au tour 5 à 8, en 106 à 282 s par classe, avec moins de
+    0,8 Go de RAM.
+  - Écart low − high : de 0,36 (zero4) à 31,4 (zero11), en unités de y. L'arrêt anticipé s'arrête dès que le
+    certificat tient, d'où certains petits écarts, tous exacts et positifs.
+  - `verify_orbit_certs.py coverage` : 14/14 VALIDES, low et high identiques au générateur (vérifié classe par classe),
+    couverture 30 360/30 360, ALL VERIFIED.
+  - Bilan : ≥ 2 triangles à la main (S8, S11) ; 1 triangle, 84 certificats (S17, 41 790 décompositions) ; 0 triangle,
+    14 certificats (S19, 30 360 décompositions).
+  - Vérification des certificats cellules de C1 : lot 1 (s11_1, s21_0) VALIDE ; lot 2 en cours.
+  - Deux incidents de lancement, corrigés, qui n'ont rien vérifié : `\$b` dans le script, puis la conversion de
+    chemins MSYS (corrigée par MSYS_NO_PATHCONV=1).
 

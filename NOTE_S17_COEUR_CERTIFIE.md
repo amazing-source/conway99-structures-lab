@@ -1,4 +1,11 @@
-# S17 — Cœur tout-tordu (1 triangle et sans triangle) : calcul certifié par (P2)
+# S17 — Cœur tout-tordu (1 triangle et sans triangle) : calcul certifié
+
+> **État au 26/09/2026 (fin de matinée) : le tout-tordu pur est ENTIÈREMENT EXCLU.**
+> - ≥ 2 triangles : à la main (NOTE_S8, S8.5, NOTE_S11).
+> - 1 triangle : 15 classes, 84 certificats entiers au niveau paires avec (P2) (§2.1). Revérifiés par du code séparé ;
+>   couverture de 41 790 décompositions.
+> - 0 triangle : 14 classes, 14 certificats entiers au niveau ORBITES, à la racine et sans branchement (§2.3).
+>   Revérifiés par du code séparé ; couverture de 30 360 décompositions.
 
 26/09/2026, labo « structures ». **Calcul autorisé par l'utilisateur** (réponse « Calcul certifié plafonné », environ
 1 h). Seuls les certificats exacts comptent.
@@ -137,11 +144,36 @@ soit **Q² + Q = 12 I + 4 J − Sh**, où Sh = Σ_i b_i b_iᵀ.
   Σ_{r ≠ O} min(y lo, y hi) > Σ_Z max_{c ∈ Z} (Aᵀy)_c.
   Le maximum est pris sur **toutes** les colonnes-orbites.
 
-**Résultats (tests de 5 min au plus)**
-| classe | (P2) par paires, racine | niveau orbite, racine | statut |
-|---|---|---|---|
-| zero13 (7,7,7)×120 | faisable | infaisable (convergé, phase 1 = 69,68) | flottants ; certificat à produire |
-| zero0 (4,4,4,4,5)×2520 | faisable | **certificat exact** au tour 8 (phase 1 = 34,30) | **revérifié indépendamment** |
+**Résultats.** Les 14 classes sont certifiées à la racine, sans branchement. Pour chacune, le PL par paires avec
+(P2) était faisable à la racine (§2.2). Ce sont les tests de 5 min, puis le lot autorisé par l'utilisateur (« Lancer
+les 13 classes », `scripts/run_orbit_batch.sh`, une classe à la fois, moins de 0,8 Go de RAM).
+| classe | type | étiquetées | tour | phase 1 à l'arrêt | écart low − high (unités de y) |
+|---|---|---|---|---|---|
+| zero0 | (4,4,4,4,5) | 2520 | 8 | 34,30 | 26,32 |
+| zero1 | (4,4,6,7) | 2520 | 8 | 17,90 | 9,38 |
+| zero2 | (4,4,6,7) | 2520 | 7 | 29,04 | 12,80 |
+| zero3 | (4,5,5,7) | 2520 | 6 | 36,73 | 2,43 |
+| zero4 | (4,5,5,7) | 2520 | 6 | 34,97 | 0,36 |
+| zero5 | (4,5,5,7) | 2520 | 6 | 48,27 | 16,34 |
+| zero6 | (4,5,6,6) | 5040 | 7 | 32,94 | 19,11 |
+| zero7 | (4,5,6,6) | 2520 | 6 | 35,71 | 2,12 |
+| zero8 | (4,5,6,6) | 2520 | 6 | 42,66 | 6,56 |
+| zero9 | (5,5,5,6) | 840 | 6 | 50,72 | 20,70 |
+| zero10 | (5,5,5,6) | 2520 | 6 | 45,20 | 9,93 |
+| zero11 | (5,5,5,6) | 840 | 6 | 56,90 | 31,38 |
+| zero12 | (7,7,7) | 840 | 7 | 33,94 | 18,16 |
+| zero13 | (7,7,7) | 120 | 5 | 77,77 | 21,43 |
+
+- Total : 30360 décompositions étiquetées.
+- zero13 : le test flottant initial (convergé, phase 1 = 69,68) a été refait dans le lot pour extraire le certificat.
+
+**Revérification indépendante et couverture** (`python scripts/verify_orbit_certs.py coverage`,
+`logs/verify_orbit_certs.log`) :
+- les 14 certificats sont VALIDES : bornes recalculées identiques, et mêmes low et high que le générateur à l'unité
+  près ;
+- couverture : les **30 360** décompositions étiquetées sans triangle sont toutes isomorphes à un représentant
+  certifié (forme canonique propre `canon_any`), et les effectifs s'additionnent exactement ;
+- verdict : **ALL VERIFIED**.
 
 **Vérification de zero0** (`scripts/verify_orbit_certs.py`) :
 - Le vérificateur est un code séparé, en entiers seuls. Les colonnes par paires viennent de `my_columns` (propre
@@ -153,9 +185,8 @@ soit **Q² + Q = 12 I + 4 J − Sh**, où Sh = Σ_i b_i b_iᵀ.
   utilise pas, les a signalées. Le générateur stocke désormais les bornes des lignes doublées, et le fichier de zero0 a
   été corrigé de la même façon.
 
-**Reste.** Les 12 autres classes et le certificat de zero13 : environ 5 min par classe, soit une heure au plus au
-total. C'est un calcul hors du cadre des « tests de 5 min » : **accord de l'utilisateur requis**. Il faudra ensuite
-un contrôle de couverture (verify_orbit_certs.py … coverage).
+**Contrôle sur un vrai graphe.** L'identité d'orbites est exacte sur BvLS, srg(243,22,1,2), avec σ(v) = −v :
+Q² + Q = 20I + 4J − Sh. Q y a une diagonale nulle et un seul 2 par ligne (`scripts/orbit_identity_real.py`).
 
 ## 3. Portée et réserves
 - La preuve est **assistée par ordinateur**. Chaque certificat est un objet fini, vérifiable en entiers ; il ne dépend

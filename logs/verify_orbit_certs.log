@@ -1,0 +1,16 @@
+logs/orbit_certs/zero_00.json.gz: 352800 orbit-level columns, 42 orbits; low = 37079589870, high = 10760944756, low - high = 26318645114; bounds differing from the recomputed ones: 0  ->  VALID
+logs/orbit_certs/zero_01.json.gz: 352800 orbit-level columns, 42 orbits; low = 27593357456, high = 18216198285, low - high = 9377159171; bounds differing from the recomputed ones: 0  ->  VALID
+logs/orbit_certs/zero_02.json.gz: 352800 orbit-level columns, 42 orbits; low = 19346020810, high = 6541551115, low - high = 12804469695; bounds differing from the recomputed ones: 0  ->  VALID
+logs/orbit_certs/zero_03.json.gz: 352800 orbit-level columns, 42 orbits; low = 33477217164, high = 31043414668, low - high = 2433802496; bounds differing from the recomputed ones: 0  ->  VALID
+logs/orbit_certs/zero_04.json.gz: 352800 orbit-level columns, 42 orbits; low = 36678857592, high = 36321321105, low - high = 357536487; bounds differing from the recomputed ones: 0  ->  VALID
+logs/orbit_certs/zero_05.json.gz: 352800 orbit-level columns, 42 orbits; low = 44223943648, high = 27878995304, low - high = 16344948344; bounds differing from the recomputed ones: 0  ->  VALID
+logs/orbit_certs/zero_06.json.gz: 352800 orbit-level columns, 42 orbits; low = 28991752200, high = 9883407986, low - high = 19108344214; bounds differing from the recomputed ones: 0  ->  VALID
+logs/orbit_certs/zero_07.json.gz: 352800 orbit-level columns, 42 orbits; low = 39236376936, high = 37119033236, low - high = 2117343700; bounds differing from the recomputed ones: 0  ->  VALID
+logs/orbit_certs/zero_08.json.gz: 352800 orbit-level columns, 42 orbits; low = 38098601758, high = 31533602820, low - high = 6564998938; bounds differing from the recomputed ones: 0  ->  VALID
+logs/orbit_certs/zero_09.json.gz: 352800 orbit-level columns, 42 orbits; low = 59668331286, high = 38972158949, low - high = 20696172337; bounds differing from the recomputed ones: 0  ->  VALID
+logs/orbit_certs/zero_10.json.gz: 352800 orbit-level columns, 42 orbits; low = 41374463516, high = 31442802206, low - high = 9931661310; bounds differing from the recomputed ones: 0  ->  VALID
+logs/orbit_certs/zero_11.json.gz: 352800 orbit-level columns, 42 orbits; low = 55066626456, high = 23689531234, low - high = 31377095222; bounds differing from the recomputed ones: 0  ->  VALID
+logs/orbit_certs/zero_12.json.gz: 352800 orbit-level columns, 42 orbits; low = 25151212264, high = 6992738933, low - high = 18158473331; bounds differing from the recomputed ones: 0  ->  VALID
+logs/orbit_certs/zero_13.json.gz: 352800 orbit-level columns, 42 orbits; low = 84820215772, high = 63386267194, low - high = 21433948578; bounds differing from the recomputed ones: 0  ->  VALID
+coverage: 30360 labelled triangle-free decompositions, 0 not isomorphic to a certified representative; labelled counts of the certified classes add up to 30360
+ALL VERIFIED

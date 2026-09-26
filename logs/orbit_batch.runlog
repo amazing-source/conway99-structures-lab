@@ -1,0 +1,16 @@
+zero13: CERTIFIED at round 5 (phase-1 value 77.7722; convergence not needed) | CERTIFICATE VALID  [106 s]
+zero01: CERTIFIED at round 8 (phase-1 value 17.8988; convergence not needed) | CERTIFICATE VALID  [235 s]
+zero02: CERTIFIED at round 7 (phase-1 value 29.0427; convergence not needed) | CERTIFICATE VALID  [203 s]
+zero03: CERTIFIED at round 6 (phase-1 value 36.7299; convergence not needed) | CERTIFICATE VALID  [181 s]
+zero04: CERTIFIED at round 6 (phase-1 value 34.9704; convergence not needed) | CERTIFICATE VALID  [176 s]
+zero05: CERTIFIED at round 6 (phase-1 value 48.2696; convergence not needed) | CERTIFICATE VALID  [178 s]
+zero06: CERTIFIED at round 7 (phase-1 value 32.9394; convergence not needed) | CERTIFICATE VALID  [221 s]
+zero07: CERTIFIED at round 6 (phase-1 value 35.7096; convergence not needed) | CERTIFICATE VALID  [186 s]
+zero08: CERTIFIED at round 6 (phase-1 value 42.6647; convergence not needed) | CERTIFICATE VALID  [177 s]
+zero09: CERTIFIED at round 6 (phase-1 value 50.7228; convergence not needed) | CERTIFICATE VALID  [182 s]
+zero10: CERTIFIED at round 6 (phase-1 value 45.2012; convergence not needed) | CERTIFICATE VALID  [174 s]
+zero11: CERTIFIED at round 6 (phase-1 value 56.9040; convergence not needed) | CERTIFICATE VALID  [157 s]
+zero12: CERTIFIED at round 7 (phase-1 value 33.9443; convergence not needed) | CERTIFICATE VALID  [282 s]
+logs/orbit_certs/zero_13.json.gz: 352800 orbit-level columns, 42 orbits; low = 84820215772, high = 63386267194, low - high = 21433948578; bounds differing from the recomputed ones: 0  ->  VALID
+coverage: 30360 labelled triangle-free decompositions, 0 not isomorphic to a certified representative; labelled counts of the certified classes add up to 30360
+ALL VERIFIED

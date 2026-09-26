@@ -1,0 +1,12 @@
+class zero12 (7, 7, 7) x840  decomposition [(3, 4, 5, 6, 0, 1, 2), (3, 5, 0, 4, 2, 6, 1), (3, 6, 4, 1, 5, 2, 0)]
+  12600 pair-level columns, 352800 orbit-level columns, 1778 rows  [7 s]
+  round 1: 12600 columns, phase-1 value 679.7968, 12597 improving  [27 s]
+  round 2: 16600 columns, phase-1 value 300.4085, 8285 improving  [46 s]
+  round 3: 20600 columns, phase-1 value 101.8041, 2993 improving  [74 s]
+  round 4: 23593 columns, phase-1 value 56.2435, 1142 improving  [120 s]
+  round 5: 24735 columns, phase-1 value 41.3089, 614 improving  [167 s]
+  round 6: 25349 columns, phase-1 value 35.5310, 340 improving  [218 s]
+  round 7: 25689 columns, phase-1 value 33.9443: exact certificate already valid (low - high = 18158473331)  [279 s]
+CERTIFIED at round 7 (phase-1 value 33.9443; convergence not needed)
+exact check over ALL 352800 orbit-level columns: low = 25151212264, high = 6992738933, low - high = 18158473331 (scale 1e9); spot-checks 400, mismatches 0  ->  CERTIFICATE VALID  [282 s]
+saved logs/orbit_certs/zero_12.json.gz

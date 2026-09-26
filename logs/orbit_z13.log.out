@@ -1,0 +1,10 @@
+class zero13 (7, 7, 7) x120  decomposition [(0, 1, 2, 3, 4, 5, 6), (0, 2, 4, 6, 1, 3, 5), (0, 3, 6, 2, 5, 1, 4)]
+  12600 pair-level columns, 352800 orbit-level columns, 1778 rows  [6 s]
+  round 1: 12600 columns, phase-1 value 690.6484, 12598 improving  [22 s]
+  round 2: 16600 columns, phase-1 value 300.6247, 7656 improving  [37 s]
+  round 3: 20600 columns, phase-1 value 140.5778, 3076 improving  [58 s]
+  round 4: 23676 columns, phase-1 value 95.3159, 1215 improving  [81 s]
+  round 5: 24891 columns, phase-1 value 77.7722: exact certificate already valid (low - high = 21433948578)  [105 s]
+CERTIFIED at round 5 (phase-1 value 77.7722; convergence not needed)
+exact check over ALL 352800 orbit-level columns: low = 84820215772, high = 63386267194, low - high = 21433948578 (scale 1e9); spot-checks 400, mismatches 0  ->  CERTIFICATE VALID  [106 s]
+saved logs/orbit_certs/zero_13.json.gz

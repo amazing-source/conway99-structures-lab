@@ -1,0 +1,9 @@
+08:42:17  START pid=21388 RAM cap=4000MB commit cap=10000MB timeout=360s minfree RAM=2000MB commit=3000MB | avail RAM=6069MB commit=11581MB | "C:\Users\RESEARCHER\AppData\Local\Python\pythoncore-3.14-64\python.exe" scripts/orbit_p2_colgen.py 6 270
+08:42:47  running 30s  RAM 450MB (max 450)  commit 1604MB (max 1612)  | machine: RAM avail 5623MB, commit headroom 9949MB
+08:43:17  running 60s  RAM 610MB (max 610)  commit 1785MB (max 1785)  | machine: RAM avail 5455MB, commit headroom 9779MB
+08:43:47  running 90s  RAM 702MB (max 702)  commit 1914MB (max 1914)  | machine: RAM avail 5427MB, commit headroom 9819MB
+08:44:17  running 120s  RAM 705MB (max 705)  commit 1906MB (max 1914)  | machine: RAM avail 5317MB, commit headroom 9704MB
+08:44:47  running 150s  RAM 692MB (max 739)  commit 1881MB (max 1950)  | machine: RAM avail 5451MB, commit headroom 9788MB
+08:45:17  running 180s  RAM 374MB (max 753)  commit 1537MB (max 1979)  | machine: RAM avail 5807MB, commit headroom 10163MB
+08:45:47  running 210s  RAM 757MB (max 757)  commit 1970MB (max 1979)  | machine: RAM avail 5363MB, commit headroom 9598MB
+08:45:59  END exit=0 time=222s max RAM=757MB max commit=1979MB peak commit=2363MB (RAM cap 4000MB, commit cap 10000MB)
