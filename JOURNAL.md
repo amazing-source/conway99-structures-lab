@@ -286,4 +286,12 @@
   - Dans le cas (2,1) : les 4 racines de R forment un stable ; voisins communs (w,w′) = {(k,γ), u} ; U est l'unique
     orbite qui voit W et W′ ; D(W′) ne voit pas W ; u a deux voisins supplémentaires v₁ ≠ v₂ hors de R.
   - Non tranché. J'attends de C2 les énoncés exacts de ses lemmes d'apex et d'équilibre (note 39).
+- **Fano tendu, bilan (26/09)** : P-Ψ est un **filtre exact**, pas un lemme.
+  - Sur 9 σ solutions de KBLDP, environ 40 % des droites sont vivantes. Estimation de C1 : environ 0,4⁷ ≈ 0,2 % des
+    solutions de KBLDP passeraient les 7 droites, et elles sont très nombreuses. P-Ψ + KBLDP n'est donc
+    probablement pas une obstruction complète.
+  - Trancher demanderait un PLNE (KBLDP + retournements + P-Ψ), ce que l'utilisateur ne veut pas pour l'instant.
+  - Vérifié à la main : le graphe τ des 12 paires d'une droite est 2-régulier, sans triangle (λ = 1), de longueurs de
+    cycle multiples de 3, donc C6 + C6 ou C12.
+  - Les deux sessions reviennent au cas général.
 
