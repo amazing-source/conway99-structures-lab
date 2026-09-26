@@ -1,0 +1,3 @@
+admissible normalised data: 66 out of 243
+tau values: Counter({8640: 54, 8100: 12}) ; mod 7: Counter({2: 54, 1: 12})
+isomorphism classes of the 12-vertex cubic graphs (ignoring the layers): [(8100, 12), (8640, 54)]

@@ -581,3 +581,12 @@
   - Observation arithmétique : l'écart des valeurs propres vaut t = √(8m − 7), et t divise 63. Les membres qui
     existent ont t ∈ {3, 9}, les trois cas ouverts ont t ∈ {7, 21, 63}, c'est-à-dire exactement 7 | t.
   - Recherche bibliographique en cours (agent) : unicité du srg(243,22,1,2) et méthode de preuve.
+- **Rapport d'Astra « étoiles d'ombres » (réponse au suivi n° 3) : correct** (NOTE_S26,
+  `astra/RAPPORT_ASTRA_DOSSIER5_SUITE.md`).
+  - §1 : la famille cyclique est exclue à k = 22. Code indépendant (`scripts/star_shadows.py`,
+    `scripts/verify_astra_d5_cyclic.py`) : les 6 triplets génériques à τ non carré sont retrouvés, avec les mêmes
+    candidats. L'étoile complète échoue sur les 6.
+  - §2 : à k = 24 avec τ carré, |J_bad| ≥ 8. Refait à la main, y compris l'indépendance de 5 colonnes et le cas de 7.
+    Le lien « τ carré ⇒ R anisotrope » est à confirmer par C1 (signes de L23).
+  - §3 : 66 composantes 4+4+4 admissibles, τ ∈ {8 100, 8 640} (carrés non nuls mod 7), d(L) = 3. C'est compatible
+    avec le lemme de Klein de C1 : elles ont des événements S.

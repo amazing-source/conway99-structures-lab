@@ -1,0 +1,12 @@
+100 labelled triples: triangle-free True; two-part unions without 4-cycles True
+generic with tau a non-square mod 7 (needed at k = 22 by L23): [(2, 4, 1, 5), (2, 4, 3, 3), (2, 4, 5, 5), (4, 2, 1, 5), (4, 2, 3, 3), (4, 2, 5, 5)]
+   tau(2,4,1) = 3096828960300 = 5 mod 7
+   tau(2,4,3) = 2905653667500 = 3 mod 7
+(2,4,1) groups [1, 2, 3, 4, 5, 7, 11]: candidates [381, 336, 354, 336, 381, 362, 362]; solution None; nodes 39574 (6 s)
+(2,4,3) groups [1, 2, 3, 4, 5, 7, 9]: candidates [375, 348, 405, 348, 375, 392, 351]; solution None; nodes 41826 (6 s)
+full star (2,4,1): candidates [381, 336, 354, 336, 381, 362, 383, 311, 383, 362]; solution False; nodes 21565 (10 s)
+full star (2,4,3): candidates [375, 348, 405, 348, 375, 392, 338, 351, 338, 392]; solution False; nodes 22829 (11 s)
+full star (2,4,5): candidates [326, 349, 385, 349, 326, 362, 383, 311, 383, 362]; solution False; nodes 20064 (10 s)
+full star (4,2,1): candidates [326, 349, 385, 349, 326, 362, 383, 311, 383, 362]; solution False; nodes 20064 (10 s)
+full star (4,2,3): candidates [375, 348, 405, 348, 375, 392, 338, 351, 338, 392]; solution False; nodes 22829 (11 s)
+full star (4,2,5): candidates [381, 336, 354, 336, 381, 362, 383, 311, 383, 362]; solution False; nodes 21565 (10 s)
