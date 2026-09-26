@@ -49,6 +49,20 @@ for rr in range(6):
         ent = [(av(n, k), 1) for n, (i, j) in enumerate(pairs) if b in edges[i] or b in edges[j] for k in ks]
         t = int(K2[2 * rr, b] + K2[2 * rr + 1, b])
         row(ent, t, t)
+if 'cycles' in cfg and len(sys.argv) > 3 and sys.argv[3] == 'lemma':      # C1's full-block lemma as cuts
+    for C in cfg['cycles']:
+        for p_ in C:
+            Sp = {2 * p_, 2 * p_ + 1, m[2 * p_], m[2 * p_ + 1]}
+            big = [n for n, (i, j) in enumerate(pairs) if len((set(edges[i]) | set(edges[j])) & Sp) >= 3]
+            four = [n for n, (i, j) in enumerate(pairs) if len((set(edges[i]) | set(edges[j])) & Sp) == 4]
+            for n in four:
+                row([(n, 1)], 0, 0)
+            row([(n, 1) for n in big], 0, 1 if len(C) >= 3 else 0)
+    # per block p: #{Q in S_p : k_p(Q) = 0} - sum_{Q in S_p} (k_p(Q) - 1)^+ = 2, i.e. sum_{Q in S_p} (1 - k_p(Q)) = 2
+    for p_ in range(6):
+        Sp = {2 * p_, 2 * p_ + 1, m[2 * p_], m[2 * p_ + 1]}
+        ks = [k for k, bp in enumerate(BP) if p_ in bp]
+        row([(av(n, k), 1 - len((set(edges[i]) | set(edges[j])) & Sp)) for n, (i, j) in enumerate(pairs) for k in ks], 2, 2)
 A = sp.csr_matrix((np.array(vv, float), (np.array(ri), np.array(ci))), shape=(r[0], nv))
 t0 = time.time()
 res = milp(np.zeros(nv), constraints=[LinearConstraint(A, np.array(lo, float), np.array(hi, float))],

@@ -26,7 +26,7 @@ def K2K3(mu, tau):
     return K2, K3
 
 
-def step1(mu, tau, n_sol, tl, forbid=()):
+def step1(mu, tau, n_sol, tl, forbid=(), c1lemma=None):
     K2, K3 = K2K3(mu, tau)
     edges = [e for e in itertools.combinations(L, 2) if mu[e[0]] != e[1]]
     E = len(edges)
@@ -57,6 +57,16 @@ def step1(mu, tau, n_sol, tl, forbid=()):
             md.Add(sum(acc.get((b, d), [])) == target)
     for sol in forbid:
         md.AddBoolOr([P[k].Not() for k in sol])
+    if c1lemma is not None:                      # C1's lemma at a full block: c1lemma = list of (special labels Sp_p, bound)
+        for Sp, bound in c1lemma:
+            big = []
+            for (i, j), v in P.items():
+                k = len((set(edges[i]) | set(edges[j])) & Sp)
+                if k == 4:
+                    md.Add(v == 0)
+                elif k == 3:
+                    big.append(v)
+            md.Add(sum(big) <= bound)
     s = cp_model.CpSolver(); s.parameters.max_time_in_seconds = tl; s.parameters.num_workers = 2
     st = s.Solve(md)
     if st not in (cp_model.OPTIMAL, cp_model.FEASIBLE):

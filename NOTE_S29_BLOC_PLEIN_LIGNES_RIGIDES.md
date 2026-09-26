@@ -85,3 +85,50 @@ de somme nulle.
     ils tiennent.
   - **g⁻ ∈ {18, 20}.**
 - Un bloc plein force g = 20. À g = 18, il n'y a donc aucun bloc plein, et les résidus AD ne vivent qu'à g = 20.
+
+## 6. Le système local (i)+(ii)+(iii) semble infaisable à m = 7 (27/09, nuit) — piste pour tuer C2 d'un coup
+**Comptage heuristique** (indépendance naïve, CLT local).
+- Il y a 60! ≈ 10^81,9 bijections Φ.
+- (ii) : 121 contraintes indépendantes, de probabilité ≈ 0,33 chacune.
+- (iii) : 54 à 66 contraintes indépendantes, de probabilité ≈ 0,3.
+- Espérance : **≈ 10^−10 solution par type de bloc à m = 7**, contre 10^48 à m = 11 (BvLS existe) et 10^24 pour (i)+(ii) seuls
+  (que l'on résout en 14 s).
+- Aucune solution de (i)–(iii) n'a jamais été trouvée à m = 7, par aucun de nous.
+- Tests d'ordre 2 et d'ordre 3 :
+  - les moments M± = V(I ± R)Vᵀ sont PSD sur les 110 359 types ;
+  - le tenseur T3[a,b,d] avec ses 3 marges est PL-faisable sur 3000 types.
+  - Il n'y a donc pas de contradiction « agrégée ».
+
+**Deux étapes** (`involution/iota_design.py`).
+- (iii) ⟺ ι = ΦσΦ⁻¹ est un couplage des 60 paires non-μ dont les comptes croisés valent K₃.
+  - Au bloc plein, c'est un **quasi-design** : 30 quadruplets, chaque paire d'étiquettes couverte 3 fois, les paires π 2 fois,
+    les paires m 1 fois.
+- Étape 2 : Φ = affectation σ-paires → ι-paires orientées, sous (ii).
+- **Chaque ι trouvé meurt en étape 2, au niveau PL** :
+  - bloc plein 6-cycle : 9/9, dont 5 avec le lemme de C1 imposé ;
+  - étoile libre : 1/1.
+- Pour le 6-cycle, le (ii) agrégé par blocs suffit déjà. Le mécanisme est « propre » ou « compagnon » (couverture 2) combiné
+  avec le « reste » (couverture 4). Le niveau des profils de blocs est faisable.
+
+**Lemme mono-bloc (C1, notes/134).** En un bloc p d'un D-cycle de longueur ≥ 3, notons Sp_p = {p±, m(p±)}. Au plus UN
+quadruplet contient 3 étiquettes de Sp_p, et aucun ne les contient toutes les 4.
+- Il ne tue qu'une partie des ι (1 sur 4).
+- La mort générique est globale : l'IIS s'étend sur plusieurs blocs et utilise les orientations au niveau des étiquettes.
+- C1 ne trouve pas d'argument uniforme. En ÉTL, les certificats analogues ont un surplus nul.
+
+**Solveurs sur le modèle monolithique** (portable, ≤ 290 s) : tous inconnus.
+- HiGHS sur les σ-paires (65 000 variables) ;
+- CP-SAT : Φ seul, et Φ + T_FF ;
+- étape 1′ (quasi-design + (ii) par blocs, 19 680 variables) en CP-SAT et en HiGHS, avec et sans les coupes du lemme ;
+- CaDiCaL (55 000 variables, 124 000 clauses).
+En branch and bound sur ι, le PL de l'étape 1′ meurt après ~12 paires fixées, à 0,2 s par PL.
+
+**Reformulation (C1).** (i)+(ii) ⟺ une **double couverture orthogonale** du graphe cocktail CP₆. Les pages H_a (a = étiquette
+de N(x)) sont des quasi-2-facteurs de K₁₂ − μ (deux chemins plus des cycles) d'extrémités {a, πa, μa, τπa}. On a
+|H_a ∩ H_{a′}| = 1 si a′ ∉ {a, πa} et 0 si a′ = πa. Le vrai verrou est (iii) par-dessus.
+
+**À faire (cloud).**
+- Preuve exhaustive par type : branch and bound sur ι avec PL (npz exportés : s1p_fullblock_6cyc, s1p_fullblock_24), ou SAT
+  (`sat_local.py`) sur plusieurs cœurs.
+- Commencer par les 4 types de bloc plein.
+- Tous les types (~10³ à 10⁴ classes) demanderont une méthode plus efficace.
