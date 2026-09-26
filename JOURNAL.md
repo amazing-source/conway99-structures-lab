@@ -653,3 +653,17 @@
   - **Conséquence pour la stratégie.** k = 22 (droite générique) est presque sûrement impossible, mais une preuve
     uniforme demandera un levier structurel, ou une réduction drastique de l'espace des boules pour un examen
     exhaustif. Ce n'est pas un simple lemme local.
+- **Réponse complète d'Astra (suivi n° 4 et audit S5)** : `astra/RAPPORT_ASTRA_SUIVI4_ET_AUDIT_S5.md`.
+  - **Témoin « apex seuls » (cyclique (2,4,1)) : VÉRIFIÉ** par notre code (`scripts/verify_astra_apex_witness.py`). Il
+    satisfait tout ce qui est annoncé : forme, λ/μ, normes, lignes d'apex g = 3, somme exacte = K e_u, recouvrements
+    et MMᵀ ≤ K. Il a 19 valeurs de Gram hors de {2, 3}, identiques à sa liste. La piste (α) de C1 est donc réfutée ; il
+    faut les relations entre les 8 ombres non apex, ce qui est cohérent avec l'ablation et la surdétermination.
+  - §2 : la relation g(a,b) = 3 entre apex découle des normes et des 16 produits (5 = 6 + 24 + g). Refait ✓.
+  - §3 (k = 24, τ carré) : par étoile, j_a = 0 ou j_a ≥ 2. Si j_a = 2 : t_z = −t_y, h_z = h_y et
+    g = 3 − h_y − A_yz. Refait ✓ (M(u,v) = 0 ligne par ligne ; R_yz = −h_y). Aucun j_min uniforme.
+  - **Audit S5 : le critère tient.** 35 « ? » reproduits deux fois, 0 graphe existant exclu, (154,51,8,21) retrouvé
+    en plus. Le lemme de réseau est classique (Martinet 2003) ; la nouveauté du critère paramétrique est indécise.
+    NOTE_S5 §5 est ajoutée.
+- **C1** : environ 10⁸ classes de boules génériques à P = 0, donc pas d'examen exhaustif possible. Ses idées : une
+  surdétermination « inter-boules » (les droites par un même sommet partagent des lointains), et des bornes de type
+  Weil.

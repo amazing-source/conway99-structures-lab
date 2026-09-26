@@ -96,3 +96,29 @@ e impair (n = 13, 17, 25, 29, 37, 41, 53, 61, 65) et 122 sont sporadiques (`logs
   (web, livre de Brouwer–Van Maldeghem, articles récents de non-existence) : rien trouvé. À confirmer par un expert.
 - **Extension (C2, point 5)** : pour p ≡ 3 (mod 4) divisant d, il faudrait connaître la parité de α_p par un autre
   argument (borne de p-rang). Rare, mais cela rouvrirait des cas.
+
+## 5. Audit adverse par Astra (26/09) : le critère TIENT (`astra/RAPPORT_ASTRA_SUIVI4_ET_AUDIT_S5.md`)
+- **Preuve : tient étape par étape.** Précisions à intégrer à la rédaction :
+  - m_θ pair (pour que m_θ/2 ait un sens) ;
+  - E_θℤ^v = Λ_θ^# par surjectivité (une forme entière sur un sous-réseau primitif s'étend à ℤ^v) ;
+  - le « tout ou rien » des q | v, q ∤ d : une somme de deux q-groupes non triviaux n'est pas cyclique. A agit par k
+    sur le discriminant de W et par θ sur la partie de Λ_θ, donc q^t | k − θ. De (k − r)(k − s) = μv et
+    (k − r) − (k − s) = −d, exactement un facteur est divisible par q, avec valuation ≥ t.
+- **Vrais graphes** (réseaux saturés, Bareiss) :
+  - Petersen, Λ₁ de déterminant 162, hypothèse 2-adique fausse (elle ne doit donc pas être supprimée quand v est pair) ;
+  - Petersen, Λ₋₂ de déterminant 405 ;
+  - T(7), Λ₃ de déterminant 109 375 ;
+  - T(7), Λ₋₂ de déterminant 46 875.
+  Tout est conforme. Il y a aussi une formule analytique pour T(n), n impair.
+- **Balayage** : deux implémentations (Python et JavaScript), avec les 26 pages de la table relues.
+  - 4 538 lignes, 1 183 existantes, 0 existante exclue.
+  - **35 « ? » exclus**, 0 manquant, 0 en trop.
+  - **Deux inexistants connus retrouvés** : (289,54,1,12), qui est le cas de Bondarenko–Radchenko, et
+    **(154,51,8,21)**, un contrôle supplémentaire que nous n'avions pas cité.
+- **Antériorité.**
+  - Le lemme de réseau (réseau pair de déterminant impair ⟹ (−1)^{m/2} det ≡ 1 mod 4) est **classique** : J. Martinet,
+    *On parity classes*, notes de Lausanne (2003), corollaire 6.4.
+  - Proches mais différents : Koyama 1991 (Bruck–Ryser–Chowla pour les srg d'ordre impair) et Bagchi (arXiv:2102.05576,
+    designs quasi symétriques).
+  - **La nouveauté du critère paramétrique et du corollaire NL_e(n) reste INDÉCISE** (non retrouvés dans une recherche
+    bornée). À ne pas présenter comme nouveau sans l'avis d'un expert.

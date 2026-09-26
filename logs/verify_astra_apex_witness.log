@@ -1,0 +1,3 @@
+shape True; lambda/mu vs ball True; norms 6 True; apexes [4, 11] (uB=12, uC=24); capacities [1, 1, 1, 0, 1, 1, 1, 1, 1, 0]
+apex rows g = 3 True; exact star sum = K e_u True; overlaps <= 2 True; M M^T <= K True
+off-diagonal Gram values outside {2,3}: 19 -> [(1, 2, 4), (1, 3, 5), (1, 8, 4), (1, 9, 6), (1, 10, 4), (2, 7, 0), (2, 9, 1), (2, 10, 0), (3, 5, 1), (3, 7, 6), (3, 8, 5), (3, 9, 4), (3, 10, 4), (5, 8, 6), (5, 9, 6), (5, 10, 6), (7, 9, 6), (7, 10, 0), (8, 10, 4)]
