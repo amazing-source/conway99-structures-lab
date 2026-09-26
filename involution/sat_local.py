@@ -55,6 +55,18 @@ def encode(mu, tau, cycles=()):
         for d in L:
             eq([Wv(z, b, d) for z in reps] + [Wv(z, d, b) for z in reps], int(K3[b, d])) if b != d else \
                 eq([Wv(z, b, b) for z in reps], int(K3[b, b]) // 2)
+    # pointwise conditions (C1, 27/09; re-derived from lambda = 1, mu = 2; valid at every block type), for z and for sigma z:
+    #  (L1) a in blocks(z): not (a in Phi z and pi a in Phi sigma z)
+    #  (S1) l in z: l in Phi z  => eta l not in Phi sigma z          (eta = tau in C2 notation = pi o h)
+    #  (S2) l in z: l not in Phi z => not (mu l in Phi z and eta l in Phi sigma z)
+    for z in range(60):
+        sz = sig[z]
+        for a in far[z]:
+            for aa in (a, PI[a]):
+                cnf.append([-U(z, aa), -U(sz, PI[aa])])
+            l = a
+            cnf.append([-U(z, l), -U(sz, tau[l])])
+            cnf.append([U(z, l), -U(z, mu[l]), -U(sz, tau[l])])
     if cycles:                                                # full block extras
         for z in range(60):
             sz = sig[z]
