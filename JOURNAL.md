@@ -409,4 +409,15 @@
     est exclu parce que la multiplicité vaudrait 42/5. À P = 0, le graphe auxiliaire H du Fano tendu a des
     composantes de degrés 12, 5 + 7 ou 6 + 6.
   - Ouvert : un Fano tendu qui satisfait aussi toutes les bornes ordonnées.
+- **Décision de l'utilisateur** (AskUserQuestion, 26/09) : arrêter l'ancien pipeline par paires de C2 et lancer sa
+  campagne au niveau orbite sur M1 n = 5–6 et les mélanges (75 à 125 h CPU, sur la grosse machine de C2). Relayée à
+  C2.
+  - État de C2 (son message) : sont morts les ancrés, le tout-tordu, H / H-β, M1 n = 3 et 4, et l'orientation M1
+    n = 6 job 0.
+  - Restent en calcul M1 n = 5 et 6, et les 47 mélanges. Restent hors calcul les carrés disjoints et les 9 motifs
+    Σ ≠ ∅ : c'est le vrai verrou.
+- C1 (I_x) : holonomie (prismes sur T = points fixes de σ_T), H + 3P = 213 444, graphe signé des triangles
+  A_Σ² = 13A_Σ + 68I (spectre 17 ×44 et −4 ×187, cohérent), ombres. Toutes ces identités sont automatiques : le
+  plafond doit venir des génériques effectifs. C1 cherche des strates rigides forcées à P = 0.
+- Leçon (mémoire) : pour savoir ce que fait une session, le lui demander ; les commits sont en retard sur le travail.
 
