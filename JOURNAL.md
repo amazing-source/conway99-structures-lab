@@ -388,4 +388,14 @@
     - les notes 120 à 122.
   - Statut par droite **recoupé** : pour le témoin, les comptes P-Ψ sont 0,0,2,1,0,0,1, comme Astra ; pour s41_5, 5
     droites P-Ψ-vivantes (mortes : 013 et 602), comme C1, et 4 avec l'admissibilité.
+- **C2, niveau orbite**, avec son propre code et un second vérificateur indépendant de son côté :
+  - 14/14 survivants du niveau paires tués (écarts de 73 à 97) ;
+  - la feuille M1 n = 6 job 0 n° 17 tuée entière, A variable (écart 27,9, un PL) ;
+  - l'orientation M1 n = 6 job 0 tuée entière, toutes structures D libres (écart 5,03, 2,2 M colonnes-orbites,
+    862 s ; le niveau paires y avait mis 358 PL).
+  - « Tout libre » : faisable, comme attendu. En cours : T fixé, orientation libre, sur l'hexagone.
+  - Note : ce sont de nouveaux PL de C2, sur la consigne qu'il a reçue directement de l'utilisateur.
+- Argument de C2 (« le voisin libre de pivot j est exclu par F1 + couplage ») : juste pour les solutions entières.
+  En fractionnaire, le couplage se compense en moyenne (poids ½ sur des colonnes où D(F) = Z). La relaxation est donc
+  plus faible mais valide. Règle explicite suggérée si un PL reste faisable.
 
