@@ -686,3 +686,15 @@
 - **Décision de l'utilisateur (26/09, soir) : C1 et « structures » passent à fond sur la branche C2** (involution),
   pour viser Aut(Γ) = 1 avec C3. Messages de coordination envoyés à C2 (inventaire demandé) et à C1 (mise en pause du
   programme 7-adique).
+- **Directive de l'utilisateur** : fini la vérification, place aux paris et aux percées. C1 et « structures » attaquent
+  q:7 dans le cadre de C2 (NOTE_S27).
+  - **Partie impaire** : g⁻ = rang₇(S − 3I) est PAIR, et g⁻ ≠ 22 par un argument de bord sur le signe. Donc
+    g⁻ ∈ {8, …, 20}.
+  - **Partie paire** : g⁺ est pair et non nul, avec g⁺ + g⁻ = 14 + k. On retrouve L2, L3 et L22.
+  - **Positivité** : 88 ≤ M ≤ 173 (signes négatifs dans la jauge de C2).
+  - **Contrôles positifs** : la formule d'oddité est exacte sur H(2,3) et sur BvLS munis de x ↦ −x.
+  - **Droites-blocs** : le rang₇ de la partie impaire (19 coordonnées) vaut au plus 18. Le vecteur propre exact
+    z_c = 3d_c + Σ_{o∋c} d_o (valeur 3) l'explique, avec son compagnon w_c (valeur −4). Donc g⁻ ∈ {18, 20} dès qu'une
+    droite-bloc est générique.
+  - **Cible** : g⁻ ≥ 21 (structure lointaine), ou exclure g⁻ ∈ {18, 20}.
+  - sympy installé à la demande de l'utilisateur (1.14.0).
