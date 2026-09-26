@@ -86,3 +86,36 @@ Le bloc B de z est disjoint de R. Il y a 3 positions relatives (10 blocs = 2 + 4
   - il reste ⟨rhs_R, Ψ_R⟩ = 0.
 - Ce n'est **pas** une obstruction en soi. C1 a trouvé des retournements qui satisfont les 21 conditions (480
   affectations avec le σ du témoin). La contradiction éventuelle est ailleurs (items 2 et 3 de C1).
+
+## 4. Relecture du lemme P-Ψ de C1 (26/09) : TIENT, étapes refaites à la main
+**Énoncé (C1).** Au Fano tendu, pour toute paire y d'un bloc R = {X,Y}, avec W = Φ(X,Y) :
+θ(z_X(y)) + θ(z_Y(y)) = 0, où θ(z) = s_R(atterrissage de z via W).
+
+**Étape 0 : simplification de θ.** Pour z dans le bloc {X,W}, θ = s(a)·η se simplifie.
+- Si b = Φ(W,a), alors {a,b} ∈ M_M(R), donc s(b) = s(a) et θ = s(b).
+- Si b = Φ(X,a), alors {a,b} est une paire mixte, donc s(b) = −s(a) et θ = s(b).
+- Dans les deux cas, θ = s_R(atterrissage via W).
+
+**Étapes 1 et 2.**
+- pairblk moins les 4 spéciaux donne Σ_{z gén. ~ y} c(z) = t(y).
+- Chaque générique est libre vis-à-vis de R, avec c_R ≥ 1. La proposition de §2 donne donc ⟨t(y),Ψ_R⟩ = 0.
+
+**Étape 3.** On a r(y)_{R′} = 12[R′ = R] + 8 − 2|R∩R′| − c_{R′}(y).
+- Σ_{R′} Ψ_R(R′)(8 − 2|R∩R′|) = 8·11·Σs − 4Σs = 0, car Σ_{c∈C4} s(c) = 0.
+- ⟨c(y),Ψ_R⟩ = s(a_y) + s(b_y) + 9(s(a) + s(b)) + 4(2 − 2) = 0, par le lemme 1 et parce que la paire {a,b} est mixte.
+
+**Étape 4 : les spéciaux de y**, avec le lemme 1 dans le repère du spécial.
+- **τ-spécial dans le bloc XW** (troisième point Y ; M_M(z) = M_Y(R), M_X(z) = M_X(R), M_W(z) = M_M(R)) :
+  ⟨c,Ψ_R⟩ = s(a) + 9s(b) − 4s(b) + Σ_c s(c)g_{Yc}.
+  - Si b = Φ(W,a), le dernier terme vaut 0, d'où s(a) + 5s(b) = 6θ.
+  - Si b = Φ(X,a), il vaut 2s(b), d'où s(a) + 7s(b) = 6θ.
+- **σ-spécial dans le bloc {X,A}**, A = a_y (atterrissage via X égal à Y, par réciprocité de σ_X ; troisième point
+  A* = π_X(A)). Les deux atterrissages via A, W ou π_Y(A), donnent **−18 s(A)** (sommes détaillées au JOURNAL).
+- **Somme des deux σ-spéciaux** : −18(s(a_y) + s(b_y)) = 0, car la paire est mixte.
+
+**Étape 5.** ⟨t(y),Ψ⟩ = 0 − 6(θ(z_X) + θ(z_Y)) + 0, d'où le lemme. ∎
+
+**Portée.** P-Ψ est bien plus fort que I_R = 0 : il donne une condition par paire. C1 observe que pour le σ du témoin
+et pour 8 σ tendus frais, 2 à 6 droites sur 7 n'admettent aucun réglage de retournements. Il reste à le démontrer
+pour tout σ tendu (invariant par droite).
+

@@ -266,4 +266,15 @@
   (contrôle arithmétique 168/168), puis trois positions relatives.
 - Idée « commutant » testée pour une tâche à Astra : dim{w : [A, L_w] = 0} = nombre de composantes de K sur Paley(9) (6)
   et BvLS (11). Rien de plus que les indicatrices de composantes ; piste close.
+- Relecture du **lemme P-Ψ de C1** (condition θ(z_X(y)) + θ(z_Y(y)) = 0 par paire, au Fano tendu) : **TIENT**. Toutes
+  les étapes sont refaites à la main avec le lemme 1 de NOTE_S21 (§4 ajouté).
+  - σ-spécial dans le bloc {X,A}, cas b = W :
+    somme/σ = −1 + 9 + (0 − 9 + 0) + (0·9 + 1·(−1) + 2·(−9) + 2·1) = −18.
+  - σ-spécial dans le bloc {X,A}, cas b = π_Y(A) :
+    somme/σ = −1 + 0 + (−1 − 9 + 0) + (9 + 0 − 18 + 2) = −18.
+- C2 demande un lemme pour les carrés « dis ». Je lui ai transmis :
+  - un dictionnaire par les spéciaux (dis ⇔ le partenaire n'est pas spécial ; aucune arête τ dans le carré) ;
+  - une dichotomie exacte par paire, tirée de l'identité des sœurs : n_s = 0 ⇒ soit 2 doubles (1,1), soit 0 double
+    et un seul (2,1).
+  Je n'ai pas de borne sur n_dis.
 
