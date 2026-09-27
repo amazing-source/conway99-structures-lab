@@ -183,7 +183,8 @@ TWISTC = ('c TWIST (C1, 27/09; relu par structures): at every twisted left block
           'Uses only (i)-(iii) and block-level coverage (no dis-square hypothesis).')
 
 
-def encode(mu, tau, cycles=(), cuts=False, digon=False, path=False, sec=False, twist=False):
+def encode(mu, tau, cycles=(), cuts=False, digon=False, path=False, sec=False, twist=False, relax=()):
+    """relax: subset of {'ii', 'iii'} to DROP (positive controls only; the default keeps everything)"""
     K2, K3 = D.K2K3(mu, tau)
     far = [z for z in itertools.combinations(L, 2) if z[0] // 2 != z[1] // 2]
     fidx = {z: i for i, z in enumerate(far)}
@@ -210,7 +211,8 @@ def encode(mu, tau, cycles=(), cuts=False, digon=False, path=False, sec=False, t
                 cnf.append([-X(z, e), U(z, b)])
     for a in L:                                                        # (ii)
         for b in L:
-            eq([U(z, b) for z in range(60) if a in far[z]], int(K2[a, b]))
+            if 'ii' not in relax:
+                eq([U(z, b) for z in range(60) if a in far[z]], int(K2[a, b]))
     # iota-pair variables: allowed iff disjoint, or secant at a label b with K3[b,b] = 2
     Q = {}
     for i in range(E):
@@ -229,7 +231,7 @@ def encode(mu, tau, cycles=(), cuts=False, digon=False, path=False, sec=False, t
                 acc.setdefault((min(b, d), max(b, d)), []).append(v)
     for b in L:                                                        # (iii) through iota
         for d in L:
-            if d < b:
+            if d < b or 'iii' in relax:
                 continue
             eq(acc.get((b, d), []), int(K3[b, d]) if b != d else int(K3[b, b]) // 2)
     for z in range(60):                                                # linking x <-> q
