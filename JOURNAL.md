@@ -934,3 +934,18 @@
 - **~9 h 45 (C2)** : iota_dfs (0,6) arrêté (aucun nœud mort en 10 min). Le mode bas passe en 3 voies cadical natives.
   **33/79 VERIFIED** (no lex + DRAT), avec en plus rel 6, 29, 46 (les trois (3,2)), 2, 8, 9, 13 et 16. Le « noyau dur » tombe
   sous cadical natif + tous les lemmes, en plafond 1 h. Deux blocs et (0,6) mono-bloc en exploration (2 h), kissat en mode haut.
+
+## 27/09, ~10 h 15 : directive de l'utilisateur et ligne d'arrivée
+- **Directive (relayée par C1)** : toutes les ressources sur C2 (cas involution) jusqu'à le finir ; objectif « si le graphe de
+  Conway existe, il est asymétrique » ; pas de dossier Sol, pas de piste « graphe entier » ; il faut une ligne d'arrivée.
+- **Ligne d'arrivée (C1, relue par structures, pilotée par C2)** :
+  - chaque orbite est frère, « un bloc » ou dis, d'où Σ_c(2#piv_c + d_c) = 84 + 4|Σ| ;
+  - donc un bloc a 2#piv + d ≥ 12. On le choisit par argmax lexicographique de (w, #piv) : si c'est une étoile libre, toute la
+    configuration est tout-dis.
+  - Fin = (A) les 1521 types à pivots, système local + β (`--beta`) UNSAT, et (B) la famille globale tout-dis (7 étoiles
+    libres, D = 2-facteur de KG(7,2)).
+- Codé par structures : `--beta` (convention C2 : β = 1 ⟺ dis), unités π-arête de C1 (notes/137), `--balance`,
+  all_types_3308.json, LEMMA_SCOPES.md (portées ; 0 écart sur les membres droits en dur, 156 classes).
+- État : **33/79 certifiés** (théorème Σ = ∅, avec SEC). Barreau 1 (156 classes, sans SEC) en cours au PC.
+  - Durs : les (0,6), les classes frères (stabilisateurs jusqu'à 46 080) et les étoiles libres (toutes inconnues à 15 s au
+    portable).
