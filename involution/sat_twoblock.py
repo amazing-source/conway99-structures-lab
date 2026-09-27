@@ -711,6 +711,12 @@ if __name__ == '__main__':
             com.append(CROSSC)
         if '--full' in sys.argv:
             com.append(FULLC)
+        if glue is None:                        # for cube-and-conquer: append units B[beta,k,o] = 1 to fix part of the gluing
+            Tl = build_instance.last
+            com.append('c GLUEVARS (d-frame block beta -> world block k, orientation o: DIMACS var) ' +
+                       json.dumps({'%d,%d,%d' % key: v for key, v in sorted(Tl.Bv.items())}))
+            com.append('c CUBES: a cube = the image (k, o) of the first d-frame block beta != gamma//2 (10 cubes); '
+                       'add the unit clause [B[beta,k,o]] to the CNF')
         if flags['sec']:
             com.append(S2.SECC)
         if flags['twist']:
