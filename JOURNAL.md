@@ -922,3 +922,12 @@
     et **meurt à exactement 8 paires fixées avec SEC** (2/2).
   - Un arbre de Farkas exact sur les (0,6), donc sur T = K₇, devient plausible. C2 lance iota_dfs.
   - Certificats DRAT chez C2 : 7/25 VERIFIED (rel 00, 01, 03, 04, 05, 07, 10).
+- **~9 h 35 : sondes sécantes (C1) et taille de l'arbre PL (0,6).**
+  - Rel 25, PL de l'étape 1′ avec SEC :
+    - fixer seulement les 6 ι-paires sécantes d'un VRAI ι tue le PL (2/2) ;
+    - 8 non-sécantes au hasard le laissent faisable (6/8) ;
+    - le certificat de phase 1 est dense (1458 lignes).
+  - Estimateur de Knuth, « sécantes d'abord » : 1,8·10⁵ à 1,6·10⁸ nœuds. Des sécantes PL-faisables survivent aux 6 niveaux.
+  - **L'arbre de Farkas (0,6) est donc probablement hors de portée** : la voie PL reste secondaire. C2 est prévenu.
+  - Dans le modèle à deux blocs, le placement de la sécante de d° (partenaire D) est déjà forcé par les unités Uc2/Uc4.
+  - **C2 : 25/25 certificats DRAT VERIFIED**, sans lex-leader. Ce sont les 25 premiers types du théorème, démontrés.
