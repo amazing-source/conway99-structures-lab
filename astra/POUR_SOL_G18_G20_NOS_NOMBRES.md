@@ -88,7 +88,11 @@ La boule H_I (19 × 19) a un rang 18 − t. Son noyau vaut ⟨z_c⟩ ⊕ {(2Cφ 
 ## 6. Notre piste la plus prometteuse : le système local (i)–(iii) lui-même
 - **Comptage heuristique** : ≈ 10^−10 solution par type avec pivots, contre 10^48 à m = 11.
 - **Formulation en deux étapes** : (iii) ⟺ un couplage ι des 60 paires non-μ aux comptes croisés K₃ ; puis (ii) comme
-  affectation. Chaque ι trouvé sur un type AVEC pivots meurt en étape 2, presque toujours au PL.
+  affectation. Sur les types AVEC pivots testés, chaque ι trouvé meurt en étape 2 :
+  - blocs pleins 9/9, et les 9 types (2,4) : au PL ou en PLNE ;
+  - un type par profil (2,2), (1,4), (3,0), (3,2), (4,0) : au PL ;
+  - **exception : le profil (0,6)** (aucun bloc ancré), où l'étape 2 est PL-faisable et indécise, comme aux étoiles libres.
+  - Ce sont des indices, pas des preuves.
 - **Échelle des pivots** (C1) : Σ_blocs #pivots = 42 + 2|Σ| − 2n_dis, toujours pair par bloc, jamais 10. Donc :
   - système local UNSAT sur les 79 classes pertinentes à ≥ 6 pivots ⟹ la famille « Σ = ∅, tout un bloc » est morte ;
   - UNSAT sur les 1521 classes à pivots ⟹ seul « tout dis » survit (toutes les étoiles libres).
