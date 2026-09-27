@@ -1,0 +1,4 @@
+t06_0.json  SEC=False step-2 vars  1800  LP feasible   MILP unknown(1)  47s
+t06_0.json  SEC=True  step-2 vars  1560  LP INFEASIBLE MILP   47s
+t06_3.json  SEC=False step-2 vars  1800  LP INFEASIBLE MILP   55s
+t06_3.json  SEC=True  step-2 vars  1560  LP INFEASIBLE MILP   55s

@@ -93,7 +93,12 @@ PATHC = ('c PATH (C1 notes/134 par. 6, equality form of the single-block lemma):
          'k <= 2 on the sigma-pairs through p, never 4, and exactly one of {k = 2 through p}, {k = 3 not through p}, {k = 0 not through p}.')
 
 
-def encode(mu, tau, cycles=(), digon=False, path=False):
+SECC = ('c SEC (structures, 27/09): in a configuration WITHOUT dis D-squares (e.g. the Sigma = empty all-one-block family), '
+        'a far root z with v in Phi(z) and v in Phi(sigma z) has D-partner o_v in star(c); the square is one-block, so z meets '
+        'block(v). Clauses: not(U[z,v] and U[sigma z,v]) whenever block(v) is not a block of z. NOT valid if dis squares exist.')
+
+
+def encode(mu, tau, cycles=(), digon=False, path=False, sec=False):
     K2, K3 = D.K2K3(mu, tau)
     far = [z for z in itertools.combinations(L, 2) if z[0] // 2 != z[1] // 2]
     fidx = {z: i for i, z in enumerate(far)}
@@ -156,6 +161,14 @@ def encode(mu, tau, cycles=(), digon=False, path=False):
                     continue
                 eq([U(z, b) for b in Sp] + [U(sig[z], b) for b in Sp], 2 - len({a // 2 for a in far[z]} & {p, q}))
         print('digon balance added for anchored digons', dg, flush=True)
+    if sec:                                                   # (SEC): no dis D-square between far(c) and star(c)
+        nsec = 0
+        for z in range(60):
+            zb = {a // 2 for a in far[z]}
+            for v in L:
+                if v // 2 not in zb:
+                    cnf.append([-U(z, v), -U(sig[z], v)]); nsec += 1
+        print('SEC clauses added:', nsec, flush=True)
     if path:
         pb = path_constraints(cnf, pool, mu, tau, far, sig, U)
         print('path constraints (exactly one excess) added for anchored path blocks', pb, flush=True)
@@ -185,7 +198,7 @@ if __name__ == '__main__':
     else:
         cycles = []; mu, tau = cfg['mu'], cfg['tau']
     t0 = time.time()
-    cnf, pool, far, edges = encode(mu, tau, cycles, digon='--digon' in sys.argv, path='--path' in sys.argv)
+    cnf, pool, far, edges = encode(mu, tau, cycles, digon='--digon' in sys.argv, path='--path' in sys.argv, sec='--sec' in sys.argv)
     if '--symbreak' in sys.argv and cycles:        # C1's lex-leader symmetry breaking (conway99-c1 code/fullblock_symmetry.py)
         sys.path.insert(0, 'C:/home/researcher/Desktop/c1_recherche/code')
         from fullblock_symmetry import lexleader_clauses
