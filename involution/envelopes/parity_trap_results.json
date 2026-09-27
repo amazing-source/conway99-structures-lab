@@ -1,0 +1,102 @@
+{
+"117": {
+"id": 117,
+"roots": "d_8d_4^4",
+"r": 208,
+"norm3": 4096,
+"admissible": 4096,
+"components": 1,
+"largest": [
+{
+"size": 4096,
+"rank": 24,
+"dim_short": 8,
+"short": 16,
+"codim": 0,
+"ok": false
+}
+],
+"verdict": "EXCLUDED (parity + connectivity + trap)",
+"seconds": 4.2
+},
+"1": {
+"id": 1,
+"roots": "a_1^8",
+"r": 16,
+"norm3": 4096,
+"admissible": 4096,
+"components": 1,
+"largest": [
+{
+"size": 4096,
+"rank": 24,
+"dim_short": 0,
+"short": 0,
+"codim": 0,
+"ok": true
+}
+],
+"verdict": "survives",
+"seconds": 6.1
+},
+"2": {
+"id": 2,
+"roots": "a_1^{12}",
+"r": 24,
+"norm3": 4096,
+"admissible": 4096,
+"components": 1,
+"largest": [
+{
+"size": 4096,
+"rank": 24,
+"dim_short": 0,
+"short": 0,
+"codim": 0,
+"ok": true
+}
+],
+"verdict": "survives",
+"seconds": 4.4
+},
+"3": {
+"id": 3,
+"roots": "a_2^2a_1^{10}",
+"r": 32,
+"norm3": 4096,
+"admissible": 4096,
+"components": 1,
+"largest": [
+{
+"size": 4096,
+"rank": 24,
+"dim_short": 0,
+"short": 0,
+"codim": 0,
+"ok": true
+}
+],
+"verdict": "survives",
+"seconds": 4.0
+},
+"30": {
+"id": 30,
+"roots": "a_3^4a_3^2a_1^4",
+"r": 80,
+"norm3": 4096,
+"admissible": 4096,
+"components": 1,
+"largest": [
+{
+"size": 4096,
+"rank": 24,
+"dim_short": 0,
+"short": 0,
+"codim": 0,
+"ok": true
+}
+],
+"verdict": "survives",
+"seconds": 3.9
+}
+}

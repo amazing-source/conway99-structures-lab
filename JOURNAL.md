@@ -960,3 +960,24 @@
     générateur hors de G et spec tronquée.
   - Refactor de sat_local2 (twist/path/ident en unités) : encode inchangé, 95/95 empreintes.
   - Reste : un mode de brisure compact pour les très gros groupes (chaîne d'orbites de C1 généralisée), si C2 le demande.
+
+## 27/09, après-midi : route (C), les 156 enveloppes et O₂₄
+- **Décision utilisateur** : « effacer les réseaux mathématiquement », pas de SAT aveugle. Route (C) de Sol : toute involution
+  donne un repère de 51 vecteurs (42 u norme 3, 7 h norme 4, 2 y norme 7, Σv⊗v = 7I) dans l'un des 156 réseaux unimodulaires
+  impairs de dim 24 et min ≥ 2 de Borcherds. Tous les exclure = fin du cas involution.
+- **Construction explicite des 156** (S35) : `involution/envelopes/build156.py`, ~5 min, tout dans Q²⁴ ; vérification
+  indépendante 156/156 ; correction prouvée de l'id 150 (nb2 = E₈³). Format = entrée de `envelope_trap.py` de C1.
+- **Critères (C1, relus)** : piège (P) (min N* ≥ 8/7), (E) = identité m(x) = r/8 − E(x) ≥ 0, packing (chaque nouvelle racine
+  touchée par au plus un vecteur impair du repère), connexité des u. Au PC (C2) : packing = 18 exclus. **Suivi (C) : 19/156**
+  (+ 87, 132 partiels via Sol).
+- **Lemme décomposable** : preuve générale (structures), adoptée par C1.
+- **O₂₄** (S36) : relecture des 141 classes ; étage u (candidats exacts + types même/opposé + identité) ; puis **PL de classe
+  entière** : l'identité du repère seule, poids fractionnaires, est infaisable pour 86/141 classes, avec certificat entier
+  (vérificateur autonome). L'optimum de phase 1 vaut 7 : l'identité force (Σx, Σz) = (38, 10) au lieu de (42, 7). 55 classes
+  PL-faisables → DFS de C2 (les sommes d'étoiles locales tuent toutes les feuilles vues).
+- **Sol (nouveau dépôt, 27/09 13:23)** : aucune exclusion annoncée ; la « coupe de parité » m(u) pair est vide (identité).
+- **Portable** : un process de C1 à 7 Go (y_first sur 132, `timeout` nu) a saturé la RAM ; prévenu, tué par C1 ; règle
+  rappelée (run_capped, ≤ 2,5 Go).
+- **Reste** : les 55 classes O₂₄ (DFS de C2) ; 134 réseaux à racines (famille rigide 10/44/87/115/132 chez C1, y d'abord ;
+  les autres : filtres exacts sur y, Y(α) ∈ {0,1,2,4,5} et a(α) + H(α) ≥ 9, à combiner avec l'énumération des y).
+
