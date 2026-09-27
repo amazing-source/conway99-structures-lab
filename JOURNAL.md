@@ -981,3 +981,23 @@
 - **Reste** : les 55 classes O₂₄ (DFS de C2) ; 134 réseaux à racines (famille rigide 10/44/87/115/132 chez C1, y d'abord ;
   les autres : filtres exacts sur y, Y(α) ∈ {0,1,2,4,5} et a(α) + H(α) ≥ 9, à combiner avec l'énumération des y).
 
+## 27/09, ~14 h 30 – 15 h 30 : pipeline « paires (y₁,y₂) → PL de repère → étage h », premières fermetures
+- **Ressources** (utilisateur) : ~70 % de la machine, puis « enlève le plafond ». Plus de plafond par tâche, garde machine
+  ≥ 700 Mo libres ; rien de fermé (Chrome = travail de l'utilisateur).
+- **frame_lp** (identité exacte du repère, y fixés, x,z ∈ [0,1], certificat entier + vérificateur autonome) : passage au
+  point intérieur HiGHS (6 à 13 × plus rapide) ; lots parallèles par tranches (8 workers ≈ 150 paires/min).
+- **Γ** (C1) : paires réduites à Aut(U) × signes près. 132 : 2 416 → 304 ; 115 : 11 664 → 1 472 ; 87 : ~150 k → 3 913.
+- **132 (d₆⁴) EXCLU par trois voies** : frame_lp 294/304 exclues (+ 10 PL-faisables) ; h-check de C1 304/304 morts ;
+  frame_dfs de C2 2 416/2 416 morts. Reste l'énumération indépendante des paires par C2 (complétude).
+- **115 (a₇²d₅²)** : frame_lp 1 470/1 472 ; frame_dfs de C2 1 472/1 472 morts. Fermé par deux voies.
+- **87 (d₄⁶)** : en cours (1 060/1 125 exclues au PL).
+- **O₂₄** : 86/141 classes par PL ; DFS de C2 : 0, 8, 12 EMPTY (0 est donc double). Classe 1 : **certificat à UN vecteur**
+  (g = s + 2e₁₀, |g|² = 12, tous les u-candidats ont |E·g| ≥ 4, B₂·g = 8). Les feuilles L7-locales meurent par « conflit
+  d'emplacement » (C2).
+- **id 1 (a₁⁸), cadre de Golay** : U(1) explicite (a ∈ ℤ²⁴, norme a·a/8), G₁ = Stab_M24(octade) × signes (|G₁|/|W| × 2
+  = 20,6 M = table). 118 428 y admissibles → **14 classes de y₁** ; classe 0 → 3,09 M y₂ filtrés → **819 classes de paires**.
+  Les 14 classes tournent, puis PL.
+- **Pistes « tout d'un coup »** (demande utilisateur) : transfert C3 (2-adique) jugé vide par C2 ; calibrage Paley 9 : mêmes
+  invariants que prévu pour m = 7 (pas de contradiction). Ligne rang 27 morte (min L₊ ≥ 6 seulement). Idées notées :
+  NOTE_S38.
+
