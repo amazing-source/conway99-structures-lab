@@ -466,6 +466,37 @@ def build_instance(inst, flags, cross=True, glue=None, full=False):
     return cnf, info
 
 
+def export_partial_graph(T, model, path, note=''):
+    """C1's filter format: x0 = 0, interior world vertex w -> 1 + w, exterior T.ext[i] -> 15 + i;
+    adj = 99 x 99 with 1 / 0 / -1 (unknown: far-far x far-far when the model is not --full)."""
+    ms = set(l for l in model if l > 0)
+
+    def val(l):
+        if isinstance(l, bool):
+            return int(l)
+        return 1 if (l > 0) == (abs(l) in ms) else 0
+    m = T.m
+    n = 1 + 2 * m + len(T.ext)
+    A = [[0] * n for _ in range(n)]
+    ide = {X: 1 + 2 * m + i for i, X in enumerate(T.ext)}
+    for w in range(2 * m):
+        A[0][1 + w] = A[1 + w][0] = 1
+        A[1 + w][1 + (w ^ 1)] = 1
+    for X, i in ide.items():
+        for w in X:
+            A[1 + w][i] = A[i][1 + w] = 1
+    unknown = 0
+    for X, Y in itertools.combinations(T.ext, 2):
+        a = T.adj(X, Y)
+        v = -1 if a is None else val(a)
+        unknown += v == -1
+        A[ide[X]][ide[Y]] = A[ide[Y]][ide[X]] = v
+    names = ['x0'] + ['(%d,%d)' % (w // 2, w & 1) for w in range(2 * m)] + ['{(%d,%d),(%d,%d)}' % (X[0] // 2, X[0] & 1, X[1] // 2, X[1] & 1) for X in T.ext]
+    json.dump({'n': n, 'x0': 0, 'blocks': [[1 + 2 * k, 2 + 2 * k] for k in range(m)], 'c': 0, 'd': 1, 'names': names,
+               'adj': A, 'note': note, 'unknown_pairs': unknown}, open(path, 'w'))
+    return unknown
+
+
 def glue_assumptions(T, glue):
     """B literals (assumptions) selecting a full gluing (list d-frame label -> world vertex) in a variable-gluing build"""
     out = []
@@ -748,4 +779,9 @@ if __name__ == '__main__':
     with Solver(name='glucose4', bootstrap_with=cnf.clauses) as s:
         timer = threading.Timer(secs, lambda: s.interrupt()); timer.start()
         res = s.solve_limited(expect_interrupt=True); timer.cancel()
+        model = s.get_model() if res else None
     print('status', {True: 'SAT', False: 'UNSAT', None: 'UNKNOWN (interrupted)'}[res], '%.1fs' % (time.time() - t0), flush=True)
+    mpath = next((a.split('=', 1)[1] for a in sys.argv if a.startswith('--model=')), None)
+    if res and mpath:
+        unk = export_partial_graph(build_instance.last, model, mpath, note='%s %s' % (tagname, json.dumps(flags)))
+        print('partial graph written to', mpath, '(%d unknown far-far pairs)' % unk)
