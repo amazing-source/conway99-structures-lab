@@ -1,0 +1,518 @@
+{
+"0": {
+"class": 0,
+"cuts": false,
+"nE": 336,
+"nM": 6060,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 6.999999999999769,
+"float_certificate": 6.999999999042042,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 4096,
+"value_times_scale": 18327,
+"n_eq_used": 255,
+"n_ineq_used": 0
+},
+"seconds": 21.9
+},
+"1": {
+"class": 1,
+"cuts": false,
+"nE": 344,
+"nM": 6037,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 6.999999999999439,
+"float_certificate": 6.999999998537339,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 1024,
+"value_times_scale": 2769,
+"n_eq_used": 169,
+"n_ineq_used": 0
+},
+"seconds": 3.3
+},
+"137": {
+"class": 137,
+"cuts": false,
+"nE": 336,
+"nM": 6060,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 6.999999999999067,
+"float_certificate": 6.9999999991880575,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 4096,
+"value_times_scale": 23742,
+"n_eq_used": 229,
+"n_ineq_used": 0
+},
+"seconds": 2.6
+},
+"2": {
+"class": 2,
+"cuts": false,
+"nE": 344,
+"nM": 6041,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 6.999999999998803,
+"float_certificate": 6.9999999988648005,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 4096,
+"value_times_scale": 14567,
+"n_eq_used": 250,
+"n_ineq_used": 0
+},
+"seconds": 2.7
+},
+"3": {
+"class": 3,
+"cuts": false,
+"nE": 344,
+"nM": 6041,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 7.000000000000348,
+"float_certificate": 6.999999998444296,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 4096,
+"value_times_scale": 16830,
+"n_eq_used": 231,
+"n_ineq_used": 0
+},
+"seconds": 2.8
+},
+"4": {
+"class": 4,
+"cuts": false,
+"nE": 334,
+"nM": 6056,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 6.999999999660745,
+"float_certificate": 6.999996463783898,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 1024,
+"value_times_scale": 709,
+"n_eq_used": 239,
+"n_ineq_used": 0
+},
+"seconds": 3.5
+},
+"5": {
+"class": 5,
+"cuts": false,
+"nE": 340,
+"nM": 6029,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 6.9999999999981695,
+"float_certificate": 6.999999994374255,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 4096,
+"value_times_scale": 15176,
+"n_eq_used": 236,
+"n_ineq_used": 0
+},
+"seconds": 3.1
+},
+"6": {
+"class": 6,
+"cuts": false,
+"nE": 352,
+"nM": 6100,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 6.999999999999725,
+"float_certificate": 6.999999998603061,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 1024,
+"value_times_scale": 3340,
+"n_eq_used": 109,
+"n_ineq_used": 0
+},
+"seconds": 3.0
+},
+"7": {
+"class": 7,
+"cuts": false,
+"nE": 344,
+"nM": 6041,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 6.9999999999965485,
+"float_certificate": 6.999999998533195,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 4096,
+"value_times_scale": 18494,
+"n_eq_used": 228,
+"n_ineq_used": 0
+},
+"seconds": 2.6
+},
+"8": {
+"class": 8,
+"cuts": true,
+"nE": 352,
+"nM": 6040,
+"ineq_rows": 61688,
+"status": 0,
+"phase1": 0.0,
+"verdict": "LP FEASIBLE",
+"z_support": 91,
+"seconds": 119.1
+},
+"9": {
+"class": 9,
+"cuts": false,
+"nE": 342,
+"nM": 6035,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 6.999999999999439,
+"float_certificate": 6.999999994625165,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 4096,
+"value_times_scale": 16181,
+"n_eq_used": 227,
+"n_ineq_used": 0
+},
+"seconds": 2.9
+},
+"10": {
+"class": 10,
+"cuts": false,
+"nE": 346,
+"nM": 6047,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 6.999999999999965,
+"float_certificate": 6.9999999991532125,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 4096,
+"value_times_scale": 18703,
+"n_eq_used": 201,
+"n_ineq_used": 0
+},
+"seconds": 3.8
+},
+"11": {
+"class": 11,
+"cuts": false,
+"nE": 356,
+"nM": 6112,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 6.999999999999902,
+"float_certificate": 6.999999999230555,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 4096,
+"value_times_scale": 13780,
+"n_eq_used": 242,
+"n_ineq_used": 0
+},
+"seconds": 3.1
+},
+"12": {
+"class": 12,
+"cuts": false,
+"nE": 350,
+"nM": 6032,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 0.0,
+"verdict": "LP FEASIBLE",
+"z_support": 96,
+"seconds": 2.8
+},
+"13": {
+"class": 13,
+"cuts": false,
+"nE": 334,
+"nM": 6054,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 7.000000000000224,
+"float_certificate": 6.999999999037986,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 4096,
+"value_times_scale": 20794,
+"n_eq_used": 243,
+"n_ineq_used": 0
+},
+"seconds": 2.6
+},
+"14": {
+"class": 14,
+"cuts": false,
+"nE": 346,
+"nM": 6047,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 6.9999999999997105,
+"float_certificate": 6.999999999105283,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 1024,
+"value_times_scale": 1339,
+"n_eq_used": 216,
+"n_ineq_used": 0
+},
+"seconds": 3.2
+},
+"15": {
+"class": 15,
+"cuts": false,
+"nE": 354,
+"nM": 6044,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 0.0,
+"verdict": "LP FEASIBLE",
+"z_support": 103,
+"seconds": 3.2
+},
+"16": {
+"class": 16,
+"cuts": false,
+"nE": 356,
+"nM": 6052,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 0.0,
+"verdict": "LP FEASIBLE",
+"z_support": 92,
+"seconds": 3.0
+},
+"17": {
+"class": 17,
+"cuts": false,
+"nE": 362,
+"nM": 6105,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 0.0,
+"verdict": "LP FEASIBLE",
+"z_support": 92,
+"seconds": 3.7
+},
+"18": {
+"class": 18,
+"cuts": false,
+"nE": 332,
+"nM": 6048,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 6.999999999950267,
+"float_certificate": 6.999999953334888,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 4096,
+"value_times_scale": 24355,
+"n_eq_used": 221,
+"n_ineq_used": 0
+},
+"seconds": 3.2
+},
+"19": {
+"class": 19,
+"cuts": false,
+"nE": 342,
+"nM": 6035,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 7.000000000000247,
+"float_certificate": 6.999999999572356,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 4096,
+"value_times_scale": 18938,
+"n_eq_used": 231,
+"n_ineq_used": 0
+},
+"seconds": 3.6
+},
+"20": {
+"class": 20,
+"cuts": false,
+"nE": 340,
+"nM": 6029,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 6.999999999999847,
+"float_certificate": 6.99999999927093,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 1024,
+"value_times_scale": 2268,
+"n_eq_used": 240,
+"n_ineq_used": 0
+},
+"seconds": 3.5
+},
+"21": {
+"class": 21,
+"cuts": false,
+"nE": 372,
+"nM": 6170,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 0.0,
+"verdict": "LP FEASIBLE",
+"z_support": 80,
+"seconds": 3.4
+},
+"22": {
+"class": 22,
+"cuts": false,
+"nE": 346,
+"nM": 6043,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 6.999999999999472,
+"float_certificate": 6.999999999298525,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 1024,
+"value_times_scale": 2328,
+"n_eq_used": 224,
+"n_ineq_used": 0
+},
+"seconds": 3.7
+},
+"23": {
+"class": 23,
+"cuts": false,
+"nE": 352,
+"nM": 6040,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 0.0,
+"verdict": "LP FEASIBLE",
+"z_support": 90,
+"seconds": 3.0
+},
+"24": {
+"class": 24,
+"cuts": false,
+"nE": 334,
+"nM": 6056,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 6.999999999999623,
+"float_certificate": 6.999999998252531,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 4096,
+"value_times_scale": 9199,
+"n_eq_used": 239,
+"n_ineq_used": 0
+},
+"seconds": 3.6
+},
+"25": {
+"class": 25,
+"cuts": false,
+"nE": 334,
+"nM": 6056,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 7.000000000000339,
+"float_certificate": 6.99999999949894,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 4096,
+"value_times_scale": 14547,
+"n_eq_used": 240,
+"n_ineq_used": 0
+},
+"seconds": 3.3
+},
+"26": {
+"class": 26,
+"cuts": false,
+"nE": 336,
+"nM": 6060,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 6.999999999819897,
+"float_certificate": 6.999998991007288,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 4096,
+"value_times_scale": 18767,
+"n_eq_used": 242,
+"n_ineq_used": 0
+},
+"seconds": 3.8
+},
+"27": {
+"class": 27,
+"cuts": false,
+"nE": 336,
+"nM": 6060,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 6.999999999997481,
+"float_certificate": 6.999999996953656,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 4096,
+"value_times_scale": 23018,
+"n_eq_used": 215,
+"n_ineq_used": 0
+},
+"seconds": 3.1
+},
+"28": {
+"class": 28,
+"cuts": false,
+"nE": 354,
+"nM": 6102,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 6.999999999999384,
+"float_certificate": 6.999999999071272,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 1024,
+"value_times_scale": 508,
+"n_eq_used": 174,
+"n_ineq_used": 0
+},
+"seconds": 4.0
+},
+"29": {
+"class": 29,
+"cuts": false,
+"nE": 332,
+"nM": 6048,
+"ineq_rows": 0,
+"status": 0,
+"phase1": 7.000000000000273,
+"float_certificate": 6.999999998098527,
+"verdict": "EXCLUDED (whole-class LP infeasible, exact certificate)",
+"certificate": {
+"scale": 4096,
+"value_times_scale": 22519,
+"n_eq_used": 175,
+"n_ineq_used": 0
+},
+"seconds": 3.5
+}
+}
