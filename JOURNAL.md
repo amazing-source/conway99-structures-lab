@@ -949,3 +949,14 @@
 - État : **33/79 certifiés** (théorème Σ = ∅, avec SEC). Barreau 1 (156 classes, sans SEC) en cours au PC.
   - Durs : les (0,6), les classes frères (stabilisateurs jusqu'à 46 080) et les étoiles libres (toutes inconnues à 15 s au
     portable).
+- **~10 h 45 : lex-leader déclarable (demande de C2, pilote)** : `involution/spec_local.py` (3dfa451).
+  - SPEC = les événements de sat_local2.encode au niveau des variables primaires. compile(SPEC) = encode, octet pour octet
+    (18/18) : la spec est COMPLÈTE.
+  - Invariance sous les générateurs de Stab(μ,τ) (stabiliser de C1) : 12/12, dont |G| = 46 080 et 1536. Contrôles négatifs
+    10/10 (permutation hors de G, contrainte cassée).
+  - Export = compile(SPEC) + lexleader_clauses de C1 (relus). L'en-tête porte les générateurs, le hash de la spec et les sha256
+    des sources C1.
+  - Vérificateur : égalité exacte des clauses, générateurs dans G et l'engendrant, invariance. Il rejette clause altérée,
+    générateur hors de G et spec tronquée.
+  - Refactor de sat_local2 (twist/path/ident en unités) : encode inchangé, 95/95 empreintes.
+  - Reste : un mode de brisure compact pour les très gros groupes (chaîne d'orbites de C1 généralisée), si C2 le demande.
