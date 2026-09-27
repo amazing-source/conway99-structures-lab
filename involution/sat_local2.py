@@ -107,24 +107,29 @@ def path_constraints(cnf, pool, mu, tau, far, sig, U):
     k <= 2 on S_p, k <= 3 elsewhere, and exactly one of {Z in S_p: k = 2}, {Z not in S_p: k = 3}, {Z not in S_p: k = 0}."""
     _, paths = anchored_structures(mu, tau)
     for p in paths:
-        Sp = [2 * p, 2 * p + 1, mu[2 * p], mu[2 * p + 1]]
-        events = []
-        for z in range(60):
-            if z > sig[z]:
-                continue
-            lits = [U(z, b) for b in Sp] + [U(sig[z], b) for b in Sp]
-            o = unary_geq(cnf, pool, lits, 4, ('pathcnt', p, z))
-            through = p in {a // 2 for a in far[z]}
-            if through:
-                cnf.append([-o[2]])                    # k <= 2 on S_p
-                events.append(o[1])                    # k = 2  <->  o2 (given not o3)
-            else:
-                cnf.append([-o[3]])                    # k <= 3 (never 4)
-                events.append(o[2])                    # k = 3  <->  o3
-                e0 = pool.id(('pathe0', p, z)); cnf.append([-e0, -o[0]]); cnf.append([e0, o[0]])   # e0 <-> k = 0
-                events.append(e0)
-        cnf.extend(CardEnc.equals(lits=events, bound=1, vpool=pool, encoding=EncType.seqcounter).clauses)
+        path_block(cnf, pool, mu, far, sig, U, p)
     return paths
+
+
+def path_block(cnf, pool, mu, far, sig, U, p):
+    """the path constraint at one anchored non-sib path block p (unit of path_constraints; also used by spec_local)"""
+    Sp = [2 * p, 2 * p + 1, mu[2 * p], mu[2 * p + 1]]
+    events = []
+    for z in range(60):
+        if z > sig[z]:
+            continue
+        lits = [U(z, b) for b in Sp] + [U(sig[z], b) for b in Sp]
+        o = unary_geq(cnf, pool, lits, 4, ('pathcnt', p, z))
+        through = p in {a // 2 for a in far[z]}
+        if through:
+            cnf.append([-o[2]])                    # k <= 2 on S_p
+            events.append(o[1])                    # k = 2  <->  o2 (given not o3)
+        else:
+            cnf.append([-o[3]])                    # k <= 3 (never 4)
+            events.append(o[2])                    # k = 3  <->  o3
+            e0 = pool.id(('pathe0', p, z)); cnf.append([-e0, -o[0]]); cnf.append([e0, o[0]])   # e0 <-> k = 0
+            events.append(e0)
+    cnf.extend(CardEnc.equals(lits=events, bound=1, vpool=pool, encoding=EncType.seqcounter).clauses)
 
 
 PATHC = ('c PATH (C1 notes/134 par. 6, equality form of the single-block lemma): at every anchored non-sib path block p, '
@@ -154,28 +159,41 @@ def twist_constraints(cnf, pool, mu, tau, far, sig, U):
     a3 + 3 a4 + sum_{Z through p} (k-1)+ + #{Z not through p : k = 0} = 3."""
     blocks = []
     for p in range(6):
-        a, b = 2 * p, 2 * p + 1
-        piv = [l for l in (a, b) if mu[l] == tau[l]]
-        if len(piv) != 1:
-            continue
-        ps = piv[0]; po = a + b - ps; qs = mu[ps]
-        if qs // 2 == p:
-            continue                                   # sib (not a twisted block)
-        S = [ps, po, qs]
-        lits = []
-        for z in range(60):
-            if z > sig[z]:
-                continue
-            o = unary_geq(cnf, pool, [U(z, x) for x in S] + [U(sig[z], x) for x in S], 4, ('twcnt', p, z))
-            cnf.append([-o[3], o[3]])                   # (k <= 4 automatically: only 4 slots)
-            through = p in {w // 2 for w in far[z]}
-            for t in twist_terms(o, through):
-                c = pool.id(('twcopy', p, z, len(lits)))  # fresh copy, so that repeated literals are separate inputs
-                cnf.append([-c, t]); cnf.append([c, -t])
-                lits.append(c)
-        cnf.extend(CardEnc.equals(lits=lits, bound=3, vpool=pool, encoding=EncType.seqcounter).clauses)
-        blocks.append(p)
+        if twist_block(cnf, pool, mu, tau, far, sig, U, p):
+            blocks.append(p)
     return blocks
+
+
+def twist_S3(mu, tau, p):
+    """S3 = [p*, p-deg, q*] if left block p is twisted (exactly one pivot label, q* = mu p* in another block), else None"""
+    a, b = 2 * p, 2 * p + 1
+    piv = [l for l in (a, b) if mu[l] == tau[l]]
+    if len(piv) != 1:
+        return None
+    ps = piv[0]; po = a + b - ps; qs = mu[ps]
+    if qs // 2 == p:
+        return None                                    # sib (not a twisted block)
+    return [ps, po, qs]
+
+
+def twist_block(cnf, pool, mu, tau, far, sig, U, p):
+    """the twisted-block identity at one block p (unit of twist_constraints; also used by spec_local)"""
+    S = twist_S3(mu, tau, p)
+    if S is None:
+        return False
+    lits = []
+    for z in range(60):
+        if z > sig[z]:
+            continue
+        o = unary_geq(cnf, pool, [U(z, x) for x in S] + [U(sig[z], x) for x in S], 4, ('twcnt', p, z))
+        cnf.append([-o[3], o[3]])                   # (k <= 4 automatically: only 4 slots)
+        through = p in {w // 2 for w in far[z]}
+        for t in twist_terms(o, through):
+            c = pool.id(('twcopy', p, z, len(lits)))  # fresh copy, so that repeated literals are separate inputs
+            cnf.append([-c, t]); cnf.append([c, -t])
+            lits.append(c)
+    cnf.extend(CardEnc.equals(lits=lits, bound=3, vpool=pool, encoding=EncType.seqcounter).clauses)
+    return True
 
 
 TWISTC = ('c TWIST (C1, 27/09; relu par structures): at every twisted left block p (one pivot p*, non-pivot p°, q* = mu p*), '
@@ -205,24 +223,29 @@ def ident_list(mu, tau, smax):
 def ident_constraints(cnf, pool, far, sig, U, idents):
     """one exact identity per (p, S, slack), same bookkeeping as twist_terms; slack 0 = unit clauses (rigidity)"""
     for nid, (p, S, sl) in enumerate(idents):
-        assert sl >= 0, ('negative slack: the type is infeasible by itself', p, S, sl)
-        lits = []
-        for z in range(60):
-            if z > sig[z]:
-                continue
-            o = unary_geq(cnf, pool, [U(z, b) for b in S] + [U(sig[z], b) for b in S], 4, ('idcnt', nid, z))
-            through = p in {w // 2 for w in far[z]}
-            if sl == 0:
-                cnf.append([-o[2]])
-                cnf.append([-o[1]] if through else [o[0]])
-                continue
-            for t in twist_terms(o, through):
-                c = pool.id(('idcopy', nid, z, len(lits)))
-                cnf.append([-c, t]); cnf.append([c, -t])
-                lits.append(c)
-        if sl > 0:
-            cnf.extend(CardEnc.equals(lits=lits, bound=sl, vpool=pool, encoding=EncType.seqcounter).clauses)
+        ident_one(cnf, pool, far, sig, U, nid, p, S, sl)
     return len(idents)
+
+
+def ident_one(cnf, pool, far, sig, U, nid, p, S, sl):
+    """one general identity (unit of ident_constraints; also used by spec_local)"""
+    assert sl >= 0, ('negative slack: the type is infeasible by itself', p, S, sl)
+    lits = []
+    for z in range(60):
+        if z > sig[z]:
+            continue
+        o = unary_geq(cnf, pool, [U(z, b) for b in S] + [U(sig[z], b) for b in S], 4, ('idcnt', nid, z))
+        through = p in {w // 2 for w in far[z]}
+        if sl == 0:
+            cnf.append([-o[2]])
+            cnf.append([-o[1]] if through else [o[0]])
+            continue
+        for t in twist_terms(o, through):
+            c = pool.id(('idcopy', nid, z, len(lits)))
+            cnf.append([-c, t]); cnf.append([c, -t])
+            lits.append(c)
+    if sl > 0:
+        cnf.extend(CardEnc.equals(lits=lits, bound=sl, vpool=pool, encoding=EncType.seqcounter).clauses)
 
 
 IDENTC = ('c IDENT (C1 notes/134 s.8, re-derived and checked on BvLS by structures): for the listed (p, S, slack), '
