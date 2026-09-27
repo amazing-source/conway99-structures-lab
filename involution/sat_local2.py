@@ -230,7 +230,29 @@ IDENTC = ('c IDENT (C1 notes/134 s.8, re-derived and checked on BvLS by structur
           'Uses only (i)-(iii) and block-level coverage; slack 0 = rigidity (unit clauses).')
 
 
-def encode(mu, tau, cycles=(), cuts=False, digon=False, path=False, sec=False, twist=False, relax=(), ident=None):
+def block_cycles(mu):
+    """components of the block graph p -- block(mu(label of p)); at a full block they are the D-cycles (a digon = 2 blocks)"""
+    adj = {p: {mu[2 * p] // 2, mu[2 * p + 1] // 2} for p in range(6)}
+    comps, seen = [], set()
+    for s in range(6):
+        if s in seen:
+            continue
+        comp, stack = set(), [s]
+        while stack:
+            p = stack.pop()
+            if p not in comp:
+                comp.add(p); stack.extend(adj[p] - comp)
+        seen |= comp
+        comps.append(sorted(comp))
+    return comps
+
+
+FULLCYCC = ('c FULLCYC (balance lemma, C2 note 23 par. 8; NOTE_S28, astra/PROBLEME_BLOC_PLEIN (v)): at a FULL block (every label '
+            'a pivot), for every D-cycle C of length 3 or 4 and every far root z: |blocks(z) & C| + |Phi(z) & lab(C)| + '
+            '|Phi(sigma z) & lab(C)| = |C| (digons: --digon; a 6-cycle is vacuous).')
+
+
+def encode(mu, tau, cycles=(), cuts=False, digon=False, path=False, sec=False, twist=False, relax=(), ident=None, fullcyc=False):
     """relax: subset of {'ii', 'iii'} to DROP (positive controls only; the default keeps everything)"""
     K2, K3 = D.K2K3(mu, tau)
     far = [z for z in itertools.combinations(L, 2) if z[0] // 2 != z[1] // 2]
@@ -329,6 +351,15 @@ def encode(mu, tau, cycles=(), cuts=False, digon=False, path=False, sec=False, t
     if path:
         pb = path_constraints(cnf, pool, mu, tau, far, sig, U)
         print('path constraints (exactly one excess) added for anchored path blocks', pb, flush=True)
+    if fullcyc and all(mu[l] == tau[l] for l in L):
+        fc = [C for C in block_cycles(mu) if 3 <= len(C) <= 4]
+        for C in fc:
+            lc = [2 * p + s for p in C for s in (0, 1)]
+            for z in range(60):
+                if z > sig[z]:
+                    continue
+                eq([U(z, v) for v in lc] + [U(sig[z], v) for v in lc], len(C) - len({a // 2 for a in far[z]} & set(C)))
+        print('full-block D-cycle balance (v) added for cycles', fc, flush=True)
     if ident is not None:
         ids = ident_list(mu, tau, ident)
         ident_constraints(cnf, pool, far, sig, U, ids)
@@ -359,7 +390,8 @@ if __name__ == '__main__':
     t0 = time.time()
     cuts = '--cuts' in sys.argv; digon = '--digon' in sys.argv; path = '--path' in sys.argv; sec = '--sec' in sys.argv; twist = '--twist' in sys.argv
     ident = next((int(a.split('=')[1]) if '=' in a else 0 for a in sys.argv if a.startswith('--ident')), None)
-    cnf, pool, far, edges = encode(mu, tau, cycles, cuts=cuts, digon=digon, path=path, sec=sec, twist=twist, ident=ident)
+    fullcyc = '--fullcyc' in sys.argv
+    cnf, pool, far, edges = encode(mu, tau, cycles, cuts=cuts, digon=digon, path=path, sec=sec, twist=twist, ident=ident, fullcyc=fullcyc)
     print(sys.argv[1], '[encoding 2: iota-pairs]' + (' + lemma cuts' if cuts else '') + (' + digon balance' if digon else '') + (' + path' if path else '') + (' + SEC' if sec else '') + (' + twist' if twist else '') + (' + ident<=%d' % ident if ident is not None else ''), 'vars', pool.top, 'clauses', len(cnf.clauses), 'encode %.1fs' % (time.time() - t0), flush=True)
     if '--dimacs' in sys.argv:
         out = sys.argv[1].replace('.json', '_enc2.cnf')
@@ -374,6 +406,8 @@ if __name__ == '__main__':
             com.append(SECC)
         if twist:
             com.append(TWISTC)
+        if fullcyc:
+            com.append(FULLCYCC)
         if ident is not None:
             com.append(IDENTC)
             com.append('c IDENT list (p, S, slack), slack <= %d: %s' % (ident, json.dumps(ident_list(mu, tau, ident))))
