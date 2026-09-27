@@ -97,8 +97,11 @@ def frame_lp(P, y1, y2, save=None):
     n = nu + nh
     m = len(beq)
     A = hstack([csr_matrix(Aeq.astype(float)), identity(m, format='csr'), -identity(m, format='csr')]).tocsr()
-    lp = linprog(np.concatenate([np.zeros(n), np.ones(2 * m)]), A_eq=A, b_eq=beq.astype(float),
-                 bounds=[(0, 1)] * n + [(0, None)] * (2 * m), method='highs')
+    cobj = np.concatenate([np.zeros(n), np.ones(2 * m)])
+    bnds = [(0, 1)] * n + [(0, None)] * (2 * m)
+    lp = linprog(cobj, A_eq=A, b_eq=beq.astype(float), bounds=bnds, method='highs-ipm')      # 6-13x faster than simplex here
+    if lp.status != 0:
+        lp = linprog(cobj, A_eq=A, b_eq=beq.astype(float), bounds=bnds, method='highs-ds')
     out['phase1'] = float(lp.fun) if lp.status == 0 else None
     if lp.status != 0:
         out['verdict'] = 'solver status %d' % lp.status
@@ -117,6 +120,19 @@ def frame_lp(P, y1, y2, save=None):
                 if save:
                     np.savez_compressed(save, y=yi, scale=Dn, y1=y1, y2=y2)
                 break
+        if not out['verdict'].startswith('EXCLUDED'):
+            lp2 = linprog(cobj, A_eq=A, b_eq=beq.astype(float), bounds=bnds, method='highs-ds')
+            yv = lp2.eqlin.marginals
+            for Dn in (1, 2, 4, 8, 16, 64, 256, 1024, 4096, 65536, 10 ** 6):
+                yi = np.rint(yv * Dn).astype(np.int64)
+                di = -(Aeq.T @ yi)
+                val = int(beq @ yi) + int(np.minimum(di, 0).sum())
+                if val > 0:
+                    out['verdict'] = 'EXCLUDED (frame LP infeasible, exact certificate)'
+                    out['certificate'] = {'scale': Dn, 'value_times_scale': val, 'duals': 'simplex'}
+                    if save:
+                        np.savez_compressed(save, y=yi, scale=Dn, y1=y1, y2=y2)
+                    break
     out['seconds'] = round(time.time() - t0, 1)
     return out
 

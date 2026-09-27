@@ -5,6 +5,8 @@ Usage: python run_frame_lp.py pairs_file.json [pairs_file ...] [--jobs N] [--sli
   --slices S splits every file into S slices run in parallel (outputs frame_results/NNN_sA_B.json, merge with --merge).
   laptop: --jobs 1 (default) through run_capped; lab PC: --jobs up to the allowed threads."""
 import json, os, sys, time
+for _v in ('OPENBLAS_NUM_THREADS', 'OMP_NUM_THREADS', 'MKL_NUM_THREADS', 'NUMEXPR_NUM_THREADS'):
+    os.environ.setdefault(_v, '1')                     # one thread per worker (parallel slices)
 from fractions import Fraction as F
 from multiprocessing import Pool
 import numpy as np
