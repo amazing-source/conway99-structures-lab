@@ -931,3 +931,6 @@
   - **L'arbre de Farkas (0,6) est donc probablement hors de portée** : la voie PL reste secondaire. C2 est prévenu.
   - Dans le modèle à deux blocs, le placement de la sécante de d° (partenaire D) est déjà forcé par les unités Uc2/Uc4.
   - **C2 : 25/25 certificats DRAT VERIFIED**, sans lex-leader. Ce sont les 25 premiers types du théorème, démontrés.
+- **~9 h 45 (C2)** : iota_dfs (0,6) arrêté (aucun nœud mort en 10 min). Le mode bas passe en 3 voies cadical natives.
+  **33/79 VERIFIED** (no lex + DRAT), avec en plus rel 6, 29, 46 (les trois (3,2)), 2, 8, 9, 13 et 16. Le « noyau dur » tombe
+  sous cadical natif + tous les lemmes, en plafond 1 h. Deux blocs et (0,6) mono-bloc en exploration (2 h), kissat en mode haut.
