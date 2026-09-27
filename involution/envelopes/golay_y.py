@@ -153,6 +153,8 @@ def main():
     shape_of = lambda v: (int((np.abs(v[Kl]) == 2).sum()), int((np.abs(v[Kl]) == 4).sum()), int((np.abs(v[Kcl]) == 3).sum()), int((np.abs(v[Kcl]) == 5).sum()))
     json.dump({'reps': [Y[r].tolist() for r in reps], 'sizes': [sizes[r] for r in reps], 'shapes': [shape_of(Y[r]) for r in reps]},
               open(os.path.join(HERE, 'state', 'u1_y1reps.json'), 'w'))
+    cls_of = {r: t for t, r in enumerate(reps)}
+    np.save(os.path.join(HERE, 'state', 'u1_ylabels.npy'), np.array([cls_of[find(i)] for i in range(len(Y))], dtype=np.int8))
     from collections import Counter
     log('orbit shapes:', Counter(shape_of(Y[r]) for r in reps))
 
