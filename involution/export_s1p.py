@@ -104,12 +104,24 @@ if '--sec' in sys.argv:            # SEC (structures 27/09; valid when there is 
             if v // 2 not in bp and ub[av(n, k)]:
                 ub[av(n, k)] = 0; nsec += 1
     print('SEC: %d assignment variables fixed to 0' % nsec)
+nl1 = 0
+if '--l1sec' in sys.argv:          # L1 o SEC (C1, 27/09): the root of a secant quadruple centred at v meets block(v), and L1 at
+    for n, (i, j) in enumerate(pairs):   # a in {v, pi v} forbids pi v in either half: no secant iota-pair contains pi(centre)
+        com = set(edges[i]) & set(edges[j])
+        if com:
+            (v,) = com
+            if (v ^ 1) in set(edges[i]) | set(edges[j]) and ub[n]:
+                ub[n] = 0; nl1 += 1
+                for k in range(15):
+                    ub[av(n, k)] = 0
+    print('L1 o SEC: %d secant iota-pairs forbidden' % nl1)
 np.savez_compressed(out + '.npz', A_data=A.data, A_indices=A.indices, A_indptr=A.indptr, A_shape=np.array(A.shape),
                     lo=lo, hi=hi, lb=np.zeros(nv), ub=ub, integrality=np.ones(nv))
 json.dump({'block_type': cfg, 'mu': list(mu), 'tau': list(tau), 'edges (non-mu pairs)': [list(e) for e in edges],
            'flags': [a for a in sys.argv[3:] if a.startswith('--')],
            'SEC': ('with --sec: a[n,k] = 0 (ub) when iota-pair n is secant with centre v and block pair k avoids block(v); '
                    'valid only with no dis D-square (Sigma = empty theorem scope); %d variables fixed' % nsec),
+           'L1SEC': ('with --l1sec: p[n] = 0 for a secant iota-pair containing pi(centre) (C1: SEC + L1); %d forbidden' % nl1),
            'var n < %d' % npair: 'p[i,j] = 1 iff non-mu pairs i, j are iota-partners; pairs listed in iota_pairs',
            'iota_pairs': [list(p) for p in pairs],
            'var npair + 15 n + k': 'a[n,k] = iota-pair n is the image of a sigma-pair of block pair k',
