@@ -845,3 +845,27 @@
 - **Sur le cloud** (C2, c2-compute) : fb (CP-SAT, blocs pleins) ; sat (CaDiCaL, 4 types pleins, avec et sans lex-leader) ;
   etl (10 types ÉTL à det carré de C1, à la recherche d'une première solution locale pour le q:7).
 - Autres gains de la nuit : A33 mort, g⁻ ≠ 16, famille ancrée morte, M1 fermé (C2), mélanges tués à la racine (C2).
+
+## 27/09, matin (après la remise à zéro de l'usage)
+- **Relectures (demandées par C2 et C1)** : réduction large-T, échelle des pivots (42 + 2|Σ| − 2n_dis, parité, 10 impossible)
+  et validité du système local hors bloc plein. Tout est correct.
+- **Recompte indépendant au niveau des ENSEMBLES** (formes canoniques sous B₆) : les 156 classes à ≥ 6 pivots sont identiques à
+  celles de C1, avec les mêmes profils et la même pertinence. Pertinentes : 79 = (2,2) 24, (1,4) 18, (2,4) 9, (3,0) 7, (0,6) 7,
+  (3,2) 6, (4,0) 4, (6,0) 4.
+- **Table complète sans P = 0** (`involution/type_table.json`) : 3308 classes.
+  - Recoupements : 1166 t = 0 scindées (le balayage g18 de C1) et 835 étoiles libres t = 0 non scindées (les ÉTL det carré de
+    C1).
+  - **Les 441 types P = 0 de Sol = exactement nos classes sans pivot, sans 2- ni 4-cycle dans μ ∪ τ, sans arête π dans μ ni
+    dans τ** (362 C₁₂ + 79 2C₆, comme chez Sol).
+- **Deux étapes** sur les 79, en indices :
+  - les 9 types (2,4) : 9/9 ι meurent en étape 2 (6 au PL, 3 en PLNE) ;
+  - un type par profil : (2,2), (1,4), (3,0), (3,2), (4,0) meurent au PL ; **(0,6) résiste** (PL faisable, PLNE indécise).
+- **Outils** :
+  - sat_local2.py (encodage par ι-paires, --cuts = lemme mono-bloc généralisé, NOTE_S29 §9) ;
+  - export_s1p.py corrigé (multiplicité des paires sécantes) ; exports npz des 9 types (2,4) pour le DFS-PL de C2.
+  - Les coupes ne font pas mourir le PL plus tôt.
+  - Preuves : sous pysat, seul glucose4 rend un DRUP.
+- **Dossier pour Sol** (demande de l'utilisateur) : astra/POUR_SOL_G18_G20_NOS_NOMBRES.md (nombres, régimes de Witt, Schur pour
+  boule singulière, nombres g18 de C1).
+- **Calcul** : plus de cloud, sur décision de l'utilisateur. Tout le lourd passe sur le PC du labo (12 threads, C2) : SAT des 79
+  et DFS-PL avec Farkas exacts.
