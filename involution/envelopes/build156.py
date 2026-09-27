@@ -21,7 +21,7 @@ TABLE = 'C:/home/researcher/Desktop/c1_recherche/data/borcherds_odd24.json'
 STATE = os.path.join(HERE, 'state')
 UDIR = os.path.join(HERE, 'U')
 T0 = time.time()
-BUDGET = float(sys.argv[1]) if len(sys.argv) > 1 else 270.0
+BUDGET = 270.0                                   # set from argv in main() (importable module)
 
 
 def log(*a):
@@ -564,6 +564,9 @@ def try_v(N0, name, roots, ch, T, need, st, niem_by_type, tried):
 
 
 def main():
+    global BUDGET
+    if len(sys.argv) > 1:
+        BUDGET = float(sys.argv[1])
     table = json.load(open(TABLE))
     for e in table:
         for k, v in TABLE_FIXES.get(e['id'], {}).items():
