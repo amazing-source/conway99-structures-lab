@@ -1,5 +1,14 @@
 # S8 — Cas « tout-tordu pur » de C2 : le type (3,3,3,3,3,6) est impossible (preuve à la main) ; bornes pour les autres types
 
+> ⚠ **ERRATUM (27/09, « structures »).** Tout ce qui suit suppose que le graphe D décompose E(K₇) en cycles SIMPLES : les 121 215
+> décompositions de `scripts/k7_cycle_decomp.py`. Ce n'est démontré nulle part : le carnet de C2 (§14) ne prouve que la
+> 2-régularité du graphe D sur les paires. En tout-tordu, D est un **système de transitions** (en chaque bloc, un couplage des
+> 6 paires en 3 transitions), et une chaîne de paires tordues peut repasser par un même bloc, en circuit non simple. Il y a 15⁷
+> systèmes étiquetés, dont 121 215 seulement à circuits tous simples.
+> **L'exclusion du « tout-tordu pur » ne vaut donc que pour les circuits simples.** Le cas non simple reste ouvert, sauf lemme
+> de simplicité. Il est couvert si les 7 types locaux (0,6) (tier06) sont UNSAT.
+
+
 *25/09, labo « structures », en appui de C2 (branche involution). Statut : **DÉRIVÉ** pour S8.1–S8.3 (preuves à la
 main) ; **ÉTABLI par calcul exhaustif contrôlé** pour le tableau du §3 (système local exact, solveur indépendant au
 niveau des étiquettes, 0 désaccord). Toutes les références « § » renvoient au carnet de C2 (`notes/MATH_C2_PROGRAMME.md`, branche

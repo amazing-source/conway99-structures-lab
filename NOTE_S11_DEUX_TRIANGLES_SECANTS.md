@@ -1,5 +1,14 @@
 # S11 — Tout-tordu à deux triangles sécants : impossible (preuves à la main)
 
+> ⚠ **ERRATUM (27/09, « structures »).** Tout ce qui suit suppose que le graphe D décompose E(K₇) en cycles SIMPLES : les 121 215
+> décompositions de `scripts/k7_cycle_decomp.py`. Ce n'est démontré nulle part : le carnet de C2 (§14) ne prouve que la
+> 2-régularité du graphe D sur les paires. En tout-tordu, D est un **système de transitions** (en chaque bloc, un couplage des
+> 6 paires en 3 transitions), et une chaîne de paires tordues peut repasser par un même bloc, en circuit non simple. Il y a 15⁷
+> systèmes étiquetés, dont 121 215 seulement à circuits tous simples.
+> **L'exclusion du « tout-tordu pur » ne vaut donc que pour les circuits simples.** Le cas non simple reste ouvert, sauf lemme
+> de simplicité. Il est couvert si les 7 types locaux (0,6) (tier06) sont UNSAT.
+
+
 25/09/2026, labo « structures », pour C2. Cadre et notations de NOTE_S8 : système local C0–C8 par orbite, CL (S8.4),
 lemme D, budget 16.1 de C2.
 
