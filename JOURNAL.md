@@ -834,3 +834,14 @@
   - Le modèle local Φ (HiGHS, CP-SAT) est inconnu à 4-5 min. Seule donnée ferme : aucun Φ n'est équivariant sous la rotation
     d'ordre 6, en 26 s.
   - Un bloc plein force g = 20, donc à g = 18 il n'y a ni bloc plein ni résidu AD.
+
+## 27/09, 2 h : piste « système local », bilan de la nuit (NOTE_S29 §6-8)
+- **Système local (i)+(ii)+(iii) en un bloc** : comptage heuristique ≈ 10^−10 solution par type pour les blocs pleins et
+  mixtes, et ≈ 10^−4,5 pour les étoiles libres, contre 10^48 à m = 11.
+- **Deux étapes** : chaque ι trouvé meurt au PL (9/9 au bloc plein, 2/2 mixtes). Aux ÉTL, l'étape 2 est PL-faisable et
+  indécise, en PLNE, CP-SAT et SAT (Glucose, 45 s, 1455 variables).
+- **Contrôle positif BvLS** (σ = −1) : toutes les formules sont exactes.
+- **Portée** : réduire C2 à « tout ÉTL », pas le tuer d'un coup.
+- **Sur le cloud** (C2, c2-compute) : fb (CP-SAT, blocs pleins) ; sat (CaDiCaL, 4 types pleins, avec et sans lex-leader) ;
+  etl (10 types ÉTL à det carré de C1, à la recherche d'une première solution locale pour le q:7).
+- Autres gains de la nuit : A33 mort, g⁻ ≠ 16, famille ancrée morte, M1 fermé (C2), mélanges tués à la racine (C2).

@@ -1,0 +1,4 @@
+step 1 #0 FEASIBLE 9s
+iota #0: step 2 SAT solver: UNKNOWN | y vars 1455 54s
+step 1 #1 UNKNOWN 84s
+step 1 UNKNOWN 84s
