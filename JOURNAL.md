@@ -915,3 +915,10 @@
   - Le rang du système ll vaut 39/39, donc le graphe ll est déterminé par (U_c, U_d, G).
   - Sur la sonde 1, twist + CROSS tue seul en 0,4 s ; SEC ralentit glucose.
 - `--fullcyc` (équilibre (v) des cycles de longueur 3-4 aux blocs pleins) : sans effet à 60 s sur rel 33 et 50.
+- **~9 h 15 : SEC sur la route PL des (0,6)** (demande de C2, mode bas du PC). export_s1p `--sec` : fixation de variables, une
+  ι-paire sécante de centre v ne va que sur une paire de blocs contenant bloc(v).
+  - Les 7 exports (0,6) sont poussés (s1p_t06_rel{25,41,43,62,63,77,78}).
+  - Le long de vrais quasi-designs de rel 25, le PL de l'étape 1′ reste **faisable jusqu'à ι entier (30 paires) sans SEC**,
+    et **meurt à exactement 8 paires fixées avec SEC** (2/2).
+  - Un arbre de Farkas exact sur les (0,6), donc sur T = K₇, devient plausible. C2 lance iota_dfs.
+  - Certificats DRAT chez C2 : 7/25 VERIFIED (rel 00, 01, 03, 04, 05, 07, 10).
