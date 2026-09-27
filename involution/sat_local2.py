@@ -252,7 +252,29 @@ FULLCYCC = ('c FULLCYC (balance lemma, C2 note 23 par. 8; NOTE_S28, astra/PROBLE
             '|Phi(sigma z) & lab(C)| = |C| (digons: --digon; a 6-cycle is vacuous).')
 
 
-def encode(mu, tau, cycles=(), cuts=False, digon=False, path=False, sec=False, twist=False, relax=(), ident=None, fullcyc=False):
+def pmt_orbits(mu, tau):
+    """orbits of <pi, mu, tau> on the 12 labels (label sets of the components of the induced graph on N(line c))"""
+    seen, out = set(), []
+    for s in L:
+        if s in seen:
+            continue
+        orb, st = set(), [s]
+        while st:
+            v = st.pop()
+            if v not in orb:
+                orb.add(v); st += [PI[v], mu[v], tau[v]]
+        seen |= orb
+        out.append(sorted(orb))
+    return out
+
+
+BALANCEC = ('c BALANCE (C2 note 23 par. 8, generalised; re-derived by structures from (i)-(iii)): for every orbit S of <pi, mu, tau> '
+            'on the labels and every far root z, |z & S| + |Phi(z) & S| + |Phi(sigma z) & S| = |S|/2 (sum over z = 30|S| and sum of '
+            'squares = 15|S|^2 by (i)-(iii), so zero variance). Valid in every configuration.')
+
+
+def encode(mu, tau, cycles=(), cuts=False, digon=False, path=False, sec=False, twist=False, relax=(), ident=None, fullcyc=False,
+           balance=False):
     """relax: subset of {'ii', 'iii'} to DROP (positive controls only; the default keeps everything)"""
     K2, K3 = D.K2K3(mu, tau)
     far = [z for z in itertools.combinations(L, 2) if z[0] // 2 != z[1] // 2]
@@ -360,6 +382,15 @@ def encode(mu, tau, cycles=(), cuts=False, digon=False, path=False, sec=False, t
                     continue
                 eq([U(z, v) for v in lc] + [U(sig[z], v) for v in lc], len(C) - len({a // 2 for a in far[z]} & set(C)))
         print('full-block D-cycle balance (v) added for cycles', fc, flush=True)
+    if balance:
+        obs = pmt_orbits(mu, tau)
+        if len(obs) > 1:
+            for S in obs:
+                for z in range(60):
+                    if z > sig[z]:
+                        continue
+                    eq([U(z, b) for b in S] + [U(sig[z], b) for b in S], len(S) // 2 - len(set(far[z]) & set(S)))
+        print('balance (v) added for <pi,mu,tau>-orbits', [len(S) for S in obs] if len(obs) > 1 else 'none (one orbit)', flush=True)
     if ident is not None:
         ids = ident_list(mu, tau, ident)
         ident_constraints(cnf, pool, far, sig, U, ids)
@@ -390,8 +421,9 @@ if __name__ == '__main__':
     t0 = time.time()
     cuts = '--cuts' in sys.argv; digon = '--digon' in sys.argv; path = '--path' in sys.argv; sec = '--sec' in sys.argv; twist = '--twist' in sys.argv
     ident = next((int(a.split('=')[1]) if '=' in a else 0 for a in sys.argv if a.startswith('--ident')), None)
-    fullcyc = '--fullcyc' in sys.argv
-    cnf, pool, far, edges = encode(mu, tau, cycles, cuts=cuts, digon=digon, path=path, sec=sec, twist=twist, ident=ident, fullcyc=fullcyc)
+    fullcyc = '--fullcyc' in sys.argv; balance = '--balance' in sys.argv
+    cnf, pool, far, edges = encode(mu, tau, cycles, cuts=cuts, digon=digon, path=path, sec=sec, twist=twist, ident=ident, fullcyc=fullcyc,
+                                   balance=balance)
     print(sys.argv[1], '[encoding 2: iota-pairs]' + (' + lemma cuts' if cuts else '') + (' + digon balance' if digon else '') + (' + path' if path else '') + (' + SEC' if sec else '') + (' + twist' if twist else '') + (' + ident<=%d' % ident if ident is not None else ''), 'vars', pool.top, 'clauses', len(cnf.clauses), 'encode %.1fs' % (time.time() - t0), flush=True)
     if '--dimacs' in sys.argv:
         out = sys.argv[1].replace('.json', '_enc2.cnf')
@@ -408,6 +440,8 @@ if __name__ == '__main__':
             com.append(TWISTC)
         if fullcyc:
             com.append(FULLCYCC)
+        if balance:
+            com.append(BALANCEC)
         if ident is not None:
             com.append(IDENTC)
             com.append('c IDENT list (p, S, slack), slack <= %d: %s' % (ident, json.dumps(ident_list(mu, tau, ident))))

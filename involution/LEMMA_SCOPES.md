@@ -15,7 +15,8 @@ Chaque ligne : ce que le lemme utilise, s'il reste valide en présence de carré
 | `--ident[=s]` | identité générale : a₃ + 3a₄ + Σ_{Q∋p}(k−1)⁺ + #{Q∌p : k = 0} = 20 − 10\|S\| + Λ(S) + C_p(S) | (i)–(iii) + couverture | **oui** | **oui** | C1 (balayage des 3308 classes), structures (BvLS : 1200/1200) |
 | **SEC** (`--sec`) | si v ∈ Φ(z) ∩ Φ(σz), alors z rencontre bloc(v) | la σ-paire est le partenaire D de l'orbite étoile de v (Lemme 1) ; son carré ne doit pas être dis | **NON** : faux en c dès qu'un carré dis contient une orbite de l'étoile de c | **oui** : les carrés frères ne sont pas dis | structures, C1, C2 |
 | L1∘SEC (C1) | aucune sécante ne contient π(centre) | SEC + L1 | **non** (comme SEC) | **oui** | C1, structures |
-| `--fullcyc` | bloc plein : équilibre (v) sur les D-cycles de longueur 3–4 | lemme d'équilibre de C2 (note 23 §8) | à confirmer par C2 | à confirmer par C2 | — |
+| `--fullcyc` | bloc plein : équilibre (v) sur les D-cycles de longueur 3–4 | lemme d'équilibre de C2 (note 23 §8) | **oui** (C2) | **oui** (C2) | C2 |
+| `--balance` | pour toute orbite S de ⟨π, μ, τ⟩ sur les étiquettes et tout z lointain : \|z ∩ S\| + \|Φ(z) ∩ S\| + \|Φ(σz) ∩ S\| = \|S\|/2 (généralise --digon, --fullcyc et la rigidité des blocs frères) | (i)–(iii) : Σ_z n = 30\|S\|, Σ_z n² = 15\|S\|², donc variance nulle (C2, note 23 §8, redérivé par structures) | **oui** | **oui** | C2, structures |
 | deux blocs : couplage, CROSS, `--full` | toute adjacence décrite deux fois ; λ/μ exacts | définitions + λ/μ | **oui** | **oui** | C1 (couplage, CROSS) ; BvLS exact |
 | deux blocs : réduction à 60 instances | c de type minimal, d = bloc 0 ; t_c ≤ t_d | T = K₇ (toutes les paires tordues) | — | — | structures ; C1 (parité des pivots) |
 | lex-leader (C1) | brisure de symétrie sous Stab_B₆(μ, τ) | correcte pour UNSAT, hors déclaration (C2 exporte --nolex) | — | — | C1, C2 |

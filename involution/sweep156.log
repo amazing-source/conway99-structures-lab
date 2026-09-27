@@ -1,0 +1,16 @@
+pos   0  i   0  (6, 0)  rel None  unknown  15.1s  flags --ident=1
+pos   1  i   1  (4, 0)  rel None  unknown  15.0s  flags --ident=1
+pos   2  i   2  (3, 0)  rel None  unknown  15.1s  flags --ident=1
+pos   3  i   3  (4, 0)  rel None  unknown  15.0s  flags --ident=1
+pos   4  i   4  (6, 0)  rel None  unknown  15.0s  flags --cuts --digon --ident=1
+pos   5  i   5  (3, 0)  rel None  unknown  15.1s  flags --ident=1
+pos   6  i   6  (3, 2)  rel None  unknown  15.0s  flags --twist --ident=1
+pos   7  i   7  (3, 0)  rel None  unknown  15.0s  flags --ident=1
+pos   8  i   8  (4, 0)  rel None  unknown  15.1s  flags --cuts --digon --ident=1
+pos   9  i   9  (2, 2)  rel None  unknown  15.0s  flags --twist --ident=1
+pos  10  i  10  (3, 0)  rel None  unknown  15.0s  flags --cuts --digon --ident=1
+pos  11  i  11  (3, 0)  rel None  unknown  15.1s  flags --ident=1
+pos  12  i  12  (3, 2)  rel None  unknown  15.1s  flags --twist --ident=1
+pos  13  i  13  (3, 0)  rel None  unknown  15.0s  flags --ident=1
+pos  14  i  14  (6, 0)  rel None  unknown  15.0s  flags --cuts --path --ident=1
+pos  15  i  15  (3, 0)  rel None  unknown  15.0s  flags --ident=1
