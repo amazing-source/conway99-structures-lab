@@ -144,3 +144,18 @@ que 0 comme point fixe (`involution/bvls_local_control.py`).
 - L'étape 2 accepte le VRAI ι de BvLS au niveau PL (`bvls_step2_control.py`).
 - Les formules et le mécanisme de mort des modèles locaux sont donc validés sur un vrai graphe. Les morts à m = 7 ne sont pas
   des artefacts de modélisation.
+
+## 8. Calibrage honnête de la piste locale (27/09, ~2 h)
+- **Types pleins et mixtes** : chaque ι trouvé meurt en étape 2 AU PL : 9/9 au bloc plein, et 2/2 sur des types mixtes
+  aléatoires.
+- **Étoiles libres (ÉTL, μ ∩ τ = ∅)** : l'étape 1 est plus lente (une paire sécante par étiquette, car K₃[b,b] = 2). Sur le type
+  aléatoire rand_type_7_3, l'étape 2 est **PL-faisable**, et la PLNE (150 s) comme CP-SAT (90 s) restent inconnues.
+  - Le comptage heuristique y est plus proche de 1 : ≈ 10^−4,5 sans la diagonale nulle de K₃.
+  - C1 a noté un surplus nul de ses certificats en ÉTL.
+- **Portée réaliste** : la piste locale tuerait probablement toutes les configurations contenant un bloc NON libre, et
+  réduirait C2 au cas « tous les blocs sont des étoiles libres ». Ce n'est pas une mort de C2 d'un coup.
+- **Cas ÉTL** :
+  - chercher une vraie solution locale ((i)+(ii)+(iii)) sur le cloud, avec sat_local.py et un cfg {"mu": …, "tau": …} ;
+  - si on en trouve une, c'est la première solution locale à m = 7, et C1 pourra y tester le q:7 (lignes rigides à det carré,
+    résidu K anisotrope) ;
+  - sinon, il faut un UNSAT par type.
