@@ -21,6 +21,7 @@ npair = len(pairs); pv = {pr: n for n, pr in enumerate(pairs)}
 av = lambda n, k: npair + 15 * n + k
 nv = npair * 16
 ri, ci, vv, lo = [], [], [], []
+CUT3 = []
 r = [0]
 def row(ent, a):
     for j, c in ent:
@@ -48,10 +49,35 @@ for rr in range(6):
         # multiplicity [b in e_i] + [b in e_j]: a secant iota-pair (common label b) contributes 2 (C1's caution, 27/09)
         row([(av(n, k), (b in edges[i]) + (b in edges[j])) for n, (i, j) in enumerate(pairs)
              if b in edges[i] or b in edges[j] for k in ks], int(K2[2 * rr, b] + K2[2 * rr + 1, b]))
+ncut = 0
+if '--cuts' in sys.argv:          # generalised single-block lemma (NOTE_S29 par. 9): anchored left blocks p (p+ and p- pivots)
+    for p_ in range(6):
+        a_, b_ = 2 * p_, 2 * p_ + 1
+        if not (mu[a_] == tau[a_] and mu[b_] == tau[b_]):
+            continue
+        Sp = {a_, b_, mu[a_], mu[b_]}
+        digon = mu[a_] // 2 == mu[b_] // 2
+        three = []
+        for n, (i, j) in enumerate(pairs):
+            k_ = len((set(edges[i]) | set(edges[j])) & Sp)
+            if k_ == 4:
+                row([(n, 1)], 0); ncut += 1
+            elif k_ == 3:
+                three.append(n)
+        # at most one (none for a digon) iota-pair with 3 labels of Sp: row sum <= bound, written as equality with a slack
+        # variable is not available here, so we use lo = 0, hi = bound through a separate list
+        CUT3.append((three, 0 if digon else 1)); ncut += 1
 A = sp.csr_matrix((np.array(vv, float), (np.array(ri), np.array(ci))), shape=(r[0], nv))
 lo = np.array(lo, float)
+hi = lo.copy()
+if CUT3:                            # append the '<= bound' rows (lo = 0, hi = bound)
+    extra = sp.csr_matrix((np.ones(sum(len(t) for t, _ in CUT3)),
+                           ([k for k, (t, _) in enumerate(CUT3) for _ in t], [n for t, _ in CUT3 for n in t])),
+                          shape=(len(CUT3), nv))
+    A = sp.vstack([A, extra]).tocsr()
+    lo = np.concatenate([lo, np.zeros(len(CUT3))]); hi = np.concatenate([hi, np.array([b for _, b in CUT3], float)])
 np.savez_compressed(out + '.npz', A_data=A.data, A_indices=A.indices, A_indptr=A.indptr, A_shape=np.array(A.shape),
-                    lo=lo, hi=lo.copy(), lb=np.zeros(nv), ub=np.ones(nv), integrality=np.ones(nv))
+                    lo=lo, hi=hi, lb=np.zeros(nv), ub=np.ones(nv), integrality=np.ones(nv))
 json.dump({'block_type': cfg, 'mu': list(mu), 'tau': list(tau), 'edges (non-mu pairs)': [list(e) for e in edges],
            'var n < %d' % npair: 'p[i,j] = 1 iff non-mu pairs i, j are iota-partners; pairs listed in iota_pairs',
            'iota_pairs': [list(p) for p in pairs],
@@ -62,4 +88,4 @@ json.dump({'block_type': cfg, 'mu': list(mu), 'tau': list(tau), 'edges (non-mu p
            'branching hint': 'branch on p (partner of the lowest unpaired non-mu pair); LP dies at ~12 fixed pairs along '
                              'a true near-design (0.2 s per LP); symmetry = Aut(pi, mu, tau) on labels'},
           open(out + '_index.json', 'w'), indent=1)
-print(out, 'vars', nv, 'rows', A.shape[0], 'nnz', A.nnz)
+print(out, 'vars', nv, 'rows', A.shape[0], 'nnz', A.nnz, '| lemma cut rows', ncut)
