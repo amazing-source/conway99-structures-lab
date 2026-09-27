@@ -98,7 +98,54 @@ SECC = ('c SEC (structures, 27/09): in a configuration WITHOUT dis D-squares (e.
         'block(v). Clauses: not(U[z,v] and U[sigma z,v]) whenever block(v) is not a block of z. NOT valid if dis squares exist.')
 
 
-def encode(mu, tau, cycles=(), digon=False, path=False, sec=False):
+def twist_terms(o, through):
+    """literals (with repetition) whose number of true members is the contribution of one sigma-pair to C1's twisted-block
+    identity, given o = [k>=1, k>=2, k>=3, k>=4]:  [k>=3] + 2[k>=4]  (+ [k>=2] + [k>=3] + [k>=4] if through p)
+    (+ [k = 0] = not o[0] if not through p)."""
+    t = [o[2], o[3], o[3]]
+    if through:
+        t += [o[1], o[2], o[3]]
+    else:
+        t += [-o[0]]
+    return t
+
+
+def twist_constraints(cnf, pool, mu, tau, far, sig, U):
+    """C1's identity at every TWISTED left block p (exactly one pivot label p*, non-pivot p°, q* = mu p* in another block):
+    with S = {p*, p°, q*} and k_Z = sum over S of U[z,b] + U[sigma z,b] (multiplicity: p° may be in both Phi's),
+    a3 + 3 a4 + sum_{Z through p} (k-1)+ + #{Z not through p : k = 0} = 3."""
+    blocks = []
+    for p in range(6):
+        a, b = 2 * p, 2 * p + 1
+        piv = [l for l in (a, b) if mu[l] == tau[l]]
+        if len(piv) != 1:
+            continue
+        ps = piv[0]; po = a + b - ps; qs = mu[ps]
+        if qs // 2 == p:
+            continue                                   # sib (not a twisted block)
+        S = [ps, po, qs]
+        lits = []
+        for z in range(60):
+            if z > sig[z]:
+                continue
+            o = unary_geq(cnf, pool, [U(z, x) for x in S] + [U(sig[z], x) for x in S], 4, ('twcnt', p, z))
+            cnf.append([-o[3], o[3]])                   # (k <= 4 automatically: only 4 slots)
+            through = p in {w // 2 for w in far[z]}
+            for t in twist_terms(o, through):
+                c = pool.id(('twcopy', p, z, len(lits)))  # fresh copy, so that repeated literals are separate inputs
+                cnf.append([-c, t]); cnf.append([c, -t])
+                lits.append(c)
+        cnf.extend(CardEnc.equals(lits=lits, bound=3, vpool=pool, encoding=EncType.seqcounter).clauses)
+        blocks.append(p)
+    return blocks
+
+
+TWISTC = ('c TWIST (C1, 27/09; relu par structures): at every twisted left block p (one pivot p*, non-pivot p°, q* = mu p*), '
+          'with k counted with multiplicity on S = {p*, p°, q*}: a3 + 3 a4 + sum_{Z through p} (k-1)+ + #{Z not through p: k = 0} = 3. '
+          'Uses only (i)-(iii) and block-level coverage (no dis-square hypothesis).')
+
+
+def encode(mu, tau, cycles=(), digon=False, path=False, sec=False, twist=False):
     K2, K3 = D.K2K3(mu, tau)
     far = [z for z in itertools.combinations(L, 2) if z[0] // 2 != z[1] // 2]
     fidx = {z: i for i, z in enumerate(far)}
@@ -169,6 +216,9 @@ def encode(mu, tau, cycles=(), digon=False, path=False, sec=False):
                 if v // 2 not in zb:
                     cnf.append([-U(z, v), -U(sig[z], v)]); nsec += 1
         print('SEC clauses added:', nsec, flush=True)
+    if twist:
+        tb = twist_constraints(cnf, pool, mu, tau, far, sig, U)
+        print('twist identities added for twisted blocks', tb, flush=True)
     if path:
         pb = path_constraints(cnf, pool, mu, tau, far, sig, U)
         print('path constraints (exactly one excess) added for anchored path blocks', pb, flush=True)
@@ -198,7 +248,7 @@ if __name__ == '__main__':
     else:
         cycles = []; mu, tau = cfg['mu'], cfg['tau']
     t0 = time.time()
-    cnf, pool, far, edges = encode(mu, tau, cycles, digon='--digon' in sys.argv, path='--path' in sys.argv, sec='--sec' in sys.argv)
+    cnf, pool, far, edges = encode(mu, tau, cycles, digon='--digon' in sys.argv, path='--path' in sys.argv, sec='--sec' in sys.argv, twist='--twist' in sys.argv)
     if '--symbreak' in sys.argv and cycles:        # C1's lex-leader symmetry breaking (conway99-c1 code/fullblock_symmetry.py)
         sys.path.insert(0, 'C:/home/researcher/Desktop/c1_recherche/code')
         from fullblock_symmetry import lexleader_clauses
