@@ -144,6 +144,10 @@ que 0 comme point fixe (`involution/bvls_local_control.py`).
 - L'étape 2 accepte le VRAI ι de BvLS au niveau PL (`bvls_step2_control.py`).
 - Les formules et le mécanisme de mort des modèles locaux sont donc validés sur un vrai graphe. Les morts à m = 7 ne sont pas
   des artefacts de modélisation.
+- ⚠ **Nuance (C1, 27/09)** : sur BvLS avec σ = −1, on a μ = τ = π en TOUT bloc, donc tous les blocs gauches sont frères. Alors
+  P_μ = P_τ = P_π et P_{τπ} = P_{τμ} = P_{μτ} = I. Le contrôle ne distingue donc PAS τπ de πτ, ni les autres termes entre eux :
+  c'est un cas dégénéré. Les formules générales reposent sur la dérivation à la main (voisins communs avec sommets de
+  correction), refaite indépendamment par C1 et par nous, et non sur ce contrôle.
 
 ## 8. Calibrage honnête de la piste locale (27/09, ~2 h)
 - **Types pleins et mixtes** : chaque ι trouvé meurt en étape 2 AU PL : 9/9 au bloc plein, et 2/2 sur des types mixtes
@@ -164,11 +168,22 @@ que 0 comme point fixe (`involution/bvls_local_control.py`).
 - **Relecture de la réduction large-T et de l'échelle des pivots de C1** : correctes (relecture envoyée à C1 et C2).
   - Recompte indépendant (`recount_pivots.py`) : 0 : 1787, 2 : 958, 4 : 407, 6 : 106, 8 : 39, 12 : 11. Pertinentes à ≥ 6 : 79.
   - Profil (2,4) : 15 classes, dont 9 pertinentes.
-- **Le lemme mono-bloc de C1 s'étend à tout bloc gauche p ANCRÉ en c** (p+ et p− pivots), quel que soit le type :
+- **Le lemme mono-bloc de C1 s'étend à tout bloc gauche p ANCRÉ en c et NON FRÈRE** (p+ et p− pivots, μp+ ≠ p−), quel que
+  soit le type. Relu par C1 : correct. Pour un bloc frère, Sp = {p±} a une couverture 0 et la preuve ne s'applique pas ; le code
+  n'y émet d'ailleurs aucune clause.
   - sur Sp_p = {p±, μp±}, la couverture est 2 et Σλ(Sp_p) = 13 − [digone] ;
   - aucun centre sécant n'est dans Sp_p, car K₃ est nul en diagonale aux pivots ;
   - donc a₃(p) + 3a₄(p) ≤ 1 (ou 0 pour un digone), ce qui donne des coupes valides sur les ι-paires pour les types à blocs
     ancrés.
+- **Forme égalité (C1)** : a₃ + 3a₄ + Σ_{Q∈S_p}(k_Q − 1)⁺ + #{Q ∉ S_p : k_Q = 0} = 1 − [digone], où S_p désigne les 10
+  σ-paires passant par p et k_Q = |Q ∩ Sp|.
+  - **Digone ancré {p, q}, dans tout type** : chaque σ-paire Z vérifie k_Z = 2 − |blocs(z) ∩ {p, q}|. C'est l'équilibre de
+    D-cycle (v), désormais valable hors bloc plein.
+    - Preuve : k = 1 sur les 8 σ-paires de S_p ∖ S_q (et symétriquement), k = 0 sur les 2 de {p, q}, k = 2 sur les 12
+      autres.
+    - Codé : `--digon`, dans sat_local.py et sat_local2.py. Il touche 21 des 79 types, dont tier8_0.
+  - **Bloc chemin** (ancré, non frère, compagnons dans deux blocs) : toute σ-paire passant par p a k ≤ 2, et au plus une a
+    k = 2.
 - **Calibrage SAT (portable, ≤ 285 s)** : tier8_0 est inconnu avec l'encodage 1 (CaDiCaL) comme avec l'encodage 2
   (ι-paires explicites, `sat_local2.py`, Glucose). La difficulté est intrinsèque : elle se tranchera sur le cloud. Lancer les
   deux encodages en parallèle et garder le premier UNSAT (même contenu logique).

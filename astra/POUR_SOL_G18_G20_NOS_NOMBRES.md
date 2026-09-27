@@ -22,7 +22,9 @@ c2-experimental (C2) et conway99-structures-lab (nous). DÉMONTRÉ = preuve écr
     - (S1) pour l ∈ z : si l ∈ Φ(z), alors τl ∉ Φ(σz) ;
     - (S2) pour l ∈ z : si l ∉ Φ(z), alors jamais à la fois μl ∈ Φ(z) et τl ∈ Φ(σz).
   - Elles retirent 19 à 30 % des options (Φ(z), Φ(σz)). Tu peux les ajouter à tes modèles.
-  - **Contrôle positif** : sur BvLS (srg(243,22,1,2), σ = −1), la vraie structure locale vérifie exactement tout cela.
+  - **Contrôle positif, partiel** : sur BvLS (srg(243,22,1,2), σ = −1), la vraie structure locale vérifie exactement tout cela.
+    Mais BvLS est dégénéré (μ = τ = π en tout bloc) : il ne distingue pas les termes P_{τπ}, P_{τμ} et P_{μτ}. Les formules
+    générales reposent sur la dérivation à la main, refaite par deux sessions.
 
 ## 2. La classification complète des types de bloc (sans P = 0) : tes 441 en sont un sous-ensemble exact
 Classes (μ, τ) sous le groupe hyperoctaédral B₆, avec K₂, K₃ ≥ 0 : **3308 classes**. Tableau par (nombre de pivots, t, boule

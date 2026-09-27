@@ -13,7 +13,25 @@ L = list(range(12))
 PI = [v ^ 1 for v in L]
 
 
-def encode(mu, tau, cycles=()):
+def anchored_structures(mu, tau):
+    """anchored (non-sib) left blocks at c: p+ and p- pivots (mu = tau on them) and mu p+ != pi p+.
+    Returns (digons, paths): digons = list of (p, q) with mu mapping p's labels into block q (anchored digon, q anchored too);
+    paths = anchored non-sib blocks whose two mates lie in two different blocks."""
+    digons, paths = [], []
+    for p in range(6):
+        a, b = 2 * p, 2 * p + 1
+        if not (mu[a] == tau[a] and mu[b] == tau[b]) or mu[a] == b:
+            continue
+        if mu[a] // 2 == mu[b] // 2:
+            q = mu[a] // 2
+            if p < q:
+                digons.append((p, q))
+        else:
+            paths.append(p)
+    return digons, paths
+
+
+def encode(mu, tau, cycles=(), digon=False):
     K2, K3 = D.K2K3(mu, tau)
     far = [z for z in itertools.combinations(L, 2) if z[0] // 2 != z[1] // 2]
     fidx = {z: i for i, z in enumerate(far)}
@@ -67,6 +85,15 @@ def encode(mu, tau, cycles=()):
             l = a
             cnf.append([-U(z, l), -U(sz, tau[l])])
             cnf.append([U(z, l), -U(z, mu[l]), -U(sz, tau[l])])
+    if digon:                                                 # C1's digon balance (anchored non-sib digons, any type)
+        dg, _ = anchored_structures(mu, tau)
+        for (p, q) in dg:
+            Sp = [2 * p, 2 * p + 1, 2 * q, 2 * q + 1]
+            for z in range(60):
+                if z > sig[z]:
+                    continue
+                eq([U(z, b) for b in Sp] + [U(sig[z], b) for b in Sp], 2 - len({a // 2 for a in far[z]} & {p, q}))
+        print('digon balance added for anchored digons', dg, flush=True)
     if cycles:                                                # full block extras
         for z in range(60):
             sz = sig[z]
@@ -93,7 +120,7 @@ if __name__ == '__main__':
     else:
         cycles = []; mu, tau = cfg['mu'], cfg['tau']
     t0 = time.time()
-    cnf, pool, far, edges = encode(mu, tau, cycles)
+    cnf, pool, far, edges = encode(mu, tau, cycles, digon='--digon' in sys.argv)
     if '--symbreak' in sys.argv and cycles:        # C1's lex-leader symmetry breaking (conway99-c1 code/fullblock_symmetry.py)
         sys.path.insert(0, 'C:/home/researcher/Desktop/c1_recherche/code')
         from fullblock_symmetry import lexleader_clauses

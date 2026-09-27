@@ -17,35 +17,59 @@ L = list(range(12)); PI = [v ^ 1 for v in L]
 
 
 LEMMA = ('c LEMMA (structures NOTE_S29 par. 9, generalising C1 notes/134): at a block c of any type (mu, tau), let p be a '
-         'left block anchored at c (p+ and p- pivots: mu = tau on them), Sp = {p+, p-, mu p+, mu p-}; then among the 30 '
+         'left block anchored at c and NOT sib (p+ and p- pivots: mu = tau on them, and mu p+ != p-), Sp = {p+, p-, mu p+, mu p-}; then among the 30 '
          'iota-quadruples none contains the 4 labels of Sp and at most one contains 3 of them (none if mu p+, mu p- lie in '
          'one block). Proof: block-level (ii) gives coverage 2 on Sp over the 10 quadruples through p, so at least 2 of '
          'them avoid Sp, while inclusion-exclusion over the near-design gives a0 = 3 - a3 - 3 a4 (2 - a3 - 3 a4 for a digon).')
 
 
 def lemma_cuts(mu, tau, edges, Q):
-    cl = []
+    """returns (unit clauses, [(literals, bound)]) for the generalised single-block lemma (anchored non-sib left blocks)."""
+    units, amos = [], []
     for p in range(6):
         a, b = 2 * p, 2 * p + 1
-        if not (mu[a] == tau[a] and mu[b] == tau[b]):
-            continue
+        if not (mu[a] == tau[a] and mu[b] == tau[b]) or mu[a] == b:
+            continue                                   # not anchored, or sib (the lemma does not apply)
         Sp = {a, b, mu[a], mu[b]}
         digon = mu[a] // 2 == mu[b] // 2
         three = []
         for (i, j), v in Q.items():
             k = len((set(edges[i]) | set(edges[j])) & Sp)
             if k == 4:
-                cl.append([-v])
+                units.append([-v])
             elif k == 3:
                 three.append(v)
         if digon:
-            cl.extend([[-v] for v in three])
+            units.extend([[-v] for v in three])
+        elif len(three) > 1:
+            amos.append((three, 1))
+    return units, amos
+
+
+def anchored_structures(mu, tau):
+    """anchored (non-sib) left blocks at c: p+ and p- pivots (mu = tau on them) and mu p+ != pi p+.
+    Returns (digons, paths): digons = list of (p, q) with mu mapping p's labels into block q (anchored digon, q anchored too);
+    paths = anchored non-sib blocks whose two mates lie in two different blocks."""
+    digons, paths = [], []
+    for p in range(6):
+        a, b = 2 * p, 2 * p + 1
+        if not (mu[a] == tau[a] and mu[b] == tau[b]) or mu[a] == b:
+            continue
+        if mu[a] // 2 == mu[b] // 2:
+            q = mu[a] // 2
+            if p < q:
+                digons.append((p, q))
         else:
-            cl.extend([[-u, -w] for u, w in itertools.combinations(three, 2)])
-    return cl
+            paths.append(p)
+    return digons, paths
 
 
-def encode(mu, tau, cycles=(), cuts=False):
+DIGON = ('c DIGON (C1, 27/09, derived from the equality form of the single-block lemma): for an anchored non-sib digon {p, q} '
+         'at c (p, q anchored, mu maps the labels of p onto those of q), every sigma-pair Z = {z, sigma z} has exactly '
+         '2 - |blocks(z) & {p, q}| labels of Sp = {p+, p-, q+, q-} in Phi(z) u Phi(sigma z) (the D-cycle balance, in any type).')
+
+
+def encode(mu, tau, cycles=(), cuts=False, digon=False):
     K2, K3 = D.K2K3(mu, tau)
     far = [z for z in itertools.combinations(L, 2) if z[0] // 2 != z[1] // 2]
     fidx = {z: i for i, z in enumerate(far)}
@@ -114,9 +138,20 @@ def encode(mu, tau, cycles=(), cuts=False):
             cnf.append([-U(z, a), -U(sz, tau[a])])
             cnf.append([U(z, a), -U(z, mu[a]), -U(sz, tau[a])])
     if cuts:
-        lc = lemma_cuts(mu, tau, edges, Q)
-        cnf.extend(lc)
-        print('lemma cuts added:', len(lc), flush=True)
+        units, amos = lemma_cuts(mu, tau, edges, Q)
+        cnf.extend(units)
+        for lits, bnd in amos:
+            cnf.extend(CardEnc.atmost(lits=lits, bound=bnd, vpool=pool, encoding=EncType.seqcounter).clauses)
+        print('lemma cuts added: %d unit clauses, %d at-most-one groups' % (len(units), len(amos)), flush=True)
+    if digon:
+        dg, _ = anchored_structures(mu, tau)
+        for (p, q) in dg:
+            Sp = [2 * p, 2 * p + 1, 2 * q, 2 * q + 1]
+            for z in range(60):
+                if z > sig[z]:
+                    continue
+                eq([U(z, b) for b in Sp] + [U(sig[z], b) for b in Sp], 2 - len({a // 2 for a in far[z]} & {p, q}))
+        print('digon balance added for anchored digons', dg, flush=True)
     if cycles:
         for z in range(60):
             sz = sig[z]
@@ -140,14 +175,16 @@ if __name__ == '__main__':
     else:
         cycles = []; mu, tau = cfg['mu'], cfg['tau']
     t0 = time.time()
-    cuts = '--cuts' in sys.argv
-    cnf, pool, far, edges = encode(mu, tau, cycles, cuts=cuts)
-    print(sys.argv[1], '[encoding 2: iota-pairs]' + (' + lemma cuts' if cuts else ''), 'vars', pool.top, 'clauses', len(cnf.clauses), 'encode %.1fs' % (time.time() - t0), flush=True)
+    cuts = '--cuts' in sys.argv; digon = '--digon' in sys.argv
+    cnf, pool, far, edges = encode(mu, tau, cycles, cuts=cuts, digon=digon)
+    print(sys.argv[1], '[encoding 2: iota-pairs]' + (' + lemma cuts' if cuts else '') + (' + digon balance' if digon else ''), 'vars', pool.top, 'clauses', len(cnf.clauses), 'encode %.1fs' % (time.time() - t0), flush=True)
     if '--dimacs' in sys.argv:
         out = sys.argv[1].replace('.json', '_enc2.cnf')
         com = ['c local system, encoding 2 (iota-pairs), ' + json.dumps(cfg)]
         if cuts:
             com.append(LEMMA)
+        if digon:
+            com.append(DIGON)
         cnf.to_file(out, comments=com)
         print('DIMACS written to', out); sys.exit(0)
     with Solver(name=sname, bootstrap_with=cnf.clauses) as s:
