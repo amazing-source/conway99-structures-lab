@@ -159,3 +159,16 @@ que 0 comme point fixe (`involution/bvls_local_control.py`).
   - si on en trouve une, c'est la première solution locale à m = 7, et C1 pourra y tester le q:7 (lignes rigides à det carré,
     résidu K anisotrope) ;
   - sinon, il faut un UNSAT par type.
+
+## 9. Pour les 79 types clés (Σ = ∅, « tout un bloc ») — 27/09, ~2 h 45
+- **Relecture de la réduction large-T et de l'échelle des pivots de C1** : correctes (relecture envoyée à C1 et C2).
+  - Recompte indépendant (`recount_pivots.py`) : 0 : 1787, 2 : 958, 4 : 407, 6 : 106, 8 : 39, 12 : 11. Pertinentes à ≥ 6 : 79.
+  - Profil (2,4) : 15 classes, dont 9 pertinentes.
+- **Le lemme mono-bloc de C1 s'étend à tout bloc gauche p ANCRÉ en c** (p+ et p− pivots), quel que soit le type :
+  - sur Sp_p = {p±, μp±}, la couverture est 2 et Σλ(Sp_p) = 13 − [digone] ;
+  - aucun centre sécant n'est dans Sp_p, car K₃ est nul en diagonale aux pivots ;
+  - donc a₃(p) + 3a₄(p) ≤ 1 (ou 0 pour un digone), ce qui donne des coupes valides sur les ι-paires pour les types à blocs
+    ancrés.
+- **Calibrage SAT (portable, ≤ 285 s)** : tier8_0 est inconnu avec l'encodage 1 (CaDiCaL) comme avec l'encodage 2
+  (ι-paires explicites, `sat_local2.py`, Glucose). La difficulté est intrinsèque : elle se tranchera sur le cloud. Lancer les
+  deux encodages en parallèle et garder le premier UNSAT (même contenu logique).
