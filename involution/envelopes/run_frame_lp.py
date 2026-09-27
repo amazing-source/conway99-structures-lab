@@ -28,10 +28,16 @@ def run_file(task):
         data['pairs'] = data['pairs'][:hi]
     out_path = os.path.join(HERE, 'frame_results', '%s.json' % stem if lo is None else '%s_s%d_%d.json' % (stem, lo, hi))
     res = json.load(open(out_path)) if os.path.exists(out_path) else {'id': i, 'source': os.path.basename(path), 'pairs': {}}
-    rec = json.load(open(os.path.join(HERE, 'U', '%03d.json' % i)))
-    P = prepare(rows_frac(rec['gens']), verbose=False)
-    bpath = os.path.join(HERE, 'frame_certs', '%03d_basis.npz' % i)      # one basis file per lattice
-    np.savez_compressed(bpath, basis=np.array([[str(x) for x in row] for row in P['M']]), den=P['d'])
+    if 'basis' in data:                                                   # own frame (e.g. Golay a-coordinates, scale 8)
+        P = prepare([[F(x) for x in r] for r in data['basis']], scale=int(data.get('scale', 1)), verbose=False)
+        bpath = os.path.join(HERE, 'frame_certs', '%s_basis.npz' % stem)
+        np.savez_compressed(bpath, basis=np.array([[str(x) for x in row] for row in P['M']]), den=P['d'],
+                            scale=int(data.get('scale', 1)), own_frame=1)
+    else:
+        rec = json.load(open(os.path.join(HERE, 'U', '%03d.json' % i)))
+        P = prepare(rows_frac(rec['gens']), verbose=False)
+        bpath = os.path.join(HERE, 'frame_certs', '%03d_basis.npz' % i)      # one basis file per lattice
+        np.savez_compressed(bpath, basis=np.array([[str(x) for x in row] for row in P['M']]), den=P['d'])
     t_last = time.time()
     for k, (c1, c2) in enumerate(data['pairs']):
         if str(k) in res['pairs'] or (lo is not None and k < lo):

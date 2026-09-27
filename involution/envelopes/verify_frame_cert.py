@@ -21,7 +21,16 @@ def check(path):
     z = np.load(path, allow_pickle=False)
     import re as _re
     i = int(_re.search(r'(\d{3})_\d{5}\.npz$', os.path.basename(path)).group(1))    # <stem ending in NNN>_PPPPP.npz
-    zb = z if 'basis' in z.files else np.load(os.path.join(os.path.dirname(path), '%03d_basis.npz' % i))
+    stem = _re.sub(r'_\d{5}\.npz$', '', os.path.basename(path))
+    own_path = os.path.join(os.path.dirname(path), '%s_basis.npz' % stem)
+    if 'basis' in z.files:
+        zb = z
+    elif os.path.exists(own_path):
+        zb = np.load(own_path)
+    else:
+        zb = np.load(os.path.join(os.path.dirname(path), '%03d_basis.npz' % i))
+    own = 'own_frame' in zb.files and int(zb['own_frame']) == 1
+    scale = int(zb['scale']) if 'scale' in zb.files else 1
     den0 = int(zb['den'])
     rows = [[F(int(x), den0) for x in r] for r in zb['basis']]          # stored as integer numerators over den
     rec = json.load(open(os.path.join(HERE, 'U', '%03d.json' % i)))
@@ -40,9 +49,23 @@ def check(path):
             q = v[c] // r[c]
             v = [p - q * s for p, s in zip(v, r)]
         return not any(v)
-    same = all(span_contains(Ha, r) for r in Hb) and all(span_contains(Hb, r) for r in Ha)
-    G = gram_of(a, da)
-    ok_lat = same and det_exact(G) == 1 and any(G[k][k] % 2 for k in range(24))
+    same = (not own) and all(span_contains(Ha, r) for r in Hb) and all(span_contains(Hb, r) for r in Ha)
+    G8 = gram_of(a, da)
+    assert all(x % scale == 0 for r in G8 for x in r)
+    G = [[x // scale for x in r] for r in G8]
+    ok_lat = det_exact(G) == 1 and any(G[k][k] % 2 for k in range(24))
+    if own:                                                    # identify by invariants: roots = the table's (checked below)
+        from build156 import rtype, tkey, parse_type
+        svr = enum(G, 2)
+        assert not any(v == 1 for zz, v in svr)
+        Rr = np.array([zz for zz, v in svr if v == 2], dtype=np.int64)
+        tab = {e['id']: e for e in json.load(open('C:/home/researcher/Desktop/c1_recherche/data/borcherds_odd24.json'))}
+        rt = tkey(rtype(Rr, np.array(G, dtype=np.int64))) if len(Rr) else ()
+        same_type = rt == tkey(parse_type(tab[i]['roots']))
+        unique = sum(1 for e in tab.values() if tkey(parse_type(e['roots'])) == rt) == 1
+        ok_lat = ok_lat and same_type and unique
+    else:
+        ok_lat = ok_lat and same
     y1 = [int(v) for v in z['y1']]; y2 = [int(v) for v in z['y2']]
     ip = lambda u, v: sum(u[p] * G[p][q] * v[q] for p in range(24) for q in range(24) if u[p] and v[q])
     ok_y = ip(y1, y1) == 7 and ip(y2, y2) == 7 and ip(y1, y2) == 0
