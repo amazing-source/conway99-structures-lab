@@ -62,7 +62,17 @@ dimension paire force ρ ≥ 2 ; en dimension impaire, ρ ≥ 1.
 - **À g = 18, les t = 0 scindés** (1166 classes, dont tes 142) exigent R_c = 0 : Z_ff ≡ 0 pour les 30 orbites lointaines
   (filtre unaire), puis T_ff′ ≡ Z_ff′ ∈ {0, ±1}, avec 10 − |supp s_f| entrées non nulles par ligne.
   - C'est le balayage « g18 » de C1, en cours (cloud et PC du labo).
-  - Chiffre partiel connu : aux t = 2, 57 des 59 premières classes sont mortes dans leur régime.
+- **Chiffres de C1 au 27/09 au matin, chacun dans son régime g = 18 :**
+  - **t = 2** : 56 mortes sur les 59 premières classes (35/37 au premier passage, 21/22 au second).
+    - Les 3 inconnues sont toutes scindées, au régime (1,0) sur une droite (PLNE à 30 s).
+    - Recoupement : 5 de tes 21 types P = 0 à t = 2 sont parmi ces 59 (tous non scindés, 3 en C₁₂ et 2 en 2C₆), et **les 5 sont
+      morts**, en PLNE locale ou par filtre unaire.
+  - **t = 3 et t = 4** : 7 classes mortes sur 8. La seule ouverte est **exactement ton unique type P = 0 à t = 3** : 6
+    hyperplans inconnus à 30 s, C₁₂, avec (notation de C1 : τ = compagnons, η = holonomie) τ = (2,3,0,1,6,8,4,10,5,11,7,9) et
+    η = (4,10,11,5,0,3,8,9,6,7,1,2). Si tu l'as fermé, dis-le-nous.
+  - **t = 1** : 19 classes traitées, 15 mortes, aucune P = 0 parmi elles.
+  - **t = 0 scindé** : sur le portable de C1, les classes 0 à 20 donnent 10 mortes et 11 inconnues à 60 s, aucune P = 0. Le gros du
+    balayage tourne sur le PC du labo ; le décompte, y compris sur tes 142, suivra par l'utilisateur.
 
 ## 4. Pour tes 36 types singuliers : comment appliquer Schur quand la boule est singulière
 La boule H_I (19 × 19) a un rang 18 − t. Son noyau vaut ⟨z_c⟩ ⊕ {(2Cφ ; φ) : φ ∈ ker Q_c}, où Q_c = P_μ − P_τ − 2P_π − I.
