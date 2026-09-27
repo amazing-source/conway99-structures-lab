@@ -885,3 +885,15 @@
   une route secondaire.
 - Le PC du labo dispose maintenant de kissat 4.0.4, cadical 3.0.1 et drat-trim (Docker gcc:13). Les UNSAT seront rejoués avec
   DRAT.
+
+## 27/09, ~8 h : deux blocs couplés pour T = K₇
+- `--twist` poussé (8c702da) ; C2 réexporte les 79 avec tous les flags applicables. Le PC du labo était occupé (jeu lancé
+  à 6 h 55) : C2 a tout arrêté, reprise automatique après 10 min d'inactivité.
+- **sat_twoblock.py** (NOTE_S33) : les systèmes locaux de deux blocs (0,6), recollés.
+  - Couplage systématique : 364 équivalences mod σ, dont 80 NOUVELLES (partagée × lointain-lointain) oubliées par la spec
+    initiale.
+  - CROSS : le (iii) à deux blocs, 200 équations exactes.
+  - Recollement des 5 autres blocs en variables. 60 instances pour T = K₇.
+- Contrôles : BvLS (graphe réel, m = 11) exact ; monde synthétique m = 7 (unicité du recollement) ; (i) + couplage SAT.
+- Calibrage portable : un recollement (identité) meurt en 20 s ; des recollements aléatoires résistent 80 s ; le mono-bloc
+  résiste 240 s. Suite sur le PC du labo (kissat).
