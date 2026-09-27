@@ -23,9 +23,10 @@ def run_file(task):
     path, lo, hi = task if isinstance(task, tuple) else (task, None, None)
     data = json.load(open(path))
     i = int(data['id'])
+    stem = os.path.splitext(os.path.basename(path))[0]                 # outputs keyed by the pairs file (no collisions)
     if lo is not None:
         data['pairs'] = data['pairs'][:hi]
-    out_path = os.path.join(HERE, 'frame_results', '%03d.json' % i if lo is None else '%03d_s%d_%d.json' % (i, lo, hi))
+    out_path = os.path.join(HERE, 'frame_results', '%s.json' % stem if lo is None else '%s_s%d_%d.json' % (stem, lo, hi))
     res = json.load(open(out_path)) if os.path.exists(out_path) else {'id': i, 'source': os.path.basename(path), 'pairs': {}}
     rec = json.load(open(os.path.join(HERE, 'U', '%03d.json' % i)))
     P = prepare(rows_frac(rec['gens']), verbose=False)
@@ -36,7 +37,7 @@ def run_file(task):
         if str(k) in res['pairs'] or (lo is not None and k < lo):
             continue
         y1, y2 = coef_of(P, [F(x) for x in c1]), coef_of(P, [F(x) for x in c2])
-        cert = os.path.join(HERE, 'frame_certs', '%03d_%05d.npz' % (i, k))
+        cert = os.path.join(HERE, 'frame_certs', '%s_%05d.npz' % (stem, k))
         r = frame_lp(P, y1, y2, save=cert)
         res['pairs'][str(k)] = r
         if time.time() - t_last > 20:
@@ -49,10 +50,10 @@ def run_file(task):
     return i, res['summary']
 
 
-def merge(i):
-    parts = [f for f in os.listdir(os.path.join(HERE, 'frame_results')) if f.startswith('%03d_s' % i)]
-    res = {'id': i, 'pairs': {}}
-    base = os.path.join(HERE, 'frame_results', '%03d.json' % i)
+def merge(stem):
+    parts = [f for f in os.listdir(os.path.join(HERE, 'frame_results')) if f.startswith(stem + '_s')]
+    res = {'stem': stem, 'pairs': {}}
+    base = os.path.join(HERE, 'frame_results', '%s.json' % stem)
     if os.path.exists(base):
         res['pairs'].update(json.load(open(base))['pairs'])
     for f in parts:
@@ -69,7 +70,7 @@ def main():
     jobs, slices = 1, 1
     if '--merge' in args:
         for a in args[args.index('--merge') + 1:]:
-            print(merge(int(a)))
+            print(a, merge(a))
         return
     if '--jobs' in args:
         k = args.index('--jobs'); jobs = int(args[k + 1]); del args[k:k + 2]

@@ -19,7 +19,8 @@ from build156 import int_rows, hnf, gram_of, det_exact, enum, inv_exact, rows_fr
 
 def check(path):
     z = np.load(path, allow_pickle=False)
-    i = int(os.path.basename(path)[:3])
+    import re as _re
+    i = int(_re.search(r'(\d{3})_\d{5}\.npz$', os.path.basename(path)).group(1))    # <stem ending in NNN>_PPPPP.npz
     zb = z if 'basis' in z.files else np.load(os.path.join(os.path.dirname(path), '%03d_basis.npz' % i))
     den0 = int(zb['den'])
     rows = [[F(int(x), den0) for x in r] for r in zb['basis']]          # stored as integer numerators over den
