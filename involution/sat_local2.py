@@ -273,8 +273,48 @@ BALANCEC = ('c BALANCE (C2 note 23 par. 8, generalised; re-derived by structures
             'squares = 15|S|^2 by (i)-(iii), so zero variance). Valid in every configuration.')
 
 
+BETAC = ('c BETA (C1 finish line, 27/09, piloted by C2; identity re-derived by structures): every orbit is sib, one-block or '
+         'dis, so sum_c (2 #piv_c + d_c) = 84 + 4|Sigma| and some block has 2 #piv + d >= 12 (d = non-pivot labels whose orbit '
+         'is dis). For a non-pivot v, beta_v = 1 iff its orbit is DIS: its secant sigma-pair (= its D-partner, Lemma 1) then '
+         'AVOIDS block(v) (SEC-dis); beta_v = 0: one-block via block(v), the secant pair MEETS block(v) (SEC). Clauses: '
+         'beta_v -> not(U[z,v] & U[sz,v]) when z meets block(v); not beta_v -> same when z avoids block(v); '
+         'cardinality 2 #piv + sum beta >= 12 (mode card), or beta = 1 everywhere (mode all), or 0 everywhere (mode zero = SEC). '
+         'Units (C1 notes/137): a non-pivot v with mu v = pi v or tau v = pi v has a dis orbit, beta_v = beta_{pi v} = 1.')
+
+
+def beta_constraints(cnf, pool, mu, tau, far, sig, U, mode):
+    """C2's convention: beta_v = 1 <=> the orbit of the non-pivot label v is dis.  mode: 'card' (2 #piv + sum beta >= 12),
+    'all' (beta = 1 for every non-pivot: free stars), 'zero' (beta = 0 everywhere, i.e. SEC: the n_dis = 0 stage)."""
+    nonpiv = [v for v in L if mu[v] != tau[v]]
+    npiv = 12 - len(nonpiv)
+    B = {v: pool.id(('beta', v)) for v in nonpiv}
+    for v in nonpiv:
+        for z in range(60):
+            meets = v // 2 in {a // 2 for a in far[z]}
+            # the secant of v on the sigma-pair of z forces the orbit type: dis iff z avoids block(v)
+            cnf.append([(-B[v] if meets else B[v]), -U(z, v), -U(sig[z], v)])
+    # C1 (notes/137, 27/09; relu): a non-pivot v with mu v = pi v or tau v = pi v has a DIS orbit (its sister root would lie
+    # in the D-partner, making a sib square): beta_v = beta_{pi v} = 1 in every configuration.
+    for v in nonpiv:
+        if mu[v] == PI[v] or tau[v] == PI[v]:
+            cnf.append([B[v]])
+            if PI[v] in B:
+                cnf.append([B[PI[v]]])
+    need = max(0, 12 - 2 * npiv)
+    if mode == 'all':
+        cnf.extend([[B[v]] for v in nonpiv])
+    elif mode == 'zero':
+        cnf.extend([[-B[v]] for v in nonpiv])
+    elif need > 0:
+        if need > len(nonpiv):
+            cnf.append([])
+        else:
+            cnf.extend(CardEnc.atleast(lits=[B[v] for v in nonpiv], bound=need, vpool=pool, encoding=EncType.seqcounter).clauses)
+    return npiv, len(nonpiv), need
+
+
 def encode(mu, tau, cycles=(), cuts=False, digon=False, path=False, sec=False, twist=False, relax=(), ident=None, fullcyc=False,
-           balance=False):
+           balance=False, beta=None):
     """relax: subset of {'ii', 'iii'} to DROP (positive controls only; the default keeps everything)"""
     K2, K3 = D.K2K3(mu, tau)
     far = [z for z in itertools.combinations(L, 2) if z[0] // 2 != z[1] // 2]
@@ -382,6 +422,9 @@ def encode(mu, tau, cycles=(), cuts=False, digon=False, path=False, sec=False, t
                     continue
                 eq([U(z, v) for v in lc] + [U(sig[z], v) for v in lc], len(C) - len({a // 2 for a in far[z]} & set(C)))
         print('full-block D-cycle balance (v) added for cycles', fc, flush=True)
+    if beta is not None:
+        npv, nnp, need = beta_constraints(cnf, pool, mu, tau, far, sig, U, beta)
+        print('beta (%s): %d pivots, %d non-pivot labels, need sum beta >= %d' % (beta, npv, nnp, need), flush=True)
     if balance:
         obs = pmt_orbits(mu, tau)
         if len(obs) > 1:
@@ -422,8 +465,9 @@ if __name__ == '__main__':
     cuts = '--cuts' in sys.argv; digon = '--digon' in sys.argv; path = '--path' in sys.argv; sec = '--sec' in sys.argv; twist = '--twist' in sys.argv
     ident = next((int(a.split('=')[1]) if '=' in a else 0 for a in sys.argv if a.startswith('--ident')), None)
     fullcyc = '--fullcyc' in sys.argv; balance = '--balance' in sys.argv
+    beta = next(((a.split('=')[1] if '=' in a else 'card') for a in sys.argv if a.startswith('--beta')), None)
     cnf, pool, far, edges = encode(mu, tau, cycles, cuts=cuts, digon=digon, path=path, sec=sec, twist=twist, ident=ident, fullcyc=fullcyc,
-                                   balance=balance)
+                                   balance=balance, beta=beta)
     print(sys.argv[1], '[encoding 2: iota-pairs]' + (' + lemma cuts' if cuts else '') + (' + digon balance' if digon else '') + (' + path' if path else '') + (' + SEC' if sec else '') + (' + twist' if twist else '') + (' + ident<=%d' % ident if ident is not None else ''), 'vars', pool.top, 'clauses', len(cnf.clauses), 'encode %.1fs' % (time.time() - t0), flush=True)
     if '--dimacs' in sys.argv:
         out = sys.argv[1].replace('.json', '_enc2.cnf')
@@ -442,6 +486,9 @@ if __name__ == '__main__':
             com.append(FULLCYCC)
         if balance:
             com.append(BALANCEC)
+        if beta is not None:
+            com.append(BETAC)
+            com.append('c BETA mode: %s' % beta)
         if ident is not None:
             com.append(IDENTC)
             com.append('c IDENT list (p, S, slack), slack <= %d: %s' % (ident, json.dumps(ident_list(mu, tau, ident))))

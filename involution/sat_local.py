@@ -145,7 +145,7 @@ TWISTC = ('c TWIST (C1, 27/09; relu par structures): at every twisted left block
           'Uses only (i)-(iii) and block-level coverage (no dis-square hypothesis).')
 
 
-def encode(mu, tau, cycles=(), digon=False, path=False, sec=False, twist=False, ident=None):
+def encode(mu, tau, cycles=(), digon=False, path=False, sec=False, twist=False, ident=None, beta=None):
     K2, K3 = D.K2K3(mu, tau)
     far = [z for z in itertools.combinations(L, 2) if z[0] // 2 != z[1] // 2]
     fidx = {z: i for i, z in enumerate(far)}
@@ -219,6 +219,10 @@ def encode(mu, tau, cycles=(), digon=False, path=False, sec=False, twist=False, 
     if twist:
         tb = twist_constraints(cnf, pool, mu, tau, far, sig, U)
         print('twist identities added for twisted blocks', tb, flush=True)
+    if beta is not None:                                      # C1's finish line (shared code in sat_local2)
+        from sat_local2 import beta_constraints
+        npv, nnp, need = beta_constraints(cnf, pool, mu, tau, far, sig, U, beta)
+        print('beta (%s): %d pivots, %d non-pivot labels, need sum beta >= %d' % (beta, npv, nnp, need), flush=True)
     if ident is not None:                                     # C1's general identity (shared code in sat_local2)
         from sat_local2 import ident_list, ident_constraints
         ids = ident_list(mu, tau, ident)
@@ -254,7 +258,8 @@ if __name__ == '__main__':
         cycles = []; mu, tau = cfg['mu'], cfg['tau']
     t0 = time.time()
     ident = next((int(a.split('=')[1]) if '=' in a else 0 for a in sys.argv if a.startswith('--ident')), None)
-    cnf, pool, far, edges = encode(mu, tau, cycles, digon='--digon' in sys.argv, path='--path' in sys.argv, sec='--sec' in sys.argv, twist='--twist' in sys.argv, ident=ident)
+    beta = next(((a.split('=')[1] if '=' in a else 'card') for a in sys.argv if a.startswith('--beta')), None)
+    cnf, pool, far, edges = encode(mu, tau, cycles, digon='--digon' in sys.argv, path='--path' in sys.argv, sec='--sec' in sys.argv, twist='--twist' in sys.argv, ident=ident, beta=beta)
     if '--symbreak' in sys.argv and cycles:        # C1's lex-leader symmetry breaking (conway99-c1 code/fullblock_symmetry.py)
         sys.path.insert(0, 'C:/home/researcher/Desktop/c1_recherche/code')
         from fullblock_symmetry import lexleader_clauses
@@ -268,6 +273,9 @@ if __name__ == '__main__':
         out = sys.argv[1].replace('.json', '.cnf')
         com = ['c local system (i)-(iii) + full-block extras + C1 pointwise (L1,S1,S2)', 'c cfg ' + json.dumps(cfg),
                'c flags: ' + ' '.join(a for a in sys.argv[3:] if a.startswith('--'))]
+        if beta is not None:
+            from sat_local2 import BETAC
+            com += [BETAC, 'c BETA mode: %s' % beta]
         if ident is not None:
             from sat_local2 import IDENTC, ident_list
             com += [IDENTC, 'c IDENT list (p, S, slack): ' + json.dumps(ident_list(mu, tau, ident))]
