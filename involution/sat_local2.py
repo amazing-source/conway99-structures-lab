@@ -183,7 +183,54 @@ TWISTC = ('c TWIST (C1, 27/09; relu par structures): at every twisted left block
           'Uses only (i)-(iii) and block-level coverage (no dis-square hypothesis).')
 
 
-def encode(mu, tau, cycles=(), cuts=False, digon=False, path=False, sec=False, twist=False, relax=()):
+def ident_list(mu, tau, smax):
+    """C1's general single-block identity (conway99-c1 notes/134 s.8, re-derived and checked on BvLS by ident_check_bvls.py):
+    for a label set S and a left block p, with k_Q = places of Phi(z) u Phi(sigma z) in S (multiplicity),
+      a3 + 3 a4 + sum_{Q through p} (k-1)+ + #{Q not through p : k = 0} = 20 - 10|S| + Lambda(S) + C_p(S),
+    Lambda(S) = sum_{b<d in S} ([b,d non-mu] + K3[b,d]) + sum_{b in S} K3[b,b]/2,  C_p(S) = sum_{b in S} (K2[p+,b] + K2[p-,b]).
+    Returns every (p, S, slack) with slack <= smax (a negative slack would kill the type by itself)."""
+    K2, K3 = D.K2K3(mu, tau)
+    out = []
+    for r in range(1, 13):
+        for S in itertools.combinations(L, r):
+            lam = sum((mu[b] != d) + int(K3[b, d]) for b, d in itertools.combinations(S, 2)) + sum(int(K3[b, b]) // 2 for b in S)
+            base = 20 - 10 * r + lam
+            for p in range(6):
+                sl = base + sum(int(K2[2 * p, b]) + int(K2[2 * p + 1, b]) for b in S)
+                if sl <= smax:
+                    out.append((p, S, sl))
+    return out
+
+
+def ident_constraints(cnf, pool, far, sig, U, idents):
+    """one exact identity per (p, S, slack), same bookkeeping as twist_terms; slack 0 = unit clauses (rigidity)"""
+    for nid, (p, S, sl) in enumerate(idents):
+        assert sl >= 0, ('negative slack: the type is infeasible by itself', p, S, sl)
+        lits = []
+        for z in range(60):
+            if z > sig[z]:
+                continue
+            o = unary_geq(cnf, pool, [U(z, b) for b in S] + [U(sig[z], b) for b in S], 4, ('idcnt', nid, z))
+            through = p in {w // 2 for w in far[z]}
+            if sl == 0:
+                cnf.append([-o[2]])
+                cnf.append([-o[1]] if through else [o[0]])
+                continue
+            for t in twist_terms(o, through):
+                c = pool.id(('idcopy', nid, z, len(lits)))
+                cnf.append([-c, t]); cnf.append([c, -t])
+                lits.append(c)
+        if sl > 0:
+            cnf.extend(CardEnc.equals(lits=lits, bound=sl, vpool=pool, encoding=EncType.seqcounter).clauses)
+    return len(idents)
+
+
+IDENTC = ('c IDENT (C1 notes/134 s.8, re-derived and checked on BvLS by structures): for the listed (p, S, slack), '
+          'a3 + 3 a4 + sum_{Q through p} (k-1)+ + #{Q not through p : k = 0} = slack = 20 - 10|S| + Lambda(S) + C_p(S). '
+          'Uses only (i)-(iii) and block-level coverage; slack 0 = rigidity (unit clauses).')
+
+
+def encode(mu, tau, cycles=(), cuts=False, digon=False, path=False, sec=False, twist=False, relax=(), ident=None):
     """relax: subset of {'ii', 'iii'} to DROP (positive controls only; the default keeps everything)"""
     K2, K3 = D.K2K3(mu, tau)
     far = [z for z in itertools.combinations(L, 2) if z[0] // 2 != z[1] // 2]
@@ -282,6 +329,11 @@ def encode(mu, tau, cycles=(), cuts=False, digon=False, path=False, sec=False, t
     if path:
         pb = path_constraints(cnf, pool, mu, tau, far, sig, U)
         print('path constraints (exactly one excess) added for anchored path blocks', pb, flush=True)
+    if ident is not None:
+        ids = ident_list(mu, tau, ident)
+        ident_constraints(cnf, pool, far, sig, U, ids)
+        print('general identities added (slack <= %d): %d, slack counts %s' % (ident, len(ids),
+              {s: sum(1 for i in ids if i[2] == s) for s in sorted({i[2] for i in ids})}), flush=True)
     if cycles:
         for z in range(60):
             sz = sig[z]
@@ -306,8 +358,9 @@ if __name__ == '__main__':
         cycles = []; mu, tau = cfg['mu'], cfg['tau']
     t0 = time.time()
     cuts = '--cuts' in sys.argv; digon = '--digon' in sys.argv; path = '--path' in sys.argv; sec = '--sec' in sys.argv; twist = '--twist' in sys.argv
-    cnf, pool, far, edges = encode(mu, tau, cycles, cuts=cuts, digon=digon, path=path, sec=sec, twist=twist)
-    print(sys.argv[1], '[encoding 2: iota-pairs]' + (' + lemma cuts' if cuts else '') + (' + digon balance' if digon else '') + (' + path' if path else '') + (' + SEC' if sec else '') + (' + twist' if twist else ''), 'vars', pool.top, 'clauses', len(cnf.clauses), 'encode %.1fs' % (time.time() - t0), flush=True)
+    ident = next((int(a.split('=')[1]) if '=' in a else 0 for a in sys.argv if a.startswith('--ident')), None)
+    cnf, pool, far, edges = encode(mu, tau, cycles, cuts=cuts, digon=digon, path=path, sec=sec, twist=twist, ident=ident)
+    print(sys.argv[1], '[encoding 2: iota-pairs]' + (' + lemma cuts' if cuts else '') + (' + digon balance' if digon else '') + (' + path' if path else '') + (' + SEC' if sec else '') + (' + twist' if twist else '') + (' + ident<=%d' % ident if ident is not None else ''), 'vars', pool.top, 'clauses', len(cnf.clauses), 'encode %.1fs' % (time.time() - t0), flush=True)
     if '--dimacs' in sys.argv:
         out = sys.argv[1].replace('.json', '_enc2.cnf')
         com = ['c local system, encoding 2 (iota-pairs), ' + json.dumps(cfg)]
@@ -321,6 +374,9 @@ if __name__ == '__main__':
             com.append(SECC)
         if twist:
             com.append(TWISTC)
+        if ident is not None:
+            com.append(IDENTC)
+            com.append('c IDENT list (p, S, slack), slack <= %d: %s' % (ident, json.dumps(ident_list(mu, tau, ident))))
         cnf.to_file(out, comments=com)
         print('DIMACS written to', out); sys.exit(0)
     with Solver(name=sname, bootstrap_with=cnf.clauses) as s:
