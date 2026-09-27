@@ -69,7 +69,69 @@ DIGON = ('c DIGON (C1, 27/09, derived from the equality form of the single-block
          '2 - |blocks(z) & {p, q}| labels of Sp = {p+, p-, q+, q-} in Phi(z) u Phi(sigma z) (the D-cycle balance, in any type).')
 
 
-def encode(mu, tau, cycles=(), cuts=False, digon=False):
+def unary_geq(cnf, pool, lits, K, tag):
+    """o[j] <-> (sum of lits >= j), j = 1..K, by a sequential counter with full equivalences."""
+    prev = {0: None}                                   # None = constant true
+    for j in range(1, K + 1):
+        prev[j] = False                                 # constant false for i = 0
+    for i, x in enumerate(lits):
+        cur = {0: None}
+        for j in range(1, K + 1):
+            v = pool.id((tag, i, j)); cur[j] = v
+            a = prev[j]; b = prev[j - 1]
+            # v <-> a or (b and x)
+            if a is not False and a is not None:
+                cnf.append([-a, v])
+            if b is None:
+                cnf.append([-x, v])
+            elif b is not False:
+                cnf.append([-b, -x, v])
+            rhs = []
+            if a is None:
+                cnf.append([v]); continue
+            if a is not False:
+                rhs.append(a)
+            if b is None:
+                cnf.append([-v] + rhs + [x])
+            elif b is False:
+                cnf.append([-v] + rhs)
+            else:
+                cnf.append([-v] + rhs + [b]); cnf.append([-v] + rhs + [x])
+        prev = cur
+    return [prev[j] for j in range(1, K + 1)]
+
+
+def path_constraints(cnf, pool, mu, tau, far, sig, U):
+    """C1's 'exactly one excess' at every anchored non-sib PATH block p (notes/134 par. 6, NOTE_S29 par. 9):
+    with k_Z = |Phi(z) u Phi(sigma z) & Sp|, Sp = {p+, p-, mu p+, mu p-}, S_p = sigma-pairs through block p:
+    k <= 2 on S_p, k <= 3 elsewhere, and exactly one of {Z in S_p: k = 2}, {Z not in S_p: k = 3}, {Z not in S_p: k = 0}."""
+    _, paths = anchored_structures(mu, tau)
+    for p in paths:
+        Sp = [2 * p, 2 * p + 1, mu[2 * p], mu[2 * p + 1]]
+        events = []
+        for z in range(60):
+            if z > sig[z]:
+                continue
+            lits = [U(z, b) for b in Sp] + [U(sig[z], b) for b in Sp]
+            o = unary_geq(cnf, pool, lits, 4, ('pathcnt', p, z))
+            through = p in {a // 2 for a in far[z]}
+            if through:
+                cnf.append([-o[2]])                    # k <= 2 on S_p
+                events.append(o[1])                    # k = 2  <->  o2 (given not o3)
+            else:
+                cnf.append([-o[3]])                    # k <= 3 (never 4)
+                events.append(o[2])                    # k = 3  <->  o3
+                e0 = pool.id(('pathe0', p, z)); cnf.append([-e0, -o[0]]); cnf.append([e0, o[0]])   # e0 <-> k = 0
+                events.append(e0)
+        cnf.extend(CardEnc.equals(lits=events, bound=1, vpool=pool, encoding=EncType.seqcounter).clauses)
+    return paths
+
+
+PATHC = ('c PATH (C1 notes/134 par. 6, equality form of the single-block lemma): at every anchored non-sib path block p, '
+         'k <= 2 on the sigma-pairs through p, never 4, and exactly one of {k = 2 through p}, {k = 3 not through p}, {k = 0 not through p}.')
+
+
+def encode(mu, tau, cycles=(), cuts=False, digon=False, path=False):
     K2, K3 = D.K2K3(mu, tau)
     far = [z for z in itertools.combinations(L, 2) if z[0] // 2 != z[1] // 2]
     fidx = {z: i for i, z in enumerate(far)}
@@ -152,6 +214,9 @@ def encode(mu, tau, cycles=(), cuts=False, digon=False):
                     continue
                 eq([U(z, b) for b in Sp] + [U(sig[z], b) for b in Sp], 2 - len({a // 2 for a in far[z]} & {p, q}))
         print('digon balance added for anchored digons', dg, flush=True)
+    if path:
+        pb = path_constraints(cnf, pool, mu, tau, far, sig, U)
+        print('path constraints (exactly one excess) added for anchored path blocks', pb, flush=True)
     if cycles:
         for z in range(60):
             sz = sig[z]
@@ -175,9 +240,9 @@ if __name__ == '__main__':
     else:
         cycles = []; mu, tau = cfg['mu'], cfg['tau']
     t0 = time.time()
-    cuts = '--cuts' in sys.argv; digon = '--digon' in sys.argv
-    cnf, pool, far, edges = encode(mu, tau, cycles, cuts=cuts, digon=digon)
-    print(sys.argv[1], '[encoding 2: iota-pairs]' + (' + lemma cuts' if cuts else '') + (' + digon balance' if digon else ''), 'vars', pool.top, 'clauses', len(cnf.clauses), 'encode %.1fs' % (time.time() - t0), flush=True)
+    cuts = '--cuts' in sys.argv; digon = '--digon' in sys.argv; path = '--path' in sys.argv
+    cnf, pool, far, edges = encode(mu, tau, cycles, cuts=cuts, digon=digon, path=path)
+    print(sys.argv[1], '[encoding 2: iota-pairs]' + (' + lemma cuts' if cuts else '') + (' + digon balance' if digon else '') + (' + path' if path else ''), 'vars', pool.top, 'clauses', len(cnf.clauses), 'encode %.1fs' % (time.time() - t0), flush=True)
     if '--dimacs' in sys.argv:
         out = sys.argv[1].replace('.json', '_enc2.cnf')
         com = ['c local system, encoding 2 (iota-pairs), ' + json.dumps(cfg)]
@@ -185,6 +250,8 @@ if __name__ == '__main__':
             com.append(LEMMA)
         if digon:
             com.append(DIGON)
+        if path:
+            com.append(PATHC)
         cnf.to_file(out, comments=com)
         print('DIMACS written to', out); sys.exit(0)
     with Solver(name=sname, bootstrap_with=cnf.clauses) as s:
