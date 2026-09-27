@@ -1,0 +1,6 @@
+profile (2, 2) (class 2, 24 in profile): step 2 LP INFEASIBLE; step 2 INFEASIBLE (LP) 59s
+profile (1, 4) (class 8, 18 in profile): step 2 LP INFEASIBLE; step 2 INFEASIBLE (LP) 125s
+profile (3, 0) (class 0, 7 in profile): step 2 LP INFEASIBLE; step 2 INFEASIBLE (LP) 135s
+profile (0, 6) (class 25, 7 in profile): step 2 LP feasible; step 2 unknown(1) 184s
+profile (3, 2) (class 6, 6 in profile): step 2 LP INFEASIBLE; step 2 INFEASIBLE (LP) 198s
+profile (4, 0) (class 1, 4 in profile): step 2 LP INFEASIBLE; step 2 INFEASIBLE (LP) 255s
