@@ -1,0 +1,6 @@
+class 1 (pivots [0, 1, 2, 3, 4, 6, 9, 11]): step 1 FEASIBLE; step 2 LP INFEASIBLE; step 2 INFEASIBLE (LP) 33s
+class 2 (pivots [0, 1, 2, 3, 4, 6, 9, 11]): step 1 FEASIBLE; step 2 LP feasible; step 2 INFEASIBLE 51s
+class 4: step 1 UNKNOWN 121s
+class 5 (pivots [0, 2, 5, 7, 8, 9, 10, 11]): step 1 FEASIBLE; step 2 LP INFEASIBLE; step 2 INFEASIBLE (LP) 127s
+class 6 (pivots [0, 1, 2, 4, 7, 9, 10, 11]): step 1 FEASIBLE; step 2 LP INFEASIBLE; step 2 INFEASIBLE (LP) 135s
+class 7 (pivots [0, 1, 2, 3, 4, 6, 9, 11]): step 1 FEASIBLE; step 2 LP feasible; step 2 INFEASIBLE 178s

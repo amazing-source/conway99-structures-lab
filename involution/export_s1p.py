@@ -45,8 +45,9 @@ for k in range(15):
 for rr in range(6):
     ks = [k for k, bp in enumerate(BP) if rr in bp]
     for b in L:
-        row([(av(n, k), 1) for n, (i, j) in enumerate(pairs) if b in edges[i] or b in edges[j] for k in ks],
-            int(K2[2 * rr, b] + K2[2 * rr + 1, b]))
+        # multiplicity [b in e_i] + [b in e_j]: a secant iota-pair (common label b) contributes 2 (C1's caution, 27/09)
+        row([(av(n, k), (b in edges[i]) + (b in edges[j])) for n, (i, j) in enumerate(pairs)
+             if b in edges[i] or b in edges[j] for k in ks], int(K2[2 * rr, b] + K2[2 * rr + 1, b]))
 A = sp.csr_matrix((np.array(vv, float), (np.array(ri), np.array(ci))), shape=(r[0], nv))
 lo = np.array(lo, float)
 np.savez_compressed(out + '.npz', A_data=A.data, A_indices=A.indices, A_indptr=A.indptr, A_shape=np.array(A.shape),

@@ -16,7 +16,36 @@ import iota_design as D
 L = list(range(12)); PI = [v ^ 1 for v in L]
 
 
-def encode(mu, tau, cycles=()):
+LEMMA = ('c LEMMA (structures NOTE_S29 par. 9, generalising C1 notes/134): at a block c of any type (mu, tau), let p be a '
+         'left block anchored at c (p+ and p- pivots: mu = tau on them), Sp = {p+, p-, mu p+, mu p-}; then among the 30 '
+         'iota-quadruples none contains the 4 labels of Sp and at most one contains 3 of them (none if mu p+, mu p- lie in '
+         'one block). Proof: block-level (ii) gives coverage 2 on Sp over the 10 quadruples through p, so at least 2 of '
+         'them avoid Sp, while inclusion-exclusion over the near-design gives a0 = 3 - a3 - 3 a4 (2 - a3 - 3 a4 for a digon).')
+
+
+def lemma_cuts(mu, tau, edges, Q):
+    cl = []
+    for p in range(6):
+        a, b = 2 * p, 2 * p + 1
+        if not (mu[a] == tau[a] and mu[b] == tau[b]):
+            continue
+        Sp = {a, b, mu[a], mu[b]}
+        digon = mu[a] // 2 == mu[b] // 2
+        three = []
+        for (i, j), v in Q.items():
+            k = len((set(edges[i]) | set(edges[j])) & Sp)
+            if k == 4:
+                cl.append([-v])
+            elif k == 3:
+                three.append(v)
+        if digon:
+            cl.extend([[-v] for v in three])
+        else:
+            cl.extend([[-u, -w] for u, w in itertools.combinations(three, 2)])
+    return cl
+
+
+def encode(mu, tau, cycles=(), cuts=False):
     K2, K3 = D.K2K3(mu, tau)
     far = [z for z in itertools.combinations(L, 2) if z[0] // 2 != z[1] // 2]
     fidx = {z: i for i, z in enumerate(far)}
@@ -84,6 +113,10 @@ def encode(mu, tau, cycles=()):
                 cnf.append([-U(z, aa), -U(sz, PI[aa])])
             cnf.append([-U(z, a), -U(sz, tau[a])])
             cnf.append([U(z, a), -U(z, mu[a]), -U(sz, tau[a])])
+    if cuts:
+        lc = lemma_cuts(mu, tau, edges, Q)
+        cnf.extend(lc)
+        print('lemma cuts added:', len(lc), flush=True)
     if cycles:
         for z in range(60):
             sz = sig[z]
@@ -107,11 +140,15 @@ if __name__ == '__main__':
     else:
         cycles = []; mu, tau = cfg['mu'], cfg['tau']
     t0 = time.time()
-    cnf, pool, far, edges = encode(mu, tau, cycles)
-    print(sys.argv[1], '[encoding 2: iota-pairs]', 'vars', pool.top, 'clauses', len(cnf.clauses), 'encode %.1fs' % (time.time() - t0), flush=True)
+    cuts = '--cuts' in sys.argv
+    cnf, pool, far, edges = encode(mu, tau, cycles, cuts=cuts)
+    print(sys.argv[1], '[encoding 2: iota-pairs]' + (' + lemma cuts' if cuts else ''), 'vars', pool.top, 'clauses', len(cnf.clauses), 'encode %.1fs' % (time.time() - t0), flush=True)
     if '--dimacs' in sys.argv:
         out = sys.argv[1].replace('.json', '_enc2.cnf')
-        cnf.to_file(out, comments=['c local system, encoding 2 (iota-pairs), ' + json.dumps(cfg)])
+        com = ['c local system, encoding 2 (iota-pairs), ' + json.dumps(cfg)]
+        if cuts:
+            com.append(LEMMA)
+        cnf.to_file(out, comments=com)
         print('DIMACS written to', out); sys.exit(0)
     with Solver(name=sname, bootstrap_with=cnf.clauses) as s:
         timer = threading.Timer(secs, lambda: s.interrupt()); timer.start()

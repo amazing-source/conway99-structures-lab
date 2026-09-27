@@ -1,0 +1,1 @@
+class 4 (pivots [0, 1, 2, 4, 7, 9, 10, 11]): step 1 FEASIBLE; step 2 LP INFEASIBLE; step 2 INFEASIBLE (LP) 65s

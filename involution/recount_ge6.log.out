@@ -1,0 +1,12 @@
+mine: 156 classes with >= 6 pivots (22s)
+C1 : 156 classes (42s)
+same set of classes: True | only mine: 0 | only C1: 0
+same profile + relevance for every class: True
+per profile (anch, tw): all {(6, 0): 11, (4, 0): 10, (3, 2): 14, (3, 0): 21, (2, 4): 15, (2, 2): 48, (1, 4): 30, (0, 6): 7}
+                   relevant {(6, 0): 4, (4, 0): 4, (3, 2): 6, (3, 0): 7, (2, 4): 9, (2, 2): 24, (1, 4): 18, (0, 6): 7} | total relevant 79
+largeT_tier6_rel      56 classes, all relevant & distinct & in my list: True, profiles {(3, 0): 7, (2, 2): 24, (1, 4): 18, (0, 6): 7}
+largeT_tier12_rel      4 classes, all relevant & distinct & in my list: True, profiles {(6, 0): 4}
+largeT_tier8_rel       9 classes, all relevant & distinct & in my list: True, profiles {(2, 4): 9}
+tier_32_rel            6 classes, all relevant & distinct & in my list: True, profiles {(3, 2): 6}
+tier_40_rel            4 classes, all relevant & distinct & in my list: True, profiles {(4, 0): 4}
+allonblock_ge6_rel    79 classes, all relevant & distinct & in my list: True, profiles {(3, 0): 7, (4, 0): 4, (2, 2): 24, (3, 2): 6, (1, 4): 18, (6, 0): 4, (2, 4): 9, (0, 6): 7}

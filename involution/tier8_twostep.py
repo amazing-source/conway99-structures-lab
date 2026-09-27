@@ -10,7 +10,7 @@ t0 = time.time()
 for idx in map(int, sys.argv[1:]):
     mu, tau = T[idx]['mu'], T[idx]['tau']
     K2, K3 = D.K2K3(mu, tau)
-    st, sol, edges = D.step1(mu, tau, 1, 70)
+    st, sol, edges = D.step1(mu, tau, 1, float(__import__("os").environ.get("STEP1_TL", "70")))
     if sol is None:
         print('class %d: step 1 %s' % (idx, st), '%.0fs' % (time.time() - t0), flush=True); continue
     far = [z for z in itertools.combinations(D.L, 2) if z[0] // 2 != z[1] // 2]
