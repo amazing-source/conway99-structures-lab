@@ -144,8 +144,9 @@ class TwoBlock:
     """coupling + cross constraints between the c-system and the d-system (generic m), see the module docstring.
     Uc(zc, b) / Ud(zd, lam): literal providers of the two local systems (U[z,b] = [z ~ (base+, b)], z a sorted label pair)."""
 
-    def __init__(self, B, m, muc, tauc, p, mud, taud, gamma, Uc, Ud, glue=None):
+    def __init__(self, B, m, muc, tauc, p, mud, taud, gamma, Uc, Ud, glue=None, full=False, FFval=None):
         self.B, self.m = B, m
+        self.full, self.FFval, self.FF = full, FFval, {}
         n = 2 * (m - 1); self.n = n
         self.muc, self.hc = muc, [tauc[l] ^ 1 for l in range(n)]          # tau = pi o h  =>  h = pi o tau
         self.mud, self.hd = mud, [taud[l] ^ 1 for l in range(n)]
@@ -273,6 +274,57 @@ class TwoBlock:
             return self.Wd(Z, x)
         return None
 
+    def descF(self, X, Y):
+        """full model only: adjacency of two far-far vertices (a variable per sigma-class; {z, sigma z} never adjacent)"""
+        if not self.full or self.kind(X) != 'F' or self.kind(Y) != 'F':
+            return None
+        if Y == sig(X):
+            return False
+        if self.FFval is not None:
+            return self.FFval(X, Y)
+        key = min(tuple(sorted((X, Y))), tuple(sorted((sig(X), sig(Y)))))
+        if key not in self.FF:
+            self.FF[key] = self.B.new(('FF',) + key)
+        return self.FF[key]
+
+    def adj(self, X, Y):
+        a = self.descC(X, Y)
+        if a is None:
+            a = self.descD(X, Y)
+        if a is None:
+            a = self.descF(X, Y)
+        return a
+
+    def full_counts(self):
+        """full model: exact lambda/mu counts for every pair not already exact (local systems, CROSS), i.e. every pair
+        with a far-far member: (N(x) vertex outside c, d ; far-far), (root ; far-far), (far-far ; far-far)."""
+        assert self.full
+        F = [X for X in self.ext if self.kind(X) == 'F']
+        R = [X for X in self.ext if self.kind(X) != 'F']
+        seen, n = set(), 0
+        for a in range(4, 2 * self.m):
+            for z in F:
+                key = min((a, z), (a ^ 1, sig(z)))
+                if key in seen:
+                    continue
+                seen.add(key)
+                terms = [self.adj(Y, z) for Y in self.ext if a in Y and Y != z] + [(a ^ 1) in z]
+                self.B.exactly(terms, 1 if a in z else 2, tag=('full-a', a, z))
+                n += 1
+        for X in R + F:
+            for z in F:
+                if X == z:
+                    continue
+                pair = tuple(sorted((X, z)))
+                key = min(pair, tuple(sorted((sig(X), sig(z)))))
+                if key in seen:
+                    continue
+                seen.add(key)
+                terms = [self.B.AND(self.adj(X, Y), self.adj(z, Y)) for Y in self.ext if Y != X and Y != z]
+                self.B.exactly(terms + [self.adj(X, z)], 2 - len(set(X) & set(z)), tag=('full', X, z))
+                n += 1
+        return n
+
     @staticmethod
     def kind(X):
         c = X[0] // 2 == 0 or X[1] // 2 == 0
@@ -374,7 +426,13 @@ GLUEC = ('c GLUE: G = signed bijection d-frame labels -> N(x) - d, G(gamma) = c+
          'Scope T = K7 (all pairs twisted, all blocks (0,6)): c = a block of minimal type, d = c-frame block p.')
 
 
-def build_instance(inst, flags, cross=True, glue=None):
+FULLC = ('c FULL (structures, 27/09): variables for the adjacency of two far-far vertices (sigma-classes; {z, sigma z} never '
+         'adjacent), and exact lambda/mu counts for every pair with a far-far member: (N(x) vertex outside c,d ; far-far), '
+         '(root ; far-far), (far-far ; far-far). With the local systems and CROSS this is the complete srg(99,14,1,2) graph '
+         'with sigma (every pair of vertices has an exact common-neighbour count).')
+
+
+def build_instance(inst, flags, cross=True, glue=None, full=False):
     import sat_local2 as S2
     mc, tc_, md, td_ = inst['mu_c'], inst['tau_c'], inst['mu_d'], inst['tau_d']
     p, gm = inst['p'], inst['gamma']
@@ -389,9 +447,10 @@ def build_instance(inst, flags, cross=True, glue=None):
     B = Builder(start=N1 + N2 + 1)
     Uc = lambda z, b: pool_c.obj2id[('u', fc[z], b)]
     Ud = lambda z, b: pool_d.obj2id[('u', fd[z], b)] + N1
-    T = TwoBlock(B, 7, mc, tc_, p, md, td_, gm, Uc, Ud, glue=glue)
+    T = TwoBlock(B, 7, mc, tc_, p, md, td_, gm, Uc, Ud, glue=glue, full=full)
     cnt = T.coupling()
     ncross = T.cross() if cross else 0
+    nfull = T.full_counts() if full else 0
     if B.violations:
         print('WARNING: %d constraints are statically violated (trivial UNSAT), e.g. %s' % (len(B.violations), B.violations[:3]))
     cnf = CNF()
@@ -400,6 +459,7 @@ def build_instance(inst, flags, cross=True, glue=None):
     cnf.extend(B.cnf.clauses)
     info = {'vars': B.pool.top, 'clauses': len(cnf.clauses), 'c_system': [N1, len(cnf_c.clauses)],
             'd_system': [N2, len(cnf_d.clauses)], 'coupling_pairs': cnt, 'cross_equations': ncross,
+            'full_equations': nfull, 'ff_vars': len(T.FF),
             'glue': 'fixed' if glue is not None else 'variable (B5)', 'static_violations': len(B.violations),
             'encode_s': round(time.time() - t0, 1)}
     build_instance.last = T
@@ -496,11 +556,11 @@ def selftest_bvls(rng, reps=3):
         Uc = lambda z, b: adjw(tuple(sorted((Fc[z[0]], Fc[z[1]]))), tuple(sorted((0, Fc[b]))))
         Ud = lambda z, b: adjw(tuple(sorted((G[z[0]], G[z[1]]))), tuple(sorted((2, G[b]))))
         Bd = Builder()
-        T = TwoBlock(Bd, m, muc, tauc, p, mud, taud, gamma, Uc, Ud, glue=G)
-        cnt = T.coupling(); nc = T.cross()
+        T = TwoBlock(Bd, m, muc, tauc, p, mud, taud, gamma, Uc, Ud, glue=G, full=True, FFval=adjw)
+        cnt = T.coupling(); nc = T.cross(); nf = T.full_counts()
         good = not Bd.violations and Bd.pool.top == 0
-        print('BvLS rep %d: p=%d gamma=%d  coupling pairs %s  cross equations %d  violations %d  %s'
-              % (rep, p, gamma, cnt, nc, len(Bd.violations), 'OK' if good else 'FAIL %s' % Bd.violations[:3]), flush=True)
+        print('BvLS rep %d: p=%d gamma=%d  coupling pairs %s  cross equations %d  full equations %d  violations %d  %s'
+              % (rep, p, gamma, cnt, nc, nf, len(Bd.violations), 'OK' if good else 'FAIL %s' % Bd.violations[:3]), flush=True)
         ok &= good
         # negative controls: a wrong gluing (swap two other d-frame blocks) and one flipped U_c value
         b1, b2 = [b for b in range(m - 1) if b != gamma // 2][:2]
@@ -625,7 +685,7 @@ if __name__ == '__main__':
         rng = random.Random(seed)
         for i in range(nsw):
             G = random_glue(rng, inst['gamma'])
-            cnf, info = build_instance(inst, flags, cross='--nocross' not in sys.argv, glue=G)
+            cnf, info = build_instance(inst, flags, cross='--nocross' not in sys.argv, glue=G, full='--full' in sys.argv)
             with Solver(name='glucose4', bootstrap_with=cnf.clauses) as s:
                 timer = threading.Timer(per, lambda: s.interrupt()); timer.start()
                 t1 = time.time()
@@ -636,8 +696,9 @@ if __name__ == '__main__':
     if relax:                                   # positive controls only: drop (ii) and/or (iii) at both blocks
         flags['relax'] = relax
     glue = next(([int(t) for t in a.split('=')[1].split(',')] for a in sys.argv if a.startswith('--glue=')), None)
-    cnf, info = build_instance(inst, flags, cross='--nocross' not in sys.argv, glue=glue)
-    tagname = 'twoblock_%d%s%s%s' % (inst['id'], '_glue' if glue else '', '_nocross' if '--nocross' in sys.argv else '',
+    cnf, info = build_instance(inst, flags, cross='--nocross' not in sys.argv, glue=glue, full='--full' in sys.argv)
+    tagname = 'twoblock_%d%s%s%s%s' % (inst['id'], '_glue' if glue else '', '_nocross' if '--nocross' in sys.argv else '',
+                                       '_full' if '--full' in sys.argv else '',
                                      '_relax' + ''.join(relax) if relax else '')
     print(tagname, json.dumps(info), flush=True)
     if '--dimacs' in sys.argv:
@@ -648,6 +709,8 @@ if __name__ == '__main__':
                % (info['c_system'][0], info['d_system'][0]), 'c local systems: sat_local2.encode (i)-(iii) + L1/S1/S2', GLUEC, COUPLEC]
         if '--nocross' not in sys.argv:
             com.append(CROSSC)
+        if '--full' in sys.argv:
+            com.append(FULLC)
         if flags['sec']:
             com.append(S2.SECC)
         if flags['twist']:
