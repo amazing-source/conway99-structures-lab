@@ -93,9 +93,23 @@ if '--digon' in sys.argv:          # C1's digon balance: a[n,k] = 0 unless |Q_n 
                     if ub[av(n, k)]:
                         ub[av(n, k)] = 0; nfix += 1
     print('digon balance: %d assignment variables fixed to 0' % nfix)
+nsec = 0
+if '--sec' in sys.argv:            # SEC (structures 27/09; valid when there is NO dis D-square = the Sigma = empty theorem scope):
+    for n, (i, j) in enumerate(pairs):   # a secant iota-pair centred at v sits on a sigma-pair whose root meets block(v)
+        com = set(edges[i]) & set(edges[j])
+        if not com:
+            continue
+        (v,) = com
+        for k, bp in enumerate(BP):
+            if v // 2 not in bp and ub[av(n, k)]:
+                ub[av(n, k)] = 0; nsec += 1
+    print('SEC: %d assignment variables fixed to 0' % nsec)
 np.savez_compressed(out + '.npz', A_data=A.data, A_indices=A.indices, A_indptr=A.indptr, A_shape=np.array(A.shape),
                     lo=lo, hi=hi, lb=np.zeros(nv), ub=ub, integrality=np.ones(nv))
 json.dump({'block_type': cfg, 'mu': list(mu), 'tau': list(tau), 'edges (non-mu pairs)': [list(e) for e in edges],
+           'flags': [a for a in sys.argv[3:] if a.startswith('--')],
+           'SEC': ('with --sec: a[n,k] = 0 (ub) when iota-pair n is secant with centre v and block pair k avoids block(v); '
+                   'valid only with no dis D-square (Sigma = empty theorem scope); %d variables fixed' % nsec),
            'var n < %d' % npair: 'p[i,j] = 1 iff non-mu pairs i, j are iota-partners; pairs listed in iota_pairs',
            'iota_pairs': [list(p) for p in pairs],
            'var npair + 15 n + k': 'a[n,k] = iota-pair n is the image of a sigma-pair of block pair k',
