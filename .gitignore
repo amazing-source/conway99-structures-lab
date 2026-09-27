@@ -1,0 +1,3 @@
+involution/envelopes/state/*.log*
+involution/envelopes/state/*.tmp
+involution/envelopes/__pycache__/
