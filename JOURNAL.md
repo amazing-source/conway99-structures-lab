@@ -897,3 +897,21 @@
 - Contrôles : BvLS (graphe réel, m = 11) exact ; monde synthétique m = 7 (unicité du recollement) ; (i) + couplage SAT.
 - Calibrage portable : un recollement (identité) meurt en 20 s ; des recollements aléatoires résistent 80 s ; le mono-bloc
   résiste 240 s. Suite sur le PC du labo (kissat).
+
+## 27/09, ~9 h : identité générale de C1, tri des 79, premiers certificats
+- **Identité générale (C1, notes/134 §8)** : a₃ + 3a₄ + Σ_{Q∋p}(k−1)⁺ + #{Q∌p : k = 0} = 20 − 10|S| + Λ(S) + C_p(S), pour
+  tout ensemble d'étiquettes S et tout bloc p.
+  - --cuts, --digon, --path et --twist en sont des cas particuliers.
+  - Relue ; testée sur BvLS (1200 couples (S, p) aléatoires, 0 écart, `involution/ident_check_bvls.py`).
+  - Codée en `--ident[=smax]`. Mes identités sont identiques au balayage de C1 sur les 79 et sur un échantillon.
+- **Tri des 79 au portable** (`involution/sweep79.py`, glucose 15 s, tous les flags qui s'appliquent) : **23 UNSAT**, dont les
+  quatre (4,0).
+  - Avec --ident, 2 types (3,2) de plus (rel 10 en 7,6 s, rel 14 en 20,8 s). Contrôle : inconnus à 40 s sans --ident.
+  - **25/79.**
+  - Noyau dur : 7 (0,6), 9 (2,4), 4 (6,0), 16 (2,2), 12 (1,4), 3 (3,0), 3 (3,2).
+- **Certificats (C2, PC du labo)** : les 25 sont réexportés SANS lex-leader, puis cadical + DRAT + drat-trim.
+  - rel 00 : s VERIFIED ; rel 01 : s VERIFIED. Les autres suivent (logs/decl_proofs.log chez C2).
+- Deux blocs (NOTE_S33) : `--full` (le graphe complet, vérifié sur BvLS), export `--model` pour le filtre rationnel de C1.
+  - Le rang du système ll vaut 39/39, donc le graphe ll est déterminé par (U_c, U_d, G).
+  - Sur la sonde 1, twist + CROSS tue seul en 0,4 s ; SEC ralentit glucose.
+- `--fullcyc` (équilibre (v) des cycles de longueur 3-4 aux blocs pleins) : sans effet à 60 s sur rel 33 et 50.
