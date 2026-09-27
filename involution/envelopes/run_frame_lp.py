@@ -23,21 +23,23 @@ def run_file(path):
     res = json.load(open(out_path)) if os.path.exists(out_path) else {'id': i, 'source': os.path.basename(path), 'pairs': {}}
     rec = json.load(open(os.path.join(HERE, 'U', '%03d.json' % i)))
     P = prepare(rows_frac(rec['gens']), verbose=False)
-    M = np.array(P['M'], dtype=object)
+    bpath = os.path.join(HERE, 'frame_certs', '%03d_basis.npz' % i)      # one basis file per lattice
+    np.savez_compressed(bpath, basis=np.array([[str(x) for x in row] for row in P['M']]), den=P['d'])
+    t_last = time.time()
     for k, (c1, c2) in enumerate(data['pairs']):
         if str(k) in res['pairs']:
             continue
         y1, y2 = coef_of(P, [F(x) for x in c1]), coef_of(P, [F(x) for x in c2])
         cert = os.path.join(HERE, 'frame_certs', '%03d_%05d.npz' % (i, k))
         r = frame_lp(P, y1, y2, save=cert)
-        if os.path.exists(cert):
-            z = dict(np.load(cert))
-            np.savez_compressed(cert, **z, basis=np.array([[str(x) for x in row] for row in P['M']]), den=P['d'])
         res['pairs'][str(k)] = r
-        json.dump(res, open(out_path, 'w'), indent=0)
+        if time.time() - t_last > 20:
+            json.dump(res, open(out_path, 'w'))
+            t_last = time.time()
+    json.dump(res, open(out_path, 'w'))
     ex = sum(1 for v in res['pairs'].values() if v['verdict'].startswith('EXCLUDED'))
     res['summary'] = {'pairs': len(res['pairs']), 'excluded': ex, 'not_excluded': len(res['pairs']) - ex}
-    json.dump(res, open(out_path, 'w'), indent=0)
+    json.dump(res, open(out_path, 'w'))
     return i, res['summary']
 
 

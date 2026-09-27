@@ -20,8 +20,9 @@ from build156 import int_rows, hnf, gram_of, det_exact, enum, inv_exact, rows_fr
 def check(path):
     z = np.load(path, allow_pickle=False)
     i = int(os.path.basename(path)[:3])
-    den0 = int(z['den'])
-    rows = [[F(int(x), den0) for x in r] for r in z['basis']]          # stored as integer numerators over den
+    zb = z if 'basis' in z.files else np.load(os.path.join(os.path.dirname(path), '%03d_basis.npz' % i))
+    den0 = int(zb['den'])
+    rows = [[F(int(x), den0) for x in r] for r in zb['basis']]          # stored as integer numerators over den
     rec = json.load(open(os.path.join(HERE, 'U', '%03d.json' % i)))
     a, da = int_rows(rows)
     b, db = int_rows(rows_frac(rec['gens']))
