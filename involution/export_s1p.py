@@ -76,8 +76,25 @@ if CUT3:                            # append the '<= bound' rows (lo = 0, hi = b
                           shape=(len(CUT3), nv))
     A = sp.vstack([A, extra]).tocsr()
     lo = np.concatenate([lo, np.zeros(len(CUT3))]); hi = np.concatenate([hi, np.array([b for _, b in CUT3], float)])
+ub = np.ones(nv); nfix = 0
+if '--digon' in sys.argv:          # C1's digon balance: a[n,k] = 0 unless |Q_n & Sp| = 2 - |block pair k & {p,q}|
+    for p_ in range(6):
+        a_, b_ = 2 * p_, 2 * p_ + 1
+        if not (mu[a_] == tau[a_] and mu[b_] == tau[b_]) or mu[a_] == b_ or mu[a_] // 2 != mu[b_] // 2:
+            continue
+        q_ = mu[a_] // 2
+        if q_ < p_:
+            continue
+        Sp = {a_, b_, 2 * q_, 2 * q_ + 1}
+        for n, (i, j) in enumerate(pairs):
+            kq = sum((b in edges[i]) + (b in edges[j]) for b in Sp)
+            for k, bp in enumerate(BP):
+                if kq != 2 - len(set(bp) & {p_, q_}):
+                    if ub[av(n, k)]:
+                        ub[av(n, k)] = 0; nfix += 1
+    print('digon balance: %d assignment variables fixed to 0' % nfix)
 np.savez_compressed(out + '.npz', A_data=A.data, A_indices=A.indices, A_indptr=A.indptr, A_shape=np.array(A.shape),
-                    lo=lo, hi=hi, lb=np.zeros(nv), ub=np.ones(nv), integrality=np.ones(nv))
+                    lo=lo, hi=hi, lb=np.zeros(nv), ub=ub, integrality=np.ones(nv))
 json.dump({'block_type': cfg, 'mu': list(mu), 'tau': list(tau), 'edges (non-mu pairs)': [list(e) for e in edges],
            'var n < %d' % npair: 'p[i,j] = 1 iff non-mu pairs i, j are iota-partners; pairs listed in iota_pairs',
            'iota_pairs': [list(p) for p in pairs],

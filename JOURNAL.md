@@ -869,3 +869,19 @@
   boule singulière, nombres g18 de C1).
 - **Calcul** : plus de cloud, sur décision de l'utilisateur. Tout le lourd passe sur le PC du labo (12 threads, C2) : SAT des 79
   et DFS-PL avec Farkas exacts.
+
+## 27/09, ~7 h : trou dans le tout-tordu ; lemmes codés pour le SAT
+- **ERRATUM** (trouvé par « structures », confirmé par C1 et C2) : « tout-tordu pur exclu » (S8, S11, S17, S19 ; carnet C2 §14 et
+  §26) ne vaut que pour les structures D à circuits SIMPLES, soit 121 215 systèmes de transitions sur 15⁷. Il n'existe aucun
+  lemme de simplicité ; C1 a vérifié qu'aucun argument local ne peut en fournir un.
+  - Conséquence : **tier06 (les 7 types (0,6)) reste sur le chemin critique.**
+  - C2 attaque le cas non simple par un PL d'orbites où tous les couplages de pivots sont libres en chaque bloc (tous les
+    systèmes à la fois), avec fixation de blocs sous S₇ si la racine est faisable.
+- **Lemmes codés** dans les deux encodages SAT (DIMACS commenté, déclarables) :
+  - `--cuts` : lemme mono-bloc généralisé, blocs ancrés NON frères (relu par C1) ;
+  - `--digon` : équilibre de digone ancré, en tout type (C1) ;
+  - `--path` : « exactement un excès » en chaque bloc chemin (C1), avec compteurs unaires testés sur 256 × 4 cas.
+- Les coupes et la fixation par digone ne font PAS mourir le PL de l'étape 1′ plus tôt (toujours à 12 paires). Le DFS-PL reste
+  une route secondaire.
+- Le PC du labo dispose maintenant de kissat 4.0.4, cadical 3.0.1 et drat-trim (Docker gcc:13). Les UNSAT seront rejoués avec
+  DRAT.
